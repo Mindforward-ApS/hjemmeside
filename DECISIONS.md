@@ -1,0 +1,100 @@
+# DECISIONS
+
+- 2026-10-21 · Template rebuilt from the docebo.com teardown under the PREMIUM WEB BUILD playbook. Only mechanics were borrowed; look, copy and assets are our own.
+- **Demo product "Fjord"** (customer-request inbox for Danish SMBs) is a placeholder, chosen for its clear before → after. Swap it in `src/content/site.ts` and `src/content/copy.da.ts`.
+- **Hero variant gate skipped:** Marco asked for a complete template in one go. The direction can be changed through tokens. When used for a real project, run the 3-variant hero step (§2).
+- **Fonts:** Schibsted Grotesk (font B, chosen by Marco 2026-10-21) for both display (800, -0.045em) and text. Full æ ø å.
+- **Colours:** warm stone neutrals + ink + one blue accent (`--brand-h: 266`). Re-brand by changing the hue. No new accents without asking.
+- **Signatures:** (1) Explorer with index-card tabs, (2) StoryScroll with a pinned product screen whose UI changes per step, (3) the wave motif from the logo in the closing CTA.
+- **Motion:** CSS-first (scroll-driven word fill inside `@supports`, IntersectionObserver for reveal/story). No GSAP/Motion dependency needed yet.
+- **Comma practice:** startkomma not used; comma before subordinate clauses ("…, der …").
+- **Forms:** server actions + Zod + honeypot + naive in-memory rate limit (swap for a shared store in production).
+- 2026-10-21 · v2 after Marco's feedback ("not good enough"): ONE button system (blue primary + outline secondary everywhere; filters/toggles use the neutral `.chip`). Font B. Motion = mix of A and C:
+  - Home "Sådan virker det" = A (ChaosToOrder, pinned scrub).
+  - Home "Løsninger" = C (UseCaseJourney via HorizontalPin).
+  - Platform steps = C (StepsJourney).
+  - Site-wide: SplitHeadings (masked line reveal), Magnetic hero CTA, logo Marquee with a pause button, spotlight cards.
+  - Stack: GSAP 3.15 + ScrollTrigger + SplitText via @gsap/react.
+- 2026-10-21 · Marco: "just finish it". Direction **Bento-demo** chosen by me from the critic scores (B highest; C's live demo most praised). See design/DNA.md. Hero = bento with the interactive demo as the main tile. Nav = MegaNav (pill) site-wide. The preview routes have been removed.
+- 2026-10-21 · Header/menu: **B (Docebo-close)**. It has a utility row with language, a tall pill with chevron mega menus, the "BOOK 15 MIN" text link and a gradient "PRØV GRATIS". On scroll it collapses to the CTA and a round menu button.
+- 2026-10-21 · Colour: **black + coral** (`data-pal="sort-koral"`). Marco first liked sand/light orange, then chose D: "Det skal være D sort + koral". He called the blue "grim" and said no to lime.
+- 2026-10-22 · Home rebuilt in the **"night" direction** after Marco's reference `design/references/owell-ref.webp`:
+  - dark page, thin gradient display type;
+  - glass cards, coral glows;
+  - order: hero, logos, split feature, channels, FAQ, closing panel.
+  - Not a pixel copy: our own code, copy and product.
+  - Marco: "Mega fedt jo." Other pages are still light (menu B) until they get the same treatment.
+- 2026-10-22 · Home switched to a **light background**; layout, glass cards, coral glow and thin type are unchanged. The theme is tokenised: `.theme-night` = light, `.night-dark` = dark scope (used for the phone).
+- 2026-10-22 · /priser rebuilt as a comparison table after Marco's reference, in our light theme: plan cards over the columns (Team dark with a coral "Anbefalet" badge, monthly price struck through), 3 feature groups with hint tooltips, one action per column. The old Pricing/PlanFinder components were removed.
+- 2026-10-22 · /priser rebuilt again after a second reference (Marco: "den her er bedre"): serif-italic accent words (Instrument Serif), review badge (placeholder), monthly/annual toggle, 3 plan cards with coral checks, logo row (placeholder), +/− FAQ, contact line.
+- 2026-10-22 · Template switched to a **course platform** ("Fjord Akademi", demo). Home has all 13 sections from Marco's list: nav + WarmHero, logos, outcomes, catalog (filter), sample lesson, how it works, why us + instructors (placeholders), learner stories (placeholders), plans, FAQ, final CTA, footer. Content in `src/content/academy.ts`; course pages at `/kurser/[slug]`; /priser uses the academy plans.
+- 2026-10-22 · Hero NOT approved: "det ser skide godt ud" was sarcasm ("det ligner lort"). Current state: brown stage + silk + glass pill + Mindforward logo + cut-out portrait. To be redone.
+- 2026-10-22 · Hero details approved by Marco ("perfekt tak"):
+  - Mindforward hero person (waves, then crosses her arms);
+  - AI tiles placed by Marco himself in the editor (`design/tile-positions.json`);
+  - AI tile with a gradient orange "AI" and a spark;
+  - learner avatar with a centred play button behind the coral arrow;
+  - team photo `team3.webp` in the white card;
+  - stacked card bottom-right.
+- 2026-10-22 · Marco: "Jeg er mega tilfreds med heroen den er fuldstændig vanvittigt". The hero and the button system are done: one shape everywhere (pill, icon left, hairline ring + soft shadow), each button keeps its colour.
+- 2026-10-22 · Logo row: **B1 "Mørk scene"**, chosen in the lab (:3401). The hero's chocolate stage continues as a band holding a logo marquee with a pause button. "140 virksomheder" is set in serif italic, with orange light falling from the top edge. Marco did not want a drawn orange line. The logos are fictional demo logos (DemoLogos.tsx).
+- 2026-10-22 · "Det lærer du": **O1 "Bento med produkt"**, chosen in the lab. Four tiles on a 7/5/5/7 grid, each with a small product moment (AI summary, data-sharing check, filled-in prompt, course certificate). The first tile sits on the hero's brown stage with orange light. The names and data are demo data (OutcomeMinis.tsx).
+- 2026-10-22 · Course catalog: **K1 "Hylde på scenen"**, chosen in the lab (Marco: "Vildt flot"). It is a dark stage section like the hero. The thin headline has "du mangler" in a warm gradient, the filters sit in a glass pill, and the courses are square-cover cards on a horizontal shelf (scroll-snap) with a coral arrow.
+- 2026-10-22 · Sample lesson: **P2 "Biograf"**, chosen in the lab and then adjusted at Marco's request:
+  - the player is 21:9 on desktop (it was too tall);
+  - a segmented lesson timeline replaces the chapter pills (he called them "grimme");
+  - the play button uses a filled, optically centred triangle (the old one wasn't centred).
+  - The instructor is the hero person.
+- 2026-10-22 · "Sådan virker det": **N3 "Holdbillede"**, chosen in round 2. Round 1 (pinned screen, silk line, week view) was rejected: "vi er der ikke". It is one white card with the heading "Fire trin. Ét hold. Ingen teori for teoriens skyld." and a "Find dit forløb" button. Below that sit a large team photo (team3.webp) and the four steps in a strip with serif-italic coral numbers. It has no motion.
+- 2026-10-22 · "Hvorfor os" + instructors: **I1 "Mørk scene"**, chosen in the lab (Marco: "Helt klart"). It is a dark stage band with the heading "Lavet af folk, der bruger AI hver dag" and the three reasons as large lines with hairlines between them. The four instructors appear as round monogram portraits marked "Foto kommer". The names are placeholders; never invent faces.
+- 2026-10-22 · Learner stories: **S3 "Videovæg"**, chosen in the lab. One large dark video card (stage poster, coral play button, quote) sits next to two quote cards. Every quote is a visible **"Eksempel"** until real, consented quotes exist; the people are shown as initials.
+- 2026-10-22 · Pricing: **R2 "Alt på scenen"**, chosen in the lab. It is a dark stage section with the heading "Vælg den måde, du vil lære på" in a warm gradient and a glass pill for monthly/annual. The three plans are glass cards; Medlemskab has a coral ring and glow, a "Mest valgt" badge and a white button. It is also used on /priser.
+- 2026-10-22 · FAQ: **M1 "Liste + chat"**, a blend of F1 and F3 that Marco asked for. The big question list (F1 style) is on the left. On desktop, a sticky brown chat window on the right shows the picked question as a coral bubble and the answer as a white bubble. Its bottom bar, "Har du et andet spørgsmål? Skriv til os …", replaces the contact card. On mobile the answer opens under its question.
+- 2026-10-22 · Page ending: **E1 "Scenen lukker"**, with the giant "Forward" wordmark at the bottom removed at Marco's request.
+  - Home now ends with `StageCta`: the hero's stage, "Tag det første kursus i dag", and the hero person waving goodbye.
+  - `SiteFooter` is brown on every page (logo, columns, company details) and continues StageCta without a seam.
+  - Other pages keep their own NightCta for now.
+- 2026-10-22 · Sample lesson: Marco removed the three take-aways under the timeline and the subtitle "Lektionerne er korte, konkrete …". The section is now the heading, the player and the timeline.
+- 2026-10-22 · (lab) Hero sign-in: **G1 "To knapper"**. "Fortsæt med Google" (white) and "Fortsæt med Microsoft" (glass) sit stacked under the headline, followed by "Eller se kurserne først" as a text link. The decorative ring dot was removed. They are visual only (no auth yet). Built in the lab on :3401; not on :3400 yet.
+- 2026-10-22 · (lab) The white hero card at bottom left is a little smaller: height 34svh → 31svh and the right margin 4rem → 6rem (Marco: "just a tiny bit").
+- 2026-10-22 · (lab) Buttons: **B3 "Kantet"** chosen. Header rebuilt in the **shape of mindforward.dk** at Marco's explicit request, shape only (our brown glass and cream colours): a near full-width bar with 16px corners, plain text links, "Log ind" as a text link, and a squared 12px "Start et kursus". The "Forside" link was dropped to match; this is pending Marco's OK.
+- 2026-10-22 · (lab) Prices are now **Mindforward's real prices** (the one exception to "nothing from the old site"). Privat is 69 kr/md. incl. VAT; Virksomhed is 69 kr/user/md. excl. VAT (min. 5); Tilpasset is "Efter aftale" with "Tal med os". Plan contents, tags (Til dig/Til hold/Til store) and "Ingen skjulte gebyrer og ingen binding" are from mindforward.dk. Annual = 2 months free: 690 kr/år (828 kr struck through), with a "2 måneder gratis" badge on the toggle. The "−2 md." badge was removed.
+- 2026-10-22 · (lab) Typeface: **Inter** everywhere (display and text), replacing Schibsted Grotesk. Serif text in cards became Inter at Marco's request ("Sofie Lund" on the certificate, the step numbers, the quote mark, "140 virksomheder"). The serif italic remains only in the FAQ heading accent "og svar" and the demo logo "Lund Arkitekter".
+- 2026-10-22 · (lab) Hero scroll moment: the white card at bottom left grows on scroll (clip-path reveal, pinned hero) into a full panel with a **course certificate** (demo: Sofie Lund, AI på arbejdet · Niveau 1, Certifikat-ID MF-26-04812, "Tjek det på mindforward.dk/id", marked Eksempel). It runs on desktop with motion allowed only and is **one-way**: it closes exactly as it opened (the certificate drops back and the panel shrinks into the white card), then the hero scrolls away normally: once past it the pin is removed, so scrolling up shows the normal hero; it re-arms at the top. The wave is W1 "Silke" (Marco rejected W3: "tydelige streger … ikke nice") and the person stands **exactly on the top edge of the white card** (measured and snapped at every screen size).
+- 2026-10-22 · **Published from the lab to :3400**: hero sign-in G1, smaller white card, header in the mindforward.dk shape, squared buttons (B3), Inter, Mindforward prices (690 kr annual), wave W1 "Silke", the person on the card, and the certificate scroll moment. The header links "Priser" and "Om os" now point to the front page's own sections (/#priser and /#om-os, where the "Hvorfor os" section got the id om-os) instead of the old /priser and /om-os pages.
+- 2026-10-22 · Hero: her waving sleeve stuck out past the white card on the right. The centre column (person + AI tiles) now shifts left by the measured amount, so the sleeve rests on the card at every screen size. Published to :3400.
+- 2026-10-22 · Hero wave: back to the **original line wave** ("det gamle vi havde til at starte med"). The fluid variants W1–W3 stay available in SilkWave but are unused.
+- 2026-10-22 · Hero: removed the two white dots at the right edge (Marco: "hænger bare ude"). The unused Dot component was removed too.
+- 2026-10-22 · (lab) Course shelf: on desktop the section pins, and scrolling down slides the shelf slowly sideways through every card (scrub, travel × 2.4). The last card stops at the same margin as the first. Touch and reduced-motion keep the normal swipe shelf. The covers are 4:3 on desktop so the pinned section fits the screen.
+- 2026-10-22 · Published the course shelf (pinned sideways scroll) from the lab to :3400.
+- 2026-10-23 · (lab) Hero copy: **S1**, "AI-kurser med øvemiljø." with the sub-line "Lær AI i korte lektioner, og øv dig på rigtige opgaver, til du kan det. Med certifikat." Rounds 1–2 (clever/wordplay) were rejected; Marco wants simple and clear.
+- 2026-10-23 · (lab) The white hero card now sells the certificate: "ET CERTIFIKAT, DU STOLT KAN VISE FREM" (Marco's wording) / "Med dit navn og et unikt ID. Sæt det på LinkedIn, eller send det til chefen." / the link "Se certifikatet" smooth-scrolls to play the certificate reveal. The team photo stays.
+- 2026-10-23 · (lab) The certificate heading is on two lines ("Et certifikat, du / stolt kan vise frem"). The text column is wider (1.25fr) and the font is fluid, so it stays two lines from 1024 px to 1920 px and on mobile.
+- 2026-10-23 · (lab) Hero sub-line in Marco's own words: "Hos Mindforward lærer du at bruge AI i praksis, og du kan have det sjovt samtidig." (grammar only tidied). The earlier sub-line was rejected as "ord ord ord, pause".
+- 2026-10-23 · (lab) Hero heading "AI-kurser med veludviklet øvemiljø.":
+  - laptops and normal screens get two lines at a smaller size;
+  - big monitors (≥1600 px wide and ≥1060 px tall) get three lines at full size, gated on height so the buttons never hit the white card.
+- 2026-10-23 · (lab) All orange gradient text was made plain white at Marco's request (hero, "du mangler", "der bruger AI hver dag", "du vil lære på", "kursus i dag").
+- 2026-10-23 · (lab) On big monitors (same gate as the 3-line heading) the headline block moves straight down by 40 % of the free space above the white card. The full drop was "alt for lavt". Its horizontal position is unchanged.
+- 2026-10-23 · (lab) The first video (Marco: an AI-generated **fictional person**, 9 s, ~/Downloads/video_redigeret.mp4 → public/video/kunde-1.mp4) now plays in the big card of "Hør det fra dem selv". The poster frame is the smile at 7.5 s; click to play with sound and controls; it pauses off-screen. It has Danish captions (VTT) and is labelled "Eksempel, AI-genereret". It must NOT go live as a customer testimonial; it is to be replaced by a real customer with consent.
+- 2026-10-23 · (lab) The video story is captioned "Marco Nielsen · CEO, Leadline" (Marco's own name and company, at his request). It is still labelled "Eksempel, AI-genereret".
+- 2026-10-23 · (lab) The "Smagsprøve" and "Sådan virker det" sections looked 1:1 alike (Marco). I made three proposals each in the lab with a two-row switch (LabDual): A1 "Prøv øvemiljøet" (interactive), A2 "Se og gør", A3 "Kompakt bånd"; B1 "Tidslinje", B2 "Foto + trin", B3 "Varmt bånd".
+- 2026-10-23 · (lab) Marco only meant the BACKGROUNDS: Smagsprøve and Sådan virker det were both light cream back-to-back. The layouts stay; "Sådan virker det" gets its own background. There are three proposals (warm peach, sand, light coral glow), and the A/B layout proposals are parked.
+- 2026-10-23 · (lab) "Sådan virker det" background: **F3 "Lys koral-glød"** (cream with a soft coral light from the top).
+- 2026-10-23 · (lab) The missing people photos come from Marco's Mindforward image folder (mindforward-web/public/img/people), which he explicitly allowed; only the images were taken, not names or copy.
+  - Instructors 1–4: line-vestergaard, jonas-bak, mette-krogh, sara-damgaard.
+  - Quote cards: ali-yilmaz (Sælger), peter-skov (Ejer).
+  - The portraits are zoomed in on the faces. The courses section is untouched.
+- 2026-10-23 · (lab) Favicon = the Mindforward brain (Phosphor Brain duotone, #EC6F45) on a transparent background. Also apple-icon (brain on the brown stage). Source files are in ~/Downloads/mindforward-favicon.
+- 2026-10-23 · (lab) A real course certificate (components/cert/Certificate.tsx, preview at /preview/certifikat), A4 landscape:
+  - logo, certificate ID, name, course and level, practice hours and skills;
+  - signature, date, a coral "Bestået" seal, and a QR code to a verification URL (mindforward.dk/c/<ID>);
+  - exported to ~/Downloads/mindforward-certifikat.pdf/.png.
+  - The data is examples; the verification page does not exist yet.
+- 2026-10-23 · (lab) Certificate v1 was rejected ("skal være meget bedre"). Three new directions at /preview/certifikat?v=1|2|3:
+  - V1 classic diploma (guilloche frame, centred, rosette seal);
+  - V2 dark brand stage (silk, bronze, glowing seal, skill chips);
+  - V3 modern split (dark column with seal/QR/ID, cream page with a huge name).
+- 2026-10-23 · (lab) Hero copy: **C "Lær ved at gøre"** chosen. Subheading ABOVE the headline: "Lær AI ved at bruge det". Headline unchanged ("AI-kurser med veludviklet øvemiljø."). Under it, three coral check marks: "Korte lektioner på dansk" · "Opgaver i øvemiljøet med score" · "Overblik for hele teamet". The old sub "…og du kan have det sjovt samtidig" is gone. With points, the left column scales with screen height (svh) so the sign-in buttons clear the white card from 1280×720 to 2000×1000.
+- 2026-10-23 · (lab) Hero with check marks on laptops: on MacBook Pro 14" (100 % zoom, ~1512×860) the svh-scaled spacing looked squeezed. Screens < 920 px tall now use normal rem spacing, and the hero may grow a little taller than the screen (the white card moves slightly down). Screens ≥ 920 px tall keep the exact monitor look Marco approved (classes `hero-pts-*` in globals.css).
+- 2026-10-23 · **Published the whole lab to :3400** (hero C with subheading + 3 check marks, retina/laptop spacing, and all lab work since 2026-10-22). Lab-only code (components/lab, /preview/lab) stays in the lab.
