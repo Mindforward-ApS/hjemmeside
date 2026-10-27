@@ -5,8 +5,7 @@
 // to the card's exact rectangle, while the hero is pinned. Desktop and motion-OK only; otherwise nothing changes.
 import { useRef, type RefObject } from "react";
 import { gsap, ScrollTrigger, useGSAP, motionQuery } from "@/lib/gsap";
-import { MindforwardLogo } from "@/components/ui/MindforwardLogo";
-import { Icon } from "@/components/ui/Icon";
+import Image from "next/image";
 
 const ink = "oklch(0.22 0.02 30)";
 const muted = "oklch(0.5 0.012 30)";
@@ -97,27 +96,11 @@ export function CertReveal({ stage, card }: { stage: RefObject<HTMLDivElement | 
           <p className="mt-5 max-w-[24rem] text-[1.0625rem] leading-relaxed" style={{ color: muted }}>Hvert certifikat har sit eget ID, så din chef eller en ny arbejdsgiver kan se, at det er ægte.</p>
         </div>
 
-        {/* The certificate itself (demo data) */}
-        <div className="cert-doc relative aspect-[1.414/1] w-full rounded-[10px] bg-white p-[3%] shadow-[0_0_0_1px_oklch(0.2_0.01_30/0.08),0_40px_90px_-40px_oklch(0.3_0.05_30/0.45)]">
-          <div className="relative flex h-full flex-col rounded-[6px] border border-[oklch(0.75_0.06_45/0.5)] px-[7%] py-[6%]">
-            <div className="flex items-center justify-between">
-              <span className="[&_span:last-child]:!text-[oklch(0.22_0.02_30)]"><MindforwardLogo size={30} /></span>
-              <span className="rounded-full bg-[oklch(0.975_0.006_60)] px-3 py-1 text-[0.75rem]" style={{ color: muted }}>Eksempel</span>
-            </div>
-            <p className="mt-[6%] text-[0.8125rem] font-medium uppercase tracking-[0.2em]" style={{ color: muted }}>Certifikat</p>
-            <p className="mt-3 text-[1rem]" style={{ color: muted }}>Det bekræftes hermed, at</p>
-            <p className="mt-2 font-display text-[clamp(2rem,1rem+2.4vw,3.25rem)] font-semibold leading-none tracking-[-0.04em]" style={{ color: ink }}>Sofie Lund</p>
-            <p className="mt-4 text-[1rem]" style={{ color: muted }}>har gennemført</p>
-            <p className="mt-1 text-[1.375rem] font-medium tracking-[-0.02em]" style={{ color: ink }}>AI på arbejdet · Niveau 1</p>
-            <div className="mt-auto grid grid-cols-3 gap-6 border-t border-[oklch(0.2_0.01_30/0.08)] pt-5 text-[0.8125rem]">
-              <div><p style={{ color: muted }}>Dato</p><p className="mt-1 font-medium" style={{ color: ink }}>14. nov. 2026</p></div>
-              <div><p style={{ color: muted }}>Certifikat-ID</p><p className="mt-1 font-medium tabular-nums" style={{ color: ink }}>MF-26-04812</p></div>
-              <div><p style={{ color: muted }}>Tjek det på</p><p className="mt-1 font-medium" style={{ color: ink }}>mindforward.dk/id</p></div>
-            </div>
-            <span className="absolute right-[7%] top-[30%] grid size-24 place-items-center rounded-full text-white shadow-[0_14px_30px_-12px_oklch(0.55_0.17_30/0.6)]" style={{ background: "radial-gradient(circle at 35% 30%, oklch(0.8 0.12 38), oklch(0.6 0.17 24))" }}>
-              <span className="grid size-[84px] place-items-center rounded-full border border-dashed border-white/50"><Icon name="check" size={30} /></span>
-            </span>
-          </div>
+        {/* The approved certificate V7 "Bevis" (Marco 23 Oct 2026: "V7 er perfekt"), rendered from the lab's A4 design
+            (/preview/certifikat?v=7 on :3401) to a 2× image so it matches exactly. Demo person, hence "Eksempel". */}
+        <div className="cert-doc relative aspect-[297/210] w-full overflow-hidden rounded-[10px] shadow-[0_0_0_1px_oklch(0.2_0.01_30/0.08),0_40px_90px_-40px_oklch(0.3_0.05_30/0.45)]">
+          <Image src="/cert/certifikat-v7.webp" alt="" fill sizes="(min-width: 1024px) 760px, 100vw" className="object-cover" priority={false} />
+          <span className="absolute right-[3%] top-[4%] rounded-full bg-white/90 px-3 py-1 text-[0.75rem]" style={{ color: muted }}>Eksempel</span>
         </div>
       </div>
     </div>
