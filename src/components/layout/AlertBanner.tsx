@@ -22,6 +22,7 @@ export function AlertBanner() {
     () => false,
   );
 
+  if (!site.alert.vis) return null;
   // Pages in the "night" design have no announcement bar (reference layout).
   if (dismissed || stored || ["/", "/priser", "/platform"].includes(pathname) || pathname.startsWith("/loesninger/") || pathname.startsWith("/kurser/") || pathname.startsWith("/preview")) return null;
 

@@ -118,7 +118,6 @@ export function WarmHero({ tiles = "float", cta, silk = "lines", person = "fade"
                 { label: "Kurser", href: "/#kurser" },
                 { label: "Sådan virker det", href: "/#saadan" },
                 { label: "Priser", href: "/#priser" },
-                { label: "Om os", href: "/#om-os" },
               ].map((l) => (
                 <li key={l.href}>
                   <Link href={l.href} className="block rounded-full px-4 py-2 text-[0.9375rem] font-medium text-white/85 transition-colors hover:bg-white/10 hover:text-white">

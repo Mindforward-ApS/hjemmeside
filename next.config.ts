@@ -10,6 +10,12 @@ const nextConfig: NextConfig = {
       { source: "/tilmeld", destination: `${APP_URL}/opret`, permanent: false },
       { source: "/login", destination: `${APP_URL}/log-ind`, permanent: false },
       { source: "/log-ind", destination: `${APP_URL}/log-ind`, permanent: false },
+      // Pages still written for the template product are off until rewritten for Mindforward (Marco 2026-10-30, option A).
+      // Legal texts live on the platform, which has the finished versions.
+      { source: "/privatliv", destination: `${APP_URL}/privatliv`, permanent: false },
+      { source: "/vilkaar", destination: `${APP_URL}/handelsbetingelser`, permanent: false },
+      { source: "/cookies", destination: `${APP_URL}/cookies`, permanent: false },
+      ...["/sikkerhed", "/platform", "/kunder", "/kunder/:path*", "/om-os", "/blog", "/blog/:path*", "/kurser/:path*", "/loesninger/:path*"].map((source) => ({ source, destination: "/", permanent: false })),
     ];
   },
   cacheComponents: true,

@@ -14,8 +14,8 @@ export function NightNav() {
     document.documentElement.style.overflow = open ? "hidden" : "";
   }, [open]);
   const left = [
-    { label: "Platform", href: "/platform" },
-    { label: "Løsninger", href: "/loesninger/haandvaerk" },
+    { label: "Kurser", href: "/#kurser" },
+    { label: "Sådan virker det", href: "/#saadan" },
     { label: "Priser", href: "/priser" },
   ];
   return (

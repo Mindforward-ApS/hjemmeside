@@ -18,7 +18,7 @@ export default function ContactPage() {
           <ul className="mt-10 divide-y divide-line border-y border-line">
             {[
               { icon: "mail" as const, label: "Mail", value: site.company.email, href: `mailto:${site.company.email}` },
-              { icon: "phone" as const, label: "Telefon", value: site.company.phone, href: `tel:${site.company.phone}` },
+              ...(site.company.phone.startsWith("[") ? [] : [{ icon: "phone" as const, label: "Telefon", value: site.company.phone, href: `tel:${site.company.phone}` }]),
               { icon: "clock" as const, label: "Svartid", value: site.company.responsePromise },
             ].map((r) => (
               <li key={r.label} className="flex min-h-16 items-center gap-4 py-3">
@@ -28,7 +28,7 @@ export default function ContactPage() {
               </li>
             ))}
           </ul>
-          <p className="mt-6 t-small text-muted">{site.company.legalName} · {site.company.cvr} · {site.company.address}</p>
+          <p className="mt-6 t-small text-muted">{[site.company.legalName, site.company.cvr, site.company.address].filter((v) => !v.startsWith("[")).join(" · ")}</p>
         </div>
         <ContactForm />
       </div>

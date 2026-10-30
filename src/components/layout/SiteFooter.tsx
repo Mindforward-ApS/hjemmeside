@@ -35,7 +35,7 @@ export function SiteFooter() {
             </div>
           </div>
           <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-[0.8125rem] text-white/45 md:flex-row md:items-center md:justify-between">
-            <p>© {c.year} {c.legalName} · {c.cvr} · {c.address}</p>
+            <p>© {c.year} {[c.legalName, c.cvr, c.address].filter((v) => !v.startsWith("[")).join(" · ")}</p>
             <p>Hostet i EU · Data i Frankfurt</p>
           </div>
         </div>

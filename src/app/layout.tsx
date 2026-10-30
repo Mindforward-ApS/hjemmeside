@@ -35,7 +35,7 @@ export const viewport: Viewport = {
 const orgJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
-    { "@type": "Organization", name: site.company.legalName, url: site.url, email: site.company.email, vatID: site.company.cvr },
+    { "@type": "Organization", name: site.company.legalName, url: site.url, email: site.company.email, ...(site.company.cvr.startsWith("[") ? {} : { vatID: site.company.cvr }) },
     { "@type": "WebSite", name: site.name, url: site.url, inLanguage: "da-DK" },
   ],
 };
