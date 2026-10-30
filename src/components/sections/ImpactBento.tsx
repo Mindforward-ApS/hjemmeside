@@ -1,9 +1,11 @@
+import { VIS_PLADSHOLDERE } from "@/lib/pladsholdere";
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
 
 // Docebo-DNA "results on the record": giant numbers in colour fields + one quote with mini stats.
 // Every figure is a marked placeholder until the customer's own data exists (§7). Never invent numbers.
 export function ImpactBento() {
+  if (!VIS_PLADSHOLDERE) return null;
   return (
     <section className="pad-standard" aria-labelledby="impact-title">
       <div className="container-wide">

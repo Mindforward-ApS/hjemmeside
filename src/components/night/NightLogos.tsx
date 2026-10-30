@@ -2,6 +2,7 @@
 
 // Logo band under the hero (Marco 2026-10-22: B1 "Mørk scene"). The hero's stage continues; demo logos until real ones exist.
 import { useState, type ReactNode } from "react";
+import { VIS_PLADSHOLDERE } from "@/lib/pladsholdere";
 import { Icon } from "@/components/ui/Icon";
 import { DemoLogo, demoLogos } from "@/components/night/DemoLogos";
 
@@ -41,6 +42,7 @@ const fade = "linear-gradient(to right, transparent, black 10%, black 90%, trans
 
 // B1: the hero's chocolate stage continues as a band; logos in cream, orange light from the top edge.
 export function NightLogos() {
+  if (!VIS_PLADSHOLDERE) return null;
   const [paused, setPaused] = useState(false);
   return (
     <section aria-label="Kunder" className="group relative overflow-hidden" style={{ background: stage }}>

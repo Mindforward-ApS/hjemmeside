@@ -327,6 +327,8 @@ img, svg, video { display: block; max-width: 100%; }
 
 /* Placeholder marker (§7): visible in dev so nobody ships fake proof */
 .ph { outline: 1px dashed var(--border-strong); outline-offset: 2px; }
+/* Production: placeholder proof is never shown (src/lib/pladsholdere.ts). */
+.skjul-ph .ph { display: none !important; }
 
 /* Hero product: request rows arrive (motion spec "Hero product") */
 @keyframes product-arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }

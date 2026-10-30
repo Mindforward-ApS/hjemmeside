@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Inter } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
+import { VIS_PLADSHOLDERE } from "@/lib/pladsholdere";
 import { AlertBanner } from "@/components/layout/AlertBanner";
 import { SiteNav } from "@/components/layout/SiteNav";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -41,7 +42,7 @@ const orgJsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="da" data-pal="sort-koral" suppressHydrationWarning className={`${inter.variable} ${serif.variable}`}>
+    <html lang="da" data-pal="sort-koral" suppressHydrationWarning className={`${inter.variable} ${serif.variable}${VIS_PLADSHOLDERE ? "" : " skjul-ph"}`}>
       <head>
         {/* Enables reveal styles only when JS runs, so content is never hidden without JS (§10.7). */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />

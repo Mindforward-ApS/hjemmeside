@@ -1,5 +1,6 @@
 "use client";
 
+import { VIS_PLADSHOLDERE } from "@/lib/pladsholdere";
 import { appLinks } from "@/lib/app";
 import Link from "next/link";
 import { useState } from "react";
@@ -111,13 +112,13 @@ export function PricingPlans() {
       </section>
 
       {/* Logo row (placeholders until real, permitted customer logos exist) */}
-      <section aria-label="Kunder (pladsholdere)" className="pb-24">
+      {VIS_PLADSHOLDERE && <section aria-label="Kunder (pladsholdere)" className="pb-24">
         <ul className="container-content grid grid-cols-2 items-center gap-6 sm:grid-cols-4 lg:grid-cols-8">
           {Array.from({ length: 8 }, (_, i) => (
             <li key={i} className="ph grid h-10 place-items-center font-display text-[1.125rem] font-bold tracking-[-0.03em] text-muted">[Logo {i + 1}]</li>
           ))}
         </ul>
-      </section>
+      </section>}
 
       {/* FAQ */}
       <section className="pb-24 md:pb-32">

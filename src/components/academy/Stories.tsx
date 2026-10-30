@@ -2,6 +2,7 @@
 // next to two quote cards.
 // The two text quotes are still EXAMPLES, visibly labelled, until real, consented ones exist.
 
+import { VIS_PLADSHOLDERE } from "@/lib/pladsholdere";
 import Image from "next/image";
 import { VideoStory } from "@/components/academy/VideoStory";
 
@@ -34,6 +35,7 @@ function Person({ s, dark = false }: { s: (typeof stories)[number]; dark?: boole
 }
 
 export function Stories() {
+  if (!VIS_PLADSHOLDERE) return null;
   const rest = stories.slice(1);
   return (
     <section className="py-24 md:py-32">

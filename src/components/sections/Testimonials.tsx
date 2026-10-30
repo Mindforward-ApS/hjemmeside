@@ -1,11 +1,13 @@
 "use client";
 
+import { VIS_PLADSHOLDERE } from "@/lib/pladsholdere";
 import { useState } from "react";
 import { copy } from "@/content/copy.da";
 import { testimonials } from "@/content/data";
 
 // Proof filtered by segment (§4.2). Every card is a marked placeholder until real, consented quotes exist.
 export function Testimonials({ limit, showFilter = true }: { limit?: number; showFilter?: boolean }) {
+  if (!VIS_PLADSHOLDERE) return null;
   const t = copy.home.testimonials;
   const [filter, setFilter] = useState<string>("Alle");
   const list = testimonials.filter((x) => filter === "Alle" || x.segment === filter).slice(0, limit);

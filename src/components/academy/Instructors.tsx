@@ -1,4 +1,5 @@
 // Instructor portraits are placeholder photos from Marco's Mindforward image folder (2026-10-23), not real instructors yet.
+import { VIS_PLADSHOLDERE } from "@/lib/pladsholdere";
 import Image from "next/image";
 import { Icon, type IconName } from "@/components/ui/Icon";
 
@@ -22,6 +23,7 @@ const team = [
 // 8 · Why us + instructors (Marco 2026-10-22: I1 "Mørk scene", "Helt klart"). It is a dark stage with a thin gradient
 // headline, the three reasons as large lines, and the instructors as round monogram portraits.
 export function Instructors() {
+  if (!VIS_PLADSHOLDERE) return null;
   return (
     <section id="om-os" className="relative scroll-mt-24 overflow-hidden py-24 text-white md:py-32" style={{ background: stage }}>
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_60%_at_50%_0%,oklch(0.66_0.17_38/0.22),transparent_70%)]" />
