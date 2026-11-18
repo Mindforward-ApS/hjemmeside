@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Inter } from "next/font/google";
+import { Instrument_Serif, Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
 import { VIS_PLADSHOLDERE } from "@/lib/pladsholdere";
@@ -18,6 +18,8 @@ const inter = Inter({
 });
 
 // Italic accent words in headlines (pricing page reference). Second and last family.
+// Font for the dark "Tilmeld jer" pill button (Marco 2026-11-14).
+const grotesk = Space_Grotesk({ subsets: ["latin", "latin-ext"], weight: ["500", "700"], variable: "--font-grotesk", display: "swap" });
 const serif = Instrument_Serif({ subsets: ["latin", "latin-ext"], weight: "400", style: ["italic"], variable: "--font-serif", display: "swap" });
 
 export const metadata: Metadata = {
@@ -42,7 +44,7 @@ const orgJsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="da" data-pal="sort-koral" suppressHydrationWarning className={`${inter.variable} ${serif.variable}${VIS_PLADSHOLDERE ? "" : " skjul-ph"}`}>
+    <html lang="da" data-pal="sort-koral" suppressHydrationWarning className={`${inter.variable} ${serif.variable} ${grotesk.variable}${VIS_PLADSHOLDERE ? "" : " skjul-ph"}`}>
       <head>
         {/* Enables reveal styles only when JS runs, so content is never hidden without JS (§10.7). */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />

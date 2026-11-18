@@ -99,3 +99,15 @@
 - 2026-10-23 · (lab) Hero with check marks on laptops: on MacBook Pro 14" (100 % zoom, ~1512×860) the svh-scaled spacing looked squeezed. Screens < 920 px tall now use normal rem spacing, and the hero may grow a little taller than the screen (the white card moves slightly down). Screens ≥ 920 px tall keep the exact monitor look Marco approved (classes `hero-pts-*` in globals.css).
 - 2026-10-23 · **Published the whole lab to :3400** (hero C with subheading + 3 check marks, retina/laptop spacing, and all lab work since 2026-10-22). Lab-only code (components/lab, /preview/lab) stays in the lab.
 - 2026-10-27 · Hero certificate reveal: shows the approved certificate **V7 "Bevis"** (image from the lab's A4 design, `public/cert/certifikat-v7.webp`) in layout **C "To bokse"** (Marco chose C over A "Stor boks" and B "Certifikatet i centrum"): a dark box with "Når du er færdig / Et certifikat, der kan tjekkes" and three check points, next to a light box with the certificate. Both boxes fill the screen and grow with it (big monitors were mostly empty before). The moment plays **only when scrolling down**: scrolling up at any point lets go of the pin and shows the normal hero; it re-arms at the very top.
+
+- 2026-11-05 · Hero: **D "Som nu + video"** valgt (Marco: "D skal det være"). De tre kort i heroen er erstattet af platform-videoen i samme kolonne; alt andet i heroen er uændret. Videoen er pladsholder (oevemiljoe.mp4) indtil en rigtig skærmoptagelse fra platformen. Varianterne A/B/C ligger fortsat på /preview/hero-overskrift.
+- 2026-11-05 · "Sådan starter I": **Calendly-trin** (Inviter / Lær / Øv / Følg op, fuld bredde, kompakt), bygget tæt på calendly.com. Erstatter de tre fotokort (FordeleFotokort) på /preview/ny-forside. Marco: "Det er fint for nu".
+- 2026-11-05 · Færdigheder: **version 3 "Mørk scene" med fulde fotos** (Marco: "Yes det er flot"). Erstatter den lyse karrusel N på /preview/ny-forside. Fotos: StockSnap CC0 i public/img/stock.
+- 2026-11-05 · Øv på dine egne opgaver: **version 1 "Videoen fylder"** (Marco: "1"). Erstatter laptop-videoen P på /preview/ny-forside.
+- 2026-11-05 · Øv på dine egne opgaver: **tilbage til den oprindelige laptop-version P** (Marco: "jeg kan faktisk bedre lide den første version"). Version 1 er fjernet fra forsiden igen.
+- 2026-11-05 · Certifikat: **version 1 "Som nu, skarpere"** (større, let på skrå, LinkedIn-chip, QR-tjek der kører). Erstatter den gamle Certificate på /preview/ny-forside.
+- 2026-11-05 · Pilot: **version 2 "Foto i fuld bredde"** (Marco: "2 helt sikkert"). Erstatter den gamle Pilot på /preview/ny-forside.
+- 2026-11-05 · Pris: version 1 "Calendly" (PrisVarianter2 A) uden afrundet baggrund; referencer i design/references/pris/. Gamle Stats() ligger stadig i koden.
+- 2026-11-05 · FAQ: uændret. Afslutning: version 1 "Calendly" (CtaVarianter K1) som endeløs karussel med pause/forrige/næste; referencer i design/references/cta/. Gamle CtaBand() ligger stadig i koden.
+- 2026-11-05 · Den færdige ny-forside er nu forsiden på / (:3700). Den gamle forside ligger på /preview/forside-gammel.
+- 2026-11-05 · Animation hero: ingen ændring (Marco).

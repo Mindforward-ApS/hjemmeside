@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "src/components/lab/feature-bento.css"
+        ],
+        "createdAt": "2026-11-14T19:07:59.116Z",
+        "reason": "Claude: L64 is a CSS triangle (play icon via border-left on .zal::after), not a card accent border"
+      },
+      {
+        "rule": "border-accent-on-rounded",
+        "value": "*",
+        "files": [
+          "src/components/lab/feature-bento.css"
+        ],
+        "createdAt": "2026-11-14T19:07:59.133Z",
+        "reason": "Claude: L64 is a CSS triangle (play icon via border-left on .zal::after), not a card accent border"
+      }
+    ]
+  }
+}

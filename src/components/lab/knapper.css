@@ -1,0 +1,11 @@
+/* All buttons on the front page get a soft inset shadow (Marco 2026-11-14): a light line along the top edge and a
+   darker one along the bottom, so they read slightly rounded. In the components layer, so a hover shadow set with a
+   Tailwind utility still wins while hovering. */
+@layer components {
+  .nf-press,
+  #faq a[href^="mailto"],
+  #kontakt a[href^="mailto"],
+  #kontakt button[type="submit"] {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), inset 0 -2px 4px rgba(32, 22, 19, 0.18);
+  }
+}

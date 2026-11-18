@@ -9,10 +9,10 @@ export const appLinks = {
   login: app("/log-ind"),
   signup: app("/opret"),
   placementTest: app("/niveautest"),
-  /** Privat: sign up, then straight to checkout (monthly, or yearly with 2 months free). */
-  buyPrivate: (yearly = false) => signupThen(yearly ? "/koeb?plan=aar" : "/koeb"),
-  /** Virksomhed: sign up, then create the company (14-day trial, min. 5 users). */
-  startBusiness: signupThen("/virksomhed/opret"),
+  /** Privat: the app's sign-up + onboarding for private members (Marco 2026-11-11: /opret?type=privat). */
+  buyPrivate: (_yearly = false) => app("/opret?type=privat"),
+  /** Virksomhed: the app's sign-up + onboarding for companies (/opret?type=virksomhed). */
+  startBusiness: app("/opret?type=virksomhed"),
   /** The pricing cards' ids on the website ("privat" | "virksomhed"). */
   forPlan: (id: string, yearly = false) => (id === "virksomhed" ? signupThen("/virksomhed/opret") : signupThen(yearly ? "/koeb?plan=aar" : "/koeb")),
 };

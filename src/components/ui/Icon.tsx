@@ -23,6 +23,7 @@ const paths = {
   plus: "M12 5v14M5 12h14",
   minus: "M5 12h14",
   chevronDown: "M6 9l6 6 6-6",
+  chart: "M4 4v16h16M8 15l3.5-4 3 2.5L20 7",
 } as const;
 
 export type IconName = keyof typeof paths;

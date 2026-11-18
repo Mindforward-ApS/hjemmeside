@@ -1,0 +1,123 @@
+/* Feature bento (Marco 2026-11-14), same design as the features section on the 3770 draft, scoped under .ftx. */
+.ftx{--espresso:#201613;--espresso-2:#2c1f1b;--espresso-3:#3a2a24;--cream:#f6f1ea;--cream-2:#fbf8f3;--sand:#ece2d5;--sand-2:#e3d6c5;--ink:#201613;--bg-dark:#201613;--muted:rgba(32,22,19,.64);--hair:rgba(32,22,19,.1);--accent:#e8664a;--caramel:#e8664a;--caramel-l:#e8664a;--accent-hi:#f6a58f;--lime:#fbe1d7;--r-lg:24px;--r-md:16px;--shadow-card:0 1px 0 rgba(32,22,19,.04),0 24px 48px -28px rgba(32,22,19,.35);--margin:16px;--container:calc(100vw - 2*var(--margin));font-family:var(--font-inter),Inter,Arial,sans-serif;color:var(--ink);font-size:16px;line-height:24px}
+@media(min-width:1280px){.ftx{--container:1216px}}
+@media(min-width:1650px){.ftx{--container:1608px}}
+.ftx *,.ftx *::before,.ftx *::after{box-sizing:border-box}
+.ftx h2,.ftx h3,.ftx p{margin:0}
+.ftx img{display:block}
+.ftx .nav-item{position:relative;display:flex;align-items:center;gap:8px;height:100%;padding:0 16px;font-size:14px;line-height:20px;cursor:pointer}
+.ftx .burger{display:none;align-self:center;position:relative;width:24px;height:24px;background:none;border:0;padding:0 4px;cursor:pointer}
+.ftx .eyebrow{font-size:11px;line-height:16px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(31,22,17,.6)}
+.ftx .features{padding:96px 0 120px;background:#eae6de}
+.ftx .bento{width:var(--container);margin-left:calc((100vw - var(--container))/2);display:grid;gap:16px;grid-template-columns:1fr}
+.ftx .fc{position:relative;overflow:hidden;border-radius:22px;padding:40px 40px 44px;display:flex;flex-direction:column;min-height:500px;color:#1c1c1e}
+.ftx .fc-light{background:#f6f4f2}
+.ftx .fc-dark{background:#181a1c;color:#fff}
+.ftx .fc-green{background:#01432a;color:#fff}
+.ftx .fc-center{align-items:center;text-align:center}
+.ftx .fc-visual{flex:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;margin-bottom:28px}
+.ftx .fc h3{font-size:30px;line-height:36px;font-weight:600;letter-spacing:-.02em}
+.ftx .fc p{margin-top:16px;font-size:18px;line-height:26px;opacity:.82}
+.ftx .fc .clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:300px}
+.ftx .fbtn{margin-top:32px;display:inline-block;padding:14px 30px;border-radius:14px;border:1px solid rgba(28,28,30,.15);font-size:19px;line-height:24px;font-weight:500;transition:background-color .2s}
+.ftx .fbtn:hover{background:rgba(28,28,30,.05)}
+.ftx .fc-dark .fbtn,.ftx .fc-green .fbtn{border-color:rgba(255,255,255,.22)}
+.ftx .fc-dark .fbtn:hover,.ftx .fc-green .fbtn:hover{background:rgba(255,255,255,.08)}
+.ftx .note{display:flex;align-items:center;gap:14px;background:#fff;border-radius:16px;padding:14px 32px 14px 14px;text-align:left;box-shadow:0 18px 40px -20px rgba(0,0,0,.18);align-self:flex-start}
+.ftx .note img{width:50px;height:50px;border-radius:50%}
+.ftx .note b{display:block;font-size:15px;font-weight:600;line-height:20px}
+.ftx .note span{font-size:12.5px;line-height:15px;color:#7a7a7d}
+.ftx .note em{font-style:normal;color:#1c1c1e;font-weight:500}
+.ftx .note-2{align-self:center;margin-left:40px}
+.ftx .fc-split{flex-direction:row;align-items:center;padding:0 0 0 52px}
+.ftx .fc-copy{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;max-width:320px}
+.ftx .stat{margin-top:28px;font-size:56px;line-height:60px;font-weight:600;letter-spacing:-.02em}
+.ftx .fc .stat-label{margin-top:8px;font-size:18px}
+.ftx .phone{position:absolute;right:6%;bottom:0;height:90%;width:auto;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%),linear-gradient(180deg,transparent,#000 8%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 12%),linear-gradient(180deg,transparent,#000 8%);mask-composite:intersect}
+.ftx .chip{width:194px;height:194px;border-radius:24px;background:linear-gradient(160deg,#2e2f31,#121314);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;position:relative;
+  box-shadow:0 0 0 4px transparent;border:4px solid transparent;background-clip:padding-box}
+.ftx .chip::before{content:"";position:absolute;inset:-4px;border-radius:26px;padding:4px;background:linear-gradient(180deg,#19c7a5,#d8f05a);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.ftx .chip b{font-size:24px;font-weight:600}
+.ftx .chip-dots{display:grid;grid-template-columns:repeat(9,6px);gap:4px}
+.ftx .chip-dots i{width:6px;height:6px;border-radius:50%;background:#000;box-shadow:inset 0 1px 1px rgba(255,255,255,.12)}
+.ftx .fc-green.fc-split{align-items:flex-end;padding:0 0 52px 52px}
+.ftx .cards-visual{position:absolute;inset:0;pointer-events:none}
+.ftx .ccard{position:absolute;left:51%;top:72px;width:248px;height:420px;border-radius:22px;background:linear-gradient(180deg,#2c2c2e,#1b1c1d);border:3px solid transparent;background-clip:padding-box}
+.ftx .ccard::before{content:"";position:absolute;inset:-3px;border-radius:22px;padding:3px;background:linear-gradient(180deg,#19c7a5,#d8f05a);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.ftx .ccard-2{left:86%;opacity:.55;background:linear-gradient(180deg,#14523d,#0b3a2a);background-clip:padding-box}
+.ftx .cc-num{position:absolute;left:24px;top:30px;writing-mode:vertical-rl;color:rgba(255,255,255,.55);font-size:15px;letter-spacing:.06em}
+.ftx .cc-chip{position:absolute;left:126px;top:26px;width:40px;height:54px;border-radius:7px;background:linear-gradient(135deg,#d9d4c6,#a8a293);box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}
+.ftx .cc-brand{position:absolute;left:24px;bottom:28px;display:flex;flex-direction:column}
+.ftx .cc-brand i{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.4)}
+.ftx .cc-brand i+i{margin-top:-22px;background:rgba(255,255,255,.62)}
+.ftx .cc-world{position:absolute;left:118px;bottom:44px;writing-mode:vertical-rl;color:rgba(255,255,255,.35);font-size:14px}
+.ftx .cc-nfc{position:absolute;right:30px;bottom:30px;transform:rotate(90deg);color:rgba(255,255,255,.6);font-size:18px;font-weight:700}
+.ftx .copy-tip{position:absolute;z-index:2;left:26%;top:112px;display:flex;align-items:center;gap:10px;background:#fff;color:#1c1c1e;border-radius:14px;padding:12px 20px;font-size:18px;font-weight:600;box-shadow:0 10px 30px -10px rgba(0,0,0,.35)}
+.ftx .copy-tip svg{width:20px;height:20px;fill:#1c1c1e;stroke:#fff;stroke-width:1.5}
+.ftx .copy-tip .cursor{position:absolute;right:56px;bottom:-34px;width:34px;height:34px;fill:#111;stroke:#fff;stroke-width:1.6}
+.ftx .signin{background:#fff;border-radius:6px;text-align:left;width:258px;margin-left:44px;box-shadow:0 18px 40px -24px rgba(0,0,0,.2)}
+.ftx .signin-head{padding:10px 12px;font-size:15px;font-weight:500;border-bottom:1px solid #eee}
+.ftx .signin-row{display:flex;align-items:center;gap:16px;padding:14px 12px}
+.ftx .signin-row b{display:block;font-size:15px;font-weight:600}
+.ftx .signin-row span{font-size:12.5px;color:#666}
+.ftx .zal{width:36px;height:36px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.12);position:relative}
+.ftx .zal::after{content:"";position:absolute;left:11px;top:9px;border-left:16px solid #ff6900;border-top:9px solid transparent;border-bottom:9px solid transparent;border-radius:3px}
+.ftx .email-field{position:relative;margin:-30px 40px 0 0;width:266px;background:#fff;border-radius:12px;padding:14px 20px;text-align:left;font-size:15px;color:#8a8a8d;box-shadow:0 18px 40px -16px rgba(0,0,0,.2)}
+.ftx .np{position:absolute;right:20px;top:50%;width:24px;height:24px;transform:translateY(-50%);border-radius:50% 50% 0 0;background:#19c7a5;-webkit-mask:radial-gradient(circle at 50% 100%,transparent 6px,#000 7px)}
+.ftx .avatars{display:flex;gap:18px}
+.ftx .avatars img{width:84px;height:84px;border-radius:50%}
+.ftx .share{display:flex;align-items:center;gap:12px;background:#fff;border-radius:16px;padding:12px 40px 12px 12px;text-align:left;box-shadow:0 22px 0 -10px #ece9e5,0 24px 40px -16px rgba(0,0,0,.18)}
+.ftx .share b{display:flex;align-items:center;gap:6px;font-size:15px;font-weight:600}
+.ftx .share b svg{width:18px;height:18px;fill:none;stroke:#555;stroke-width:1.8}
+.ftx .share span{font-size:12.5px;color:#555}
+.ftx .ig{width:50px;height:50px;border-radius:14px;background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285aeb 90%);position:relative}
+.ftx .ig::before{content:"";position:absolute;inset:11px;border:3px solid #fff;border-radius:10px}
+.ftx .ig::after{content:"";position:absolute;left:18px;top:18px;width:8px;height:8px;border:3px solid #fff;border-radius:50%}
+@media(min-width:768px){.ftx .bento{grid-template-columns:repeat(2,1fr)}
+.ftx .fc-wide{grid-column:span 2}}
+@media(min-width:1280px){.ftx .bento{grid-template-columns:repeat(4,1fr);gap:48px}
+.ftx .fc{min-height:545px}}
+@media(max-width:767px){.ftx .fc-split{flex-direction:column;padding:40px}
+.ftx .phone,.ftx .cards-visual{position:relative;height:auto;width:100%}
+.ftx .cards-visual{height:300px}}
+.ftx .billing button{border:0;background:none;font:inherit;font-size:16px;padding:12px 34px;border-radius:999px;color:#8a8a8a;cursor:pointer;transition:color .2s,background .3s}
+.ftx .vplay{position:absolute;z-index:2;left:50%;top:50.2%;width:70px;height:70px;transform:translate(-50%,-50%);border:0;border-radius:50%;background:#fff;display:grid;place-items:center;cursor:pointer;transition:transform .25s}
+.ftx .faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:26px 30px;font-size:30px;line-height:1.25}
+.ftx .f-form button{height:44px;padding:0 18px;border:0;border-radius:6px;background:var(--fg-light);color:var(--bg-dark);font:inherit;font-size:17px;font-weight:600;cursor:pointer;transition:background-color .2s}
+.ftx .pill,.ftx .eyebrow,.ftx .faq-eyebrow,.ftx .cta-eyebrow{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;padding:7px 14px;border-radius:999px;
+  font-size:12px;line-height:16px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--cream-2);border:1px solid var(--hair)}
+.ftx .pill::before,.ftx .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.ftx .eyebrow{align-self:center}
+.ftx .fc,.ftx .cmp-card,.ftx .plan,.ftx .faq-call,.ftx .cta-card,.ftx .vcard,.ftx .step-media{border-radius:var(--r-lg)}
+.ftx .pcard,.ftx .faq-item,.ftx .note,.ftx .share{border-radius:var(--r-md)}
+.ftx .features{background:var(--sand)}
+.ftx .fc-dark{background:var(--espresso)}
+.ftx .fc-green{background:linear-gradient(160deg,var(--espresso-3),var(--espresso-2))}
+.ftx .chip::before,.ftx .ccard::before{background:linear-gradient(180deg,var(--caramel-l),var(--caramel))}
+.ftx .ccard-2{background:linear-gradient(180deg,#4a3527,#2f2219);background-clip:padding-box}
+.ftx .np{background:var(--caramel)}
+.ftx .fc{color:var(--ink)}
+.ftx .fc-dark,.ftx .fc-green{color:var(--cream)}
+.ftx .features-head{width:var(--container);margin:0 0 56px calc((100vw - var(--container))/2);display:flex;flex-direction:column;align-items:center;text-align:center}
+.ftx .features-head h2{margin-top:12px;font-weight:500;font-size:36px;line-height:1.08;letter-spacing:-.02em;color:var(--ink)}
+@media(min-width:768px){.ftx .features-head h2{font-size:48px}}
+@media(min-width:1024px){.ftx .features-head h2{font-size:52px}}
+@media(min-width:1650px){.ftx .features-head h2{font-size:60px}}
+.ftx .features-head{align-items:flex-start;text-align:left}
+.ftx .features-head .eyebrow{align-self:flex-start}
+.ftx .features-head{flex-direction:column;gap:20px}
+.ftx .features-head > div{display:flex;flex-direction:column;align-items:flex-start}
+.ftx .features-sub{max-width:440px;font-size:18px;line-height:28px;color:var(--muted)}
+@media(min-width:1024px){.ftx .features-head{flex-direction:row;justify-content:space-between;align-items:flex-end}
+.ftx .features-sub{text-align:left;padding-bottom:6px}}
+
+/* Mindforward fixes on top of the copied design (Marco 2026-11-14). */
+.ftx .fc-dark h3, .ftx .fc-green h3, .ftx .fc-dark .chip b { color: var(--cream); }
+.ftx .chip b { font-size: 20px; white-space: nowrap; }
+.ftx .fc .clamp { -webkit-line-clamp: unset; line-clamp: unset; display: block; overflow: visible; }
+.ftx .phone-ph { position: absolute; right: 6%; bottom: 0; width: 34%; height: 86%; display: grid; place-items: center; border-radius: 28px 28px 0 0; background: var(--sand-2); color: var(--muted); font-size: 13px; text-align: center; padding: 16px; }
+@media (max-width: 1023px) { .ftx .phone-ph { position: relative; right: auto; width: 100%; height: 260px; margin-top: 24px; border-radius: 20px; } }
+.ftx .tools { width: 50px; height: 50px; flex: none; display: grid; place-items: center; border-radius: 14px; background: #fbe1d7; }
+.ftx .share { padding-right: 20px; }
+@media (min-width: 1024px) { .ftx .fc-green .fc-copy { max-width: 46%; position: relative; z-index: 2; } }
+@media (max-width: 1023px) { .ftx .fc-green.fc-split { padding-top: 40px; } }

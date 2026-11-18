@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { headers } from "next/headers";
+import { neon } from "@neondatabase/serverless";
 import { copy } from "@/content/copy.da";
 
 // Server actions for the marketing forms. Wire to email/CRM/event log per project (§5.1).
@@ -43,6 +44,9 @@ const contactSchema = z.object({
   name: z.string().trim().min(1, copy.contact.errors.name).max(120),
   email: z.string().trim().email(copy.contact.errors.email),
   message: z.string().trim().min(5, copy.contact.errors.message).max(4000),
+  company: z.string().trim().max(200).optional(),
+  phone: z.string().trim().max(40).optional(),
+  team_size: z.string().trim().max(40).optional(),
 });
 
 export async function contactAction(_: FormState, data: FormData): Promise<FormState> {
@@ -51,7 +55,18 @@ export async function contactAction(_: FormState, data: FormData): Promise<FormS
   if (await rateLimited("contact")) return { ok: false, message: "For mange forsøg. Prøv igen om et minut.", values };
   const parsed = contactSchema.safeParse(Object.fromEntries(data));
   if (!parsed.success) return { ok: false, errors: flatten(parsed.error), values };
-  // TODO(project): send to inbox/CRM, log `contact_submitted`.
+  // Marco 2026-11-11: messages are stored in the database (Neon project "mindforward-hjemmeside", table contact_messages).
+  const url = process.env.DATABASE_URL;
+  if (!url) return { ok: false, message: "Beskeden kunne ikke sendes lige nu. Skriv til kontakt@mindforward.dk.", values };
+  const m = parsed.data;
+  try {
+    const sql = neon(url);
+    await sql`insert into contact_messages (name, email, company, phone, team_size, message)
+      values (${m.name}, ${m.email}, ${m.company || null}, ${m.phone || null}, ${m.team_size || null}, ${m.message})`;
+  } catch (err) {
+    console.error("contact_messages insert failed", err);
+    return { ok: false, message: "Beskeden kunne ikke sendes lige nu. Skriv til kontakt@mindforward.dk.", values };
+  }
   return { ok: true, message: copy.contact.sent };
 }
 

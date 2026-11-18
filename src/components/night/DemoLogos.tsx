@@ -48,6 +48,26 @@ export const demoLogos: Logo[] = [
   },
 ];
 
+// Marco's own brands, OK'd for the hero carousel (2026-11-07). Leadline = its bold wordmark, Hværk = the H mark in a
+// rounded square + word (from ~/Downloads/sjak), Over = a temporary wordmark with a cross until the real logo file exists.
+export const ownLogos: Logo[] = [
+  {
+    name: "Leadline",
+    mark: null,
+    text: <span className="font-sans font-bold tracking-[-0.03em]">Leadline</span>,
+  },
+  {
+    name: "Hværk",
+    mark: <svg viewBox="0 0 24 24" width="22" height="22"><rect x="1" y="1" width="22" height="22" rx="6" fill="currentColor" /><path d="M8 6.5v11M16 6.5v11M8 12h8" stroke="var(--bg)" strokeWidth="2.6" strokeLinecap="round" fill="none" /></svg>,
+    text: <span className="font-sans font-bold tracking-[-0.03em]">Hværk</span>,
+  },
+  {
+    name: "Over",
+    mark: <svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 5l14 14M19 5L5 19" {...s} strokeWidth={3} strokeLinecap="round" /></svg>,
+    text: <span className="font-sans font-extrabold uppercase tracking-[0.06em]">Over</span>,
+  },
+];
+
 export function DemoLogo({ logo, className = "" }: { logo: Logo; className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2 whitespace-nowrap font-display text-[1.0625rem] leading-none sm:text-[1.25rem] ${className}`} aria-label={logo.name} role="img">
