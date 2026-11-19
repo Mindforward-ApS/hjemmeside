@@ -20,7 +20,7 @@ export default function OgImage() {
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 26, color: "rgba(250,246,242,0.8)" }}>
           <span>AI-kurser på dansk · ChatGPT, Copilot og Claude</span>
-          <span style={{ background: "#0a0a0b", color: "#fff", padding: "14px 26px", borderRadius: 999, fontWeight: 600 }}>Åbner 1. december</span>
+          <span style={{ background: "#0a0a0b", color: "#fff", padding: "14px 26px", borderRadius: 999, fontWeight: 600 }}>Åbner 1. januar</span>
         </div>
       </div>
     ),

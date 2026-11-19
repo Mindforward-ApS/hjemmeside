@@ -36,7 +36,7 @@ const socials = [
   ["TikTok", "#"],
   ["YouTube", "#"],
 ] as const;
-const LAUNCH = new Date("2026-12-01T09:00:00+01:00"); // example launch date
+const LAUNCH = new Date("2027-01-01T09:00:00+01:00"); // launch (Marco 2026-11-19: moved from 1 December)
 
 function useCountdown() {
   const [now, setNow] = useState<number | null>(null);

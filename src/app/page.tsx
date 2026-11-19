@@ -9,7 +9,7 @@ const display = Inter_Tight({ subsets: ["latin", "latin-ext"], weight: ["500", "
 // SEO (Marco 2026-11-19): Danish search terms people actually use (AI-kursus, AI-træning, ChatGPT, Copilot, Claude),
 // a canonical URL and a share image in the waitlist's look.
 const title = "Mindforward – AI-kurser på dansk i ChatGPT, Copilot og Claude";
-const description = "Lær at bruge AI i dit arbejde og din hverdag. Korte AI-kurser på dansk, øvelser fra din egen hverdag og et certifikat, når du er færdig. Åbner 1. december 2026. Skriv dig op.";
+const description = "Lær at bruge AI i dit arbejde og din hverdag. Korte AI-kurser på dansk, øvelser fra din egen hverdag og et certifikat, når du er færdig. Åbner 1. januar 2027. Skriv dig op.";
 export const metadata: Metadata = {
   title: { absolute: title },
   description,
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title, description },
 };
 
-// Marco 2026-11-19: until launch on 1 December the home page is the waitlist. The launch front page waits at
+// Marco 2026-11-19: until launch on 1 January 2027 the home page is the waitlist. The launch front page waits at
 // /preview/forside-lancering and moves back here at launch.
 export default function Home() {
   return <div className={`${serif.variable} ${display.variable}`}><Venteliste /></div>;
