@@ -12,18 +12,18 @@ import { MindforwardLogo } from "@/components/ui/MindforwardLogo";
 // Social profiles. TODO(Marco): replace "#" with the real profile links.
 // The networks' own logos in their own colours (marks from simple-icons, CC0; Instagram and TikTok in full colour).
 const BrandLogo = ({ k }: { k: string }) => {
-  if (k === "LinkedIn") return <svg viewBox="0 0 24 24" className="size-9" aria-hidden><rect x="1" y="1" width="22" height="22" rx="3" fill="#fff" /><path fill="#0A66C2" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>;
-  if (k === "Facebook") return <svg viewBox="0 0 24 24" className="size-9" aria-hidden><circle cx="12" cy="12" r="11" fill="#fff" /><path fill="#0866FF" d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z" /></svg>;
-  if (k === "YouTube") return <svg viewBox="0 0 24 24" className="size-9" aria-hidden><rect width="24" height="24" rx="6" fill="#FF0000" /><path d="M9.6 7.4v9.2l7.9-4.6z" fill="#fff" /></svg>;
+  if (k === "LinkedIn") return <svg viewBox="0 0 24 24" className="size-8 sm:size-9" aria-hidden><rect x="1" y="1" width="22" height="22" rx="3" fill="#fff" /><path fill="#0A66C2" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>;
+  if (k === "Facebook") return <svg viewBox="0 0 24 24" className="size-8 sm:size-9" aria-hidden><circle cx="12" cy="12" r="11" fill="#fff" /><path fill="#0866FF" d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z" /></svg>;
+  if (k === "YouTube") return <svg viewBox="0 0 24 24" className="size-8 sm:size-9" aria-hidden><rect width="24" height="24" rx="6" fill="#FF0000" /><path d="M9.6 7.4v9.2l7.9-4.6z" fill="#fff" /></svg>;
   if (k === "Instagram") return (
-    <svg viewBox="0 0 24 24" className="size-9" aria-hidden>
+    <svg viewBox="0 0 24 24" className="size-8 sm:size-9" aria-hidden>
       <defs><radialGradient id="ig-g" cx="30%" cy="107%" r="150%"><stop offset="0" stopColor="#fdf497" /><stop offset=".05" stopColor="#fdf497" /><stop offset=".45" stopColor="#fd5949" /><stop offset=".6" stopColor="#d6249f" /><stop offset=".9" stopColor="#285AEB" /></radialGradient></defs>
       <rect width="24" height="24" rx="6.5" fill="url(#ig-g)" />
       <rect x="5" y="5" width="14" height="14" rx="4.2" fill="none" stroke="#fff" strokeWidth="1.9" /><circle cx="12" cy="12" r="3.4" fill="none" stroke="#fff" strokeWidth="1.9" /><circle cx="16.4" cy="7.6" r="1.1" fill="#fff" />
     </svg>
   );
   return (
-    <svg viewBox="0 0 24 24" className="size-9" aria-hidden>
+    <svg viewBox="0 0 24 24" className="size-8 sm:size-9" aria-hidden>
       <rect width="24" height="24" rx="6" fill="#000" />
       <g transform="translate(5 4.5) scale(.62)"><path fill="#25F4EE" transform="translate(-0.9 -0.9)" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" /><path fill="#FE2C55" transform="translate(0.9 0.9)" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" /><path fill="#fff" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" /></g>
     </svg>
@@ -133,16 +133,16 @@ function SignupForm({ onJoined }: { onJoined: (count: number) => void }) {
   });
   const pill = "flex flex-col gap-2 rounded-[22px] bg-[rgba(10,6,5,0.55)] p-1.5 ring-1 ring-white/12 sm:flex-row sm:rounded-full";
   const inputCls = "h-[52px] w-full rounded-full bg-transparent pl-11 pr-4 text-[0.9375rem] text-white outline-none placeholder:text-white/45";
-  const button = (label: string, onClick?: () => void) => (
-    <button type={onClick ? "button" : "submit"} onClick={onClick} disabled={pending} className="wl-btn group relative inline-flex h-[52px] w-full shrink-0 items-center justify-center rounded-full text-[0.9375rem] font-semibold text-white sm:w-[200px]">
-      <span className="wl-label">{pending ? "Gemmer …" : label}</span>
+  const button = (label: string, compact = false) => (
+    <button type="submit" disabled={pending} aria-label={compact ? label : undefined} className={`wl-btn group relative inline-flex h-[52px] shrink-0 items-center justify-center rounded-full text-[0.9375rem] font-semibold text-white sm:w-[200px] ${compact ? "wl-compact w-[52px]" : "w-full"}`}>
+      <span className={`wl-label ${compact ? "max-sm:sr-only" : ""}`}>{pending ? "Gemmer …" : label}</span>
       <span aria-hidden className="wl-ball grid size-8 place-items-center rounded-full bg-white text-[#0a0a0b]"><svg viewBox="0 0 20 20" fill="none" className="size-4"><path d="M6 14l8-8M7.5 6H14v6.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
     </button>
   );
   return (
-    <div className="mt-10 w-full max-w-[34rem] text-left">
+    <div className="mt-8 w-full max-w-[34rem] text-left sm:mt-10">
       {step === "mail" && (
-        <form onSubmit={(e) => { e.preventDefault(); join(); }} noValidate className={pill}>
+        <form onSubmit={(e) => { e.preventDefault(); join(); }} noValidate className="flex items-center gap-2 rounded-full bg-[rgba(10,6,5,0.55)] p-1.5 ring-1 ring-white/12">
           <label className="relative min-w-0 flex-1">
             <span className="sr-only">Din e-mail</span>
             {/* Same pairing as the arrow ball and the ticks: white disc, black glyph. */}
@@ -151,7 +151,7 @@ function SignupForm({ onJoined }: { onJoined: (count: number) => void }) {
             </span>
             <input type="email" value={mail} onChange={(e) => setMail(e.target.value)} placeholder={typed} aria-label="Din e-mail" autoComplete="email" className={`${inputCls} pl-[64px]`} />
           </label>
-          {button("Skriv mig op")}
+          {button("Skriv mig op", true)}
         </form>
       )}
       {step === "details" && (
@@ -176,7 +176,7 @@ function SignupForm({ onJoined }: { onJoined: (count: number) => void }) {
       {err && <p className="mt-3 text-center text-[0.8125rem] text-[#f6a58f]" role="alert">{err}</p>}
       {step !== "done" && <p className="mt-4 text-center text-[0.75rem] leading-relaxed text-white/45">Vi bruger dine oplysninger til at give dig adgang og kontakte dig om lanceringen. Læs vores <a href="/privatliv" className="underline underline-offset-2 hover:text-white/70">privatlivspolitik</a>.</p>}
       {step === "mail" && (
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 text-[0.8125rem] text-white/65">
+        <div className="mx-auto mt-5 flex w-fit flex-col items-start gap-2 text-[0.8125rem] text-white/65 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-7">
           <span className="inline-flex items-center gap-2"><Tick />Vær blandt de første på Mindforward.</span>
           <span className="inline-flex items-center gap-2"><Tick />Gratis at komme i gang</span>
         </div>
@@ -206,26 +206,26 @@ export function Venteliste() {
         <div className="absolute inset-0 opacity-[0.12] mix-blend-overlay" style={{ backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")" }} />
       </div>
 
-      <header className="relative z-10 flex items-center justify-between px-5 py-6 sm:px-20">
+      <header className="relative z-10 flex items-center justify-between px-5 py-5 sm:px-20 sm:py-6">
         <MindforwardLogo size={28} className="!text-[#faf6f2]" />
       </header>
 
       <main className="relative z-10 mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-center justify-center px-5 pb-6 pt-2 text-center">
-        <p className="text-[0.8125rem] font-medium uppercase tracking-[0.18em] text-white/60">AI ændrer måden, vi lever og arbejder på</p>
+        <p className="text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-white/60 sm:text-[0.8125rem] sm:tracking-[0.18em]">AI ændrer måden, vi lever og arbejder på</p>
         {/* Marco 2026-11-19: the first sentence stands free above, the second is the headline. */}
-        <h1 className="wl-display mt-5 max-w-[27ch] text-[clamp(2.25rem,0.8rem+3.4vw,4rem)] font-medium leading-[1.04] tracking-[-0.04em] [text-wrap:balance]" style={{ color: "#faf6f2" }}>
+        <h1 className="wl-display mt-4 max-w-[27ch] text-[clamp(1.875rem,0.8rem+3.4vw,4rem)] sm:mt-5 font-medium leading-[1.04] tracking-[-0.04em] [text-wrap:balance]" style={{ color: "#faf6f2" }}>
           Forestil dig, hvad du kunne, hvis du begyndte at udnytte mulighederne.
         </h1>
 
         <SignupForm onJoined={setCount} />
 
         {/* Launch block: countdown with the live Hold 1 counter right under it, the same width. */}
-        <div className="mt-10 inline-flex flex-col items-stretch">
+        <div className="mt-8 inline-flex flex-col items-stretch sm:mt-10">
           {/* Countdown tiles in the same black as the "Skriv mig op" button (Marco 2026-11-19). */}
           <div className="flex items-center gap-2 sm:gap-3" aria-label="Tid til lancering">
             {parts.map(([l, v], k) => (
               <div key={l} className="flex items-center gap-2 sm:gap-3">
-                <div className="wl-tile grid w-[68px] justify-items-center rounded-[18px] py-3.5 sm:w-[84px] sm:py-4">
+                <div className="wl-tile grid w-[64px] justify-items-center rounded-[16px] py-3 sm:w-[84px] sm:rounded-[18px] sm:py-4">
                   <p className="wl-display text-[1.75rem] font-medium tabular-nums leading-none tracking-[-0.02em] sm:text-[2.125rem]">{String(v).padStart(2, "0")}</p>
                   <p className="mt-2 text-[0.625rem] uppercase tracking-[0.16em] text-white/55">{l}</p>
                 </div>
@@ -238,11 +238,11 @@ export function Venteliste() {
       </main>
 
 
-      <footer className="relative z-10 flex flex-wrap items-center justify-between gap-3 px-5 pb-7 pt-4 text-[0.8125rem] text-white/60 sm:px-20">
+      <footer className="relative z-10 flex flex-col items-center gap-3 px-5 pb-6 pt-6 text-[0.75rem] text-white/60 sm:flex-row sm:justify-between sm:px-20 sm:pb-7 sm:pt-4 sm:text-[0.8125rem]">
         <span className="inline-flex items-center gap-3">Følg med
           <span className="flex gap-2">
             {socials.map(([label, href]) => (
-              <a key={label} href={href} aria-label={label} target="_blank" rel="noopener noreferrer" className="grid size-11 place-items-center transition hover:-translate-y-0.5"><BrandLogo k={label} /></a>
+              <a key={label} href={href} aria-label={label} target="_blank" rel="noopener noreferrer" className="grid size-10 place-items-center transition hover:-translate-y-0.5 sm:size-11"><BrandLogo k={label} /></a>
             ))}
           </span>
         </span>
@@ -265,6 +265,7 @@ export function Venteliste() {
         .wl-tile { background: #0a0a0b; box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), inset 0 -2px 5px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1), 0 12px 24px -12px rgba(0,0,0,0.8); }
         .wl-live::after { content: ""; position: absolute; inset: -3px; border-radius: 9999px; border: 1.5px solid #e8664a; animation: wlPing 1.8s ease-out infinite; }
         @keyframes wlPing { from { transform: scale(.6); opacity: 1; } to { transform: scale(1.8); opacity: 0; } }
+        @media (max-width: 639px) { .wl-compact { padding: 0; } .wl-compact .wl-ball { right: 10px; } }
         .wl-glass { background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03)), rgba(18,12,10,0.38); -webkit-backdrop-filter: blur(22px) saturate(140%); backdrop-filter: blur(22px) saturate(140%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), 0 30px 60px -30px rgba(0,0,0,0.8); }
         .wl-glass::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none; background: linear-gradient(180deg, rgba(255,255,255,0.32), rgba(255,255,255,0.06) 45%, rgba(255,255,255,0.12)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
         .wl-display { font-family: var(--font-wl-display), system-ui, sans-serif; }
