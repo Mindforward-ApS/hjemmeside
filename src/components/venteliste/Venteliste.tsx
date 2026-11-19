@@ -140,7 +140,7 @@ function SignupForm({ onJoined }: { onJoined: (count: number) => void }) {
     </button>
   );
   return (
-    <div className="mt-12 flex w-full max-w-[34rem] flex-col text-left sm:mt-10 sm:block">
+    <div className="mt-12 w-full max-w-[34rem] text-left sm:mt-10">
       {step === "mail" && (
         <form onSubmit={(e) => { e.preventDefault(); join(); }} noValidate className="flex items-center gap-2 rounded-full bg-[rgba(10,6,5,0.55)] p-1.5 ring-1 ring-white/12">
           <label className="relative min-w-0 flex-1">
@@ -174,9 +174,8 @@ function SignupForm({ onJoined }: { onJoined: (count: number) => void }) {
         </div>
       )}
       {err && <p className="mt-3 text-center text-[0.8125rem] text-[#f6a58f]" role="alert">{err}</p>}
-      {step !== "done" && <p className="order-last mt-8 text-center text-[0.6875rem] leading-relaxed text-white/40 sm:order-none sm:mt-4 sm:text-[0.75rem] sm:text-white/45">Vi bruger dine oplysninger til at give dig adgang og kontakte dig om lanceringen. Læs vores <a href="/privatliv" className="underline underline-offset-2 hover:text-white/70">privatlivspolitik</a>.</p>}
       {step === "mail" && (
-        <div className="mx-auto mt-8 flex w-fit flex-col items-start gap-3 text-[0.8125rem] sm:mt-5 text-white/65 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-7">
+        <div className="mt-6 flex items-start justify-center gap-x-4 text-left text-[0.75rem] leading-snug text-white/65 sm:mt-5 sm:items-center sm:gap-x-7 sm:text-[0.8125rem]">
           <span className="inline-flex items-center gap-2"><Tick />Vær blandt de første på Mindforward.</span>
           <span className="inline-flex items-center gap-2"><Tick />Gratis at komme i gang</span>
         </div>
@@ -246,7 +245,10 @@ export function Venteliste() {
             ))}
           </span>
         </span>
-        <span>© 2026 Mindforward. Lavet til danske teams.</span>
+        <span className="flex flex-col items-center gap-1 text-center sm:items-end sm:text-right">
+          <span className="max-w-[26rem] text-white/45">Vi bruger dine oplysninger til at give dig adgang og kontakte dig om lanceringen. Læs vores <a href="/privatliv" className="underline underline-offset-2 hover:text-white/70">privatlivspolitik</a>.</span>
+          <span>© 2026 Mindforward</span>
+        </span>
       </footer>
 
       <style>{`
