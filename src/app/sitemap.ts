@@ -1,13 +1,12 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/content/site";
-import { caseStudies, posts, useCases } from "@/content/data";
 
+// Only pages that are live and answer 200 (Marco 2026-11-19): the template pages redirect and stay out until launch.
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/platform", "/priser", "/kunder", "/blog", "/om-os", "/kontakt", "/sikkerhed", "/privatliv", "/vilkaar"];
+  const now = new Date();
   return [
-    ...staticRoutes.map((r) => ({ url: `${site.url}${r}` })),
-    ...useCases.map((u) => ({ url: `${site.url}/loesninger/${u.slug}` })),
-    ...caseStudies.map((c) => ({ url: `${site.url}/kunder/${c.slug}` })),
-    ...posts.map((p) => ({ url: `${site.url}/blog/${p.slug}`, lastModified: p.date })),
+    { url: site.url, lastModified: now, changeFrequency: "daily", priority: 1 },
+    { url: `${site.url}/priser`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${site.url}/kontakt`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
   ];
 }
