@@ -241,9 +241,9 @@ export function Venteliste() {
             ))}
           </span>
         </span>
-        <span className="flex flex-col items-center gap-1 text-center sm:items-end sm:text-right">
-          <span className="max-w-[26rem] text-white/45">Vi bruger dine oplysninger til at give dig adgang og kontakte dig om lanceringen. Læs vores <a href="/privatliv" className="underline underline-offset-2 hover:text-white/70">privatlivspolitik</a>.</span>
-          <span>© 2026 Mindforward</span>
+        <span className="flex flex-col items-center gap-1 text-center sm:items-end sm:text-right lg:flex-row lg:items-center lg:gap-6">
+          <span className="max-w-[26rem] text-white/45 lg:max-w-none lg:whitespace-nowrap">Vi bruger dine oplysninger til at give dig adgang og kontakte dig om lanceringen. Læs vores <a href="/privatliv" className="underline underline-offset-2 hover:text-white/70">privatlivspolitik</a>.</span>
+          <span className="whitespace-nowrap">© 2026 Mindforward</span>
         </span>
       </footer>
 
