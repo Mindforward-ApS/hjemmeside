@@ -132,7 +132,7 @@ function SignupForm({ onJoined }: { onJoined: (count: number) => void }) {
     setErr(""); setStep("done");
   });
   const pill = "flex flex-col gap-2 rounded-[22px] bg-[rgba(10,6,5,0.55)] p-1.5 ring-1 ring-white/12 sm:flex-row sm:rounded-full";
-  const inputCls = "h-[52px] w-full rounded-full bg-transparent pl-11 pr-4 text-[0.9375rem] text-white outline-none placeholder:text-white/45";
+  const inputCls = "h-[52px] w-full rounded-full bg-transparent pr-4 text-[0.9375rem] text-white outline-none placeholder:text-white/45";
   const button = (label: string, compact = false) => (
     <button type="submit" disabled={pending} aria-label={compact ? label : undefined} className={`wl-btn group relative inline-flex h-[52px] shrink-0 items-center justify-center rounded-full text-[0.9375rem] font-semibold text-white sm:w-[200px] ${compact ? "wl-compact w-[52px]" : "w-full"}`}>
       <span className={`wl-label ${compact ? "max-sm:sr-only" : ""}`}>{pending ? "Gemmer …" : label}</span>
@@ -145,11 +145,7 @@ function SignupForm({ onJoined }: { onJoined: (count: number) => void }) {
         <form onSubmit={(e) => { e.preventDefault(); join(); }} noValidate className="flex items-center gap-2 rounded-full bg-[rgba(10,6,5,0.55)] p-1.5 ring-1 ring-white/12">
           <label className="relative min-w-0 flex-1">
             <span className="sr-only">Din e-mail</span>
-            {/* Same pairing as the arrow ball and the ticks: white disc, black glyph. */}
-            <span aria-hidden className="pointer-events-none absolute left-2.5 top-1/2 grid size-8 -translate-y-1/2 place-items-center rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.35)]">
-              <svg viewBox="0 0 20 20" fill="none" className="size-4"><rect x="3" y="5" width="14" height="10.5" rx="2.2" stroke="#0a0a0b" strokeWidth="1.8" /><path d="M3.8 6.2l6.2 4.6 6.2-4.6" stroke="#0a0a0b" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
-            </span>
-            <input type="email" value={mail} onChange={(e) => setMail(e.target.value)} placeholder={typed} aria-label="Din e-mail" autoComplete="email" className={`${inputCls} pl-[64px]`} />
+            <input type="email" value={mail} onChange={(e) => setMail(e.target.value)} placeholder={typed} aria-label="Din e-mail" autoComplete="email" className={`${inputCls} pl-6`} />
           </label>
           {button("Skriv mig op", true)}
         </form>
@@ -194,7 +190,7 @@ export function Venteliste() {
       <div aria-hidden className="pointer-events-none absolute inset-0">
         {/* Smoke: soft coloured clouds, warped by an SVG turbulence filter so they read as smoke, not circles. */}
         <svg className="absolute h-0 w-0"><filter id="wl-smoke"><feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="3" seed="7"><animate attributeName="baseFrequency" values="0.006;0.0085;0.005;0.006" dur="18s" repeatCount="indefinite" /></feTurbulence><feDisplacementMap in="SourceGraphic" scale="180" /></filter></svg>
-        <div className="absolute inset-[-15%]" style={{ filter: "url(#wl-smoke) blur(40px)" }}>
+        <div className="wl-smoke absolute inset-[-15%]">
           <div className="wl-blob absolute left-[0%] top-[20%] h-[75%] w-[45%] rounded-full" style={{ background: "radial-gradient(circle at 40% 50%, rgba(232,102,74,0.85), rgba(184,69,46,0.45) 45%, transparent 70%)" }} />
           <div className="wl-blob2 absolute right-[2%] top-[25%] h-[80%] w-[50%] rounded-full" style={{ background: "radial-gradient(circle at 55% 50%, rgba(140,52,38,0.9), rgba(90,32,24,0.5) 45%, transparent 70%)" }} />
           <div className="wl-blob absolute left-[30%] top-[45%] h-[60%] w-[40%] rounded-full" style={{ background: "radial-gradient(circle, rgba(246,165,143,0.55), rgba(232,102,74,0.25) 45%, transparent 70%)" }} />
@@ -268,6 +264,8 @@ export function Venteliste() {
         .wl-live::after { content: ""; position: absolute; inset: -3px; border-radius: 9999px; border: 1.5px solid #e8664a; animation: wlPing 1.8s ease-out infinite; }
         @keyframes wlPing { from { transform: scale(.6); opacity: 1; } to { transform: scale(1.8); opacity: 0; } }
         @media (max-width: 639px) { .wl-compact { padding: 0; } .wl-compact .wl-ball { right: 10px; } }
+        .wl-smoke { filter: blur(60px); }
+        @media (min-width: 768px) { .wl-smoke { filter: url(#wl-smoke) blur(40px); } }
         .wl-glass { background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03)), rgba(18,12,10,0.38); -webkit-backdrop-filter: blur(22px) saturate(140%); backdrop-filter: blur(22px) saturate(140%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), 0 30px 60px -30px rgba(0,0,0,0.8); }
         .wl-glass::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none; background: linear-gradient(180deg, rgba(255,255,255,0.32), rgba(255,255,255,0.06) 45%, rgba(255,255,255,0.12)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
         .wl-display { font-family: var(--font-wl-display), system-ui, sans-serif; }
