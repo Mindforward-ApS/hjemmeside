@@ -1,16 +1,18 @@
-import { Bebas_Neue, Geist } from "next/font/google";
-import { NyForside } from "@/components/lab/NyForside";
+import type { Metadata } from "next";
+import { Instrument_Serif, Inter_Tight } from "next/font/google";
+import { Venteliste } from "@/components/venteliste/Venteliste";
 
-// Condensed caps display face from Marco's reference (2026-11-02). Full æ ø å via latin-ext.
-const bebas = Bebas_Neue({ subsets: ["latin", "latin-ext"], weight: "400", variable: "--font-bebas", display: "swap" });
-const geist = Geist({ subsets: ["latin", "latin-ext"], variable: "--font-geist", display: "swap" });
+const serif = Instrument_Serif({ subsets: ["latin", "latin-ext"], weight: "400", style: ["italic"], variable: "--font-wl-serif", display: "swap" });
+// Display face for the headline: tight, slightly narrow letters.
+const display = Inter_Tight({ subsets: ["latin", "latin-ext"], weight: ["500", "600"], variable: "--font-wl-display", display: "swap" });
 
-// Marco 2026-11-11: the new front page (/preview/forside-ny) is the home page: hero unchanged, everything below in
-// the new structure, Øvemiljø B, Pilot A (picture left), section separation 1. The previous home is ?gammel via git.
+export const metadata: Metadata = {
+  title: "Mindforward · Skriv dig op",
+  description: "AI ændrer måden, vi lever og arbejder på. Skriv dig op til Mindforward, der åbner 1. december 2026.",
+};
+
+// Marco 2026-11-19: until launch on 1 December the home page is the waitlist. The launch front page waits at
+// /preview/forside-lancering and moves back here at launch.
 export default function Home() {
-  return (
-    <div className={`${bebas.variable} ${geist.variable}`}>
-      <NyForside layout="ny" practice="b" pilot="a" sep={1} />
-    </div>
-  );
+  return <div className={`${serif.variable} ${display.variable}`}><Venteliste /></div>;
 }
