@@ -216,7 +216,6 @@ export function Venteliste() {
         <h1 className="wl-display mt-5 max-w-[27ch] text-[clamp(2.25rem,0.8rem+3.4vw,4rem)] font-medium leading-[1.04] tracking-[-0.04em] [text-wrap:balance]" style={{ color: "#faf6f2" }}>
           Forestil dig, hvad du kunne, hvis du begyndte at udnytte mulighederne.
         </h1>
-        <p className="mt-7 max-w-[32rem] text-[1.0625rem] leading-[1.7] text-white/65">Fra dit allerførste prompt til avanceret brug af AI. Lær at mestre værktøjerne, løse virkelige udfordringer og udvikle færdigheder, der gør en forskel i dit arbejde og din hverdag.</p>
 
         <SignupForm onJoined={setCount} />
 
