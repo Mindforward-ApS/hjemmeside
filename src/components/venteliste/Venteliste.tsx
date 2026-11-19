@@ -140,7 +140,7 @@ function SignupForm({ onJoined }: { onJoined: (count: number) => void }) {
     </button>
   );
   return (
-    <div className="mt-8 w-full max-w-[34rem] text-left sm:mt-10">
+    <div className="mt-12 flex w-full max-w-[34rem] flex-col text-left sm:mt-10 sm:block">
       {step === "mail" && (
         <form onSubmit={(e) => { e.preventDefault(); join(); }} noValidate className="flex items-center gap-2 rounded-full bg-[rgba(10,6,5,0.55)] p-1.5 ring-1 ring-white/12">
           <label className="relative min-w-0 flex-1">
@@ -174,9 +174,9 @@ function SignupForm({ onJoined }: { onJoined: (count: number) => void }) {
         </div>
       )}
       {err && <p className="mt-3 text-center text-[0.8125rem] text-[#f6a58f]" role="alert">{err}</p>}
-      {step !== "done" && <p className="mt-4 text-center text-[0.75rem] leading-relaxed text-white/45">Vi bruger dine oplysninger til at give dig adgang og kontakte dig om lanceringen. Læs vores <a href="/privatliv" className="underline underline-offset-2 hover:text-white/70">privatlivspolitik</a>.</p>}
+      {step !== "done" && <p className="order-last mt-8 text-center text-[0.6875rem] leading-relaxed text-white/40 sm:order-none sm:mt-4 sm:text-[0.75rem] sm:text-white/45">Vi bruger dine oplysninger til at give dig adgang og kontakte dig om lanceringen. Læs vores <a href="/privatliv" className="underline underline-offset-2 hover:text-white/70">privatlivspolitik</a>.</p>}
       {step === "mail" && (
-        <div className="mx-auto mt-5 flex w-fit flex-col items-start gap-2 text-[0.8125rem] text-white/65 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-7">
+        <div className="mx-auto mt-8 flex w-fit flex-col items-start gap-3 text-[0.8125rem] sm:mt-5 text-white/65 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-7">
           <span className="inline-flex items-center gap-2"><Tick />Vær blandt de første på Mindforward.</span>
           <span className="inline-flex items-center gap-2"><Tick />Gratis at komme i gang</span>
         </div>
@@ -210,17 +210,17 @@ export function Venteliste() {
         <MindforwardLogo size={28} className="!text-[#faf6f2]" />
       </header>
 
-      <main className="relative z-10 mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-center justify-center px-5 pb-6 pt-2 text-center">
+      <main className="relative z-10 mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-center justify-center px-6 pb-10 pt-10 text-center sm:px-5 sm:pb-6 sm:pt-2">
         <p className="text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-white/60 sm:text-[0.8125rem] sm:tracking-[0.18em]">AI ændrer måden, vi lever og arbejder på</p>
         {/* Marco 2026-11-19: the first sentence stands free above, the second is the headline. */}
-        <h1 className="wl-display mt-4 max-w-[27ch] text-[clamp(1.875rem,0.8rem+3.4vw,4rem)] sm:mt-5 font-medium leading-[1.04] tracking-[-0.04em] [text-wrap:balance]" style={{ color: "#faf6f2" }}>
+        <h1 className="wl-display mt-5 max-w-[27ch] text-[clamp(1.875rem,0.8rem+3.4vw,4rem)] leading-[1.1] sm:mt-5 sm:leading-[1.04] font-medium tracking-[-0.03em] sm:tracking-[-0.04em] [text-wrap:balance]" style={{ color: "#faf6f2" }}>
           Forestil dig, hvad du kunne, hvis du begyndte at udnytte mulighederne.
         </h1>
 
         <SignupForm onJoined={setCount} />
 
         {/* Launch block: countdown with the live Hold 1 counter right under it, the same width. */}
-        <div className="mt-8 inline-flex flex-col items-stretch sm:mt-10">
+        <div className="mt-14 inline-flex flex-col items-stretch sm:mt-10">
           {/* Countdown tiles in the same black as the "Skriv mig op" button (Marco 2026-11-19). */}
           <div className="flex items-center gap-2 sm:gap-3" aria-label="Tid til lancering">
             {parts.map(([l, v], k) => (
@@ -238,7 +238,7 @@ export function Venteliste() {
       </main>
 
 
-      <footer className="relative z-10 flex flex-col items-center gap-3 px-5 pb-6 pt-6 text-[0.75rem] text-white/60 sm:flex-row sm:justify-between sm:px-20 sm:pb-7 sm:pt-4 sm:text-[0.8125rem]">
+      <footer className="relative z-10 flex flex-col items-center gap-4 px-5 pb-10 pt-10 text-[0.75rem] text-white/60 sm:flex-row sm:justify-between sm:px-20 sm:pb-7 sm:pt-4 sm:text-[0.8125rem]">
         <span className="inline-flex items-center gap-3">Følg med
           <span className="flex gap-2">
             {socials.map(([label, href]) => (
