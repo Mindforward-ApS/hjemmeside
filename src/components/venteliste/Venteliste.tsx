@@ -172,7 +172,7 @@ function SignupForm({ onJoined }: { onJoined: (count: number) => void }) {
       {err && <p className="mt-3 text-center text-[0.8125rem] text-[#f6a58f]" role="alert">{err}</p>}
       {step === "mail" && (
         <div className="mt-6 flex items-center justify-center gap-x-5 text-left text-[0.8125rem] leading-snug text-white/65 sm:mt-5 sm:items-center sm:gap-x-7 sm:text-[0.8125rem]">
-          <span className="inline-flex items-center gap-2 whitespace-nowrap"><Tick />Vær blandt de første<span className="hidden sm:inline"> på Mindforward.</span></span>
+          <span className="inline-flex items-center gap-2 whitespace-nowrap"><Tick />Vær blandt de første</span>
           <span className="inline-flex items-center gap-2 whitespace-nowrap"><Tick />Gratis at komme i gang</span>
         </div>
       )}
