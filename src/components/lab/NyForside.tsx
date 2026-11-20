@@ -42,6 +42,7 @@ import { A as PrisCalendly } from "@/components/lab/PrisVarianter2";
 import { Pi2 as PilotFoto } from "@/components/lab/PilotVarianter";
 import { HeroLunar } from "@/components/lab/HeroLunar";
 import { HeroPleo } from "@/components/lab/HeroPleo";
+import { MiwaLive } from "@/components/lab/MiwaLive";
 import { videoVersions, type VideoVersion } from "@/components/lab/VideoSektion";
 
 const c = {
@@ -303,7 +304,19 @@ function HeroVideo() {
   );
 }
 
-export function Hero({ toggle = false, media = "cards", navSwitch = false }: { toggle?: boolean; media?: "cards" | "video" | "none"; navSwitch?: boolean }) {
+// Marco 2026-11-20: Miwa, the AI tutor, takes the team photo's place in the hero. Cut-out 3D figure standing on the
+// dark hero background, with a warm coral glow behind her and a soft floor shadow so the black outfit stays readable.
+function HeroMiwa({ pose }: { pose: "velkommen" | "glad" }) {
+  return (
+    <div className="relative mx-auto flex h-[min(78svh,46rem)] w-full max-w-[34rem] items-end justify-center lg:mr-0 lg:h-[calc(100svh-13rem)] lg:max-w-none">
+      <div aria-hidden className="pointer-events-none absolute left-1/2 top-[38%] aspect-square w-[115%] -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ background: "radial-gradient(closest-side, rgba(232,102,74,0.42), rgba(232,102,74,0.16) 45%, transparent 75%)" }} />
+      <div aria-hidden className="pointer-events-none absolute bottom-[-1.5%] left-1/2 h-[6%] w-[60%] -translate-x-1/2 rounded-[50%] blur-md" style={{ background: "radial-gradient(closest-side, rgba(0,0,0,0.7), transparent)" }} />
+      <Image data-hero-person src={`/img/miwa/miwa-${pose}.webp`} alt="Miwa, Mindforwards AI-tutor" width={pose === "glad" ? 916 : 876} height={1466} priority sizes="(min-width:1024px) 40vw, 90vw" className="relative h-full w-auto max-w-full object-contain object-bottom drop-shadow-[0_0_28px_rgba(232,102,74,0.25)]" />
+    </div>
+  );
+}
+
+export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa }: { toggle?: boolean; media?: "cards" | "video" | "none"; navSwitch?: boolean; miwa?: "velkommen" | "glad" | "live" }) {
   // Shared with the pricing section via lib/siteMode (Marco 2026-11-11: Privat must show private prices).
   const mode = useSiteMode();
   const setMode = setSiteMode;
@@ -317,7 +330,7 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false }: { t
           dark background. Phones keep a cover crop on her. */}
       {/* Erhverv shows the office team, Privat the woman at home (Marco 2026-11-07); both dark-toned and a little blurred,
           crossfading when the switch changes. Both are Gemini-generated mood photos, never presented as customers. */}
-      <div aria-hidden data-hero-bg className="pointer-events-none absolute inset-0 overflow-hidden lg:bottom-auto lg:aspect-[2752/1536] lg:[mask-image:linear-gradient(180deg,black_72%,transparent)]">
+      {!miwa && <><div aria-hidden data-hero-bg className="pointer-events-none absolute inset-0 overflow-hidden lg:bottom-auto lg:aspect-[2752/1536] lg:[mask-image:linear-gradient(180deg,black_72%,transparent)]">
         {navSwitch && <Image src="/img/hero-erhverv-2.jpg" alt="" fill priority sizes="100vw" className={`scale-[1.03] object-cover object-[70%_40%] transition-opacity duration-700 lg:object-[50%_40%] ${privat ? "opacity-0" : "opacity-100"}`} />}
         <Image src="/img/hero-hjem.jpg" alt="" fill priority={!navSwitch} sizes="100vw" className={`scale-[1.03] object-cover object-[72%_40%] transition-opacity duration-700 lg:object-[50%_40%] ${navSwitch && !privat ? "opacity-0" : "opacity-100"}`} />
         {/* Marco 2026-11-07: the blur fades out towards the people (sharp) and is strongest behind the headline and text.
@@ -331,7 +344,14 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false }: { t
           <div key={px} className="absolute inset-0 hidden lg:block" style={{ backdropFilter: `blur(${px}px)`, WebkitBackdropFilter: `blur(${px}px)`, maskImage: `linear-gradient(90deg, black 0%, black ${solid}%, transparent ${clear}%)`, WebkitMaskImage: `linear-gradient(90deg, black 0%, black ${solid}%, transparent ${clear}%)` }} />
         ))}
       </div>
-      <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(14,10,9,0.86) 0%, rgba(14,10,9,0.7) 38%, rgba(14,10,9,0.35) 70%, rgba(14,10,9,0.25) 100%), linear-gradient(180deg, rgba(14,10,9,0.5) 0%, transparent 25%, transparent 65%, rgba(14,10,9,0.8) 100%)" }} />
+      <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(14,10,9,0.86) 0%, rgba(14,10,9,0.7) 38%, rgba(14,10,9,0.35) 70%, rgba(14,10,9,0.25) 100%), linear-gradient(180deg, rgba(14,10,9,0.5) 0%, transparent 25%, transparent 65%, rgba(14,10,9,0.8) 100%)" }} /></>}
+      {/* Marco 2026-11-20: Miwa's autumn landscape behind the live hero; dark veil on the left keeps the white text readable. */}
+      {miwa === "live" && (
+        <div aria-hidden data-hero-bg className="pointer-events-none absolute inset-0 overflow-hidden">
+          <Image src="/img/hero-efteraar.webp" alt="" fill priority sizes="100vw" className="object-cover object-[60%_70%]" />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,13,11,0.86) 0%, rgba(20,13,11,0.7) 30%, rgba(20,13,11,0.25) 52%, transparent 66%), linear-gradient(180deg, rgba(20,13,11,0.55) 0%, transparent 18%, transparent 80%, rgba(20,13,11,0.7) 100%)" }} />
+        </div>
+      )}
       {navSwitch && <TopBar mode={mode} setMode={setMode} />}
       {/* Marco 2026-11-07: a very light orange haze spread over the whole blurred area (left), gone before the people. */}
       <div aria-hidden data-glow className="pointer-events-none absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(232,102,74,0.075) 0%, rgba(232,102,74,0.06) 30%, rgba(232,102,74,0.025) 48%, transparent 58%)" }} />
@@ -383,7 +403,7 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false }: { t
             )}
           </div>
         </div>
-        {media === "video" ? <HeroVideo /> : media === "cards" ? <HeroCollage privat={privat} /> : null}
+        {miwa === "live" ? <MiwaLive /> : miwa ? <HeroMiwa pose={miwa} /> : media === "video" ? <HeroVideo /> : media === "cards" ? <HeroCollage privat={privat} /> : null}
       </div>
       <HeroLogos />
     </section>
@@ -665,7 +685,7 @@ function CtaBand() {
 }
 
 /* ───────────── Page + motion layer ───────────── */
-export function NyForside({ toggle = false, uiMode = "off", hero = "video", video, start, skills, oev, cert = true, layout, practice, pilot, sep, start3, system }: { toggle?: boolean; uiMode?: UiMode; hero?: "video" | "lunar" | "pleo"; video?: VideoVersion; start?: "kort"; skills?: "cases"; oev?: "kort"; cert?: boolean; layout?: "ny"; practice?: "a" | "b" | "c"; pilot?: "a" | "b" | "c"; sep?: 1 | 2 | 3; start3?: "a" | "b" | "c"; system?: boolean } = {}) {
+export function NyForside({ miwa, toggle = false, uiMode = "off", hero = "video", video, start, skills, oev, cert = true, layout, practice, pilot, sep, start3, system }: { miwa?: "velkommen" | "glad" | "live"; toggle?: boolean; uiMode?: UiMode; hero?: "video" | "lunar" | "pleo"; video?: VideoVersion; start?: "kort"; skills?: "cases"; oev?: "kort"; cert?: boolean; layout?: "ny"; practice?: "a" | "b" | "c"; pilot?: "a" | "b" | "c"; sep?: 1 | 2 | 3; start3?: "a" | "b" | "c"; system?: boolean } = {}) {
   const VideoSek = video ? videoVersions[video] : null;
   const root = useRef<HTMLDivElement>(null);
 
@@ -764,7 +784,7 @@ export function NyForside({ toggle = false, uiMode = "off", hero = "video", vide
       `}</style>
       {/* hero="lunar" = the Lunar test at /preview/hero-lunar (2026-11-07); /preview/ny-forside keeps the video hero. */}
       {/* Marco 2026-11-07: "gå med den vi selv har og bare fjern den store produkt video for nu" (Lunar copy too recognisable). */}
-      {hero === "lunar" ? <HeroLunar /> : hero === "pleo" ? <HeroPleo /> : <Hero toggle={toggle} media="none" navSwitch={!toggle} />}
+      {hero === "lunar" ? <HeroLunar /> : hero === "pleo" ? <HeroPleo /> : <Hero toggle={toggle} media="none" navSwitch={!toggle} miwa={miwa} />}
       {layout === "ny" && system ? <Forside3 practice={practice === "b" ? <Oev3.B /> : undefined} pilot={pilot === "a" ? <Pilot3.A /> : undefined} /> : layout === "ny" ? <Forside2 practice={practice === "a" ? <Oev3.A /> : practice === "b" ? <Oev3.B /> : practice === "c" ? <Oev3.C /> : undefined} pilot={pilot === "a" ? <Pilot3.A /> : pilot === "b" ? <Pilot3.B /> : pilot === "c" ? <Pilot3.C /> : undefined} sep={sep} steps={start3 === "a" ? <Start3.A /> : start3 === "b" ? <Start3.B /> : start3 === "c" ? <Start3.C /> : undefined} /> : (<>
       {/* Product video right after the hero (Marco 2026-11-10); versions on /preview/sektion-video, "/" unchanged. */}
       {VideoSek && <VideoSek />}

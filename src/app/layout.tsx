@@ -6,6 +6,7 @@ import { VIS_PLADSHOLDERE } from "@/lib/pladsholdere";
 import { AlertBanner } from "@/components/layout/AlertBanner";
 import { SiteNav } from "@/components/layout/SiteNav";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { FooterGate } from "@/components/layout/FooterGate";
 import { RevealObserver } from "@/components/motion/RevealObserver";
 import { SplitHeadings } from "@/components/motion/SplitHeadings";
 import { SpotlightTracker } from "@/components/motion/SpotlightTracker";
@@ -57,7 +58,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <AlertBanner />
         <SiteNav />
         <main id="main">{children}</main>
-        <SiteFooter />
+        <FooterGate><SiteFooter /></FooterGate>
         <RevealObserver />
         <SplitHeadings />
         <SpotlightTracker />

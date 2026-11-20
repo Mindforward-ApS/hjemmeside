@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
     ];
   },
   // Blog posts are markdown files read from disk (src/lib/blog.ts); keep them next to the server code.
-  outputFileTracingIncludes: { "/blog/*": ["./content/blog/*.md"] },
+  outputFileTracingIncludes: { "/blog/*": ["./content/blog/*.md"], "/sitemap.xml": ["./content/blog/*.md"] },
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {

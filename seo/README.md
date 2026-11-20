@@ -39,11 +39,9 @@ Samme tankegang som på ai-konsulenterne.dk, men uden CMS:
 
 ## Mangler før agenterne kan køre (status 20. november 2026)
 
-1. **Den live side er nyere end `main` på GitHub.** mindforward.dk har bl.a.
-   siden `/venteliste`, som ikke findes i repoet, så siden bliver udgivet et
-   andet sted fra end GitHub. Før bloggen kan køre automatisk, skal det
-   nyeste arbejde pushes til `main`, blog-opsætningen flettes ind, og siden
-   sættes til at bygge sig selv ved push til `main`.
+1. Blog-opsætningen skal flettes ind i `main`, og siden skal bygge sig selv
+   ved push til `main` (Vercel → Settings → Git). Først derefter kan
+   blog-agenterne udgive.
 2. mindforward.dk er ikke i Search Console med adgang for servicekontoen, så
    der er ingen tal til quick wins og rapporter.
 3. Teksten på `/ai-forordningen-artikel-4` skal tjekkes mod den gældende
