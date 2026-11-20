@@ -14,7 +14,8 @@ til på en kursusplatform.
 ## Faste regler
 
 - **Rapportering:** alle SEO-rapporter postes i den private kanal
-  `#googleanalytics` i Leadlines Slack. Post aldrig i AI Konsulenternes Slack.
+  `#googleanalytics` i Leadlines Slack (kanal-ID `C0CKJR2MG85`, workspace
+  `leadlinedkworkspace`). Post aldrig i AI Konsulenternes Slack.
   Er du i tvivl om en kanal, så spørg Nicholas i stedet for at poste.
 - **Adskillelse:** Mindforward er en selvstændig forretning. Brug ikke AIK's
   cases, priser, telefonnumre eller links i indhold til mindforward.dk.
@@ -24,9 +25,7 @@ til på en kursusplatform.
 
 ## Mangler før agenterne kan køre (status 20. november 2026)
 
-1. Slack-forbindelsen går til AIK's workspace. Leadline skal forbindes, og
-   kanal-ID'et for `#googleanalytics` skal skrives ind her.
-2. mindforward.dk er ikke i Search Console med adgang for servicekontoen, så
+1. mindforward.dk er ikke i Search Console med adgang for servicekontoen, så
    der er ingen tal til quick wins og rapporter.
-3. Bloggen har ingen indholdskilde endnu: indlæggene i `src/content/data.ts`
+2. Bloggen har ingen indholdskilde endnu: indlæggene i `src/content/data.ts`
    er pladsholdere fra skabelonen, og artikelsiden viser pladsholdertekst.
