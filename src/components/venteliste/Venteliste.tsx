@@ -8,6 +8,7 @@ import { useEffect, useState, useTransition } from "react";
 import { addDetails, joinWaitlist, waitlistCount } from "./actions";
 import { SPOTS } from "./spots";
 import { MindforwardLogo } from "@/components/ui/MindforwardLogo";
+import { appLinks } from "@/lib/app";
 
 // Social profiles. TODO(Marco): replace "#" with the real profile links.
 // The networks' own logos in their own colours (marks from simple-icons, CC0; Instagram and TikTok in full colour).
@@ -203,6 +204,11 @@ export function Venteliste() {
 
       <header className="relative z-10 flex items-center justify-between px-5 py-5 sm:px-20 sm:py-6">
         <MindforwardLogo size={28} className="!text-[#faf6f2]" />
+        {/* Existing users go straight to the platform (Marco 2026-11-20). */}
+        <a href={appLinks.login} className="wl-login inline-flex h-10 items-center gap-2 rounded-full px-4 text-[0.875rem] font-semibold text-white ring-1 ring-white/20 transition hover:bg-white/10 hover:ring-white/35">
+          Log ind
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden className="size-3.5"><path d="M6 14l8-8M7.5 6H14v6.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+        </a>
       </header>
 
       <main className="relative z-10 mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-center justify-center px-6 pb-10 pt-10 text-center sm:px-5 sm:pb-6 sm:pt-2">

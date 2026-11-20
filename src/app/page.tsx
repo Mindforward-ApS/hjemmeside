@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Inter_Tight } from "next/font/google";
-import { Venteliste } from "@/components/venteliste/Venteliste";
+import { Bebas_Neue, Geist } from "next/font/google";
+import { NyForside } from "@/components/lab/NyForside";
 
-const serif = Instrument_Serif({ subsets: ["latin", "latin-ext"], weight: "400", style: ["italic"], variable: "--font-wl-serif", display: "swap" });
-// Display face for the headline: tight, slightly narrow letters.
-const display = Inter_Tight({ subsets: ["latin", "latin-ext"], weight: ["500", "600"], variable: "--font-wl-display", display: "swap" });
+// Condensed caps display face from Marco's reference (2026-11-02). Full æ ø å via latin-ext.
+const bebas = Bebas_Neue({ subsets: ["latin", "latin-ext"], weight: "400", variable: "--font-bebas", display: "swap" });
+const geist = Geist({ subsets: ["latin", "latin-ext"], variable: "--font-geist", display: "swap" });
 
-// SEO (Marco 2026-11-19): Danish search terms people actually use (AI-kursus, AI-træning, ChatGPT, Copilot, Claude),
-// a canonical URL and a share image in the waitlist's look.
 const title = "Mindforward – AI-kurser på dansk i ChatGPT, Copilot og Claude";
-const description = "Lær at bruge AI i dit arbejde og din hverdag. Korte AI-kurser på dansk, øvelser fra din egen hverdag og et certifikat, når du er færdig. Åbner 1. januar 2027. Skriv dig op.";
+const description = "Lær at bruge AI i dit arbejde og din hverdag. Korte AI-kurser på dansk, et øvemiljø med opgaver fra din egen hverdag og et certifikat, når du er færdig.";
 export const metadata: Metadata = {
   title: { absolute: title },
   description,
@@ -19,8 +17,12 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title, description },
 };
 
-// Marco 2026-11-19: until launch on 1 January 2027 the home page is the waitlist. The launch front page waits at
-// /preview/forside-lancering and moves back here at launch.
+// Marco 2026-11-20: the full website is the home page again instead of the waitlist (which lives at /venteliste).
+// Hero unchanged, everything below in the new structure, Øvemiljø B, Pilot A (picture left), section separation 1.
 export default function Home() {
-  return <div className={`${serif.variable} ${display.variable}`}><Venteliste /></div>;
+  return (
+    <div className={`${bebas.variable} ${geist.variable}`}>
+      <NyForside layout="ny" practice="b" pilot="a" sep={1} />
+    </div>
+  );
 }
