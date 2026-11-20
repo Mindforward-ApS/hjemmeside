@@ -24,6 +24,8 @@ export type LandingPage = {
   /** Course structured data. Off for the page about the regulation, which is an explainer, not a course page. */
   course: boolean;
   cta: { title: string; sub: string };
+  /** A draft is built in development only. It is left out of the live site, the sitemap and every link list. */
+  draft?: boolean;
 };
 
 const fra = erhverv[1].price; // "55 kr"
@@ -42,7 +44,7 @@ const opgaver = {
   deling: { icon: "shield" as const, title: "Hvad må deles med AI", body: "Lær at se, hvilke oplysninger der skal fjernes fra en tekst, før den må deles." },
 };
 
-export const landingPages: LandingPage[] = [
+const allPages: LandingPage[] = [
   {
     slug: "copilot-kursus",
     nav: "Copilot-kursus",
@@ -173,6 +175,9 @@ export const landingPages: LandingPage[] = [
   },
   {
     slug: "ai-forordningen-artikel-4",
+    // Draft until the legal wording has been checked (see the note at intro.body). To publish: remove this line, add
+    // the footer link back in src/content/site.ts and drop the "ikke live" notes in seo/.
+    draft: true,
     nav: "AI-forordningen artikel 4",
     metaTitle: "AI-forordningen artikel 4: AI-kompetencer",
     metaDescription: "Artikel 4 i AI-forordningen handler om AI-kompetencer (AI literacy) hos medarbejdere. Se hvad pligten betyder, og hvordan I dokumenterer det.",
@@ -214,5 +219,10 @@ export const landingPages: LandingPage[] = [
     cta: { title: "Kom i gang med AI-kompetencerne", sub: "Opret holdet, og send ét link. Første lektion tager 10 minutter." },
   },
 ];
+
+// Drafts show in development (and with NEXT_PUBLIC_VIS_KLADDER=1), never on mindforward.dk.
+const VIS_KLADDER = process.env.NEXT_PUBLIC_VIS_KLADDER === "1" || process.env.NODE_ENV !== "production";
+
+export const landingPages: LandingPage[] = allPages.filter((p) => VIS_KLADDER || !p.draft);
 
 export const getLandingPage = (slug: string) => landingPages.find((p) => p.slug === slug);

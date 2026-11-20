@@ -55,7 +55,7 @@ Læs [`seo-fokus.md`](seo-fokus.md). Kort:
 | chatgpt kursus, kursus i ai og chatgpt | `/chatgpt-kursus` |
 | claude kursus | `/claude-kursus` |
 | ai kursus, ai kursus online, ai kursus for virksomheder | `/ai-kursus-for-virksomheder` |
-| ai literacy, ai act kursus, ai-kompetencer | `/ai-forordningen-artikel-4` |
+| ai literacy, ai act kursus, ai-kompetencer | `/ai-forordningen-artikel-4` (ikke live endnu - link til `/ai-kursus-for-virksomheder` indtil videre) |
 
 Regler for hvert indlæg:
 
@@ -125,11 +125,12 @@ en kilde, før du skriver om den.
 ### Link-mål, der findes
 
 `/copilot-kursus` `/chatgpt-kursus` `/claude-kursus`
-`/ai-kursus-for-virksomheder` `/ai-forordningen-artikel-4` `/priser`
+`/ai-kursus-for-virksomheder` `/priser`
 `/kontakt` `/blog` samt artikler under `/blog/`.
 
 Sider som `/platform`, `/kunder`, `/om-os` og `/kurser/...` sender videre til
-forsiden - link aldrig til dem.
+forsiden - link aldrig til dem. `/ai-forordningen-artikel-4` er en kladde og
+er ikke live, før lovteksten er tjekket - link heller ikke dertil endnu.
 
 ### Markdown-begrænsninger (rendereren er minimal)
 

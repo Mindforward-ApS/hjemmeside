@@ -61,7 +61,7 @@ bygget, og teksterne ligger i `src/content/landingssider.ts`:
 | `/chatgpt-kursus` | chatgpt kursus, kursus i ai og chatgpt, ai og chatgpt kursus |
 | `/claude-kursus` | claude kursus (ingen volumen i arket endnu) |
 | `/ai-kursus-for-virksomheder` | ai kursus, ai kursus online, ai kursus for virksomheder |
-| `/ai-forordningen-artikel-4` | ai literacy, ai act kursus |
+| `/ai-forordningen-artikel-4` (kladde, ikke live endnu) | ai literacy, ai act kursus |
 | `/priser` | priser |
 
 Der er ingen selvstændig side om kursusbeviset endnu.

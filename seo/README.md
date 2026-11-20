@@ -39,10 +39,10 @@ Samme tankegang som på ai-konsulenterne.dk, men uden CMS:
 
 ## Mangler før agenterne kan køre (status 20. november 2026)
 
-1. Blog-opsætningen skal flettes ind i `main`, og siden skal bygge sig selv
-   ved push til `main` (Vercel → Settings → Git). Først derefter kan
-   blog-agenterne udgive.
+1. Siden skal bygge sig selv ved push til `main` (Vercel → Settings → Git),
+   og blog-agenterne skal oprettes.
 2. mindforward.dk er ikke i Search Console med adgang for servicekontoen, så
    der er ingen tal til quick wins og rapporter.
-3. Teksten på `/ai-forordningen-artikel-4` skal tjekkes mod den gældende
-   lovtekst, før siden går live (se kommentaren i `landingssider.ts`).
+3. `/ai-forordningen-artikel-4` er en kladde og vises ikke på den live side.
+   Teksten skal tjekkes mod den gældende lovtekst, før `draft: true` fjernes
+   i `src/content/landingssider.ts`.

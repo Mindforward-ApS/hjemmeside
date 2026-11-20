@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { landingPages, type LandingPage } from "@/content/landingssider";
+import { getLandingPage, landingPages, type LandingPage } from "@/content/landingssider";
 import { erhverv } from "@/content/priser";
 import { site } from "@/content/site";
 import { appLinks } from "@/lib/app";
@@ -123,7 +123,7 @@ export function KursusLanding({ page }: { page: LandingPage }) {
             <div>
               <h2 className="text-[clamp(1.75rem,1.1rem+1.8vw,2.75rem)] font-semibold leading-[1.1] tracking-[-0.025em] text-white">{page.proof.title}</h2>
               <p className="mt-5 max-w-[30rem] text-[1.0625rem] leading-relaxed text-white/75">{page.proof.body}</p>
-              {page.proof.note === "artikel4" && (
+              {page.proof.note === "artikel4" && getLandingPage("ai-forordningen-artikel-4") && (
                 <Link href="/ai-forordningen-artikel-4" className="mt-6 inline-flex min-h-11 items-center gap-2 text-[0.9375rem] font-medium text-white underline decoration-white/40 underline-offset-4 hover:decoration-white">Læs om artikel 4 <Icon name="arrowRight" size={16} /></Link>
               )}
             </div>

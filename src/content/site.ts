@@ -54,7 +54,6 @@ export const site = {
         { label: "Sådan virker det", href: "/#saadan" },
         { label: "Priser", href: "/priser" },
         { label: "For virksomheder", href: "/ai-kursus-for-virksomheder" },
-        { label: "AI-forordningen artikel 4", href: "/ai-forordningen-artikel-4" },
         { label: "Blog", href: "/blog" },
       ],
     },
