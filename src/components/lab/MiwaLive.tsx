@@ -1,13 +1,17 @@
 "use client";
 
-// Marco 2026-11-20: Miwa comes alive in the hero. She is a cut-out 3D render split into layers (body, forearm, eyelids),
-// animated in the browser: she breathes, blinks, waves when the page opens and says hello in a speech bubble. Next to
-// her sit the test-user video cards; she taps one herself, the clip starts, and she laughs along. Clicking her gives a
-// new line. No real test-user videos yet: one card is the AI-generated example clip (labelled), the rest say so.
+// Marco 2026-11-20: Miwa comes alive in the hero. The motion is rendered in Blender (her cut-out image skinned to a
+// skeleton, so elbows, shoulders and neck bend smoothly) into four transparent clips: idle (breathing, swaying,
+// blinking, loops), wave, point/tap and laugh. Every clip starts and ends in the same rest pose, so they cut together
+// without a jump. Chrome/Firefox get VP9 with alpha (webm), Safari HEVC with alpha (mp4).
+// Next to her sit the test-user video cards; she taps one herself, the clip starts, and she laughs along. Clicking her
+// gives a new line. No real test-user videos yet: one card is the AI-generated example clip (labelled), the rest say so.
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type Arm = "rest" | "wave" | "point";
+type Act = "wave" | "point" | "laugh";
 type Card = { id: string; label: string; src?: string; poster?: string };
+
+const acts: Act[] = ["wave", "point", "laugh"];
 
 const cards: Card[] = [
   { id: "a", label: "Eksempel", src: "/video/kunde-1.mp4", poster: "/video/kunde-1-poster.jpg" },
@@ -23,23 +27,44 @@ const pokes = [
   "Claude, ChatGPT eller Copilot? Jeg kan dem alle tre.",
 ];
 
-// Pivot of the forearm (the cuff), as a share of the image box.
-const elbow = "81.55% 28.79%";
-
 export function MiwaLive() {
-  const [arm, setArm] = useState<Arm>("rest");
+  const [ext, setExt] = useState<"webm" | "mp4" | null>(null);
+  const [act, setAct] = useState<Act | null>(null);
+  const [ready, setReady] = useState(false);
   const [line, setLine] = useState<string | null>(null);
-  const [blink, setBlink] = useState(false);
-  const [hop, setHop] = useState(0);
   const [playing, setPlaying] = useState<string | null>(null);
   const [pressed, setPressed] = useState<string | null>(null);
   const touched = useRef(false);
   const poke = useRef(0);
+  const idle = useRef<HTMLVideoElement>(null);
+  const clips = useRef<Partial<Record<Act, HTMLVideoElement | null>>>({});
   const vids = useRef<Record<string, HTMLVideoElement | null>>({});
   const timers = useRef<number[]>([]);
   const later = (ms: number, fn: () => void) => { timers.current.push(window.setTimeout(fn, ms)); };
 
-  const laugh = useCallback(() => setHop((h) => h + 1), []);
+  // Safari can't show VP9 alpha; it gets the HEVC-with-alpha files instead.
+  useEffect(() => {
+    const ua = navigator.userAgent;
+    setExt(/^((?!chrome|chromium|android|crios|fxios).)*safari/i.test(ua) ? "mp4" : "webm");
+  }, []);
+
+  // Plays one action clip on top of the idle loop. Idle is parked on frame 0 (the shared rest pose) meanwhile.
+  const run = useCallback((a: Act) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const v = clips.current[a];
+    if (!v) return;
+    Object.values(clips.current).forEach((o) => { if (o && o !== v) o.pause(); });
+    idle.current?.pause();
+    if (idle.current) idle.current.currentTime = 0;
+    v.currentTime = 0;
+    setAct(a);
+    void v.play().catch(() => setAct(null));
+  }, []);
+
+  const done = (a: Act) => {
+    setAct((cur) => (cur === a ? null : cur));
+    void idle.current?.play().catch(() => {});
+  };
 
   const play = useCallback((c: Card, byMiwa: boolean) => {
     setPressed(c.id);
@@ -54,83 +79,63 @@ export function MiwaLive() {
     if (v) { v.currentTime = 0; v.muted = byMiwa; void v.play().catch(() => {}); }
     setPlaying(c.id);
     setLine(byMiwa ? "Den her må du se!" : "Haha, den elsker jeg!");
-    later(700, laugh);
-    later(1500, laugh);
-  }, [laugh]);
+    later(byMiwa ? 900 : 200, () => run("laugh"));
+  }, [run]);
 
   // Opening scene: wave + hello, then a hint, then she taps the first card herself unless the visitor already did.
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    later(500, () => { setArm(reduce ? "rest" : "wave"); setLine("Hej! Jeg er Miwa, din AI-tutor."); });
-    later(2900, () => setArm("rest"));
-    later(3600, () => setLine("Vil du høre, hvad testbrugerne siger?"));
-    later(6200, () => {
+    if (!ext) return;
+    later(600, () => { setLine("Hej! Jeg er Miwa, din AI-tutor."); run("wave"); });
+    later(3700, () => setLine("Vil du høre, hvad testbrugerne siger?"));
+    later(6400, () => {
       if (touched.current) return;
-      setArm("point");
       setLine("Jeg trykker bare på den her…");
+      run("point");
       later(650, () => { if (!touched.current) play(cards[0], true); });
-      later(1600, () => setArm("rest"));
     });
     return () => timers.current.forEach(clearTimeout);
-  }, [play]);
-
-  // Blinks at a slightly random rhythm.
-  useEffect(() => {
-    let t: number;
-    const next = () => { t = window.setTimeout(() => { setBlink(true); window.setTimeout(() => setBlink(false), 130); next(); }, 2600 + Math.random() * 2600); };
-    next();
-    return () => clearTimeout(t);
-  }, []);
+  }, [ext, run, play]);
 
   const onMiwa = () => {
     touched.current = true;
     setLine(pokes[poke.current++ % pokes.length]);
-    setArm("wave");
-    later(1700, () => setArm("rest"));
-    laugh();
+    run(poke.current % 2 ? "wave" : "laugh");
   };
 
   return (
-    <div className="relative mx-auto mt-16 flex h-[26rem] w-full max-w-[40rem] items-end justify-center gap-3 sm:mt-0 sm:h-[min(78svh,46rem)] sm:gap-4 lg:mr-0 lg:h-[calc(100svh-13rem)] lg:max-w-none lg:justify-end lg:gap-[2vw]">
+    <div className="relative mx-auto mt-16 flex h-[26rem] w-full max-w-[40rem] items-end justify-center gap-1 sm:mt-0 sm:h-[min(78svh,46rem)] lg:mr-0 lg:h-[calc(100svh-13rem)] lg:max-w-none lg:justify-end">
       <style>{`
-        @keyframes mwBreath { 0%,100% { transform: scale(1,1) rotate(0deg); } 50% { transform: scale(1.006,1.012) rotate(-0.5deg); } }
-        @keyframes mwWave { 0%,100% { transform: rotate(-4deg); } 25% { transform: rotate(-16deg); } 75% { transform: rotate(10deg); } }
-        @keyframes mwRest { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-3deg); } }
-        @keyframes mwHop { 0% { transform: translateY(0) scale(1,1); } 20% { transform: translateY(0) scale(1.02,0.97); } 50% { transform: translateY(-3.5%) scale(0.99,1.02); } 80% { transform: translateY(0) scale(1.015,0.985); } 100% { transform: translateY(0) scale(1,1); } }
         @keyframes mwPop { 0% { opacity: 0; transform: translateY(8px) scale(0.92); } 100% { opacity: 1; transform: none; } }
-        .mw-body { transform-origin: 50% 100%; animation: mwBreath 4.2s ease-in-out infinite; }
-        .mw-hop { transform-origin: 50% 100%; animation: mwHop 520ms cubic-bezier(.3,.7,.4,1); }
-        .mw-arm { transform-origin: ${elbow}; transition: transform 450ms cubic-bezier(.3,.7,.3,1); }
-        .mw-arm[data-arm="wave"] { animation: mwWave 620ms ease-in-out infinite; }
-        .mw-arm[data-arm="rest"] { animation: mwRest 3.6s ease-in-out infinite; }
-        .mw-arm[data-arm="point"] { transform: rotate(38deg); }
         .mw-bubble { animation: mwPop 320ms cubic-bezier(.2,.9,.3,1.2); }
-        @media (prefers-reduced-motion: reduce) { .mw-body, .mw-arm, .mw-hop, .mw-bubble { animation: none !important; } }
+        @media (prefers-reduced-motion: reduce) { .mw-bubble { animation: none; } }
       `}</style>
 
-      {/* Miwa */}
-      <div className="relative h-full min-w-0">
-        <div key={hop} className={hop ? "mw-hop h-full" : "h-full"}>
-          <button type="button" onClick={onMiwa} aria-label="Sig hej til Miwa" className="nf-focus mw-body relative block h-full cursor-pointer" style={{ aspectRatio: "916 / 1466" }}>
-            <div aria-hidden className="pointer-events-none absolute left-1/2 top-[38%] aspect-square w-[130%] -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ background: "radial-gradient(closest-side, rgba(232,102,74,0.42), rgba(232,102,74,0.16) 45%, transparent 75%)" }} />
-            <div aria-hidden className="pointer-events-none absolute bottom-[-1.5%] left-1/2 h-[6%] w-[60%] -translate-x-1/2 rounded-[50%] blur-md" style={{ background: "radial-gradient(closest-side, rgba(0,0,0,0.7), transparent)" }} />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img data-arm={arm} src="/img/miwa/glad-arm.webp" alt="" className="mw-arm absolute inset-0 size-full" draggable={false} />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img data-hero-person src="/img/miwa/glad-base.webp" alt="Miwa, Mindforwards AI-tutor" className="absolute inset-0 size-full drop-shadow-[0_0_28px_rgba(232,102,74,0.25)]" draggable={false} />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/miwa/glad-lids.webp" alt="" className="pointer-events-none absolute inset-0 size-full" style={{ opacity: blink ? 1 : 0 }} draggable={false} />
-          </button>
-        </div>
+      {/* Miwa: 720×960 clips; her figure fills x 7–93 %, y 4–100 % of the frame. */}
+      <div className="relative h-full min-w-0" style={{ aspectRatio: "3 / 4" }}>
+        <div aria-hidden className="pointer-events-none absolute left-1/2 top-[36%] aspect-square w-[115%] -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ background: "radial-gradient(closest-side, rgba(232,102,74,0.42), rgba(232,102,74,0.16) 45%, transparent 75%)" }} />
+        <div aria-hidden className="pointer-events-none absolute bottom-[-1.5%] left-1/2 h-[6%] w-[50%] -translate-x-1/2 rounded-[50%] blur-md" style={{ background: "radial-gradient(closest-side, rgba(0,0,0,0.7), transparent)" }} />
+        <button type="button" onClick={onMiwa} aria-label="Sig hej til Miwa" className="nf-focus absolute inset-x-[10%] inset-y-0 z-10 cursor-pointer rounded-[24px]" />
+        {/* Still of the rest pose until the idle clip runs (the clips are transparent, so it must not stay underneath). */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img data-hero-person src="/video/miwa/poster.webp" alt="Miwa, Mindforwards AI-tutor" className="absolute inset-0 size-full object-contain object-bottom" style={{ opacity: ready || act ? 0 : 1 }} draggable={false} />
+        {ext && (
+          <>
+            <video ref={idle} src={`/video/miwa/idle.${ext}`} autoPlay muted loop playsInline preload="auto" aria-hidden onPlaying={() => setReady(true)} className="absolute inset-0 size-full object-contain object-bottom" style={{ opacity: act ? 0 : 1 }} />
+            {acts.map((a) => (
+              <video key={a} ref={(el) => { clips.current[a] = el; }} src={`/video/miwa/${a}.${ext}`} muted playsInline preload="auto" aria-hidden onEnded={() => done(a)}
+                className="absolute inset-0 size-full object-contain object-bottom" style={{ opacity: act === a ? 1 : 0 }} />
+            ))}
+          </>
+        )}
         {line && (
-          <p key={line} role="status" className="mw-bubble absolute left-[-4%] top-[-12%] max-w-[13rem] sm:left-[-18%] sm:top-[-2%] sm:max-w-[15rem] rounded-[20px] rounded-br-[6px] bg-white px-4 py-3 text-[0.9375rem] font-semibold leading-snug shadow-[0_18px_40px_-16px_rgba(0,0,0,0.6)] lg:left-[-30%]" style={{ color: "#201613" }}>
+          <p key={line} role="status" className="mw-bubble absolute left-[-2%] top-[-10%] z-20 max-w-[13rem] rounded-[20px] rounded-br-[6px] bg-white px-4 py-3 text-[0.9375rem] font-semibold leading-snug shadow-[0_18px_40px_-16px_rgba(0,0,0,0.6)] sm:left-[-14%] sm:top-[0%] sm:max-w-[15rem] lg:left-[-24%]" style={{ color: "#201613" }}>
             {line}
           </p>
         )}
       </div>
 
-      {/* Test-user videos next to her */}
-      <ul className="mb-[1%] flex h-[78%] w-[24%] max-w-[8.5rem] flex-none flex-col gap-2.5 sm:gap-3">
+      {/* Test-user videos next to her; the top card sits where her pointing hand lands. */}
+      <ul className="mb-[1%] flex h-[74%] w-[24%] max-w-[8.5rem] flex-none flex-col gap-2.5 sm:gap-3">
         {cards.map((c) => (
           <li key={c.id} className="min-h-0 flex-1">
             <button type="button" onClick={() => { touched.current = true; play(c, false); }} aria-label={c.src ? "Afspil eksempelvideo" : "Testbruger-video kommer snart"}
@@ -145,7 +150,7 @@ export function MiwaLive() {
                   <svg viewBox="0 0 24 24" aria-hidden className="ml-0.5 size-4 fill-[#201613]"><path d="M8 5.5v13l11-6.5z" /></svg>
                 </span>
               )}
-              <span className="absolute bottom-2 left-2.5 right-2 hidden text-left sm:block text-[0.6875rem] font-semibold leading-tight text-white">
+              <span className="absolute bottom-2 left-2.5 right-2 hidden text-left text-[0.6875rem] font-semibold leading-tight text-white sm:block">
                 {c.label}
                 <span className="block font-normal text-white/70">{c.src ? "AI-genereret" : "Kommer snart"}</span>
               </span>
