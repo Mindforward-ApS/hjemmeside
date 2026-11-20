@@ -1,8 +1,8 @@
 "use client";
 
-// Marco 2026-11-20: Miwa comes alive in the hero. The motion is rendered in Blender (scripts/miwa/rig2.py: her cut-out
-// image inflated into a 3D body and put on a skeleton — legs that stride, hips and spine that twist, a head that
-// turns, a talking jaw, swinging hair and arms that swing, wave, explain and cheer) into transparent clips: idle (weight shift,
+// Marco 2026-11-20: Miwa comes alive in the hero. She is a full 3D model built in Blender from her four turnaround
+// images (front, back, both sides), on a human skeleton, so she can turn all the way round, walk in profile, sit and
+// be seen from behind (scripts/miwa/3d). Her motion is rendered into transparent clips: idle (weight shift,
 // looking around, blinking, loops), hello, talk, point/tap, laugh, dance, and two walk cycles. While a walk cycle
 // loops, the page moves her across the hero, so she strolls over to the video cards and wanders around now and then. Every clip starts and ends in the same rest pose, so they cut together
 // without a jump. Chrome/Firefox get VP9 with alpha (webm), Safari HEVC with alpha (mp4).
@@ -115,10 +115,10 @@ export function MiwaLive() {
   // Opening scene: wave + hello, then a hint, then she taps the first card herself unless the visitor already did.
   // She starts a bit to the left on wide screens and walks over to the cards; phones keep her in place.
   useEffect(() => {
-    // How far left she may go: never past the headline (her body starts ~20 % into the clip frame).
+    // How far left she may go: never past the headline (her body starts ~33 % into the clip frame).
     const box = walker.current?.getBoundingClientRect();
     const title = document.querySelector("[data-hero-title]")?.getBoundingClientRect();
-    const free = box && title ? box.left + box.width * 0.2 - (title.right + 40) : 0;
+    const free = box && title ? box.left + box.width * 0.33 - (title.right + 40) : 0;
     range.current = window.innerWidth >= 1024 ? Math.max(0, Math.round(Math.min(window.innerWidth * 0.2, 320, free))) : 0;
     posRef.current = -range.current; setPos(-range.current);
   }, []);
@@ -165,7 +165,7 @@ export function MiwaLive() {
         @media (prefers-reduced-motion: reduce) { .mw-bubble { animation: none; } }
       `}</style>
 
-      {/* Miwa: 720×960 clips; her figure fills x 7–93 %, y 4–100 % of the frame. */}
+      {/* Miwa: 720×960 clips; standing, her body fills x 35–64 %, y 6–98 % of the frame (arms reach further). */}
       {/* Outer layer walks (translateX); the inner one belongs to the hero's intro animation, which sets its own transform. */}
       <div ref={walker} className="relative h-full min-w-0" style={{ aspectRatio: "3 / 4", transform: `translateX(${pos}px)`, transition: `transform ${walkMs}ms linear` }}>
       <div data-hero-person role="img" aria-label="Miwa, Mindforwards AI-tutor" className="relative size-full">
