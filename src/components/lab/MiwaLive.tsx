@@ -2,17 +2,19 @@
 
 // Marco 2026-11-20: Miwa comes alive in the hero. The motion is rendered in Blender (scripts/miwa/rig2.py: her cut-out
 // image on a deep skeleton — legs with knees and planted feet, hips, spine, head, a face that turns, a talking jaw,
-// swinging hair and both arms) into six transparent clips: idle (weight shift, looking around, blinking, loops),
-// hello, talk, point/tap, laugh and dance. Every clip starts and ends in the same rest pose, so they cut together
+// swinging hair and both arms that can hang, wave, explain and cheer) into transparent clips: idle (weight shift,
+// looking around, blinking, loops), hello, talk, point/tap, laugh, dance, and two walk cycles. While a walk cycle
+// loops, the page moves her across the hero, so she strolls over to the video cards and wanders around now and then. Every clip starts and ends in the same rest pose, so they cut together
 // without a jump. Chrome/Firefox get VP9 with alpha (webm), Safari HEVC with alpha (mp4).
 // Next to her sit the test-user video cards; she taps one herself, the clip starts, and she laughs along. Clicking her
 // gives a new line. No real test-user videos yet: one card is the AI-generated example clip (labelled), the rest say so.
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type Act = "hello" | "talk" | "point" | "laugh" | "dance";
+type Act = "hello" | "talk" | "point" | "laugh" | "dance" | "walkR" | "walkL";
 type Card = { id: string; label: string; src?: string; poster?: string };
 
-const acts: Act[] = ["hello", "talk", "point", "laugh", "dance"];
+const acts: Act[] = ["hello", "talk", "point", "laugh", "dance", "walkR", "walkL"];
+const SPEED = 150; // px per second while walking
 
 const cards: Card[] = [
   { id: "a", label: "Eksempel", src: "/video/kunde-1.mp4", poster: "/video/kunde-1-poster.jpg" },
@@ -41,6 +43,13 @@ export function MiwaLive() {
   const vids = useRef<Record<string, HTMLVideoElement | null>>({});
   const timers = useRef<number[]>([]);
   const queued = useRef<Act | null>(null);
+  const [pos, setPos] = useState(0);
+  const [walkMs, setWalkMs] = useState(0);
+  const posRef = useRef(0);
+  const range = useRef(0);
+  const busy = useRef(false);
+  const walkEnd = useRef<(() => void) | null>(null);
+  const walker = useRef<HTMLDivElement>(null);
   const later = (ms: number, fn: () => void) => { timers.current.push(window.setTimeout(fn, ms)); };
 
   // Safari can't show VP9 alpha; it gets the HEVC-with-alpha files instead.
@@ -70,6 +79,17 @@ export function MiwaLive() {
     void idle.current?.play().catch(() => {});
   };
 
+  // Walks to x (px from her home spot next to the cards, negative = left), then calls after().
+  const walkTo = useCallback((x: number, after?: () => void) => {
+    const dist = Math.abs(x - posRef.current);
+    if (dist < 8 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) { posRef.current = x; setWalkMs(0); setPos(x); after?.(); return; }
+    run(x > posRef.current ? "walkR" : "walkL");
+    const ms = Math.round((dist / SPEED) * 1000);
+    walkEnd.current = () => { walkEnd.current = null; queued.current = null; setAct(null); void idle.current?.play().catch(() => {}); after?.(); };
+    posRef.current = x; setWalkMs(ms); setPos(x);
+    later(ms + 40, () => walkEnd.current?.());
+  }, [run]);
+
   const play = useCallback((c: Card, byMiwa: boolean) => {
     setPressed(c.id);
     later(260, () => setPressed(null));
@@ -83,25 +103,51 @@ export function MiwaLive() {
     const v = vids.current[c.id];
     if (v) { v.currentTime = 0; v.muted = byMiwa; void v.play().catch(() => {}); }
     setPlaying(c.id);
+    busy.current = true;
+    later(9000, () => { busy.current = false; });
     setLine(byMiwa ? "Den her må du se!" : "Haha, den elsker jeg!");
     later(byMiwa ? 900 : 150, () => run(byMiwa ? "laugh" : "dance", byMiwa ? "dance" : "laugh"));
   }, [run]);
 
   // Opening scene: wave + hello, then a hint, then she taps the first card herself unless the visitor already did.
+  // She starts a bit to the left on wide screens and walks over to the cards; phones keep her in place.
+  useEffect(() => {
+    // How far left she may go: never past the headline (her body starts ~20 % into the clip frame).
+    const box = walker.current?.getBoundingClientRect();
+    const title = document.querySelector("[data-hero-title]")?.getBoundingClientRect();
+    const free = box && title ? box.left + box.width * 0.2 - (title.right + 40) : 0;
+    range.current = window.innerWidth >= 1024 ? Math.max(0, Math.round(Math.min(window.innerWidth * 0.2, 320, free))) : 0;
+    posRef.current = -range.current; setPos(-range.current);
+  }, []);
+
+  // Opening scene: hello, a question, she walks over to the cards and taps the first one herself.
   useEffect(() => {
     if (!ext) return;
+    busy.current = true;
     later(600, () => { setLine("Hej! Jeg er Miwa, din AI-tutor."); run("hello"); });
-    later(3700, () => { if (touched.current) return; setLine("Vil du høre, hvad testbrugerne siger?"); run("talk"); });
-    later(6400, () => {
-      if (touched.current) return;
-      setLine("Jeg trykker bare på den her…");
-      run("point");
-      later(650, () => { if (!touched.current) play(cards[0], true); });
+    later(4300, () => { if (touched.current) return; setLine("Vil du høre, hvad testbrugerne siger?"); run("talk"); });
+    later(7000, () => {
+      if (touched.current) { busy.current = false; return; }
+      setLine("Kom, jeg viser dig det!");
+      walkTo(0, () => {
+        if (touched.current) { busy.current = false; return; }
+        setLine("Jeg trykker bare på den her…");
+        run("point");
+        later(650, () => { if (!touched.current) play(cards[0], true); });
+      });
     });
-    return () => timers.current.forEach(clearTimeout);
-  }, [ext, run, play]);
+    // Now and then she strolls somewhere else and back, when nothing else is going on.
+    const wander = window.setInterval(() => {
+      if (busy.current || !range.current) return;
+      busy.current = true;
+      const x = -Math.round(range.current * (0.3 + Math.random() * 0.7));
+      walkTo(x, () => later(2600, () => walkTo(0, () => { busy.current = false; })));
+    }, 16000);
+    return () => { timers.current.forEach(clearTimeout); clearInterval(wander); };
+  }, [ext, run, play, walkTo]);
 
   const onMiwa = () => {
+    if (act === "walkR" || act === "walkL") return;
     touched.current = true;
     const [text, a] = pokes[poke.current++ % pokes.length];
     setLine(text);
@@ -117,9 +163,10 @@ export function MiwaLive() {
       `}</style>
 
       {/* Miwa: 720×960 clips; her figure fills x 7–93 %, y 4–100 % of the frame. */}
-      <div data-hero-person role="img" aria-label="Miwa, Mindforwards AI-tutor" className="relative h-full min-w-0" style={{ aspectRatio: "3 / 4" }}>
-        <div aria-hidden className="pointer-events-none absolute left-1/2 top-[36%] aspect-square w-[115%] -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ background: "radial-gradient(closest-side, rgba(232,102,74,0.42), rgba(232,102,74,0.16) 45%, transparent 75%)" }} />
-        <div aria-hidden className="pointer-events-none absolute bottom-[-1.5%] left-1/2 h-[6%] w-[50%] -translate-x-1/2 rounded-[50%] blur-md" style={{ background: "radial-gradient(closest-side, rgba(0,0,0,0.7), transparent)" }} />
+      {/* Outer layer walks (translateX); the inner one belongs to the hero's intro animation, which sets its own transform. */}
+      <div ref={walker} className="relative h-full min-w-0" style={{ aspectRatio: "3 / 4", transform: `translateX(${pos}px)`, transition: `transform ${walkMs}ms linear` }}>
+      <div data-hero-person role="img" aria-label="Miwa, Mindforwards AI-tutor" className="relative size-full">
+        <div aria-hidden className="pointer-events-none absolute bottom-[-1%] left-1/2 h-[5%] w-[44%] -translate-x-1/2 rounded-[50%] blur-md" style={{ background: "radial-gradient(closest-side, rgba(60,30,10,0.55), transparent)" }} />
         <button type="button" onClick={onMiwa} aria-label="Sig hej til Miwa" className="nf-focus absolute inset-x-[10%] inset-y-0 z-10 cursor-pointer rounded-[24px]" />
         {/* Still of the rest pose until we know which clip format to load; removed after that, because the clips are
             transparent and anything left underneath shows through as a second Miwa. */}
@@ -129,16 +176,17 @@ export function MiwaLive() {
           <>
             <video ref={idle} src={`/video/miwa/idle.${ext}`} poster="/video/miwa/poster.webp" autoPlay muted loop playsInline preload="auto" aria-hidden className="absolute inset-0 size-full object-contain object-bottom" style={{ opacity: act ? 0 : 1 }} />
             {acts.map((a) => (
-              <video key={a} ref={(el) => { clips.current[a] = el; }} src={`/video/miwa/${a}.${ext}`} muted playsInline preload="auto" aria-hidden onEnded={() => done(a)}
+              <video key={a} ref={(el) => { clips.current[a] = el; }} src={`/video/miwa/${a}.${ext}`} muted playsInline preload="auto" aria-hidden loop={a.startsWith("walk")} onEnded={() => done(a)}
                 className="absolute inset-0 size-full object-contain object-bottom" style={{ opacity: act === a ? 1 : 0 }} />
             ))}
           </>
         )}
         {line && (
-          <p key={line} role="status" className="mw-bubble absolute left-[-2%] top-[-10%] z-20 max-w-[13rem] rounded-[20px] rounded-br-[6px] bg-white px-4 py-3 text-[0.9375rem] font-semibold leading-snug shadow-[0_18px_40px_-16px_rgba(0,0,0,0.6)] sm:left-[-14%] sm:top-[0%] sm:max-w-[15rem] lg:left-[-24%]" style={{ color: "#201613" }}>
+          <p key={line} role="status" className="mw-bubble absolute left-[-2%] top-[-10%] z-20 max-w-[13rem] rounded-[20px] rounded-br-[6px] bg-white px-4 py-3 text-[0.9375rem] font-semibold leading-snug shadow-[0_18px_40px_-16px_rgba(0,0,0,0.6)] sm:left-[-14%] sm:top-[0%] sm:max-w-[15rem] lg:left-[4%] lg:top-[-2%]" style={{ color: "#201613" }}>
             {line}
           </p>
         )}
+      </div>
       </div>
 
       {/* Test-user videos next to her; the top card sits where her pointing hand lands. */}

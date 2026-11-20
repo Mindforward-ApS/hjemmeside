@@ -345,6 +345,13 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa 
         ))}
       </div>
       <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(14,10,9,0.86) 0%, rgba(14,10,9,0.7) 38%, rgba(14,10,9,0.35) 70%, rgba(14,10,9,0.25) 100%), linear-gradient(180deg, rgba(14,10,9,0.5) 0%, transparent 25%, transparent 65%, rgba(14,10,9,0.8) 100%)" }} /></>}
+      {/* Marco 2026-11-20: Miwa's autumn landscape behind the live hero; dark veil on the left keeps the white text readable. */}
+      {miwa === "live" && (
+        <div aria-hidden data-hero-bg className="pointer-events-none absolute inset-0 overflow-hidden">
+          <Image src="/img/hero-efteraar.webp" alt="" fill priority sizes="100vw" className="object-cover object-[60%_70%]" />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,13,11,0.86) 0%, rgba(20,13,11,0.7) 30%, rgba(20,13,11,0.25) 52%, transparent 66%), linear-gradient(180deg, rgba(20,13,11,0.55) 0%, transparent 18%, transparent 80%, rgba(20,13,11,0.7) 100%)" }} />
+        </div>
+      )}
       {navSwitch && <TopBar mode={mode} setMode={setMode} />}
       {/* Marco 2026-11-07: a very light orange haze spread over the whole blurred area (left), gone before the people. */}
       <div aria-hidden data-glow className="pointer-events-none absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(232,102,74,0.075) 0%, rgba(232,102,74,0.06) 30%, rgba(232,102,74,0.025) 48%, transparent 58%)" }} />
