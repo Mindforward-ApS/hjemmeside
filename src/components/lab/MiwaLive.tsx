@@ -1,8 +1,8 @@
 "use client";
 
 // Marco 2026-11-20: Miwa comes alive in the hero. The motion is rendered in Blender (scripts/miwa/rig2.py: her cut-out
-// image on a deep skeleton — legs with knees and planted feet, hips, spine, head, a face that turns, a talking jaw,
-// swinging hair and both arms that can hang, wave, explain and cheer) into transparent clips: idle (weight shift,
+// image inflated into a 3D body and put on a skeleton — legs that stride, hips and spine that twist, a head that
+// turns, a talking jaw, swinging hair and arms that swing, wave, explain and cheer) into transparent clips: idle (weight shift,
 // looking around, blinking, loops), hello, talk, point/tap, laugh, dance, and two walk cycles. While a walk cycle
 // loops, the page moves her across the hero, so she strolls over to the video cards and wanders around now and then. Every clip starts and ends in the same rest pose, so they cut together
 // without a jump. Chrome/Firefox get VP9 with alpha (webm), Safari HEVC with alpha (mp4).
@@ -10,10 +10,10 @@
 // gives a new line. No real test-user videos yet: one card is the AI-generated example clip (labelled), the rest say so.
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type Act = "hello" | "talk" | "point" | "laugh" | "dance" | "walkR" | "walkL";
+type Act = "hello" | "talk" | "point" | "laugh" | "dance" | "walkR" | "walkL" | "walkRStart" | "walkLStart" | "walkRStop" | "walkLStop";
 type Card = { id: string; label: string; src?: string; poster?: string };
 
-const acts: Act[] = ["hello", "talk", "point", "laugh", "dance", "walkR", "walkL"];
+const acts: Act[] = ["hello", "talk", "point", "laugh", "dance", "walkR", "walkL", "walkRStart", "walkLStart", "walkRStop", "walkLStop"];
 const SPEED = 150; // px per second while walking
 
 const cards: Card[] = [
@@ -83,10 +83,13 @@ export function MiwaLive() {
   const walkTo = useCallback((x: number, after?: () => void) => {
     const dist = Math.abs(x - posRef.current);
     if (dist < 8 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) { posRef.current = x; setWalkMs(0); setPos(x); after?.(); return; }
-    run(x > posRef.current ? "walkR" : "walkL");
-    const ms = Math.round((dist / SPEED) * 1000);
-    walkEnd.current = () => { walkEnd.current = null; queued.current = null; setAct(null); void idle.current?.play().catch(() => {}); after?.(); };
+    // She turns into the walk (start clip), strides (loop), and turns back to you as she arrives (stop clip).
+    const dir = x > posRef.current ? "R" : "L";
+    run(`walk${dir}Start` as Act, `walk${dir}` as Act);
+    const ms = Math.max(900, Math.round((dist / SPEED) * 1000));
+    walkEnd.current = () => { walkEnd.current = null; after?.(); };
     posRef.current = x; setWalkMs(ms); setPos(x);
+    later(ms - 600, () => run(`walk${dir}Stop` as Act));
     later(ms + 40, () => walkEnd.current?.());
   }, [run]);
 
@@ -147,7 +150,7 @@ export function MiwaLive() {
   }, [ext, run, play, walkTo]);
 
   const onMiwa = () => {
-    if (act === "walkR" || act === "walkL") return;
+    if (act?.startsWith("walk")) return;
     touched.current = true;
     const [text, a] = pokes[poke.current++ % pokes.length];
     setLine(text);
@@ -176,7 +179,7 @@ export function MiwaLive() {
           <>
             <video ref={idle} src={`/video/miwa/idle.${ext}`} poster="/video/miwa/poster.webp" autoPlay muted loop playsInline preload="auto" aria-hidden className="absolute inset-0 size-full object-contain object-bottom" style={{ opacity: act ? 0 : 1 }} />
             {acts.map((a) => (
-              <video key={a} ref={(el) => { clips.current[a] = el; }} src={`/video/miwa/${a}.${ext}`} muted playsInline preload="auto" aria-hidden loop={a.startsWith("walk")} onEnded={() => done(a)}
+              <video key={a} ref={(el) => { clips.current[a] = el; }} src={`/video/miwa/${a}.${ext}`} muted playsInline preload="auto" aria-hidden loop={a === "walkR" || a === "walkL"} onEnded={() => done(a)}
                 className="absolute inset-0 size-full object-contain object-bottom" style={{ opacity: act === a ? 1 : 0 }} />
             ))}
           </>
