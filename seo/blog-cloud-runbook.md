@@ -135,7 +135,7 @@ forsiden - link aldrig til dem.
 
 Virker: `##`-`######`, afsnit, `-`/`*`-lister, `1.`-lister, `**fed**`,
 `*kursiv*`, `[tekst](url)`, `` `kode` ``, `>` citat, og billeder på egen linje:
-`![alt-tekst](/blog/<slug>/<navn>.webp "Foto: Navn / Unsplash")`.
+`![alt-tekst](/blog/<slug>/<navn>.webp "Foto: Navn / Pexels")`.
 
 Virker IKKE - brug aldrig: tabeller · kodeblokke med backticks · rå HTML ·
 `---` · indrykkede lister · fed og link i samme udtryk (`**[x](/y)**` og
@@ -160,7 +160,7 @@ felt mellem to linjer med `---`, én linje pr. felt, og så artiklen:
     readingTime: 6
     image: /blog/hvad-koster-et-copilot-kursus/forside.webp
     imageAlt: To kolleger ser på en skærm i et lyst kontor
-    imageCredit: Foto: Navn / Unsplash
+    imageCredit: Foto: Navn / Pexels
     ---
 
     ## Første overskrift
@@ -194,10 +194,21 @@ skærm, et møde, et kontor. Lyst, roligt, nordisk. Liggende format, mindst
 genererede billeder, tekst eller logoer i billedet, kendte personer,
 tydelige varemærker, overdrevent smilende stockfotos.
 
-**Kilder:** kun Unsplash (unsplash.com) eller Pexels (pexels.com). Find
-billedet med websøgning, hent det i fuld størrelse
-(Unsplash: `https://unsplash.com/photos/<id>/download?force=true`), og notér
-fotografens navn.
+**Kilde:** Pexels (pexels.com). Licensen tillader gratis kommerciel brug.
+Ingen billeder fra Google Billeder, andre hjemmesider eller nyhedsmedier.
+
+Find et billede med websøgning (fx `site:pexels.com office meeting laptop`).
+Fotoets adresse slutter på et tal, fx `pexels.com/photo/people-in-a-meeting-3184291/`.
+Tallet er fotoets id, og billedfilen ligger her:
+
+    https://images.pexels.com/photos/<id>/pexels-photo-<id>.jpeg?auto=compress&cs=tinysrgb&w=2000
+
+Notér fotografens navn fra søgeresultatet til `imageCredit`
+("Foto: Navn / Pexels"). Kender du ikke navnet, så skriv "Foto: Pexels".
+
+Unsplash kan kun bruges, hvis du har den direkte billedadresse på
+`images.unsplash.com`. Download-linket på unsplash.com er spærret af et
+robot-tjek og virker ikke fra skyen (testet 20. november 2026).
 
 **Gør billedet klar** - hotlink aldrig, og læg aldrig den rå fil i repoet:
 
