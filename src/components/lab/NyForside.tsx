@@ -42,6 +42,7 @@ import { A as PrisCalendly } from "@/components/lab/PrisVarianter2";
 import { Pi2 as PilotFoto } from "@/components/lab/PilotVarianter";
 import { HeroLunar } from "@/components/lab/HeroLunar";
 import { HeroPleo } from "@/components/lab/HeroPleo";
+import { MiwaLive } from "@/components/lab/MiwaLive";
 import { videoVersions, type VideoVersion } from "@/components/lab/VideoSektion";
 
 const c = {
@@ -315,7 +316,7 @@ function HeroMiwa({ pose }: { pose: "velkommen" | "glad" }) {
   );
 }
 
-export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa }: { toggle?: boolean; media?: "cards" | "video" | "none"; navSwitch?: boolean; miwa?: "velkommen" | "glad" }) {
+export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa }: { toggle?: boolean; media?: "cards" | "video" | "none"; navSwitch?: boolean; miwa?: "velkommen" | "glad" | "live" }) {
   // Shared with the pricing section via lib/siteMode (Marco 2026-11-11: Privat must show private prices).
   const mode = useSiteMode();
   const setMode = setSiteMode;
@@ -395,7 +396,7 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa 
             )}
           </div>
         </div>
-        {miwa ? <HeroMiwa pose={miwa} /> : media === "video" ? <HeroVideo /> : media === "cards" ? <HeroCollage privat={privat} /> : null}
+        {miwa === "live" ? <MiwaLive /> : miwa ? <HeroMiwa pose={miwa} /> : media === "video" ? <HeroVideo /> : media === "cards" ? <HeroCollage privat={privat} /> : null}
       </div>
       <HeroLogos />
     </section>
@@ -677,7 +678,7 @@ function CtaBand() {
 }
 
 /* ───────────── Page + motion layer ───────────── */
-export function NyForside({ miwa, toggle = false, uiMode = "off", hero = "video", video, start, skills, oev, cert = true, layout, practice, pilot, sep, start3, system }: { miwa?: "velkommen" | "glad"; toggle?: boolean; uiMode?: UiMode; hero?: "video" | "lunar" | "pleo"; video?: VideoVersion; start?: "kort"; skills?: "cases"; oev?: "kort"; cert?: boolean; layout?: "ny"; practice?: "a" | "b" | "c"; pilot?: "a" | "b" | "c"; sep?: 1 | 2 | 3; start3?: "a" | "b" | "c"; system?: boolean } = {}) {
+export function NyForside({ miwa, toggle = false, uiMode = "off", hero = "video", video, start, skills, oev, cert = true, layout, practice, pilot, sep, start3, system }: { miwa?: "velkommen" | "glad" | "live"; toggle?: boolean; uiMode?: UiMode; hero?: "video" | "lunar" | "pleo"; video?: VideoVersion; start?: "kort"; skills?: "cases"; oev?: "kort"; cert?: boolean; layout?: "ny"; practice?: "a" | "b" | "c"; pilot?: "a" | "b" | "c"; sep?: 1 | 2 | 3; start3?: "a" | "b" | "c"; system?: boolean } = {}) {
   const VideoSek = video ? videoVersions[video] : null;
   const root = useRef<HTMLDivElement>(null);
 
