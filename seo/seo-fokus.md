@@ -52,19 +52,19 @@ Hele listen med 240 søgeord ligger i
 
 ## Sider, der skal eje kernesøgeordene
 
-Et kernesøgeord skal ejes af én side, ikke af et blogindlæg. Disse sider
-mangler på mindforward.dk og skal bygges, før blogindlæg kan linke til dem:
+Et kernesøgeord skal ejes af én side, ikke af et blogindlæg. Siderne er
+bygget, og teksterne ligger i `src/content/landingssider.ts`:
 
-| Side | Søgeord den skal eje |
+| Side | Søgeord den ejer |
 |---|---|
-| Copilot-kursus | copilot kursus, microsoft copilot kursus, copilot kursus online |
-| ChatGPT-kursus | kursus i ai og chatgpt, ai og chatgpt kursus |
-| Claude-kursus | - (ingen volumen i arket endnu) |
-| AI-kursus for virksomheder og medarbejdere | ai kursus, ai kursus online, ai kursus for virksomheder |
-| AI-forordningens artikel 4 | ai literacy, ai act kursus |
-| Priser, kursusbevis, blog | - |
+| `/copilot-kursus` | copilot kursus, microsoft copilot kursus, copilot kursus online |
+| `/chatgpt-kursus` | chatgpt kursus, kursus i ai og chatgpt, ai og chatgpt kursus |
+| `/claude-kursus` | claude kursus (ingen volumen i arket endnu) |
+| `/ai-kursus-for-virksomheder` | ai kursus, ai kursus online, ai kursus for virksomheder |
+| `/ai-forordningen-artikel-4` | ai literacy, ai act kursus |
+| `/priser` | priser |
 
-Kurserne i `src/content/academy.ts` er demo-data fra skabelonen.
+Der er ingen selvstændig side om kursusbeviset endnu.
 
 ## Regler for blogindlæg
 

@@ -1,58 +1,117 @@
-import { Suspense } from "react";
-import { PageFallback } from "@/components/ui/PageFallback";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { posts } from "@/content/data";
 import { site } from "@/content/site";
-import { FooterCta } from "@/components/sections/FooterCta";
+import { appLinks } from "@/lib/app";
+import { extractFaq, renderMarkdown } from "@/lib/markdown";
+import { getBlogPostBySlug, getBlogPosts, strapiImageUrl } from "@/lib/strapi";
+import { NightCta } from "@/components/night/NightCta";
 import { Icon } from "@/components/ui/Icon";
+import { categoryLabel, formatDate } from "../shared";
 
-export function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }));
+// Cache Components needs at least one param at build time. Before the first article exists (or when Strapi cannot be
+// reached during the build) a placeholder is used; it resolves to no post and therefore to the 404 page.
+const PLACEHOLDER = "__ingen-artikler__";
+
+export async function generateStaticParams() {
+  const posts = await getBlogPosts().catch(() => []);
+  return posts.length > 0 ? posts.map((p) => ({ slug: p.slug })) : [{ slug: PLACEHOLDER }];
 }
 
 export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const p = posts.find((x) => x.slug === slug);
-  return { title: p?.title ?? "Blog", description: p?.excerpt, alternates: { canonical: `/blog/${slug}` }, openGraph: { type: "article" } };
+  const post = slug === PLACEHOLDER ? null : await getBlogPostBySlug(slug).catch(() => null);
+  if (!post) return { title: "Artikel ikke fundet", robots: { index: false, follow: false } };
+
+  const image = strapiImageUrl(post.featuredImage);
+  return {
+    title: post.seoTitle || post.title,
+    description: post.seoDescription || post.excerpt,
+    keywords: post.keywords,
+    alternates: { canonical: `/blog/${post.slug}` },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: `/blog/${post.slug}`,
+      type: "article",
+      publishedTime: post.publishedAt,
+      modifiedTime: post.updatedAt,
+      authors: post.author ? [post.author] : undefined,
+      images: image ? [{ url: image }] : undefined,
+    },
+    twitter: { card: "summary_large_image", title: post.title, description: post.excerpt, images: image ? [image] : undefined },
+  };
 }
 
-const fmt = (d: string) => new Intl.DateTimeFormat("da-DK", { day: "numeric", month: "long", year: "numeric" }).format(new Date(d));
-
-export default function PostPage({ params }: PageProps<"/blog/[slug]">) {
-  return (
-    <Suspense fallback={<PageFallback />}>
-      <PostPageContent params={params} />
-    </Suspense>
-  );
-}
-
-async function PostPageContent({ params }: { params: PageProps<"/blog/[slug]">["params"] }) {
+export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
   const { slug } = await params;
-  const p = posts.find((x) => x.slug === slug);
-  if (!p) notFound();
-  const jsonLd = { "@context": "https://schema.org", "@type": "Article", headline: p.title, datePublished: p.date, inLanguage: "da-DK", publisher: { "@type": "Organization", name: site.company.legalName } };
+  const post = slug === PLACEHOLDER ? null : await getBlogPostBySlug(slug).catch(() => null);
+  if (!post) notFound();
+
+  const image = strapiImageUrl(post.featuredImage);
+  const url = `${site.url}/blog/${post.slug}`;
+  const faq = extractFaq(post.content);
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        headline: post.title,
+        description: post.excerpt,
+        datePublished: post.publishedAt,
+        dateModified: post.updatedAt,
+        inLanguage: "da-DK",
+        author: { "@type": "Organization", name: post.author || site.name, url: site.url },
+        publisher: { "@type": "Organization", name: site.name, url: site.url },
+        ...(image ? { image } : {}),
+        mainEntityOfPage: url,
+        ...(post.keywords?.length ? { keywords: post.keywords.join(", ") } : {}),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Forside", item: site.url },
+          { "@type": "ListItem", position: 2, name: "Blog", item: `${site.url}/blog` },
+          { "@type": "ListItem", position: 3, name: post.title, item: url },
+        ],
+      },
+      ...(faq.length > 0
+        ? [{ "@type": "FAQPage", mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }]
+        : []),
+    ],
+  };
+
   return (
-    <>
-      <article className="pt-12 pb-16 md:pt-20 md:pb-24">
-        <div className="container-content">
-          <Link href="/blog" className="link-arrow t-small"><Icon name="arrowLeft" size={16} /> Blog</Link>
-          <header className="mt-8 max-w-[44rem]">
-            <p className="t-small text-muted">{p.category} · <time dateTime={p.date}>{fmt(p.date)}</time> · {p.readMinutes} min læsning</p>
-            <h1 className="t-display mt-4">{p.title}</h1>
-            <p className="t-lead mt-5">{p.excerpt}</p>
+    <div className="theme-night -mt-[5.5rem] pt-[5.5rem]">
+      <article className="pb-16 pt-14 md:pb-24 md:pt-20">
+        <div className="mx-auto w-full max-w-[46rem] px-[var(--gutter)]">
+          <Link href="/blog" className="inline-flex min-h-11 items-center gap-2 text-[0.9375rem] text-muted hover:text-heading"><Icon name="arrowLeft" size={16} /> Blog</Link>
+          <header className="mt-6">
+            <p className="text-[0.8125rem] font-semibold uppercase tracking-[0.1em] text-accent">{categoryLabel(post.category)}</p>
+            <h1 className="mt-4 text-[clamp(2.125rem,1.3rem+3vw,3.5rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-heading">{post.title}</h1>
+            <p className="mt-5 text-[0.9375rem] text-muted">
+              <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+              {post.author ? ` · ${post.author}` : ""}
+              {post.readingTime ? ` · ${post.readingTime} min læsning` : ""}
+            </p>
+            {post.excerpt && <p className="mt-7 text-[clamp(1.125rem,1rem+0.45vw,1.3125rem)] leading-relaxed text-heading">{post.excerpt}</p>}
           </header>
-          {/* Body: replace with MDX/CMS. Measure 60–75 characters per line. */}
-          <div className="ph mt-12 max-w-[65ch] space-y-6 t-body text-[1.0625rem] leading-[1.7]">
-            <p>[ARTIKEL NEEDED: Svar på overskriftens spørgsmål i første afsnit, med fakta og kilde (§12.1).]</p>
-            <h2 className="t-h3 pt-4">[Mellemrubrik, der siger pointen]</h2>
-            <p>[Afsnit på højst 3–4 sætninger. Ét tal med kilde-ID i SOURCES.md.]</p>
-          </div>
         </div>
+
+        {image && (
+          <div className="mx-auto mt-10 w-full max-w-[60rem] px-[var(--gutter)]">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-[1.75rem] bg-[var(--tile-deep)]">
+              <Image src={image} alt={post.featuredImage?.alternativeText || post.title} fill sizes="(max-width: 768px) 100vw, 960px" priority className="object-cover" />
+            </div>
+          </div>
+        )}
+
+        <div className="mx-auto mt-10 w-full max-w-[46rem] px-[var(--gutter)] text-[1.0625rem] leading-[1.75] text-text">{renderMarkdown(post.content)}</div>
       </article>
-      <FooterCta />
+
+      <NightCta title="Vil du selv prøve det?" sub="Korte lektioner på dansk, opgaver i øvemiljøet og et kursusbevis til sidst." primary={{ label: "Kom i gang", href: appLinks.signup }} secondary={{ label: "Se priser", href: "/priser" }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-    </>
+    </div>
   );
 }

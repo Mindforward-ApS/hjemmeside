@@ -43,6 +43,9 @@ export const site = {
       title: "Kurser",
       links: [
         { label: "Alle kurser", href: "/#kurser" },
+        { label: "Copilot-kursus", href: "/copilot-kursus" },
+        { label: "ChatGPT-kursus", href: "/chatgpt-kursus" },
+        { label: "Claude-kursus", href: "/claude-kursus" },
       ],
     },
     {
@@ -50,7 +53,9 @@ export const site = {
       links: [
         { label: "Sådan virker det", href: "/#saadan" },
         { label: "Priser", href: "/priser" },
-        { label: "For virksomheder", href: "/priser#priser" },
+        { label: "For virksomheder", href: "/ai-kursus-for-virksomheder" },
+        { label: "AI-forordningen artikel 4", href: "/ai-forordningen-artikel-4" },
+        { label: "Blog", href: "/blog" },
       ],
     },
     {
