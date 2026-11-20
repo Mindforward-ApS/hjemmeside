@@ -243,15 +243,24 @@ et indlæg, der ikke består: en fejl i filen stopper hele sidens build.
    hent dem (`git pull --rebase origin main`) og push igen. Brug aldrig
    force-push.
 
-Siden bygger sig selv efter pushet. Du kan ikke altid hente mindforward.dk
-fra skyen, så et bestået tjek og et gennemført push er din bekræftelse.
-**Fælde,** hvis du henter siden: en ukendt adresse under `/blog/` svarer HTTP
-200 med en "ikke fundet"-side og `noindex`. Statuskoden beviser derfor intet -
-kig på `<title>` og H1.
+Siden bygger sig selv efter pushet. Tjek, at indlægget kommer ud (kommandoen
+prøver igen hvert 15. sekund i op til 6 minutter):
+
+    curl -sS -f --retry 24 --retry-delay 15 --retry-all-errors -o /tmp/live.html \
+      "https://mindforward.dk/blog/<slug>" && grep -o "<title>[^<]*</title>" /tmp/live.html
+
+Viser `<title>` indlæggets titel, er det live. Fejler kommandoen, eller viser
+den forsidens titel, så skriv **ØVERST i rapporten: "IKKE LIVE ENDNU"** -
+indlægget ligger på `main`, men siden er ikke blevet udgivet. Prøv ikke at
+udgive på anden vis.
+
+**Fælde:** en ukendt adresse under `/blog/` kan svare HTTP 200 med en "ikke
+fundet"-side og `noindex`. Statuskoden beviser derfor intet - kig på `<title>`.
 
 ## Rapport
 
 Rapportér i `#googleanalytics` (se "Adskillelse"): emne og begrundelse,
-titel, slug, fuld URL (`https://mindforward.dk/blog/<slug>`), excerpt, om der
-er billeder med, og hvor mange emner der er tilbage i køen. Gik noget galt,
+titel, slug, fuld URL (`https://mindforward.dk/blog/<slug>`), excerpt, om
+indlægget er live, om der er billeder med, og hvor mange emner der er tilbage
+i køen. Gik noget galt,
 så rapportér fejlen tydeligt i stedet for at pynte på den.
