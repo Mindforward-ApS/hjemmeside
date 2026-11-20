@@ -5,26 +5,24 @@ import { notFound } from "next/navigation";
 import { site } from "@/content/site";
 import { appLinks } from "@/lib/app";
 import { extractFaq, renderMarkdown } from "@/lib/markdown";
-import { getBlogPostBySlug, getBlogPosts, strapiImageUrl } from "@/lib/strapi";
+import { getPost, posts } from "@/lib/blog";
 import { NightCta } from "@/components/night/NightCta";
 import { Icon } from "@/components/ui/Icon";
 import { categoryLabel, formatDate } from "../shared";
 
-// Cache Components needs at least one param at build time. Before the first article exists (or when Strapi cannot be
-// reached during the build) a placeholder is used; it resolves to no post and therefore to the 404 page.
+// Cache Components needs at least one param at build time. Before the first article exists a placeholder is used; it
+// matches no post and therefore renders the 404 page.
 const PLACEHOLDER = "__ingen-artikler__";
 
-export async function generateStaticParams() {
-  const posts = await getBlogPosts().catch(() => []);
+export function generateStaticParams() {
   return posts.length > 0 ? posts.map((p) => ({ slug: p.slug })) : [{ slug: PLACEHOLDER }];
 }
 
 export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const post = slug === PLACEHOLDER ? null : await getBlogPostBySlug(slug).catch(() => null);
+  const post = getPost(slug);
   if (!post) return { title: "Artikel ikke fundet", robots: { index: false, follow: false } };
 
-  const image = strapiImageUrl(post.featuredImage);
   return {
     title: post.seoTitle || post.title,
     description: post.seoDescription || post.excerpt,
@@ -35,21 +33,21 @@ export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): P
       description: post.excerpt,
       url: `/blog/${post.slug}`,
       type: "article",
-      publishedTime: post.publishedAt,
-      modifiedTime: post.updatedAt,
-      authors: post.author ? [post.author] : undefined,
-      images: image ? [{ url: image }] : undefined,
+      publishedTime: post.date,
+      modifiedTime: post.updated ?? post.date,
+      authors: [post.author],
+      images: post.image ? [{ url: post.image }] : undefined,
     },
-    twitter: { card: "summary_large_image", title: post.title, description: post.excerpt, images: image ? [image] : undefined },
+    twitter: { card: "summary_large_image", title: post.title, description: post.excerpt, images: post.image ? [post.image] : undefined },
   };
 }
 
 export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
   const { slug } = await params;
-  const post = slug === PLACEHOLDER ? null : await getBlogPostBySlug(slug).catch(() => null);
+  const post = getPost(slug);
   if (!post) notFound();
 
-  const image = strapiImageUrl(post.featuredImage);
+  const image = post.image;
   const url = `${site.url}/blog/${post.slug}`;
   const faq = extractFaq(post.content);
   const jsonLd = {
@@ -59,14 +57,14 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
         "@type": "Article",
         headline: post.title,
         description: post.excerpt,
-        datePublished: post.publishedAt,
-        dateModified: post.updatedAt,
+        datePublished: post.date,
+        dateModified: post.updated ?? post.date,
         inLanguage: "da-DK",
-        author: { "@type": "Organization", name: post.author || site.name, url: site.url },
+        author: { "@type": "Organization", name: post.author, url: site.url },
         publisher: { "@type": "Organization", name: site.name, url: site.url },
-        ...(image ? { image } : {}),
+        ...(image ? { image: `${site.url}${image}` } : {}),
         mainEntityOfPage: url,
-        ...(post.keywords?.length ? { keywords: post.keywords.join(", ") } : {}),
+        ...(post.keywords.length ? { keywords: post.keywords.join(", ") } : {}),
       },
       {
         "@type": "BreadcrumbList",
@@ -91,8 +89,8 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
             <p className="text-[0.8125rem] font-semibold uppercase tracking-[0.1em] text-accent">{categoryLabel(post.category)}</p>
             <h1 className="mt-4 text-[clamp(2.125rem,1.3rem+3vw,3.5rem)] font-semibold leading-[1.08] tracking-[-0.03em] text-heading">{post.title}</h1>
             <p className="mt-5 text-[0.9375rem] text-muted">
-              <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-              {post.author ? ` · ${post.author}` : ""}
+              <time dateTime={post.date}>{formatDate(post.date)}</time>
+              {` · ${post.author}`}
               {post.readingTime ? ` · ${post.readingTime} min læsning` : ""}
             </p>
             {post.excerpt && <p className="mt-7 text-[clamp(1.125rem,1rem+0.45vw,1.3125rem)] leading-relaxed text-heading">{post.excerpt}</p>}
@@ -102,8 +100,9 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
         {image && (
           <div className="mx-auto mt-10 w-full max-w-[60rem] px-[var(--gutter)]">
             <div className="relative aspect-[16/9] overflow-hidden rounded-[1.75rem] bg-[var(--tile-deep)]">
-              <Image src={image} alt={post.featuredImage?.alternativeText || post.title} fill sizes="(max-width: 768px) 100vw, 960px" priority className="object-cover" />
+              <Image src={image} alt={post.imageAlt || post.title} fill sizes="(max-width: 768px) 100vw, 960px" priority className="object-cover" />
             </div>
+            {post.imageCredit && <p className="mt-3 text-[0.8125rem] text-muted">{post.imageCredit}</p>}
           </div>
         )}
 

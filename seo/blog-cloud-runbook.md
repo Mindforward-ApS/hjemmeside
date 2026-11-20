@@ -4,39 +4,36 @@ Denne fil er **facit for blog-agenterne** (`mindforward-blog-trend-tirsdag` og
 `mindforward-blog-keyword-torsdag-soendag`). Retter du reglerne, så ret dem
 HER - så følger begge agenter med, uden at deres prompt skal ændres.
 
-Opsætningen er den samme som på ai-konsulenterne.dk: agenten skriver indlægget,
-sender det til Strapi, og så er det live. Der skal hverken bygges eller deployes.
+Et indlæg er en fil i repoet: `content/blog/<slug>.md`, med billeder i
+`public/blog/<slug>/`. Når filen er pushet til `main`, bygger siden sig selv
+igen, og indlægget er live få minutter efter. Der er ingen CMS og ingen
+adgangsnøgler.
 
 ## Adskillelse (gælder altid)
 
 - Mindforward er en selvstændig forretning. Brug aldrig AI Konsulenternes
   Strapi, repo, cases, priser, telefonnumre eller links.
-- Mindforwards Strapi ligger i miljøvariablerne `MF_STRAPI_API_URL` og
-  `MF_STRAPI_API_TOKEN`. Variablerne `STRAPI_API_URL` og `STRAPI_API_TOKEN`
-  (uden `MF_`) hører til AI Konsulenterne - **rør dem ikke**.
+- Arbejd kun i repoet `Mindforward-ApS/hjemmeside`. Miljøvariablerne
+  `STRAPI_API_URL` og `STRAPI_API_TOKEN` hører til AI Konsulenterne - **rør
+  dem ikke**.
+- Ret kun i `content/blog/`, `public/blog/` og `seo/blog-log.md`. Rør aldrig
+  sidens kode, design eller andre tekster.
 - Rapportér kun i Leadlines Slack, den private kanal `#googleanalytics`
   (kanal-ID `C0CKJR2MG85`). Kan du ikke nå præcis den kanal, så post ingen
   andre steder - skriv rapporten som dit afsluttende svar i stedet.
 
 ## Forudsætninger (tjek FØRST - stop hvis noget mangler)
 
-    test -n "$MF_STRAPI_API_URL" && test -n "$MF_STRAPI_API_TOKEN" && echo "STRAPI OK" || echo "STRAPI MANGLER"
-
-Mangler de: **STOP med det samme**. Skriv ikke posten, og rapportér at
-hemmelighederne ikke er sat. Udgiv aldrig halvfærdigt.
-
-Kan du ikke nå Strapi over netværket (fx `curl: (56) CONNECT tunnel failed,
-response 403`): stop og rapportér, at værten er blokeret. Forsøg aldrig at
-omgå en blokering.
+1. Hent repoet: tilføj `Mindforward-ApS/hjemmeside` til sessionen med
+   skriveadgang, klon det, og stå på `main` med seneste ændringer.
+2. Tjek, at mapperne `content/blog/` og `scripts/blog-check.mjs` findes på
+   `main`. Gør de ikke det, er blog-opsætningen ikke flettet ind endnu:
+   **STOP**, skriv ikke posten, og rapportér det.
 
 ## Trin 0: undgå dubletter (ALTID først)
 
 1. Læs [`blog-log.md`](blog-log.md) - alle udgivne emner.
-2. Hent live slugs fra Strapi (`-g` er påkrævet, ellers fejler curl på `[]`):
-
-       curl -sS -g -H "Authorization: Bearer $MF_STRAPI_API_TOKEN" \
-         "$MF_STRAPI_API_URL/api/blog-posts?pagination[pageSize]=100&fields[0]=slug&fields[1]=title"
-
+2. Se filnavnene i `content/blog/` - det er de live slugs.
 3. Jagter en eksisterende artikel **samme søgeord**, så vælg et andet søgeord.
 
 Reglen går på søgeordet, ikke på emnet. Samme emne må gerne gå igen, hvis
@@ -138,50 +135,111 @@ forsiden - link aldrig til dem.
 
 Virker: `##`-`######`, afsnit, `-`/`*`-lister, `1.`-lister, `**fed**`,
 `*kursiv*`, `[tekst](url)`, `` `kode` ``, `>` citat, og billeder på egen linje:
-`![alt-tekst](https://...media.strapiapp.com/... "Foto: Navn / Unsplash")`
-(kun billeder fra Strapis mediebibliotek vises - andre URL'er springes over).
+`![alt-tekst](/blog/<slug>/<navn>.webp "Foto: Navn / Unsplash")`.
 
 Virker IKKE - brug aldrig: tabeller · kodeblokke med backticks · rå HTML ·
 `---` · indrykkede lister · fed og link i samme udtryk (`**[x](/y)**` og
 `[**x**](/y)` går begge i stykker - hold dem adskilt).
 
-**Content skal starte med `##`**, ikke `#`. Sidens H1 er `title`-feltet.
+**Artiklen skal starte med `##`**, ikke `#`. Sidens H1 er `title`-feltet.
 Skriv ikke JSON-LD - `Article`- og `FAQPage`-schema udsendes af siden.
 
-## Strapi-felter (collection `blog-posts`)
+## Filen: `content/blog/<slug>.md`
 
-POST til `$MF_STRAPI_API_URL/api/blog-posts?status=published` med
-`{"data": {...}}` og `Authorization: Bearer $MF_STRAPI_API_TOKEN`:
+Slug: kebab-case, æøå → ae/oe/aa, ikke allerede brugt. Filen starter med et
+felt mellem to linjer med `---`, én linje pr. felt, og så artiklen:
 
-- `title` - søgeordet forrest, ca. 55-65 tegn
-- `slug` - kebab-case, æøå → ae/oe/aa, ikke allerede brugt
-- `category` - `"guide"` eller `"news"`
-- `excerpt` - 1-2 sætninger, ca. 150 tegn
-- `content` - markdown, starter med `##`
+    ---
+    title: Hvad koster et Copilot-kursus?
+    date: 2026-11-24
+    category: guide
+    excerpt: 1-2 sætninger, ca. 150 tegn. Vises på oversigten og øverst i artiklen.
+    seoTitle: Hvad koster et Copilot-kursus?
+    seoDescription: 140-155 tegn med søgeordet og det, læseren får ud af at klikke.
+    keywords: ["copilot kursus pris", "hvad koster et copilot kursus"]
+    readingTime: 6
+    image: /blog/hvad-koster-et-copilot-kursus/forside.webp
+    imageAlt: To kolleger ser på en skærm i et lyst kontor
+    imageCredit: Foto: Navn / Unsplash
+    ---
+
+    ## Første overskrift
+
+    Artiklen ...
+
+- `title` - søgeordet forrest, ca. 55-65 tegn (højst 100)
+- `date` - udgivelsesdatoen, `YYYY-MM-DD`
+- `category` - `guide` eller `news`
 - `seoTitle` - **højst 46 tegn** (siden føjer " · Mindforward" til → højst 60)
-- `seoDescription` - 140-155 tegn, søgeord + værdi
-- `keywords` - array med 5 relevante
-- `readingTime` - tal (minutter)
-- `author` - `"Mindforward"`
+- `seoDescription` - 140-155 tegn (højst 160)
+- `keywords` - liste på én linje med dobbelte anførselstegn, ca. 5 stk.
+- `readingTime` - helt tal (minutter)
+- `image`, `imageAlt`, `imageCredit` - forsidebilledet, se "Billeder"
+- `updated` - kun når et gammelt indlæg er rettet væsentligt, `YYYY-MM-DD`
 
-Svarer Strapi ikke HTTP 201: stop og rapportér fejlen.
+Skriv værdier uden anførselstegn (undtagen `keywords`). Et kolon inde i en
+tekst er i orden.
 
-## Efter udgivelse
+## Billeder
 
-Der skal hverken bygges eller deployes. Sitemappet henter indlæggene fra
-Strapi ved hver forespørgsel, og blogsiderne opdaterer sig selv inden for få
-minutter (straks, hvis Strapi-webhooken til `/api/revalidate` er sat op).
+Hvert indlæg bør have et forsidebillede og 1-3 billeder inde i teksten,
+placeret mellem H2-afsnit (aldrig to billeder lige efter hinanden, aldrig før
+første afsnit).
 
-Verificér via Strapi (`?filters[slug][$eq]=<slug>&status=published` og at
-`publishedAt` er sat). **Fælde:** en ukendt slug under `/blog/` svarer HTTP
-200 med en "ikke fundet"-side og `noindex`. Statuskoden beviser derfor intet -
-kig på `<title>` og H1, hvis du kan hente siden.
+**Udseende:** rigtige mennesker i rigtige arbejdssituationer - folk ved en
+skærm, et møde, et kontor. Lyst, roligt, nordisk. Liggende format, mindst
+1600 px bredt. Billedet skal passe til afsnittet.
 
-## Til sidst
+**Aldrig:** robotter, glødende hjerner, blå/lilla "AI"-grafik, kunstigt
+genererede billeder, tekst eller logoer i billedet, kendte personer,
+tydelige varemærker, overdrevent smilende stockfotos.
+
+**Kilder:** kun Unsplash (unsplash.com) eller Pexels (pexels.com). Find
+billedet med websøgning, hent det i fuld størrelse
+(Unsplash: `https://unsplash.com/photos/<id>/download?force=true`), og notér
+fotografens navn.
+
+**Gør billedet klar** - hotlink aldrig, og læg aldrig den rå fil i repoet:
+
+    curl -sSL -o /tmp/billede.jpg "<download-url>"
+    python3 scripts/blog-image.py /tmp/billede.jpg <slug> forside
+
+Scriptet skalerer til højst 1600 px, gemmer som WebP på ca. 200 KB eller
+mindre i `public/blog/<slug>/`, og skriver stien, du skal bruge. Brug navnet
+`forside` til forsidebilledet og korte, beskrivende navne til resten.
+
+**Hvis billederne fejler** (netværket blokerer billedsitet, eller scriptet
+fejler): udgiv indlægget uden `image`-felterne og uden billeder i teksten, og
+skriv **ØVERST i rapporten: "BILLEDER MANGLER"** med fejlbeskeden. Opdigt
+aldrig et billede eller en sti. Forsøg aldrig at omgå en netværksblokering.
+
+## Tjek før udgivelse (SKAL bestås)
+
+    node scripts/blog-check.mjs
+
+Scriptet tjekker felter, længder, markdown, der ikke kan vises, og at alle
+billedfiler findes. Melder det `FEJL`, så ret filen og kør igen. Push aldrig
+et indlæg, der ikke består: en fejl i filen stopper hele sidens build.
+
+## Udgivelse
 
 1. Tilføj en linje i [`blog-log.md`](blog-log.md): dato, spor, søgeord,
    klynge, slug.
-2. Commit kun den fil, og push til `main`.
-3. Rapportér i `#googleanalytics` (se "Adskillelse"): emne og begrundelse,
-   titel, slug, fuld URL, excerpt, og hvor mange emner der er tilbage i køen.
-   Gik noget galt, så rapportér fejlen tydeligt i stedet for at pynte på den.
+2. Commit præcis disse ting og intet andet: `content/blog/<slug>.md`,
+   `public/blog/<slug>/` og `seo/blog-log.md`. Commit-besked: `blog: <titel>`.
+3. Push til `main`. Afvises pushet, fordi `main` har fået nye commits, så
+   hent dem (`git pull --rebase origin main`) og push igen. Brug aldrig
+   force-push.
+
+Siden bygger sig selv efter pushet. Du kan ikke altid hente mindforward.dk
+fra skyen, så et bestået tjek og et gennemført push er din bekræftelse.
+**Fælde,** hvis du henter siden: en ukendt adresse under `/blog/` svarer HTTP
+200 med en "ikke fundet"-side og `noindex`. Statuskoden beviser derfor intet -
+kig på `<title>` og H1.
+
+## Rapport
+
+Rapportér i `#googleanalytics` (se "Adskillelse"): emne og begrundelse,
+titel, slug, fuld URL (`https://mindforward.dk/blog/<slug>`), excerpt, om der
+er billeder med, og hvor mange emner der er tilbage i køen. Gik noget galt,
+så rapportér fejlen tydeligt i stedet for at pynte på den.

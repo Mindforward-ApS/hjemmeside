@@ -18,8 +18,8 @@ const nextConfig: NextConfig = {
       ...["/sikkerhed", "/platform", "/kunder", "/kunder/:path*", "/om-os", "/kurser/:path*", "/loesninger/:path*"].map((source) => ({ source, destination: "/", permanent: false })),
     ];
   },
-  // Blog images come from Strapi's media library (Strapi Cloud).
-  images: { remotePatterns: [{ protocol: "https", hostname: "**.strapiapp.com" }] },
+  // Blog posts are markdown files read from disk (src/lib/blog.ts); keep them next to the server code.
+  outputFileTracingIncludes: { "/blog/*": ["./content/blog/*.md"] },
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {

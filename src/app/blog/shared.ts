@@ -1,4 +1,4 @@
-// Same categories as the Strapi enumeration on `blog-posts`.
+// The categories a post can have (src/lib/blog-format.mjs).
 const labels: Record<string, string> = { guide: "Guide", "case-story": "Case", "tech-dive": "Teknik", "business-case": "Forretning", compliance: "Regler", news: "Nyhed" };
 
 export const categoryLabel = (category?: string) => (category ? labels[category] ?? category : "Guide");

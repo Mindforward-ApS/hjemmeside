@@ -10,7 +10,7 @@ Ingen indlæg er udgivet endnu.
 
 ## Udgivelsesnoter
 
-- Indlæg udgives til Strapi (collection `blog-posts`), ikke som filer i
-  repoet. Regler og felter: [`blog-cloud-runbook.md`](blog-cloud-runbook.md).
+- Indlæg er filer i `content/blog/`. Regler og felter:
+  [`blog-cloud-runbook.md`](blog-cloud-runbook.md).
 - `seoTitle` må højst være 46 tegn - siden føjer " · Mindforward" til.
-- Strapi til Mindforward er ikke oprettet endnu (status 20. november 2026).
+- Kør `node scripts/blog-check.mjs`, før du pusher.

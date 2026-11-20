@@ -5,15 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { createElement, type ReactNode } from "react";
 
-// Images in the body must come from Strapi's media library (same hosts as next.config.ts).
-const IMAGE_LINE = /^!\[([^\]]*)\]\((https:\/\/[^)\s]+)(?:\s+"([^"]*)")?\)\s*$/;
-function isAllowedImage(url: string): boolean {
-  try {
-    return new URL(url).hostname.endsWith(".strapiapp.com");
-  } catch {
-    return false;
-  }
-}
+// Images in the body are files in public/blog/. Anything else is skipped, so an article can never hotlink.
+const IMAGE_LINE = /^!\[([^\]]*)\]\((\/blog\/[^)\s]+)(?:\s+"([^"]*)")?\)\s*$/;
 
 const linkClass = "font-medium text-heading underline decoration-[var(--accent)] decoration-2 underline-offset-4 hover:text-accent";
 
@@ -66,7 +59,7 @@ export function renderMarkdown(source: string): ReactNode {
     const img = line.trim().match(IMAGE_LINE);
     if (img) {
       const [, alt, src, caption] = img;
-      if (isAllowedImage(src)) {
+      {
         blocks.push(
           <figure key={key++} className="my-10">
             <div className="relative aspect-[16/9] overflow-hidden rounded-[1.25rem] bg-[var(--tile-deep)]">

@@ -2,24 +2,20 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { appLinks } from "@/lib/app";
-import { getBlogPosts, strapiImageUrl, type BlogPost } from "@/lib/strapi";
+import { posts, type BlogPost } from "@/lib/blog";
 import { NightCta } from "@/components/night/NightCta";
 import { Icon } from "@/components/ui/Icon";
 import { categoryLabel, formatDate } from "./shared";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const posts = await getBlogPosts().catch(() => [] as BlogPost[]);
-  return {
-    title: "Blog: AI i arbejdsdagen",
-    description: "Guides og nyheder om Copilot, ChatGPT og Claude på arbejdet. Skrevet til medarbejdere og ledere i danske virksomheder.",
-    alternates: { canonical: "/blog" },
-    // An empty blog is not worth indexing; the page opens up by itself when the first article is published.
-    ...(posts.length === 0 ? { robots: { index: false, follow: true } } : {}),
-  };
-}
+export const metadata: Metadata = {
+  title: "Blog: AI i arbejdsdagen",
+  description: "Guides og nyheder om Copilot, ChatGPT og Claude på arbejdet. Skrevet til medarbejdere og ledere i danske virksomheder.",
+  alternates: { canonical: "/blog" },
+  // An empty blog is not worth indexing; the page opens up by itself when the first article is published.
+  ...(posts.length === 0 ? { robots: { index: false, follow: true } } : {}),
+};
 
-export default async function BlogPage() {
-  const posts = await getBlogPosts().catch(() => [] as BlogPost[]);
+export default function BlogPage() {
   const [first, ...rest] = posts;
   return (
     <div className="theme-night -mt-[5.5rem] pt-[5.5rem]">
@@ -42,7 +38,7 @@ export default async function BlogPage() {
           ) : (
             <>
               <PostCard post={first} featured />
-              {rest.length > 0 && <ul className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">{rest.map((p) => <li key={p.id}><PostCard post={p} /></li>)}</ul>}
+              {rest.length > 0 && <ul className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">{rest.map((p) => <li key={p.slug}><PostCard post={p} /></li>)}</ul>}
             </>
           )}
         </div>
@@ -54,18 +50,18 @@ export default async function BlogPage() {
 }
 
 function PostCard({ post, featured = false }: { post: BlogPost; featured?: boolean }) {
-  const image = strapiImageUrl(post.featuredImage);
+  const image = post.image;
   const meta = (
     <p className="text-[0.8125rem] text-muted">
       <span className="font-semibold uppercase tracking-[0.1em] text-accent">{categoryLabel(post.category)}</span>
-      {" · "}<time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+      {" · "}<time dateTime={post.date}>{formatDate(post.date)}</time>
       {post.readingTime ? ` · ${post.readingTime} min` : ""}
     </p>
   );
   const cover = (
     <div className="relative aspect-[16/9] overflow-hidden rounded-[1.25rem] bg-[var(--accent-soft)]">
       {image ? (
-        <Image src={image} alt={post.featuredImage?.alternativeText || post.title} fill sizes={featured ? "(max-width: 768px) 100vw, 640px" : "(max-width: 768px) 100vw, 420px"} priority={featured} className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+        <Image src={image} alt={post.imageAlt || post.title} fill sizes={featured ? "(max-width: 768px) 100vw, 640px" : "(max-width: 768px) 100vw, 420px"} priority={featured} className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
       ) : (
         <span aria-hidden className="absolute inset-0 grid place-items-center text-accent"><Icon name="sparkle" size={40} /></span>
       )}
