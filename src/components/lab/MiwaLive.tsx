@@ -1,17 +1,18 @@
 "use client";
 
-// Marco 2026-11-20: Miwa comes alive in the hero. The motion is rendered in Blender (her cut-out image skinned to a
-// skeleton, so elbows, shoulders and neck bend smoothly) into four transparent clips: idle (breathing, swaying,
-// blinking, loops), wave, point/tap and laugh. Every clip starts and ends in the same rest pose, so they cut together
+// Marco 2026-11-20: Miwa comes alive in the hero. The motion is rendered in Blender (scripts/miwa/rig2.py: her cut-out
+// image on a deep skeleton — legs with knees and planted feet, hips, spine, head, a face that turns, a talking jaw,
+// swinging hair and both arms) into six transparent clips: idle (weight shift, looking around, blinking, loops),
+// hello, talk, point/tap, laugh and dance. Every clip starts and ends in the same rest pose, so they cut together
 // without a jump. Chrome/Firefox get VP9 with alpha (webm), Safari HEVC with alpha (mp4).
 // Next to her sit the test-user video cards; she taps one herself, the clip starts, and she laughs along. Clicking her
 // gives a new line. No real test-user videos yet: one card is the AI-generated example clip (labelled), the rest say so.
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type Act = "wave" | "point" | "laugh";
+type Act = "hello" | "talk" | "point" | "laugh" | "dance";
 type Card = { id: string; label: string; src?: string; poster?: string };
 
-const acts: Act[] = ["wave", "point", "laugh"];
+const acts: Act[] = ["hello", "talk", "point", "laugh", "dance"];
 
 const cards: Card[] = [
   { id: "a", label: "Eksempel", src: "/video/kunde-1.mp4", poster: "/video/kunde-1-poster.jpg" },
@@ -19,12 +20,12 @@ const cards: Card[] = [
   { id: "c", label: "Testbruger" },
 ];
 
-const pokes = [
-  "Hov! Det kilder.",
-  "Ti minutter om dagen. Det er alt, hvad jeg beder om.",
-  "Jeg har en blyant i håret. Man ved aldrig.",
-  "Prøv at trykke på en af videoerne.",
-  "Claude, ChatGPT eller Copilot? Jeg kan dem alle tre.",
+const pokes: [string, Act][] = [
+  ["Hov! Det kilder.", "laugh"],
+  ["Ti minutter om dagen. Det er alt, hvad jeg beder om.", "talk"],
+  ["Jeg har en blyant i håret. Man ved aldrig.", "talk"],
+  ["Prøv at trykke på en af videoerne.", "hello"],
+  ["Claude, ChatGPT eller Copilot? Jeg kan dem alle tre.", "dance"],
 ];
 
 export function MiwaLive() {
@@ -39,6 +40,7 @@ export function MiwaLive() {
   const clips = useRef<Partial<Record<Act, HTMLVideoElement | null>>>({});
   const vids = useRef<Record<string, HTMLVideoElement | null>>({});
   const timers = useRef<number[]>([]);
+  const queued = useRef<Act | null>(null);
   const later = (ms: number, fn: () => void) => { timers.current.push(window.setTimeout(fn, ms)); };
 
   // Safari can't show VP9 alpha; it gets the HEVC-with-alpha files instead.
@@ -48,7 +50,8 @@ export function MiwaLive() {
   }, []);
 
   // Plays one action clip on top of the idle loop. Idle is parked on frame 0 (the shared rest pose) meanwhile.
-  const run = useCallback((a: Act) => {
+  const run = useCallback((a: Act, then: Act | null = null) => {
+    queued.current = then;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const v = clips.current[a];
     if (!v) return;
@@ -61,6 +64,8 @@ export function MiwaLive() {
   }, []);
 
   const done = (a: Act) => {
+    const next = queued.current;
+    if (next) { run(next); return; }
     setAct((cur) => (cur === a ? null : cur));
     void idle.current?.play().catch(() => {});
   };
@@ -71,6 +76,7 @@ export function MiwaLive() {
     if (!c.src) {
       setPlaying(null);
       setLine("Den video er på vej. Testbrugerne er ved at optage!");
+      run("talk");
       return;
     }
     Object.entries(vids.current).forEach(([id, v]) => { if (id !== c.id && v) v.pause(); });
@@ -78,14 +84,14 @@ export function MiwaLive() {
     if (v) { v.currentTime = 0; v.muted = byMiwa; void v.play().catch(() => {}); }
     setPlaying(c.id);
     setLine(byMiwa ? "Den her må du se!" : "Haha, den elsker jeg!");
-    later(byMiwa ? 900 : 200, () => run("laugh"));
+    later(byMiwa ? 900 : 150, () => run(byMiwa ? "laugh" : "dance", byMiwa ? "dance" : "laugh"));
   }, [run]);
 
   // Opening scene: wave + hello, then a hint, then she taps the first card herself unless the visitor already did.
   useEffect(() => {
     if (!ext) return;
-    later(600, () => { setLine("Hej! Jeg er Miwa, din AI-tutor."); run("wave"); });
-    later(3700, () => setLine("Vil du høre, hvad testbrugerne siger?"));
+    later(600, () => { setLine("Hej! Jeg er Miwa, din AI-tutor."); run("hello"); });
+    later(3700, () => { if (touched.current) return; setLine("Vil du høre, hvad testbrugerne siger?"); run("talk"); });
     later(6400, () => {
       if (touched.current) return;
       setLine("Jeg trykker bare på den her…");
@@ -97,8 +103,9 @@ export function MiwaLive() {
 
   const onMiwa = () => {
     touched.current = true;
-    setLine(pokes[poke.current++ % pokes.length]);
-    run(poke.current % 2 ? "wave" : "laugh");
+    const [text, a] = pokes[poke.current++ % pokes.length];
+    setLine(text);
+    run(a);
   };
 
   return (
