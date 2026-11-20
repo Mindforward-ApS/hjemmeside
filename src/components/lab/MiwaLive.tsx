@@ -30,7 +30,6 @@ const pokes = [
 export function MiwaLive() {
   const [ext, setExt] = useState<"webm" | "mp4" | null>(null);
   const [act, setAct] = useState<Act | null>(null);
-  const [ready, setReady] = useState(false);
   const [line, setLine] = useState<string | null>(null);
   const [playing, setPlaying] = useState<string | null>(null);
   const [pressed, setPressed] = useState<string | null>(null);
@@ -111,16 +110,17 @@ export function MiwaLive() {
       `}</style>
 
       {/* Miwa: 720×960 clips; her figure fills x 7–93 %, y 4–100 % of the frame. */}
-      <div className="relative h-full min-w-0" style={{ aspectRatio: "3 / 4" }}>
+      <div data-hero-person role="img" aria-label="Miwa, Mindforwards AI-tutor" className="relative h-full min-w-0" style={{ aspectRatio: "3 / 4" }}>
         <div aria-hidden className="pointer-events-none absolute left-1/2 top-[36%] aspect-square w-[115%] -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ background: "radial-gradient(closest-side, rgba(232,102,74,0.42), rgba(232,102,74,0.16) 45%, transparent 75%)" }} />
         <div aria-hidden className="pointer-events-none absolute bottom-[-1.5%] left-1/2 h-[6%] w-[50%] -translate-x-1/2 rounded-[50%] blur-md" style={{ background: "radial-gradient(closest-side, rgba(0,0,0,0.7), transparent)" }} />
         <button type="button" onClick={onMiwa} aria-label="Sig hej til Miwa" className="nf-focus absolute inset-x-[10%] inset-y-0 z-10 cursor-pointer rounded-[24px]" />
-        {/* Still of the rest pose until the idle clip runs (the clips are transparent, so it must not stay underneath). */}
+        {/* Still of the rest pose until we know which clip format to load; removed after that, because the clips are
+            transparent and anything left underneath shows through as a second Miwa. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img data-hero-person src="/video/miwa/poster.webp" alt="Miwa, Mindforwards AI-tutor" className="absolute inset-0 size-full object-contain object-bottom" style={{ opacity: ready || act ? 0 : 1 }} draggable={false} />
+        {!ext && <img src="/video/miwa/poster.webp" alt="" className="absolute inset-0 size-full object-contain object-bottom" draggable={false} />}
         {ext && (
           <>
-            <video ref={idle} src={`/video/miwa/idle.${ext}`} autoPlay muted loop playsInline preload="auto" aria-hidden onPlaying={() => setReady(true)} className="absolute inset-0 size-full object-contain object-bottom" style={{ opacity: act ? 0 : 1 }} />
+            <video ref={idle} src={`/video/miwa/idle.${ext}`} poster="/video/miwa/poster.webp" autoPlay muted loop playsInline preload="auto" aria-hidden className="absolute inset-0 size-full object-contain object-bottom" style={{ opacity: act ? 0 : 1 }} />
             {acts.map((a) => (
               <video key={a} ref={(el) => { clips.current[a] = el; }} src={`/video/miwa/${a}.${ext}`} muted playsInline preload="auto" aria-hidden onEnded={() => done(a)}
                 className="absolute inset-0 size-full object-contain object-bottom" style={{ opacity: act === a ? 1 : 0 }} />
