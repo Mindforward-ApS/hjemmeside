@@ -43,6 +43,7 @@ import { Pi2 as PilotFoto } from "@/components/lab/PilotVarianter";
 import { HeroLunar } from "@/components/lab/HeroLunar";
 import { HeroPleo } from "@/components/lab/HeroPleo";
 import { MiwaLive } from "@/components/lab/MiwaLive";
+import { MiwaForloeb } from "@/components/lab/MiwaForloeb";
 import { videoVersions, type VideoVersion } from "@/components/lab/VideoSektion";
 
 const c = {
@@ -316,7 +317,7 @@ function HeroMiwa({ pose }: { pose: "velkommen" | "glad" }) {
   );
 }
 
-export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa }: { toggle?: boolean; media?: "cards" | "video" | "none"; navSwitch?: boolean; miwa?: "velkommen" | "glad" | "live" }) {
+export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa }: { toggle?: boolean; media?: "cards" | "video" | "none"; navSwitch?: boolean; miwa?: "velkommen" | "glad" | "live" | "forloeb" }) {
   // Shared with the pricing section via lib/siteMode (Marco 2026-11-11: Privat must show private prices).
   const mode = useSiteMode();
   const setMode = setSiteMode;
@@ -346,9 +347,10 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa 
       </div>
       <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(14,10,9,0.86) 0%, rgba(14,10,9,0.7) 38%, rgba(14,10,9,0.35) 70%, rgba(14,10,9,0.25) 100%), linear-gradient(180deg, rgba(14,10,9,0.5) 0%, transparent 25%, transparent 65%, rgba(14,10,9,0.8) 100%)" }} /></>}
       {/* Marco 2026-11-20: Miwa's autumn landscape behind the live hero; dark veil on the left keeps the white text readable. */}
-      {miwa === "live" && (
+      {/* Marco 2026-11-21: in the choreography preview she sits at the computer in the warm room (baked into the image). */}
+      {(miwa === "live" || miwa === "forloeb") && (
         <div aria-hidden data-hero-bg className="pointer-events-none absolute inset-0 overflow-hidden">
-          <Image src="/img/hero-efteraar.webp" alt="" fill priority sizes="100vw" className="object-cover object-[60%_70%]" />
+          <Image src={miwa === "forloeb" ? "/img/miwa-forloeb/hero.webp" : "/img/hero-efteraar.webp"} alt="" fill priority sizes="100vw" className={miwa === "forloeb" ? "object-cover object-[100%_100%]" : "object-cover object-[60%_70%]"} />
           <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,13,11,0.86) 0%, rgba(20,13,11,0.7) 30%, rgba(20,13,11,0.25) 52%, transparent 66%), linear-gradient(180deg, rgba(20,13,11,0.55) 0%, transparent 18%, transparent 80%, rgba(20,13,11,0.7) 100%)" }} />
         </div>
       )}
@@ -403,7 +405,7 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa 
             )}
           </div>
         </div>
-        {miwa === "live" ? <MiwaLive /> : miwa ? <HeroMiwa pose={miwa} /> : media === "video" ? <HeroVideo /> : media === "cards" ? <HeroCollage privat={privat} /> : null}
+        {miwa === "live" ? <MiwaLive /> : miwa === "forloeb" ? null : miwa ? <HeroMiwa pose={miwa} /> : media === "video" ? <HeroVideo /> : media === "cards" ? <HeroCollage privat={privat} /> : null}
       </div>
       <HeroLogos />
     </section>
@@ -685,7 +687,7 @@ function CtaBand() {
 }
 
 /* ───────────── Page + motion layer ───────────── */
-export function NyForside({ miwa, toggle = false, uiMode = "off", hero = "video", video, start, skills, oev, cert = true, layout, practice, pilot, sep, start3, system }: { miwa?: "velkommen" | "glad" | "live"; toggle?: boolean; uiMode?: UiMode; hero?: "video" | "lunar" | "pleo"; video?: VideoVersion; start?: "kort"; skills?: "cases"; oev?: "kort"; cert?: boolean; layout?: "ny"; practice?: "a" | "b" | "c"; pilot?: "a" | "b" | "c"; sep?: 1 | 2 | 3; start3?: "a" | "b" | "c"; system?: boolean } = {}) {
+export function NyForside({ miwa, toggle = false, uiMode = "off", hero = "video", video, start, skills, oev, cert = true, layout, practice, pilot, sep, start3, system }: { miwa?: "velkommen" | "glad" | "live" | "forloeb"; toggle?: boolean; uiMode?: UiMode; hero?: "video" | "lunar" | "pleo"; video?: VideoVersion; start?: "kort"; skills?: "cases"; oev?: "kort"; cert?: boolean; layout?: "ny"; practice?: "a" | "b" | "c"; pilot?: "a" | "b" | "c"; sep?: 1 | 2 | 3; start3?: "a" | "b" | "c"; system?: boolean } = {}) {
   const VideoSek = video ? videoVersions[video] : null;
   const root = useRef<HTMLDivElement>(null);
 
@@ -785,6 +787,7 @@ export function NyForside({ miwa, toggle = false, uiMode = "off", hero = "video"
       {/* hero="lunar" = the Lunar test at /preview/hero-lunar (2026-11-07); /preview/ny-forside keeps the video hero. */}
       {/* Marco 2026-11-07: "gå med den vi selv har og bare fjern den store produkt video for nu" (Lunar copy too recognisable). */}
       {hero === "lunar" ? <HeroLunar /> : hero === "pleo" ? <HeroPleo /> : <Hero toggle={toggle} media="none" navSwitch={!toggle} miwa={miwa} />}
+      {miwa === "forloeb" && <MiwaForloeb />}
       {layout === "ny" && system ? <Forside3 practice={practice === "b" ? <Oev3.B /> : undefined} pilot={pilot === "a" ? <Pilot3.A /> : undefined} /> : layout === "ny" ? <Forside2 practice={practice === "a" ? <Oev3.A /> : practice === "b" ? <Oev3.B /> : practice === "c" ? <Oev3.C /> : undefined} pilot={pilot === "a" ? <Pilot3.A /> : pilot === "b" ? <Pilot3.B /> : pilot === "c" ? <Pilot3.C /> : undefined} sep={sep} steps={start3 === "a" ? <Start3.A /> : start3 === "b" ? <Start3.B /> : start3 === "c" ? <Start3.C /> : undefined} /> : (<>
       {/* Product video right after the hero (Marco 2026-11-10); versions on /preview/sektion-video, "/" unchanged. */}
       {VideoSek && <VideoSek />}
