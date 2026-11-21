@@ -305,23 +305,24 @@ function HeroVideo() {
   );
 }
 
-// Marco 2026-11-21: Miwa's animated clip in the hero (she walks to the desk, works a moment, then stands and turns to
-// the viewer). A rounded card in the right column, so she is never hidden behind the headline. Plays once and stays on
-// the last frame instead of looping, so she never jumps back. Reduced motion shows that last frame straight away.
-function HeroMiwaVideo() {
+// Marco 2026-11-21: Miwa's animated clip fills the whole hero ("Den skal fylde hele heroen"). She walks to the desk,
+// works a moment, then stands and turns to the viewer. Anchored bottom right so the desk is always in view; the dark
+// veil on the left keeps the white text readable. Plays once and stays on the last frame instead of looping, so she
+// never jumps back. Reduced motion shows that last frame straight away.
+function HeroMiwaVideoBg() {
   const ref = useRef<HTMLVideoElement>(null);
   const [still, setStill] = useState(false);
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setStill(true); return; }
     ref.current?.play().catch(() => setStill(true));
   }, []);
+  const fit = "absolute inset-0 h-full w-full object-cover object-[78%_100%] lg:object-[100%_100%]";
   return (
-    <div className="relative ml-auto w-full min-w-0 lg:max-w-[calc((100svh-13rem)*16/9)]">
-      <div data-hero-card className="relative overflow-hidden rounded-[28px] ring-1 ring-white/15 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)]">
-        {still
-          ? <Image src="/video/miwa-hero-slut.webp" alt="Miwa, Mindforwards AI-tutor, står ved sit skrivebord" width={1276} height={718} priority className="block aspect-[1276/718] w-full object-cover" />
-          : <video ref={ref} src="/video/miwa-hero.mp4" poster="/video/miwa-hero-start.webp" muted playsInline preload="auto" className="block aspect-[1276/718] w-full object-cover" aria-label="Miwa, Mindforwards AI-tutor, sætter sig ved computeren, rejser sig og vender sig mod dig" />}
-      </div>
+    <div aria-hidden data-hero-bg className="pointer-events-none absolute inset-0 overflow-hidden">
+      {still
+        ? <Image src="/video/miwa-hero-slut.webp" alt="" fill priority sizes="100vw" className={fit} />
+        : <video ref={ref} src="/video/miwa-hero.mp4" poster="/video/miwa-hero-start.webp" muted playsInline preload="auto" className={fit} />}
+      <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,13,11,0.86) 0%, rgba(20,13,11,0.7) 30%, rgba(20,13,11,0.25) 52%, transparent 66%), linear-gradient(180deg, rgba(20,13,11,0.55) 0%, transparent 18%, transparent 80%, rgba(20,13,11,0.7) 100%)" }} />
     </div>
   );
 }
@@ -378,6 +379,7 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa 
           <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,13,11,0.86) 0%, rgba(20,13,11,0.7) 30%, rgba(20,13,11,0.25) 52%, transparent 66%), linear-gradient(180deg, rgba(20,13,11,0.55) 0%, transparent 18%, transparent 80%, rgba(20,13,11,0.7) 100%)" }} />
         </div>
       )}
+      {miwa === "video" && <HeroMiwaVideoBg />}
       {navSwitch && <TopBar mode={mode} setMode={setMode} />}
       {/* Marco 2026-11-07: a very light orange haze spread over the whole blurred area (left), gone before the people. */}
       <div aria-hidden data-glow className="pointer-events-none absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(232,102,74,0.075) 0%, rgba(232,102,74,0.06) 30%, rgba(232,102,74,0.025) 48%, transparent 58%)" }} />
@@ -429,7 +431,7 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa 
             )}
           </div>
         </div>
-        {miwa === "live" ? <MiwaLive /> : miwa === "video" ? <HeroMiwaVideo /> : miwa === "forloeb" ? null : miwa ? <HeroMiwa pose={miwa} /> : media === "video" ? <HeroVideo /> : media === "cards" ? <HeroCollage privat={privat} /> : null}
+        {miwa === "live" ? <MiwaLive /> : miwa === "video" ? null : miwa === "forloeb" ? null : miwa ? <HeroMiwa pose={miwa} /> : media === "video" ? <HeroVideo /> : media === "cards" ? <HeroCollage privat={privat} /> : null}
       </div>
       <HeroLogos />
     </section>
