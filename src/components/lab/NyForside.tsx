@@ -305,6 +305,27 @@ function HeroVideo() {
   );
 }
 
+// Marco 2026-11-21: Miwa's animated clip in the hero (she walks to the desk, works a moment, then stands and turns to
+// the viewer). A rounded card in the right column, so she is never hidden behind the headline. Plays once and stays on
+// the last frame instead of looping, so she never jumps back. Reduced motion shows that last frame straight away.
+function HeroMiwaVideo() {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [still, setStill] = useState(false);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setStill(true); return; }
+    ref.current?.play().catch(() => setStill(true));
+  }, []);
+  return (
+    <div className="relative ml-auto w-full min-w-0 lg:max-w-[calc((100svh-13rem)*16/9)]">
+      <div data-hero-card className="relative overflow-hidden rounded-[28px] ring-1 ring-white/15 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)]">
+        {still
+          ? <Image src="/video/miwa-hero-slut.webp" alt="Miwa, Mindforwards AI-tutor, står ved sit skrivebord" width={1276} height={718} priority className="block aspect-[1276/718] w-full object-cover" />
+          : <video ref={ref} src="/video/miwa-hero.mp4" poster="/video/miwa-hero-start.webp" muted playsInline preload="auto" className="block aspect-[1276/718] w-full object-cover" aria-label="Miwa, Mindforwards AI-tutor, sætter sig ved computeren, rejser sig og vender sig mod dig" />}
+      </div>
+    </div>
+  );
+}
+
 // Marco 2026-11-20: Miwa, the AI tutor, takes the team photo's place in the hero. Cut-out 3D figure standing on the
 // dark hero background, with a warm coral glow behind her and a soft floor shadow so the black outfit stays readable.
 function HeroMiwa({ pose }: { pose: "velkommen" | "glad" }) {
@@ -317,7 +338,7 @@ function HeroMiwa({ pose }: { pose: "velkommen" | "glad" }) {
   );
 }
 
-export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa }: { toggle?: boolean; media?: "cards" | "video" | "none"; navSwitch?: boolean; miwa?: "velkommen" | "glad" | "live" | "forloeb" }) {
+export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa }: { toggle?: boolean; media?: "cards" | "video" | "none"; navSwitch?: boolean; miwa?: "velkommen" | "glad" | "live" | "forloeb" | "video" }) {
   // Shared with the pricing section via lib/siteMode (Marco 2026-11-11: Privat must show private prices).
   const mode = useSiteMode();
   const setMode = setSiteMode;
@@ -408,7 +429,7 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa 
             )}
           </div>
         </div>
-        {miwa === "live" ? <MiwaLive /> : miwa === "forloeb" ? null : miwa ? <HeroMiwa pose={miwa} /> : media === "video" ? <HeroVideo /> : media === "cards" ? <HeroCollage privat={privat} /> : null}
+        {miwa === "live" ? <MiwaLive /> : miwa === "video" ? <HeroMiwaVideo /> : miwa === "forloeb" ? null : miwa ? <HeroMiwa pose={miwa} /> : media === "video" ? <HeroVideo /> : media === "cards" ? <HeroCollage privat={privat} /> : null}
       </div>
       <HeroLogos />
     </section>
@@ -690,7 +711,7 @@ function CtaBand() {
 }
 
 /* ───────────── Page + motion layer ───────────── */
-export function NyForside({ miwa, toggle = false, uiMode = "off", hero = "video", video, start, skills, oev, cert = true, layout, practice, pilot, sep, start3, system }: { miwa?: "velkommen" | "glad" | "live" | "forloeb"; toggle?: boolean; uiMode?: UiMode; hero?: "video" | "lunar" | "pleo"; video?: VideoVersion; start?: "kort"; skills?: "cases"; oev?: "kort"; cert?: boolean; layout?: "ny"; practice?: "a" | "b" | "c"; pilot?: "a" | "b" | "c"; sep?: 1 | 2 | 3; start3?: "a" | "b" | "c"; system?: boolean } = {}) {
+export function NyForside({ miwa, toggle = false, uiMode = "off", hero = "video", video, start, skills, oev, cert = true, layout, practice, pilot, sep, start3, system }: { miwa?: "velkommen" | "glad" | "live" | "forloeb" | "video"; toggle?: boolean; uiMode?: UiMode; hero?: "video" | "lunar" | "pleo"; video?: VideoVersion; start?: "kort"; skills?: "cases"; oev?: "kort"; cert?: boolean; layout?: "ny"; practice?: "a" | "b" | "c"; pilot?: "a" | "b" | "c"; sep?: 1 | 2 | 3; start3?: "a" | "b" | "c"; system?: boolean } = {}) {
   const VideoSek = video ? videoVersions[video] : null;
   const root = useRef<HTMLDivElement>(null);
 
