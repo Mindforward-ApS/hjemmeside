@@ -1,7 +1,8 @@
 "use client";
 
 // Marco 2026-11-21: choreography preview. Rough stills of Miwa (rendered in Blender) moved by scroll to show the
-// story before the real animated clips exist: she sits at the computer in the hero (baked into the hero image), lifts
+// story before the real animated clips exist: she sits at the computer in the hero (a hero image layer that fades out
+// the moment she appears below, so there is only one of her), lifts
 // the next section when it scrolls in, jumps over it in an arc, lands by the product video and presses it, and the
 // video starts (muted). Desktop only for now.
 import { useEffect, useRef, useState } from "react";
@@ -32,15 +33,15 @@ export function MiwaForloeb() {
       const top = (el: Element) => el.getBoundingClientRect().top + s;
       const A = top(sec);
       const vb = vid.getBoundingClientRect(); const V = { x: vb.left, y: vb.top + s, w: vb.width, h: vb.height };
-      const H = Math.min(320, vh * 0.36); // her height on screen
+      const H = Math.min(440, vh * 0.5); // her height on screen, the same scale as in the chair
       // 1. lift: as the section's top edge comes up, she stands on it and pushes it up
       const pl = clamp((s - (A - vh * 0.95)) / (vh * 0.3));
       // 2. jump: from the top edge of the section, in an arc, down to the product video
       const pj = clamp((s - (A - vh * 0.6)) / (vh * 0.7));
       const lifted = pl * (1 - pj) * 40;
       sec.style.transform = `translateY(${-lifted}px) rotate(${-lifted * 0.012}deg)`;
-      sec.style.transformOrigin = "20% 0";
-      const x0 = vw * 0.12, y0 = A - lifted - H * 0.98;
+      sec.style.transformOrigin = "62% 0";
+      const x0 = vw * 0.62, y0 = A - lifted - H * 0.98; // right of the headline, not over the text
       const x1 = V.x - H * 0.35, y1 = V.y + V.h * 0.55 - H;
       let pose: Pose = "lift", x = x0, y = y0, h = H;
       if (pj > 0 && pj < 1) {
@@ -56,6 +57,9 @@ export function MiwaForloeb() {
           void vid.play().catch(() => {});
         }
       }
+      // she leaves the chair as soon as she appears down at the section (never two of her at once)
+      const seat = document.getElementById("miwa-seat");
+      if (seat) { seat.style.transition = "opacity 250ms"; seat.style.opacity = pl > 0 ? "0" : "1"; }
       setSt({ pose, x, y, h, show: pl > 0 });
     };
     const on = () => { if (!raf) raf = requestAnimationFrame(tick); };

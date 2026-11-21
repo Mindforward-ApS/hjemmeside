@@ -350,7 +350,10 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa 
       {/* Marco 2026-11-21: in the choreography preview she sits at the computer in the warm room (baked into the image). */}
       {(miwa === "live" || miwa === "forloeb") && (
         <div aria-hidden data-hero-bg className="pointer-events-none absolute inset-0 overflow-hidden">
-          <Image src={miwa === "forloeb" ? "/img/miwa-forloeb/hero.webp" : "/img/hero-efteraar.webp"} alt="" fill priority sizes="100vw" className={miwa === "forloeb" ? "object-cover object-[100%_100%]" : "object-cover object-[60%_70%]"} />
+          {/* forloeb: the empty room underneath, the room with Miwa in the chair on top; the top layer fades out when she
+              leaves the hero to lift the next section (MiwaForloeb sets its opacity), so there is only ever one of her. */}
+          {miwa === "forloeb" && <Image src="/img/miwa-forloeb/hero-tom.webp" alt="" fill priority sizes="100vw" className="object-cover object-[100%_100%]" />}
+          <Image id={miwa === "forloeb" ? "miwa-seat" : undefined} src={miwa === "forloeb" ? "/img/miwa-forloeb/hero.webp" : "/img/hero-efteraar.webp"} alt="" fill priority sizes="100vw" className={miwa === "forloeb" ? "object-cover object-[100%_100%]" : "object-cover object-[60%_70%]"} />
           <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(20,13,11,0.86) 0%, rgba(20,13,11,0.7) 30%, rgba(20,13,11,0.25) 52%, transparent 66%), linear-gradient(180deg, rgba(20,13,11,0.55) 0%, transparent 18%, transparent 80%, rgba(20,13,11,0.7) 100%)" }} />
         </div>
       )}
