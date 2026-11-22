@@ -5,8 +5,7 @@ søgeord ikke bliver brugt to gange.
 
 | Dato | Spor | Søgeord / emne | Klynge | Slug |
 |---|---|---|---|---|
-
-Ingen indlæg er udgivet endnu.
+| 2026-11-22 | keyword | hvad lærer man på et Copilot-kursus (long-tail af M1 "microsoft copilot kursus" - kernesøgeordet ejes af /copilot-kursus og er brugt som linktekst, ikke som primært søgeord) | Copilot | `hvad-laerer-man-paa-et-copilot-kursus` |
 
 ## Udgivelsesnoter
 
