@@ -135,7 +135,7 @@ function SignupForm({ onJoined }: { onJoined: (count: number) => void }) {
   const pill = "flex flex-col gap-2 rounded-[22px] bg-[rgba(10,6,5,0.55)] p-1.5 ring-1 ring-white/12 sm:flex-row sm:rounded-full";
   const inputCls = "h-[52px] w-full rounded-full bg-transparent pr-4 text-[0.9375rem] text-white outline-none placeholder:text-white/45";
   const button = (label: string, compact = false) => (
-    <button type="submit" disabled={pending} aria-label={compact ? label : undefined} className={`wl-btn group relative inline-flex h-[52px] shrink-0 items-center justify-center rounded-full text-[0.9375rem] font-semibold text-white sm:w-[200px] ${compact ? "wl-compact w-[52px]" : "w-full"}`}>
+    <button type="submit" disabled={pending} aria-label={compact ? label : undefined} className={`wl-btn group relative inline-flex h-[52px] shrink-0 items-center justify-center rounded-full text-[0.9375rem] font-semibold text-[#1a0e08] sm:w-[200px] ${compact ? "wl-compact w-[52px]" : "w-full"}`}>
       <span className={`wl-label ${compact ? "max-sm:sr-only" : ""}`}>{pending ? "Gemmer …" : label}</span>
       <span aria-hidden className="wl-ball grid size-8 place-items-center rounded-full bg-white text-[#0a0a0b]"><svg viewBox="0 0 20 20" fill="none" className="size-4"><path d="M6 14l8-8M7.5 6H14v6.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
     </button>
@@ -205,7 +205,7 @@ export function Venteliste() {
       <header className="relative z-10 flex items-center justify-between px-5 py-5 sm:px-20 sm:py-6">
         <MindforwardLogo size={28} className="!text-[#faf6f2]" />
         {/* Existing users go straight to the platform (Marco 2026-11-20). */}
-        <a href={appLinks.login} className="wl-login inline-flex h-10 items-center gap-2 rounded-full px-4 text-[0.875rem] font-semibold text-white ring-1 ring-white/20 transition hover:bg-white/10 hover:ring-white/35">
+        <a href={appLinks.login} className="wl-login inline-flex h-10 items-center gap-2 rounded-full px-4 text-[0.875rem] font-semibold text-[#1a0e08] transition">
           Log ind
           <svg viewBox="0 0 20 20" fill="none" aria-hidden className="size-3.5"><path d="M6 14l8-8M7.5 6H14v6.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </a>
@@ -254,8 +254,10 @@ export function Venteliste() {
       </footer>
 
       <style>{`
-        .wl-btn { background: #0a0a0b; box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), inset 0 -2px 5px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1), 0 10px 22px -10px rgba(0,0,0,0.8); transition: background-color .2s, transform .15s; }
-        .wl-btn:hover { background: #1c1c1f; }
+        .wl-btn, .wl-login { background: linear-gradient(90deg, #fb970a, #f8400a); box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -2px 5px rgba(120,20,0,0.35), 0 10px 22px -10px rgba(0,0,0,0.8); transition: filter .2s, transform .15s; }
+        /* Same orange gradient as the M logo (Marco 2026-11-22). */
+        .wl-btn:hover, .wl-login:hover { filter: brightness(1.08); }
+        .wl-login:active { transform: translateY(1px); }
         .wl-btn:active { transform: translateY(1px); }
         /* Hover: the white ball rolls to the left end (one turn minus 45°, so the arrow ends pointing straight right)
            and the label slides over to make room. */
