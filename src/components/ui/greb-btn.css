@@ -1,34 +1,31 @@
-/* "Tilmeld jer" button (Marco 2026-11-14): a black pill with a light rim and a coral circle with an arrow on the right.
+/* "Tilmeld jer" button (Marco 2026-11-14): a pill with a light rim and a round arrow circle on the right.
+   Marco 2026-11-22: the pill has the M logo's orange gradient, dark text and a dark circle.
    --small for the nav, --on-dark when it sits on a dark background. */
 .greb-btn {
-  --orange: #e8664a;
-  --black: #0a0a0b;
-  --black-hover: #1c1c1f;
   --rim: rgba(255,255,255,.30), rgba(255,255,255,.08) 42%, rgba(255,255,255,0) 82%;
-  --fill: var(--black);
+  --fill: linear-gradient(90deg, #fb970a, #f8400a);
   --d: 2.59em; --in: .294em; --icon: 1.18em;
   display: inline-flex; align-items: center; gap: 1.18em;
   padding: var(--in) var(--in) var(--in) calc(var(--d) / 2 + var(--in) + 1px);
   font: 700 13px/1.2 var(--font-grotesk), system-ui, sans-serif; letter-spacing: -.015em;
-  color: #fff; text-decoration: none; white-space: nowrap; cursor: pointer;
+  color: #1a0e08; text-decoration: none; white-space: nowrap; cursor: pointer;
   border: 1px solid transparent; border-radius: 999px;
   background:
-    linear-gradient(var(--fill), var(--fill)) padding-box,
+    var(--fill) padding-box,
     linear-gradient(180deg, var(--rim)) border-box,
-    linear-gradient(var(--fill), var(--fill)) border-box;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 -2px 5px rgba(0,0,0,.5), 0 1px 1px rgba(0,0,0,.30), 0 3px 6px -2px rgba(0,0,0,.26), 0 14px 24px -12px rgba(0,0,0,.38);
+    var(--fill) border-box;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.3), inset 0 -2px 5px rgba(120,20,0,.35), 0 1px 1px rgba(0,0,0,.30), 0 3px 6px -2px rgba(0,0,0,.26), 0 14px 24px -12px rgba(0,0,0,.38);
   -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; user-select: none;
   position: relative;
   transition: box-shadow .2s ease, transform .25s cubic-bezier(.2,.7,.2,1);
 }
 .greb-btn--small { font-size: 15px; --d: 2.27em; --in: .267em; --icon: 1.07em; gap: .87em; }
-.greb-btn--on-dark { --black-hover: #161618; --rim: rgba(255,255,255,.46), rgba(255,255,255,.26) 42%, rgba(255,255,255,.16) 82%; }
+.greb-btn--on-dark { --rim: rgba(255,255,255,.46), rgba(255,255,255,.26) 42%, rgba(255,255,255,.16) 82%; }
 .greb-btn__circle {
   display: grid; place-items: center; flex: none; margin-inline-start: auto;
   width: var(--d); height: var(--d); border-radius: 50%;
-  background: var(--orange); color: #fff;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.38), inset 0 -1px 0 color-mix(in srgb, var(--orange) 72%, black),
-              0 0 0 1.5px rgba(0,0,0,.9), 0 1px 0 1.5px rgba(255,255,255,.10);
+  background: #1a0e08; color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 1px 2px rgba(120,20,0,.4);
   transition: background-color .18s ease, transform .18s ease;
 }
 .greb-btn__circle svg { width: var(--icon); height: var(--icon); margin: .06em .06em 0 0; transition: transform .28s cubic-bezier(.2,.7,.2,1); }
@@ -38,7 +35,7 @@
 .greb-btn::before, .greb-btn::after {
   content: ""; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none;
   padding: 1px;
-  background: conic-gradient(from var(--greb-ang), transparent 0 55%, rgba(232,102,74,.0) 58%, #e8664a 72%, #fbe1d7 78%, #e8664a 84%, transparent 92%);
+  background: conic-gradient(from var(--greb-ang), transparent 0 55%, rgba(251,151,10,0) 58%, #fb970a 72%, #fff1d6 78%, #f8400a 84%, transparent 92%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor; mask-composite: exclude;
   opacity: 0; transition: opacity .3s ease;
@@ -47,15 +44,15 @@
 @keyframes greb-spin { to { --greb-ang: 360deg; } }
 @media (hover: hover) {
   .greb-btn:hover {
-    --fill: var(--black-hover); transform: translateY(-2px);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.14), inset 0 -3px 8px rgba(0,0,0,.55),
+    filter: brightness(1.06); transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.3), inset 0 -3px 8px rgba(120,20,0,.4),
                 0 1px 1px rgba(0,0,0,.22), 0 10px 16px -4px rgba(0,0,0,.3), 0 28px 40px -16px rgba(0,0,0,.5);
   }
   .greb-btn:hover::before, .greb-btn:hover::after { opacity: 1; animation: greb-spin 2.4s linear infinite; }
   .greb-btn:hover .greb-btn__circle svg { transform: rotate(45deg); }
 }
-.greb-btn:active { --fill: var(--black); transform: translateY(0); box-shadow: inset 0 2px 6px rgba(0,0,0,.6), 0 1px 1px rgba(0,0,0,.38); }
-.greb-btn:active .greb-btn__circle { background: color-mix(in oklab, var(--orange) 92%, black); transform: scale(.96); }
+.greb-btn:active { transform: translateY(0); box-shadow: inset 0 2px 6px rgba(120,20,0,.5), 0 1px 1px rgba(0,0,0,.38); }
+.greb-btn:active .greb-btn__circle { transform: scale(.96); }
 .greb-btn:active .greb-btn__circle svg { transform: rotate(45deg); }
 .greb-btn:focus-visible { outline: 2px solid #1d4ed8; outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) {
