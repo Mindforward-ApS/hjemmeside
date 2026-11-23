@@ -489,7 +489,7 @@ export function Faq() {
 }
 
 /* 8 · Kontakt (dark band with coral light streaks): heading left, form card right, a small contact card bottom-left. */
-const field = "h-12 w-full rounded-full border-0 px-5 text-[0.875rem] outline-none ring-1 ring-transparent transition focus:ring-[#e8664a]";
+const field = "h-11 w-full rounded-full border-0 px-5 text-[0.875rem] outline-none ring-1 ring-transparent transition focus:ring-[#e8664a]";
 function Contact() {
   const [state, action, pending] = useActionState<FormState, FormData>(contactAction, { ok: false });
   const [extra, setExtra] = useState({ firma: "", tlf: "", antal: "" });
@@ -497,51 +497,51 @@ function Contact() {
 
   useEffect(() => { if (state.ok) { setMsg(""); setExtra({ firma: "", tlf: "", antal: "" }); } }, [state.ok]);
   return (
-    <section id="kontakt" className="relative overflow-hidden py-24 sm:py-36" style={{ background: c.dark }}>
+    <section id="kontakt" className="relative overflow-hidden py-16 sm:py-20" style={{ background: c.dark }}>
       <div aria-hidden className="pointer-events-none absolute inset-0" style={{ backgroundImage: "repeating-linear-gradient(90deg, rgba(232,102,74,0) 0 7px, rgba(232,102,74,0.55) 8px, rgba(246,201,182,0.25) 10px, rgba(232,102,74,0) 12px 19px)", maskImage: "linear-gradient(180deg, transparent 25%, black 100%)", WebkitMaskImage: "linear-gradient(180deg, transparent 25%, black 100%)" }} />
-      <div className={`${wrap} relative grid gap-12 lg:grid-cols-2`}>
+      <div className={`${wrap} relative grid grid-cols-1 gap-12 lg:grid-cols-2`}>
         <div className="flex flex-col">
           <Label light>Kontakt</Label>
           <h2 className={`${h2} !font-semibold tracking-[-0.045em] mt-4 max-w-[14ch] text-white`}>Lad os tale om jeres hold</h2>
           <p className="mt-6 max-w-[24rem] text-[1rem] leading-relaxed text-white/70">Udfyld formularen, så vender vi tilbage inden for 1 hverdag.</p>
           <div className="mt-12 flex max-w-[28rem] items-center gap-4 rounded-[20px] bg-white p-3 lg:mt-auto">
-            <span className="grid size-24 shrink-0 place-items-center rounded-[14px]" style={{ background: c.coralSoft }}><Image src="/icon.svg" alt="" width={44} height={44} unoptimized /></span>
+            <span className="grid size-16 sm:size-24 shrink-0 place-items-center rounded-[14px]" style={{ background: c.coralSoft }}><Image src="/icon.svg" alt="" width={44} height={44} unoptimized /></span>
             <div>
               <p className="text-[1rem] font-semibold leading-snug" style={{ color: c.ink }}>Hellere skrive direkte?</p>
               <GrebBtn href="mailto:kontakt@mindforward.dk" onDark className="mt-3">kontakt@mindforward.dk</GrebBtn>
             </div>
           </div>
         </div>
-        <form action={action} noValidate className="rounded-[24px] bg-white p-6 sm:p-8">
+        <form action={action} noValidate className="min-w-0 rounded-[24px] bg-white p-6 sm:p-8">
           <p className={`${head} text-[1.5rem] tracking-[-0.015em]`} style={{ color: c.ink }}>Book 15 minutter med os</p>
           <input className="hidden" name="company_website" tabIndex={-1} autoComplete="off" aria-hidden />
           
-          <div className="mt-6 grid gap-5">
+          <div className="mt-5 grid gap-3.5">
             {([["name", "Navn", "Dit navn", "text", true], ["email", "Arbejdsmail", "navn@firma.dk", "email", true]] as const).map(([n, l, ph, type]) => (
-              <label key={n} className="grid gap-2 text-[0.875rem] font-medium" style={{ color: c.ink }}>{l}
+              <label key={n} className="grid gap-1.5 text-[0.875rem] font-medium" style={{ color: c.ink }}>{l}
                 <input name={n} type={type} placeholder={ph} defaultValue={state.values?.[n] ?? ""} className={field} style={{ background: c.page, color: c.ink }} />
                 {state.errors?.[n] && <span className="text-[0.8125rem]" style={{ color: c.coralText }}>{state.errors[n]}</span>}
               </label>
             ))}
-            <label className="grid gap-2 text-[0.875rem] font-medium" style={{ color: c.ink }}>Telefon (valgfri)
+            <label className="grid gap-1.5 text-[0.875rem] font-medium" style={{ color: c.ink }}>Telefon (valgfri)
               <input type="tel" name="phone" value={extra.tlf} onChange={(e) => setExtra({ ...extra, tlf: e.target.value })} placeholder="12 34 56 78" className={field} style={{ background: c.page, color: c.ink }} />
             </label>
-            <div className="grid gap-5 sm:grid-cols-2">
-              <label className="grid gap-2 text-[0.875rem] font-medium" style={{ color: c.ink }}>Virksomhed
+            <div className="grid gap-3.5 sm:grid-cols-2">
+              <label className="grid gap-1.5 text-[0.875rem] font-medium" style={{ color: c.ink }}>Virksomhed
                 <input name="company" value={extra.firma} onChange={(e) => setExtra({ ...extra, firma: e.target.value })} placeholder="Firmanavn" className={field} style={{ background: c.page, color: c.ink }} />
               </label>
-              <label className="grid gap-2 text-[0.875rem] font-medium" style={{ color: c.ink }}>Antal medarbejdere
+              <label className="grid gap-1.5 text-[0.875rem] font-medium" style={{ color: c.ink }}>Antal medarbejdere
                 <select name="team_size" value={extra.antal} onChange={(e) => setExtra({ ...extra, antal: e.target.value })} className={field} style={{ background: c.page, color: c.ink }}>
                   <option value="">Vælg</option><option>5–20</option><option>21–50</option><option>51–200</option><option>Over 200</option>
                 </select>
               </label>
             </div>
-            <label className="grid gap-2 text-[0.875rem] font-medium" style={{ color: c.ink }}>Besked
-              <textarea name="message" value={msg} onChange={(e) => setMsg(e.target.value)} rows={4} placeholder="Hvad vil I gerne blive bedre til?" className="w-full rounded-[18px] border-0 px-5 py-4 text-[0.875rem] outline-none ring-1 ring-transparent focus:ring-[#e8664a]" style={{ background: c.page, color: c.ink }} />
+            <label className="grid gap-1.5 text-[0.875rem] font-medium" style={{ color: c.ink }}>Besked
+              <textarea name="message" value={msg} onChange={(e) => setMsg(e.target.value)} rows={3} placeholder="Hvad vil I gerne blive bedre til?" className="w-full rounded-[18px] border-0 px-5 py-3 text-[0.875rem] outline-none ring-1 ring-transparent focus:ring-[#e8664a]" style={{ background: c.page, color: c.ink }} />
               {state.errors?.message && <span className="text-[0.8125rem]" style={{ color: c.coralText }}>{state.errors.message}</span>}
             </label>
           </div>
-          <GrebBtn disabled={pending} onDark className="greb-btn--full mt-7">{pending ? "Sender …" : "Send"}</GrebBtn>
+          <GrebBtn disabled={pending} onDark className="greb-btn--full mt-5">{pending ? "Sender …" : "Send"}</GrebBtn>
           <p className="mt-4 flex items-center gap-2 text-[0.8125rem]" style={{ color: c.muted }}>
             <Icon name="check" size={14} />{state.ok ? state.message : "Vi bruger kun dine oplysninger til at svare dig."}
           </p>
