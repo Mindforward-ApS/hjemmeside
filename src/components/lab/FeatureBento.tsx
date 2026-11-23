@@ -72,8 +72,8 @@ export function FeatureBento() {
               <p className="mt-2 text-[0.9375rem]" style={{ color: muted }}>pr. lektion</p>
               <div className="mt-auto"><CardButton href="#kurser">Se kurserne</CardButton></div>
             </div>
-            <div className="relative order-first aspect-[16/10] flex-1 overflow-hidden rounded-[14px] border lg:order-none lg:aspect-auto lg:min-h-[260px]" style={{ borderColor: line, background: "#f5f2ef" }}>
-              <video src="/video/platform-tur.mp4" poster="/video/platform-tur-poster.jpg" autoPlay muted loop playsInline aria-label="Platformen: oversigt med kurser, øvetid og fremskridt" className="absolute inset-0 h-full w-full object-cover object-[30%_50%]" />
+            <div className="relative order-first aspect-[16/10] w-full overflow-hidden rounded-[14px] border lg:order-none lg:w-[56%] lg:self-center" style={{ borderColor: line, background: "#f5f2ef" }}>
+              <video src="/video/platform-tur.mp4" poster="/video/platform-tur-poster.jpg" autoPlay muted loop playsInline aria-label="Platformen: oversigt med kurser, øvetid og fremskridt" className="absolute inset-0 h-full w-full object-cover" />
             </div>
           </article>
 
