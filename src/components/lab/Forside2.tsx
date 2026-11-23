@@ -384,7 +384,7 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
   // two plan cards on the right; the featured one sits in a frame with the M logo's gradient and a strip on top.
   const mode = useSiteMode();
   const privatMode = mode === "privat";
-  const plans = (privatMode ? privat : erhverv).slice(0, 2);
+  const plans = privatMode ? privat : erhverv;
   const facts = privatMode
     ? [{ icon: "clock" as const, t: "10 minutter om dagen" }, { icon: "shield" as const, t: "Data i EU" }, { icon: "check" as const, t: "Opsig, når du vil" }]
     : [{ icon: "clock" as const, t: "10 minutter om dagen" }, { icon: "shield" as const, t: "Data i EU med databehandleraftale" }, { icon: "check" as const, t: "Opsig, når I vil" }];
@@ -395,29 +395,29 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
     const [unitMain, ...unitRest] = p.unit.replace(/^\/\s*/, "").split(" ");
     return (
       <div className="flex h-full flex-col">
-        <div className="px-6 pb-7 pt-7">
-          <div className="flex items-center justify-between gap-3">
-            <p className="text-[1.5rem] font-medium tracking-[-0.02em]" style={{ color: "#0f0d0c" }}>{p.name}</p>
+        <div className="px-5 pb-5 pt-5">
+          <div className="flex min-h-8 items-center justify-between gap-3">
+            <p className="text-[1.25rem] font-medium leading-tight tracking-[-0.02em]" style={{ color: "#0f0d0c" }}>{p.name}</p>
             {p.badge && <span className="whitespace-nowrap rounded-full px-2.5 py-1 text-[0.875rem] font-semibold" style={{ background: "#ffeadb", color: "#f8400a" }}>{p.badge}</span>}
           </div>
-          <p className="mt-4 flex items-baseline gap-2"><span className={`${head} whitespace-nowrap text-[3rem] !font-semibold leading-none tracking-[-0.03em]`} style={{ color: "#0f0d0c" }}>{p.price}</span><span className="text-[1.125rem]" style={{ color: "#4a4440" }}>/{unitMain}</span></p>
-          <p className="mt-3 text-[1rem]" style={{ color: "#6b625d" }}>{unitRest.join(" ")}</p>
+          <p className="mt-3 flex items-baseline gap-2"><span className={`${head} whitespace-nowrap text-[2.5rem] !font-semibold leading-none tracking-[-0.03em]`} style={{ color: "#0f0d0c" }}>{p.price}</span>{p.unit && <span className="text-[1rem]" style={{ color: "#4a4440" }}>/{unitMain}</span>}</p>
+          <p className="mt-2 text-[0.9375rem]" style={{ color: "#6b625d" }}>{p.unit ? unitRest.join(" ") : "Pris efter antal brugere"}</p>
         </div>
-        <div className="flex flex-1 flex-col border-t px-6 pb-8 pt-6" style={{ borderColor: "#e8e4e1" }}>
-          <p className="text-[1rem]" style={{ color: "#4a4440" }}>{privatMode ? "Det får du" : "Det får I"}</p>
-          <ul className="mt-4 grid gap-4">
-            {items.map((x) => <li key={x} className="flex items-center gap-3 text-[1rem] leading-6" style={{ color: "#1a1614" }}><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden className="shrink-0"><path d="m3 8.5 3.2 3L13 4.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>{x}</li>)}
+        <div className="flex flex-1 flex-col border-t px-5 pb-5 pt-4" style={{ borderColor: "#e8e4e1" }}>
+          <p className="text-[0.9375rem]" style={{ color: "#4a4440" }}>{privatMode ? "Det får du" : "Det får I"}</p>
+          <ul className="mt-3 grid gap-2.5">
+            {items.map((x) => <li key={x} className="flex items-center gap-2.5 text-[0.9375rem] leading-[1.35]" style={{ color: "#1a1614" }}><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden className="shrink-0"><path d="m3 8.5 3.2 3L13 4.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>{x}</li>)}
           </ul>
-          <Link href={planHref[p.href]} className={`nf-focus nf-press mt-auto flex h-12 translate-y-0 items-center justify-center gap-2 rounded-full text-[0.9375rem] font-semibold transition ${p.featured ? "text-white hover:bg-black" : "border hover:bg-[#f7f5f3]"}`} style={p.featured ? { background: "#0f0d0c", marginTop: 32 } : { borderColor: "#dcd7d3", color: "#0f0d0c", marginTop: 32 }}>{p.cta} {arrow}</Link>
+          <Link href={planHref[p.href]} className={`nf-focus nf-press mt-auto flex h-11 translate-y-0 items-center justify-center gap-2 rounded-full text-[0.9375rem] font-semibold transition ${p.featured ? "text-white hover:bg-black" : "border hover:bg-[#f7f5f3]"}`} style={p.featured ? { background: "#0f0d0c", marginTop: 22 } : { borderColor: "#dcd7d3", color: "#0f0d0c", marginTop: 22 }}>{p.cta} {arrow}</Link>
         </div>
       </div>
     );
   };
   return (
     <section id="priser" className="py-[100px]">
-      <div className="mx-auto grid w-full max-w-[1152px] gap-12 px-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,340px)_minmax(0,340px)] lg:gap-x-6 lg:px-0">
-        <div className="flex flex-col lg:pr-14">
-          <span className="self-start rounded-full border px-3 py-1 text-[0.875rem]" style={{ borderColor: "#dcd7d3", color: "#0f0d0c" }}>Pris</span>
+      <div className="mx-auto grid w-full max-w-[1440px] gap-12 px-5 lg:grid-cols-[minmax(0,1fr)_repeat(3,minmax(0,292px))] lg:gap-x-5 lg:px-[3.5vw]">
+        <div className="flex flex-col lg:pr-6">
+          <span className="self-start rounded-full border px-3 py-1 text-[0.875rem]" style={{ borderColor: "#dcd7d3", color: "#0f0d0c" }}>Vores priser</span>
           <h2 className={`${head} mt-4 text-[clamp(2.25rem,1.6rem+1.8vw,3rem)] !font-semibold leading-[1.05] tracking-[-0.03em]`} style={{ color: "#0f0d0c" }}>Enkle priser, ingen binding</h2>
           <p className="mt-5 max-w-[24rem] text-[1rem] leading-6" style={{ color: "#4a4440" }}>{privatMode ? "Én fast pris om måneden. Del med en ven, og I betaler mindre hver." : "I betaler pr. bruger pr. måned. Jo flere I er, jo lavere er prisen."}</p>
           {toggle && (
@@ -430,7 +430,7 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
           <ul className="mt-6 grid gap-4">
             {facts.map((f) => <li key={f.t} className="flex items-center gap-3 text-[1rem]" style={{ color: "#4a4440" }}><Icon name={f.icon} size={18} />{f.t}</li>)}
           </ul>
-          <div className="mt-12 lg:mt-auto">
+          <div className="mt-12">
             <p className="text-[1rem]" style={{ color: "#4a4440" }}>Virksomheder, der træner AI med os</p>
             <ul className="mt-4 flex flex-wrap items-center gap-x-10 gap-y-3" style={{ color: "#0f0d0c" }}>
               <li><span role="img" aria-label="SydDesign" className="block h-[1.4rem] w-[7rem] bg-current" style={{ maskImage: "url(/logos/syddesign.svg)", WebkitMaskImage: "url(/logos/syddesign.svg)", maskSize: "contain", WebkitMaskSize: "contain", maskRepeat: "no-repeat", WebkitMaskRepeat: "no-repeat" }} /></li>
