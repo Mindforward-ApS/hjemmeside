@@ -55,7 +55,7 @@ function Mark() {
 
 export function Problem() {
   return (
-    <section id="problemet" className="relative overflow-x-clip pb-20 pt-24 sm:pb-24 sm:pt-[7.5rem]">
+    <section id="problemet" className="relative overflow-x-clip bg-white pb-20 pt-24 sm:pb-24 sm:pt-[7.5rem]">
       <div className="w-full px-5 sm:px-[3.5vw]">
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-[5vw]">
           <div>
@@ -72,11 +72,11 @@ export function Problem() {
         {/* Marco 2026-11-23: the tools-vs-Mindforward idea as two cards, like the rest of the page. The Mindforward card
             uses the featured price card's frame (pris-glow: the logo gradient with a strip on top). */}
         <div className="mt-[60px] grid gap-4 md:grid-cols-2 md:items-end xl:gap-[1.74vw]">
-          <div className="flex flex-col rounded-[22px] bg-white p-6 sm:p-8" style={{ boxShadow: `0 0 0 1px ${line}` }}>
+          <div className="flex flex-col rounded-[22px] p-6 sm:p-8" style={{ background: "#f5f2ef" }}>
             <div className="flex items-center gap-3">
               <span className="flex -space-x-2">
                 {["chatgpt", "copilot", "claude"].map((t) => (
-                  <span key={t} className="grid size-9 place-items-center rounded-[10px] bg-white ring-2 ring-white">
+                  <span key={t} className="grid size-9 place-items-center rounded-[10px] bg-white ring-2 ring-[#f5f2ef]">
                     <Image src={`/logos/${t}.png`} alt="" width={22} height={22} className="size-[22px] object-contain" />
                   </span>
                 ))}
