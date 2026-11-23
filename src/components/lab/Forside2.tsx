@@ -477,14 +477,16 @@ export function Faq() {
   return (
     <section id="faq" className="relative isolate overflow-hidden pb-24 pt-20" style={{ background: "#f6f1ea" }}>
       <div className="mx-auto grid w-full max-w-[1216px] gap-12 px-5 lg:grid-cols-[36%_1fr] lg:gap-[5%] lg:px-0">
-        <div className="flex flex-col">
+        {/* Marco 2026-11-23: the left column takes its height from the questions (h-0 + min-h-full), so the card's bottom
+            always lines up with the last question, open or closed. */}
+        <div className="flex flex-col lg:h-0 lg:min-h-full">
           <SectionLabel>FAQ</SectionLabel>
           <h2 className={`${head} mt-[22px] text-[clamp(2.5rem,1.6rem+2.4vw,3.25rem)] font-medium leading-[1.08] tracking-[-0.02em]`} style={{ color: c.ink }}>Spørgsmål, vi ofte får</h2>
-          <div className="mt-10 flex flex-1 flex-col items-start rounded-[24px] px-8 py-9" style={{ background: "#fbf8f3", boxShadow: faqCard }}>
-            <span className="block size-[108px] overflow-hidden rounded-full" style={{ boxShadow: "0 0 0 1px #0f0d0c, 0 12px 30px -8px rgba(31,22,17,0.35)" }}><Image src="/img/marco-2.jpg" alt="Marco Nielsen" width={108} height={108} className="size-full object-cover" /></span>
-            <h3 className={`${head} mt-9 text-[clamp(1.75rem,1.2rem+1.2vw,2.125rem)] font-normal leading-tight tracking-[-0.01em]`} style={{ color: c.ink }}>Hellere skrive direkte?</h3>
-            <p className="mb-10 mt-5 text-[1.25rem] leading-[35px]" style={{ color: "rgba(31,22,17,0.64)" }}>Lad os tale om jeres hold.</p>
-            <a href="mailto:kontakt@mindforward.dk" className="nf-focus mt-auto block self-stretch rounded-[14px] border px-[30px] py-3.5 text-center text-[1.1875rem] font-medium transition-colors hover:bg-[rgba(28,28,30,0.05)]" style={{ borderColor: "rgba(31,22,17,0.16)", color: "#1c1c1e" }}>kontakt@mindforward.dk</a>
+          <div className="mt-8 flex flex-1 flex-col items-start rounded-[24px] px-8 py-7" style={{ background: "#fbf8f3", boxShadow: faqCard }}>
+            <span className="block size-[84px] shrink-0 overflow-hidden rounded-full" style={{ boxShadow: "0 0 0 1px #0f0d0c, 0 12px 30px -8px rgba(31,22,17,0.35)" }}><Image src="/img/marco-2.jpg" alt="Marco Nielsen" width={96} height={96} className="size-full object-cover" /></span>
+            <h3 className={`${head} mt-5 text-[1.75rem] font-normal leading-tight tracking-[-0.01em]`} style={{ color: c.ink }}>Hellere skrive direkte?</h3>
+            <p className="mb-5 mt-2 text-[1.125rem] leading-7" style={{ color: "rgba(31,22,17,0.64)" }}>Lad os tale om jeres hold.</p>
+            <a href="mailto:kontakt@mindforward.dk" className="nf-focus mt-auto block self-stretch rounded-[14px] border px-[30px] py-3 text-center text-[1.0625rem] font-medium transition-colors hover:bg-[rgba(28,28,30,0.05)]" style={{ borderColor: "rgba(31,22,17,0.16)", color: "#1c1c1e" }}>kontakt@mindforward.dk</a>
           </div>
         </div>
         <div className="flex flex-col gap-5">
