@@ -33,7 +33,7 @@ function Pill({ href, children }: { href: string; children: React.ReactNode }) {
 function MailChip() {
   return (
     <a href="mailto:kontakt@mindforward.dk" className="nf-focus flex items-center gap-3 rounded-full bg-white py-2 pl-2 pr-5">
-      <span className="grid size-11 place-items-center rounded-full" style={{ background: c.coral, color: c.ink }}><Icon name="mail" size={16} /></span>
+      <span className="grid size-11 place-items-center rounded-full" style={{ background: c.cta, color: "#fff" }}><Icon name="mail" size={16} /></span>
       <span className="leading-tight"><span className="block text-[0.75rem] font-medium uppercase" style={{ color: c.ink }}>Skriv til os</span><span className="text-[1rem] font-semibold" style={{ color: c.ink }}>kontakt@mindforward.dk</span></span>
     </a>
   );

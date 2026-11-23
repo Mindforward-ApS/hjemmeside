@@ -82,7 +82,7 @@ export function B() {
           <ul className="mt-auto grid gap-3 pt-12">
             {steps.map((s) => (
               <li key={s.n} className="flex items-center gap-4 rounded-[16px] bg-white/[0.06] p-4">
-                <span className="grid size-10 shrink-0 place-items-center rounded-full" style={{ background: c.coral, color: c.ink }}><Icon name={s.icon} size={16} /></span>
+                <span className="grid size-10 shrink-0 place-items-center rounded-full" style={{ background: c.cta, color: "#fff" }}><Icon name={s.icon} size={16} /></span>
                 <span className="text-[1rem] font-semibold text-white">{s.t}</span>
               </li>
             ))}
