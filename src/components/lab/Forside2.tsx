@@ -96,7 +96,7 @@ function Platform() {
     <section id="kurser" className="relative overflow-x-clip pb-16 pt-24 sm:pt-[7.5rem]">
       <div className={wrap}>
         <div>
-          <SectionLabel>Platformen</SectionLabel>
+          <SectionLabel>Løsningen</SectionLabel>
           <h2 className={`${head} mt-4 max-w-[790px] !font-semibold text-[clamp(2.25rem,1.4rem+2.6vw,3.5rem)] leading-[1.143] tracking-[-0.045em]`} style={{ color: c.ink }}>Korte lektioner, et rigtigt øvemiljø og overblik til lederen</h2>
         </div>
         {/* Marco 2026-11-11: the product video (16:9, with sound) is shown whole; the stats card is only as tall as its content, and on desktop the video is lifted so both end at the same
@@ -592,13 +592,16 @@ function Contact() {
    2 · Paneler: each section is a rounded panel inset from the window, with a strip of page colour between panels.
    3 · Linjer og numre: one background, a hairline and a numbered heading row ("01 Platformen") opening each section.
    In white areas the white cards turn page-coloured so they still read as cards. */
-type Sep = 1 | 2 | 3;
+type Sep = 1 | 2 | 3 | 4 | 5;
 const tones: Record<Sep, string[]> = {
   // Marco 2026-11-23: the contact section is white now (was dark).
   // Marco 2026-11-23: FAQ white so it stands off the cream price section above.
   1: ["page", "peach", "white", "page", "white", "page", "white", "warm"],
   2: ["white", "peach", "white", "sand", "white", "sand", "white", "dark"],
   3: ["page", "page", "page", "page", "page", "page", "page", "dark"],
+  // Marco 2026-11-23 "for mange forskellige farver": 4 = white and sand alternating, 5 = all white (cards turn sand).
+  4: ["page", "white", "page", "white", "page", "white", "page", "white"],
+  5: ["white", "white", "white", "white", "white", "white", "white", "white"],
 };
 const toneBg: Record<string, string> = { warm: "#fbf1e8", page: c.page, cream: "#f6f1ea", white: "#ffffff", peach: "#f8ddd0", sand: "#ece4dd", dark: c.dark };
 const names = ["Platformen", "Sådan kommer I i gang", "I praksis", "Øvemiljøet", "Pilotforløb", "Pris", "Spørgsmål og svar", "Kontakt"];

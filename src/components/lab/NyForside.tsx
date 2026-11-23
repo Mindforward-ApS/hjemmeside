@@ -722,7 +722,7 @@ function CtaBand() {
 }
 
 /* ───────────── Page + motion layer ───────────── */
-export function NyForside({ miwa, toggle = false, uiMode = "off", hero = "video", video, start, skills, oev, cert = true, layout, practice, pilot, sep, start3, system }: { miwa?: "velkommen" | "glad" | "live" | "forloeb" | "video"; toggle?: boolean; uiMode?: UiMode; hero?: "video" | "lunar" | "pleo"; video?: VideoVersion; start?: "kort"; skills?: "cases"; oev?: "kort"; cert?: boolean; layout?: "ny"; practice?: "a" | "b" | "c"; pilot?: "a" | "b" | "c"; sep?: 1 | 2 | 3; start3?: "a" | "b" | "c"; system?: boolean } = {}) {
+export function NyForside({ miwa, toggle = false, uiMode = "off", hero = "video", video, start, skills, oev, cert = true, layout, practice, pilot, sep, start3, system }: { miwa?: "velkommen" | "glad" | "live" | "forloeb" | "video"; toggle?: boolean; uiMode?: UiMode; hero?: "video" | "lunar" | "pleo"; video?: VideoVersion; start?: "kort"; skills?: "cases"; oev?: "kort"; cert?: boolean; layout?: "ny"; practice?: "a" | "b" | "c"; pilot?: "a" | "b" | "c"; sep?: 1 | 2 | 3 | 4 | 5; start3?: "a" | "b" | "c"; system?: boolean } = {}) {
   const VideoSek = video ? videoVersions[video] : null;
   const root = useRef<HTMLDivElement>(null);
 
