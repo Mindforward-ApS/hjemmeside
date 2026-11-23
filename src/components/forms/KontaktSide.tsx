@@ -81,8 +81,11 @@ export function KontaktSide({ heading: H = "h1", id }: { heading?: "h1" | "h2"; 
                   ))}
                 </div>
               </fieldset>
-              <GrebBtn disabled={pending} className="greb-btn--full mt-1">{pending ? "Sender …" : "Send besked"}</GrebBtn>
-              <p className="text-center text-[0.9375rem]" style={{ color: muted }}>Hellere skrive direkte? <a href="mailto:kontakt@mindforward.dk" className="font-medium underline underline-offset-4" style={{ color: ink }}>kontakt@mindforward.dk</a></p>
+              {/* Marco 2026-11-23: normal width, not stretched across the form; the mail line sits next to it. */}
+              <div className="mt-1 flex flex-wrap items-center gap-x-5 gap-y-3">
+                <GrebBtn disabled={pending}>{pending ? "Sender …" : "Send besked"}</GrebBtn>
+                <p className="text-[0.9375rem]" style={{ color: muted }}>Hellere skrive direkte? <a href="mailto:kontakt@mindforward.dk" className="font-medium underline underline-offset-4" style={{ color: ink }}>kontakt@mindforward.dk</a></p>
+              </div>
               {state.message && !state.ok && <p role="alert" className="text-[0.875rem]" style={{ color: "#b8452c" }}>{state.message}</p>}
             </form>
           )}
