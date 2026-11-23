@@ -17,6 +17,7 @@ import { erhverv, privat } from "@/content/priser";
 import { setSiteMode, useSiteMode } from "@/lib/siteMode";
 import { Udtalelser } from "./Udtalelser";
 import { FeatureBento } from "./FeatureBento";
+import { OmOs } from "./OmOs";
 
 const c = { ink: "#201613", cta: "linear-gradient(90deg, #fb970a, #f8400a)" /* M logo gradient, Marco 2026-11-23 */, muted: "#5a4a44", coral: "#e8664a", coralText: "#b8452c", coralSoft: "#fbe1d7", page: "#f5f2ef", dark: "#201613", line: "rgba(32,22,19,0.1)" };
 const wrap = "w-full px-5 sm:px-[3.5vw]";
@@ -596,12 +597,13 @@ type Sep = 1 | 2 | 3;
 const tones: Record<Sep, string[]> = {
   // Marco 2026-11-23: the contact section is white now (was dark).
   // Marco 2026-11-23: FAQ white so it stands off the cream price section above.
-  1: ["page", "peach", "white", "page", "white", "page", "white", "warm"],
-  2: ["white", "peach", "white", "sand", "white", "sand", "white", "dark"],
-  3: ["page", "page", "page", "page", "page", "page", "page", "dark"],
+  // Marco 2026-11-23: "Om os" (sand) between Øvemiljøet and Pilotforløb.
+  1: ["page", "peach", "white", "page", "sand", "white", "page", "white", "warm"],
+  2: ["white", "peach", "white", "sand", "white", "white", "sand", "white", "dark"],
+  3: ["page", "page", "page", "page", "page", "page", "page", "page", "dark"],
 };
 const toneBg: Record<string, string> = { warm: "#fbf1e8", page: c.page, cream: "#f6f1ea", white: "#ffffff", peach: "#f8ddd0", sand: "#ece4dd", dark: c.dark };
-const names = ["Platformen", "Sådan kommer I i gang", "I praksis", "Øvemiljøet", "Pilotforløb", "Pris", "Spørgsmål og svar", "Kontakt"];
+const names = ["Platformen", "Sådan kommer I i gang", "I praksis", "Øvemiljøet", "Om os", "Pilotforløb", "Pris", "Spørgsmål og svar", "Kontakt"];
 
 function Sec({ sep, k, children }: { sep?: Sep; k: number; children: React.ReactNode }) {
   if (!sep) return <>{children}</>;
@@ -626,7 +628,7 @@ function Sec({ sep, k, children }: { sep?: Sep; k: number; children: React.React
 }
 
 export function Forside2({ practice, pilot, sep, steps }: { practice?: React.ReactNode; pilot?: React.ReactNode; sep?: Sep; steps?: React.ReactNode } = {}) {
-  const parts = [<Platform key="p" />, steps ?? <FeatureBento key="s" />, <Cases key="c" />, practice ?? <Practice key="o" />, pilot ?? <Pilot key="l" />, <Price key="r" />, <Faq key="f" />, <KontaktSide key="k" heading="h2" id="kontakt" />];
+  const parts = [<Platform key="p" />, steps ?? <FeatureBento key="s" />, <Cases key="c" />, practice ?? <Practice key="o" />, <OmOs key="om" />, pilot ?? <Pilot key="l" />, <Price key="r" />, <Faq key="f" />, <KontaktSide key="k" heading="h2" id="kontakt" />];
   return (
     <div style={{ background: c.page }}>
       {/* In white areas the white cards and buttons switch to the page colour so they still read as cards. */}
