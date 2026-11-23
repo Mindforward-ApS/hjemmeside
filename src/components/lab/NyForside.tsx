@@ -11,6 +11,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { GrebBtn } from "@/components/ui/GrebBtn";
+import { HeroStories } from "@/components/lab/HeroStories";
 import "./knapper.css";
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { appLinks } from "@/lib/app";
@@ -339,7 +340,7 @@ function HeroMiwa({ pose }: { pose: "velkommen" | "glad" }) {
   );
 }
 
-export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa }: { toggle?: boolean; media?: "cards" | "video" | "none"; navSwitch?: boolean; miwa?: "velkommen" | "glad" | "live" | "forloeb" | "video" }) {
+export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa }: { toggle?: boolean; media?: "cards" | "video" | "none" | "stories"; navSwitch?: boolean; miwa?: "velkommen" | "glad" | "live" | "forloeb" | "video" }) {
   // Shared with the pricing section via lib/siteMode (Marco 2026-11-11: Privat must show private prices).
   const mode = useSiteMode();
   const setMode = setSiteMode;
@@ -431,7 +432,7 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa 
             )}
           </div>
         </div>
-        {miwa === "live" ? <MiwaLive /> : miwa === "video" ? null : miwa === "forloeb" ? null : miwa ? <HeroMiwa pose={miwa} /> : media === "video" ? <HeroVideo /> : media === "cards" ? <HeroCollage privat={privat} /> : null}
+        {miwa === "live" ? <MiwaLive /> : miwa === "video" ? null : miwa === "forloeb" ? null : miwa ? <HeroMiwa pose={miwa} /> : media === "stories" ? <HeroStories /> : media === "video" ? <HeroVideo /> : media === "cards" ? <HeroCollage privat={privat} /> : null}
       </div>
       <HeroLogos />
     </section>
@@ -812,7 +813,7 @@ export function NyForside({ miwa, toggle = false, uiMode = "off", hero = "video"
       `}</style>
       {/* hero="lunar" = the Lunar test at /preview/hero-lunar (2026-11-07); /preview/ny-forside keeps the video hero. */}
       {/* Marco 2026-11-07: "gå med den vi selv har og bare fjern den store produkt video for nu" (Lunar copy too recognisable). */}
-      {hero === "lunar" ? <HeroLunar /> : hero === "pleo" ? <HeroPleo /> : <Hero toggle={toggle} media="none" navSwitch={!toggle} miwa={miwa} />}
+      {hero === "lunar" ? <HeroLunar /> : hero === "pleo" ? <HeroPleo /> : <Hero toggle={toggle} media={miwa ? "none" : "stories"} navSwitch={!toggle} miwa={miwa} />}
       {miwa === "forloeb" && <MiwaForloeb />}
       {layout === "ny" && system ? <Forside3 practice={practice === "b" ? <Oev3.B /> : undefined} pilot={pilot === "a" ? <Pilot3.A /> : undefined} /> : layout === "ny" ? <Forside2 practice={practice === "a" ? <Oev3.A /> : practice === "b" ? <Oev3.B /> : practice === "c" ? <Oev3.C /> : undefined} pilot={pilot === "a" ? <Pilot3.A /> : pilot === "b" ? <Pilot3.B /> : pilot === "c" ? <Pilot3.C /> : undefined} sep={sep} steps={start3 === "a" ? <Start3.A /> : start3 === "b" ? <Start3.B /> : start3 === "c" ? <Start3.C /> : undefined} /> : (<>
       {/* Product video right after the hero (Marco 2026-11-10); versions on /preview/sektion-video, "/" unchanged. */}
