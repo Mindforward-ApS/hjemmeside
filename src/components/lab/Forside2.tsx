@@ -486,7 +486,7 @@ export function Faq() {
       <div className="mx-auto grid w-full max-w-[1216px] gap-12 px-5 lg:grid-cols-[36%_1fr] lg:gap-[5%] lg:px-0">
         <div className="flex flex-col">
           <p className="inline-flex items-center gap-2.5 self-start rounded-full px-3.5 py-[7px] text-[0.75rem] font-semibold uppercase leading-4 tracking-[0.08em]" style={{ background: "#fbf8f3", color: c.ink }}>
-            <span aria-hidden className="size-1.5 rounded-full" style={{ background: c.coral }} />Spørgsmål og svar
+            <span aria-hidden className="size-1.5 rounded-full" style={{ background: c.coral }} />FAQ
           </p>
           <h2 className={`${head} mt-[22px] text-[clamp(2.5rem,1.6rem+2.4vw,3.25rem)] font-medium leading-[1.08] tracking-[-0.02em]`} style={{ color: c.ink }}>Spørgsmål, vi ofte får</h2>
           <div className="mt-10 flex flex-1 flex-col items-start rounded-[24px] px-8 py-9" style={{ background: "#fbf8f3", boxShadow: faqCard }}>
