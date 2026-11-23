@@ -8,7 +8,7 @@
   display: inline-flex; align-items: center; gap: 1.18em;
   padding: var(--in) var(--in) var(--in) calc(var(--d) / 2 + var(--in) + 1px);
   font: 700 13px/1.2 var(--font-grotesk), system-ui, sans-serif; letter-spacing: -.015em;
-  color: #1a0e08; text-decoration: none; white-space: nowrap; cursor: pointer;
+  color: #fff; text-decoration: none; /* Marco 2026-11-23: white text on the orange */ white-space: nowrap; cursor: pointer;
   border: 1px solid transparent; border-radius: 999px;
   background:
     var(--fill) padding-box,

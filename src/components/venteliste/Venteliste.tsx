@@ -135,7 +135,7 @@ function SignupForm({ onJoined }: { onJoined: (count: number) => void }) {
   const pill = "flex flex-col gap-2 rounded-[22px] bg-[rgba(10,6,5,0.55)] p-1.5 ring-1 ring-white/12 sm:flex-row sm:rounded-full";
   const inputCls = "h-[52px] w-full rounded-full bg-transparent pr-4 text-[0.9375rem] text-white outline-none placeholder:text-white/45";
   const button = (label: string, compact = false) => (
-    <button type="submit" disabled={pending} aria-label={compact ? label : undefined} className={`wl-btn group relative inline-flex h-[52px] shrink-0 items-center justify-center rounded-full text-[0.9375rem] font-semibold text-[#1a0e08] sm:w-[200px] ${compact ? "wl-compact w-[52px]" : "w-full"}`}>
+    <button type="submit" disabled={pending} aria-label={compact ? label : undefined} className={`wl-btn group relative inline-flex h-[52px] shrink-0 items-center justify-center rounded-full text-[0.9375rem] font-semibold text-white sm:w-[200px] ${compact ? "wl-compact w-[52px]" : "w-full"}`}>
       <span className={`wl-label ${compact ? "max-sm:sr-only" : ""}`}>{pending ? "Gemmer …" : label}</span>
       <span aria-hidden className="wl-ball grid size-8 place-items-center rounded-full bg-white text-[#0a0a0b]"><svg viewBox="0 0 20 20" fill="none" className="size-4"><path d="M6 14l8-8M7.5 6H14v6.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
     </button>
@@ -205,7 +205,7 @@ export function Venteliste() {
       <header className="relative z-10 flex items-center justify-between px-5 py-5 sm:px-20 sm:py-6">
         <MindforwardLogo size={28} className="!text-[#faf6f2]" />
         {/* Existing users go straight to the platform (Marco 2026-11-20). */}
-        <a href={appLinks.login} className="wl-login inline-flex h-10 items-center gap-2 rounded-full px-4 text-[0.875rem] font-semibold text-[#1a0e08] transition">
+        <a href={appLinks.login} className="wl-login inline-flex h-10 items-center gap-2 rounded-full px-4 text-[0.875rem] font-semibold text-white transition">
           Log ind
           <svg viewBox="0 0 20 20" fill="none" aria-hidden className="size-3.5"><path d="M6 14l8-8M7.5 6H14v6.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </a>
