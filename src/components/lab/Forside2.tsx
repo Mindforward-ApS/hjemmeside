@@ -440,7 +440,7 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
         </div>
         {plans.map((p) => p.featured ? (
           <div key={p.id} className="pris-glow relative flex flex-col rounded-[22px] p-[3px] lg:self-end">
-            <p className="relative mb-[3px] rounded-t-[19px] px-4 pb-1.5 pt-1.5 text-center text-[0.875rem] font-semibold text-white" style={{ background: "linear-gradient(90deg, #f8400a, #fb6a0a)" }}>{p.tab}</p>
+            <p className="relative px-4 pb-2 pt-1.5 text-center text-[0.875rem] font-semibold text-white [text-shadow:0_1px_2px_rgba(120,20,0,0.45)]">{p.tab}</p>
             <div className="relative flex-1 rounded-[19px] bg-white">{card(p)}</div>
           </div>
         ) : (
