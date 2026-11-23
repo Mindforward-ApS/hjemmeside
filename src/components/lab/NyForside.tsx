@@ -395,7 +395,7 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa 
           {/* Marco 2026-11-02: always exactly these three lines, at the same size relative to the cards on every screen.
               The size follows the content width (cqi), so the composition from his 14.23 screenshot holds everywhere. */}
           {toggle && <ModeSwitch mode={mode} setMode={setMode} />}
-          <h1 data-hero-title className={`${display} text-[length:calc(var(--dz,1)*16.5cqi)] text-white lg:text-[length:calc(var(--dz,1)*min(7.13vw,117px))]`}>
+          <h1 data-hero-title className={`${display} font-semibold tracking-[-0.02em] text-[length:calc(var(--dz,1)*10.6cqi)] text-white lg:text-[length:calc(var(--dz,1)*min(7.13vw,117px))]`}>
             {/* Marco 2026-11-07: always two lines, "AI-træning til / hele holdet". */}
             <span className="block whitespace-nowrap">AI-træning til</span>
             <span className="block whitespace-nowrap">hele holdet.</span>
