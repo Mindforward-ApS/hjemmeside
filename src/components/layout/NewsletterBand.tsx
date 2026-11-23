@@ -22,7 +22,7 @@ export function NewsletterBand() {
             <div className="flex flex-col gap-2 rounded-[22px] bg-white/[0.06] p-1.5 ring-1 ring-white/15 sm:flex-row sm:items-center sm:rounded-full">
               <label htmlFor="nl-email" className="sr-only">Din mail</label>
               <input id="nl-email" name="email" type="email" inputMode="email" autoComplete="email" required placeholder="Din mail" defaultValue={state.values?.email} aria-invalid={!!state.errors?.email} aria-describedby={state.errors?.email ? "nl-err" : undefined} className="h-11 min-w-0 flex-1 bg-transparent px-4 text-[0.9375rem] text-white outline-none placeholder:text-white/45" />
-              <GrebBtn disabled={pending} onDark>{pending ? "Sender …" : "Tilmeld"}</GrebBtn>
+              <GrebBtn disabled={pending} className="greb-btn--light">{pending ? "Sender …" : "Tilmeld"}</GrebBtn>
             </div>
             {(state.errors?.email || state.message) && <p id="nl-err" role="alert" className="mt-2 px-2 text-[0.8125rem] text-[#ffb59e]">{state.errors?.email ?? state.message}</p>}
           </form>
