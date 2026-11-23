@@ -32,7 +32,7 @@ export function KontaktSide({ heading: H = "h1", id }: { heading?: "h1" | "h2"; 
               ))}
             </ul>
             <div className="mt-7 flex items-center gap-4">
-              <Image src="/img/marco.jpg" alt="" width={52} height={52} className="size-[52px] rounded-full object-cover" />
+              <Image src="/img/marco-2.jpg" alt="" width={52} height={52} className="size-[52px] rounded-full object-cover" />
               <div>
                 <p className="text-[1.0625rem] font-medium" style={{ color: ink }}>Marco Nielsen</p>
                 <p className="text-[0.9375rem]" style={{ color: muted }}>Founder og Succes Manager</p>
