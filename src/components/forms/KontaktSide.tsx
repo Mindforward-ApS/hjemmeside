@@ -37,7 +37,7 @@ export function KontaktSide({ heading: H = "h1", id }: { heading?: "h1" | "h2"; 
           <figure className="mt-10 max-w-[28rem] rounded-[18px] border p-6 lg:mt-auto lg:mb-6" style={{ borderColor: "rgba(31,22,17,0.06)", background: "#fff", boxShadow: "0 18px 40px -28px rgba(31,22,17,0.35)" }}>
             <blockquote className="text-[1.125rem] leading-[1.5]" style={{ color: ink }}>“Jeg læser selv alle beskeder og svarer inden for en hverdag. Skriv bare løs, også hvis I kun er nysgerrige.”</blockquote>
             <figcaption className="mt-5 flex items-center gap-4">
-              <Image src="/img/marco-2.jpg" alt="Marco Nielsen" width={72} height={72} className="size-[72px] rounded-full object-cover" />
+              <Image src="/img/marco-2.jpg" alt="Marco Nielsen" width={72} height={72} className="size-[72px] rounded-full object-cover ring-1 ring-[#0f0d0c]" />
               <div>
                 <p className="text-[1.0625rem] font-medium" style={{ color: ink }}>Marco Nielsen</p>
                 <p className="text-[0.9375rem]" style={{ color: muted }}>Founder og Succes Manager</p>
