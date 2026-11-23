@@ -1,96 +1,142 @@
-// Funktioner (Marco 2026-11-14): replaces "Sådan kommer I i gang". A bento of six cards, same design as the features
-// section on the 3770 draft, with Mindforward's own features. Photos of people are initials; the phone is a placeholder.
-import "./feature-bento.css";
+// Funktioner (Marco 2026-11-14, rebuilt 2026-11-23 on the price section's standard): six white cards with a hairline
+// border, left-aligned copy and the price section's buttons; the course certificate is the highlighted card in the
+// M logo's gradient frame. Real Mindforward content: the platform tour video, the approved certificate (V7) and the
+// three tools' own logos.
+import Image from "next/image";
+import Link from "next/link";
 import { appLinks } from "@/lib/app";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
-const Initials = ({ t, bg }: { t: string; bg: string }) => (
-  <span aria-hidden style={{ display: "grid", placeItems: "center", width: "100%", height: "100%", borderRadius: "50%", background: bg, color: "#fff", fontWeight: 600, fontSize: 14 }}>{t}</span>
-);
+const ink = "#0f0d0c";
+const muted = "#4a4440";
+const line = "#e3dfdc";
+const grad = "linear-gradient(135deg, #fb970a, #f8400a)";
+
+const Arrow = () => <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+
+function CardButton({ href, children, dark = false }: { href: string; children: React.ReactNode; dark?: boolean }) {
+  return (
+    <Link href={href} className={`nf-focus nf-press mt-6 flex h-11 items-center justify-center gap-2 rounded-full text-[0.9375rem] font-semibold transition ${dark ? "text-white hover:bg-black" : "border hover:bg-[#f7f5f3]"}`} style={dark ? { background: ink } : { borderColor: "#dcd7d3", color: ink }}>
+      {children} <Arrow />
+    </Link>
+  );
+}
+
+function Copy({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <>
+      <h3 className="text-[1.5rem] font-medium leading-tight tracking-[-0.02em]" style={{ color: ink }}>{title}</h3>
+      <p className="mt-2 text-[0.9375rem] leading-6" style={{ color: muted }}>{children}</p>
+    </>
+  );
+}
+
+const card = "flex flex-col rounded-[20px] border bg-white p-6";
 
 export function FeatureBento() {
   return (
-    <div className="ftx">
-      <section className="features" aria-labelledby="features-title">
-        <div className="features-head">
-          <div>
+    <section aria-labelledby="features-title" className="py-[100px]" style={{ background: "#ece6de" }}>
+      <div className="mx-auto w-full max-w-[1440px] px-5 lg:px-[3.5vw]">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex flex-col">
             <SectionLabel>Funktioner</SectionLabel>
-            <h2 id="features-title">Alt, holdet har brug for,<br />ét sted</h2>
+            <h2 id="features-title" className="mt-4" style={{ color: ink }}>Alt, holdet har brug for,<br />ét sted</h2>
           </div>
-          <p className="features-sub">Lektioner, øvemiljø, kursusbevis og overblik til lederen arbejder sammen på én platform, så holdet bruger tiden på at lære.</p>
+          <p className="max-w-[26rem] text-[1rem] leading-6" style={{ color: muted }}>Lektioner, øvemiljø, kursusbevis og overblik til lederen arbejder sammen på én platform, så holdet bruger tiden på at lære.</p>
         </div>
-        <div className="bento">
-          <article className="fc fc-light fc-center">
-            <div className="fc-visual">
-              <div className="note"><span className="note-av" style={{ width: 48, height: 48, flex: "none" }}><Initials t="AH" bg="#e8664a" /></span><div><b>anna@firma.dk</b><span>Færdig med <em>Modul 1</em> i ChatGPT</span></div></div>
-              <div className="note note-2"><span className="note-av" style={{ width: 48, height: 48, flex: "none" }}><Initials t="MJ" bg="#7a5a4f" /></span><div><b>mads@firma.dk</b><span>Startede<br /><em>Lektion 3</em> i Copilot</span></div></div>
+
+        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {/* Teamoverblik */}
+          <article className={card} style={{ borderColor: line }}>
+            <div className="mb-6 grid flex-1 content-center gap-3">
+              {[["AH", "Anna H.", "Modul 1 i ChatGPT", 100], ["MJ", "Mads J.", "Lektion 3 i Copilot", 45], ["SK", "Sara K.", "Lektion 1 i Claude", 15]].map(([i, n, t, p]) => (
+                <div key={i as string} className="flex items-center gap-3 rounded-[14px] border p-3" style={{ borderColor: line }}>
+                  <span className="grid size-9 shrink-0 place-items-center rounded-full text-[0.75rem] font-semibold text-white" style={{ background: grad }}>{i}</span>
+                  <div className="min-w-0 flex-1">
+                    <p className="flex justify-between text-[0.8125rem] font-medium" style={{ color: ink }}>{n}<span style={{ color: muted }}>{p as number}%</span></p>
+                    <p className="truncate text-[0.75rem]" style={{ color: muted }}>{t}</p>
+                    <div className="mt-1.5 h-1 rounded-full" style={{ background: "#efebe7" }}><div className="h-1 rounded-full" style={{ width: `${p}%`, background: grad }} /></div>
+                  </div>
+                </div>
+              ))}
             </div>
-            <h3>Teamoverblik</h3>
-            <p className="clamp">Se, hvordan holdet kommer videre, og hvem der mangler et lille skub.</p>
-            <a className="fbtn" href="#priser">Se priser</a>
+            <Copy title="Teamoverblik">Se, hvordan holdet kommer videre, og hvem der mangler et lille skub.</Copy>
+            <CardButton href="#priser">Se priser</CardButton>
           </article>
 
-          <article className="fc fc-light fc-wide fc-split">
-            <div className="fc-copy">
-              <h3>Korte lektioner<br />på dansk</h3>
-              <p>Ti minutter om dagen.<br />I det værktøj, I bruger.</p>
-              <div className="stat">10 min</div>
-              <p className="stat-label">Pr. lektion</p>
-              <a className="fbtn" href="#kurser">Se kurserne</a>
+          {/* Korte lektioner */}
+          <article className={`${card} gap-6 md:col-span-2 lg:flex-row`} style={{ borderColor: line }}>
+            <div className="flex flex-col lg:w-[44%]">
+              <Copy title="Korte lektioner på dansk">Ti minutter om dagen, i det værktøj, I bruger.</Copy>
+              <p className="mt-8 text-[3rem] font-semibold leading-none tracking-[-0.03em]" style={{ color: ink }}>10 min</p>
+              <p className="mt-2 text-[0.9375rem]" style={{ color: muted }}>pr. lektion</p>
+              <div className="mt-auto"><CardButton href="#kurser">Se kurserne</CardButton></div>
             </div>
-            <div className="phone-ph" aria-hidden>Billede: lektion på mobil</div>
-          </article>
-
-          <article className="fc fc-dark fc-center">
-            <div className="fc-visual">
-              <div className="chip"><span className="chip-dots">{Array.from({ length: 18 }, (_, k) => <i key={k} />)}</span><b>EU · Frankfurt</b><span className="chip-dots">{Array.from({ length: 18 }, (_, k) => <i key={k} />)}</span></div>
-            </div>
-            <h3>Data i EU</h3>
-            <p className="clamp">Hostet i Frankfurt, og I får en databehandleraftale med fra start.</p>
-            <a className="fbtn" href="#faq">Spørgsmål og svar</a>
-          </article>
-
-          <article className="fc fc-green fc-wide fc-split">
-            <div className="fc-copy fc-bottom">
-              <h3>Kursusbevis</h3>
-              <p className="clamp">Alle får et bevis med navn, score og et unikt ID, der kan tjekkes via QR-koden.</p>
-              <a className="fbtn" href="#priser">Se priser</a>
-            </div>
-            <div className="cards-visual">
-              <div className="copy-tip"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="12" height="15" rx="2.5" /><rect x="4" y="6" width="12" height="15" rx="2.5" /></svg>Kopiér bevis-ID
-                <svg className="cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2l16 9-7 2-3 7z" /></svg></div>
-              <div className="ccard"><span className="cc-num">ID •••• 4875 &nbsp; 11/26</span><span className="cc-chip" /><span className="cc-brand"><i /><i /></span><span className="cc-world">Mindforward</span><span className="cc-nfc">)))</span></div>
-              <div className="ccard ccard-2"><span className="cc-num">ID •••• 4875 &nbsp; 11/26</span><span className="cc-brand"><i /><i /></span></div>
+            <div className="relative min-h-[260px] flex-1 overflow-hidden rounded-[14px] border" style={{ borderColor: line, background: "#f5f2ef" }}>
+              <video src="/video/platform-tur.mp4" poster="/video/platform-tur-poster.jpg" autoPlay muted loop playsInline aria-label="Platformen: oversigt med kurser, øvetid og fremskridt" className="absolute inset-0 h-full w-full object-cover object-[30%_50%]" />
             </div>
           </article>
 
-          <article className="fc fc-light fc-center">
-            <div className="fc-visual">
-              <div className="signin">
-                <div className="signin-head">Log ind med Microsoft</div>
-                <div className="signin-row"><span className="zal" /><div><b>Mindforward</b><span>anna@firma.dk</span></div></div>
+          {/* Data i EU */}
+          <article className={card} style={{ borderColor: line }}>
+            <div className="mb-6 grid flex-1 place-items-center">
+              <div className="rounded-[22px] p-[3px]" style={{ background: grad }}>
+                <div className="grid size-[150px] place-items-center rounded-[19px] text-center" style={{ background: "#201613" }}>
+                  <div>
+                    <p className="text-[0.75rem] uppercase tracking-[0.12em] text-white/55">Hostet i</p>
+                    <p className="mt-1 text-[1.25rem] font-semibold text-white">EU · Frankfurt</p>
+                  </div>
+                </div>
               </div>
-              <div className="email-field">Skriv din e-mail<span className="np" /></div>
             </div>
-            <h3>Log ind på sekunder</h3>
-            <p className="clamp">Med Microsoft, Google eller en kode på mail. Ingen nye kodeord at huske.</p>
-            <a className="fbtn" href={appLinks.startBusiness}>Opret konto</a>
+            <Copy title="Data i EU">Hostet i Frankfurt, og I får en databehandleraftale med fra start.</Copy>
+            <CardButton href="#faq">FAQ</CardButton>
           </article>
 
-          <article className="fc fc-light fc-center">
-            <div className="fc-visual">
-              <div className="avatars">
-                <span style={{ display: "block", width: 80, height: 80 }}><Initials t="SK" bg="#c9a48f" /></span>
-                <span style={{ display: "block", width: 80, height: 80 }}><Initials t="LP" bg="#201613" /></span>
+          {/* Kursusbevis: the highlighted card, framed like the featured price */}
+          <article className="pris-glow relative flex flex-col rounded-[22px] p-[3px] md:col-span-2">
+            <p className="relative px-4 pb-2 pt-1.5 text-center text-[0.875rem] font-semibold text-white [text-shadow:0_1px_2px_rgba(120,20,0,0.45)]">Med i alle pakker</p>
+            <div className="relative flex flex-1 flex-col gap-6 rounded-[19px] bg-white p-6 lg:flex-row">
+              <div className="flex flex-col lg:w-[40%]">
+                <Copy title="Kursusbevis">Alle får et bevis med navn, score og et unikt ID, der kan tjekkes via QR-koden.</Copy>
+                <div className="mt-auto"><CardButton href="#priser" dark>Se priser</CardButton></div>
               </div>
-              <div className="share"><span className="tools" aria-hidden><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#e8664a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3c1 4.5 4.5 8 9 9-4.5 1-8 4.5-9 9-1-4.5-4.5-8-9-9 4.5-1 8-4.5 9-9z" /></svg></span><div><b>3 AI-værktøjer</b><span>ChatGPT, Copilot og Claude</span></div></div>
+              <div className="relative flex flex-1 items-center justify-center">
+                <Image src="/cert/certifikat-v7.webp" alt="Eksempel på et kursusbevis fra Mindforward" width={1124} height={794} sizes="(min-width: 1024px) 420px, 90vw" className="h-auto w-full max-w-[440px] rounded-[10px] border shadow-[0_24px_48px_-28px_rgba(31,22,17,0.45)]" style={{ borderColor: line }} />
+              </div>
             </div>
-            <h3>Øv i jeres værktøj</h3>
-            <p>Opgaverne foregår i det værktøj, I allerede bruger.</p>
-            <a className="fbtn" href="#saadan">Se øvemiljøet</a>
+          </article>
+
+          {/* Log ind */}
+          <article className={card} style={{ borderColor: line }}>
+            <div className="mb-6 grid flex-1 content-center gap-2.5">
+              {[
+                ["Microsoft", <svg key="m" width="16" height="16" viewBox="0 0 16 16" aria-hidden><path fill="#f25022" d="M0 0h7.5v7.5H0z" /><path fill="#7fba00" d="M8.5 0H16v7.5H8.5z" /><path fill="#00a4ef" d="M0 8.5h7.5V16H0z" /><path fill="#ffb900" d="M8.5 8.5H16V16H8.5z" /></svg>],
+                ["Google", <svg key="g" width="16" height="16" viewBox="0 0 48 48" aria-hidden><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z" /><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z" /><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z" /><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z" /></svg>],
+                ["mail", <svg key="e" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={ink} strokeWidth="1.8" aria-hidden><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></svg>],
+              ].map(([n, icon]) => (
+                <div key={n as string} className="flex h-11 items-center justify-center gap-2.5 rounded-full border text-[0.875rem] font-medium" style={{ borderColor: line, color: ink }}>{icon}Fortsæt med {n}</div>
+              ))}
+            </div>
+            <Copy title="Log ind på sekunder">Med Microsoft, Google eller en kode på mail. Ingen nye kodeord at huske.</Copy>
+            <CardButton href={appLinks.startBusiness}>Opret konto</CardButton>
+          </article>
+
+          {/* Øv i jeres værktøj */}
+          <article className={card} style={{ borderColor: line }}>
+            <div className="mb-6 flex flex-1 items-center justify-center gap-3">
+              {[["chatgpt", "ChatGPT"], ["copilot", "Copilot"], ["claude", "Claude"]].map(([f, n]) => (
+                <div key={f} className="flex flex-col items-center gap-2">
+                  <span className="grid size-16 place-items-center rounded-full border bg-white" style={{ borderColor: line }}><Image src={`/logos/${f}.png`} alt="" width={34} height={34} /></span>
+                  <span className="text-[0.8125rem]" style={{ color: muted }}>{n}</span>
+                </div>
+              ))}
+            </div>
+            <Copy title="Øv i jeres værktøj">Opgaverne foregår i det værktøj, I allerede bruger.</Copy>
+            <CardButton href="#saadan">Se øvemiljøet</CardButton>
           </article>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }
