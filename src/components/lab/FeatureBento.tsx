@@ -1,7 +1,7 @@
 // Funktioner (Marco 2026-11-14, rebuilt 2026-11-23 on the price section's standard): six white cards with a hairline
 // border, left-aligned copy and the price section's buttons; the course certificate is the highlighted card in the
 // M logo's gradient frame. Real Mindforward content: the platform tour video, the approved certificate (V7) and the
-// three tools' own logos.
+// three tools' own logos. Phones: every card reads picture → title and text → button.
 import Image from "next/image";
 import Link from "next/link";
 import { appLinks } from "@/lib/app";
@@ -68,11 +68,11 @@ export function FeatureBento() {
           <article className={`${card} gap-6 md:col-span-2 lg:flex-row`} style={{ borderColor: line }}>
             <div className="flex flex-col lg:w-[44%]">
               <Copy title="Korte lektioner på dansk">Ti minutter om dagen, i det værktøj, I bruger.</Copy>
-              <p className="mt-8 text-[3rem] font-semibold leading-none tracking-[-0.03em]" style={{ color: ink }}>10 min</p>
+              <p className="mt-5 text-[2.5rem] font-semibold leading-none tracking-[-0.03em] lg:mt-8 lg:text-[3rem]" style={{ color: ink }}>10 min</p>
               <p className="mt-2 text-[0.9375rem]" style={{ color: muted }}>pr. lektion</p>
               <div className="mt-auto"><CardButton href="#kurser">Se kurserne</CardButton></div>
             </div>
-            <div className="relative min-h-[260px] flex-1 overflow-hidden rounded-[14px] border" style={{ borderColor: line, background: "#f5f2ef" }}>
+            <div className="relative order-first aspect-[16/10] flex-1 overflow-hidden rounded-[14px] border lg:order-none lg:aspect-auto lg:min-h-[260px]" style={{ borderColor: line, background: "#f5f2ef" }}>
               <video src="/video/platform-tur.mp4" poster="/video/platform-tur-poster.jpg" autoPlay muted loop playsInline aria-label="Platformen: oversigt med kurser, øvetid og fremskridt" className="absolute inset-0 h-full w-full object-cover object-[30%_50%]" />
             </div>
           </article>
@@ -80,7 +80,7 @@ export function FeatureBento() {
           {/* Data i EU */}
           <article className={card} style={{ borderColor: line }}>
             <div className="mb-6 grid flex-1 place-items-center">
-              <div className="rounded-[22px] p-[3px]" style={{ background: grad }}>
+              <div className="scale-90 rounded-[22px] p-[3px] lg:scale-100" style={{ background: grad }}>
                 <div className="grid size-[150px] place-items-center rounded-[19px] text-center" style={{ background: "#201613" }}>
                   <div>
                     <p className="text-[0.75rem] uppercase tracking-[0.12em] text-white/55">Hostet i</p>
@@ -101,7 +101,7 @@ export function FeatureBento() {
                 <Copy title="Kursusbevis">Alle får et bevis med navn, score og et unikt ID, der kan tjekkes via QR-koden.</Copy>
                 <div className="mt-auto"><CardButton href="#priser" dark>Se priser</CardButton></div>
               </div>
-              <div className="relative flex flex-1 items-center justify-center">
+              <div className="relative order-first flex flex-1 items-center justify-center lg:order-none">
                 <Image src="/cert/certifikat-v7.webp" alt="Eksempel på et kursusbevis fra Mindforward" width={1124} height={794} sizes="(min-width: 1024px) 420px, 90vw" className="h-auto w-full max-w-[440px] rounded-[10px] border shadow-[0_24px_48px_-28px_rgba(31,22,17,0.45)]" style={{ borderColor: line }} />
               </div>
             </div>
