@@ -7,6 +7,7 @@ import { AlertBanner } from "@/components/layout/AlertBanner";
 import { SiteNav } from "@/components/layout/SiteNav";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { FooterGate } from "@/components/layout/FooterGate";
+import { ChatBubble } from "@/components/layout/ChatBubble";
 import { RevealObserver } from "@/components/motion/RevealObserver";
 import { SplitHeadings } from "@/components/motion/SplitHeadings";
 import { SpotlightTracker } from "@/components/motion/SpotlightTracker";
@@ -64,6 +65,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <RevealObserver />
         <SplitHeadings />
         <SpotlightTracker />
+        <ChatBubble />
       </body>
     </html>
   );
