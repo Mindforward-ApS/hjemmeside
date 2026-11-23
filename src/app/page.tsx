@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Geist } from "next/font/google";
+import { Bebas_Neue, Google_Sans_Flex } from "next/font/google";
 import { NyForside } from "@/components/lab/NyForside";
 
 // Condensed caps display face from Marco's reference (2026-11-02). Full æ ø å via latin-ext.
 const bebas = Bebas_Neue({ subsets: ["latin", "latin-ext"], weight: "400", variable: "--font-bebas", display: "swap" });
-const geist = Geist({ subsets: ["latin", "latin-ext"], variable: "--font-geist", display: "swap" });
+// Marco 2026-11-23: Google Sans Flex under the old --font-geist name.
+const geist = Google_Sans_Flex({ subsets: ["latin", "latin-ext"], variable: "--font-geist", display: "swap" });
 
 const title = "Mindforward – AI-kurser på dansk i ChatGPT, Copilot og Claude";
 const description = "Lær at bruge AI i dit arbejde og din hverdag. Korte AI-kurser på dansk, et øvemiljø med opgaver fra din egen hverdag og et certifikat, når du er færdig.";

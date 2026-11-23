@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Google_Sans_Flex } from "next/font/google";
 import { Faq, Price } from "@/components/lab/Forside2";
 
-const geist = Geist({ subsets: ["latin", "latin-ext"], variable: "--font-geist", display: "swap" });
+// Marco 2026-11-23: Google Sans Flex under the old --font-geist name.
+const geist = Google_Sans_Flex({ subsets: ["latin", "latin-ext"], variable: "--font-geist", display: "swap" });
 
 export const metadata: Metadata = {
   title: "Priser",

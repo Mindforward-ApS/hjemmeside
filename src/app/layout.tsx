@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Inter, Space_Grotesk } from "next/font/google";
+import { Google_Sans_Flex, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
 import { VIS_PLADSHOLDERE } from "@/lib/pladsholdere";
@@ -11,8 +11,9 @@ import { RevealObserver } from "@/components/motion/RevealObserver";
 import { SplitHeadings } from "@/components/motion/SplitHeadings";
 import { SpotlightTracker } from "@/components/motion/SpotlightTracker";
 
-// Marco 2026-10-22: Inter, one family for display and text ("powerful and familiar"). Full æ ø å.
-const inter = Inter({
+// Marco 2026-11-23: Google Sans Flex (SIL OFL 1.1) for display and text, replacing Inter. The --font-inter name is
+// kept so every existing reference picks it up. Full æ ø å.
+const inter = Google_Sans_Flex({
   subsets: ["latin", "latin-ext"],
   variable: "--font-inter",
   display: "swap",
@@ -20,7 +21,8 @@ const inter = Inter({
 
 // Italic accent words in headlines (pricing page reference). Second and last family.
 // Font for the dark "Tilmeld jer" pill button (Marco 2026-11-14).
-const grotesk = Space_Grotesk({ subsets: ["latin", "latin-ext"], weight: ["500", "700"], variable: "--font-grotesk", display: "swap" });
+// Marco 2026-11-23: the button uses Google Sans Flex as well.
+const grotesk = Google_Sans_Flex({ subsets: ["latin", "latin-ext"], variable: "--font-grotesk", display: "swap" });
 const serif = Instrument_Serif({ subsets: ["latin", "latin-ext"], weight: "400", style: ["italic"], variable: "--font-serif", display: "swap" });
 
 export const metadata: Metadata = {
