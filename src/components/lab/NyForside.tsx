@@ -364,7 +364,7 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa 
             further left, so the blur builds up smoothly instead of switching on at one line. */}
         {/* Marco: the blur must never touch the people, so every layer is fully clear by 50 % of the width (the team
             starts at ~54 %, the woman at ~65 %). */}
-        {([[1, 36, 50], [2, 28, 44], [3, 20, 38], [5, 12, 32], [8, 4, 26]] as const).map(([px, solid, clear]) => (
+        {([[4, 56, 70], [10, 50, 64], [20, 44, 58], [36, 38, 52]] as const).map(([px, solid, clear]) => (
           // Marco 2026-11-23: the blur now builds up from the RIGHT, behind the testimonial videos; the left side is sharp.
           <div key={px} className="absolute inset-0 hidden lg:block" style={{ backdropFilter: `blur(${px}px)`, WebkitBackdropFilter: `blur(${px}px)`, maskImage: `linear-gradient(270deg, black 0%, black ${solid}%, transparent ${clear}%)`, WebkitMaskImage: `linear-gradient(270deg, black 0%, black ${solid}%, transparent ${clear}%)` }} />
         ))}
@@ -372,7 +372,7 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa 
       {/* Phones: dark on the left as before. Desktop (Marco 2026-11-23): light, unblurred left side; the right side behind the
           videos is darker and blurred. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 lg:hidden" style={{ background: "linear-gradient(90deg, rgba(14,10,9,0.86) 0%, rgba(14,10,9,0.7) 38%, rgba(14,10,9,0.35) 70%, rgba(14,10,9,0.25) 100%), linear-gradient(180deg, rgba(14,10,9,0.5) 0%, transparent 25%, transparent 65%, rgba(14,10,9,0.8) 100%)" }} />
-      <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block" style={{ background: "linear-gradient(90deg, rgba(14,10,9,0.3) 0%, rgba(14,10,9,0.25) 45%, rgba(14,10,9,0.5) 70%, rgba(14,10,9,0.6) 100%), linear-gradient(180deg, rgba(14,10,9,0.45) 0%, transparent 22%, transparent 65%, rgba(14,10,9,0.8) 100%)" }} /></>}
+      <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block" style={{ background: "linear-gradient(90deg, rgba(14,10,9,0.3) 0%, rgba(14,10,9,0.28) 40%, rgba(14,10,9,0.82) 54%, rgba(14,10,9,0.9) 100%), linear-gradient(180deg, rgba(14,10,9,0.45) 0%, transparent 22%, transparent 65%, rgba(14,10,9,0.8) 100%)" }} /></>}
       {/* Marco 2026-11-20: Miwa's autumn landscape behind the live hero; dark veil on the left keeps the white text readable. */}
       {/* Marco 2026-11-21: in the choreography preview she sits at the computer in the warm room (baked into the image). */}
       {(miwa === "live" || miwa === "forloeb") && (
