@@ -22,7 +22,7 @@ export function KontaktSide({ heading: H = "h1", id }: { heading?: "h1" | "h2"; 
         <div className="flex min-w-0 flex-col">
           <H className="font-semibold leading-[1.05] tracking-[-0.03em] text-[clamp(2.25rem,1.6rem+1.8vw,3rem)]" style={{ color: ink }}>Kom i kontakt</H>
           <p className="mt-4 max-w-[26rem] text-[1rem] leading-6" style={{ color: muted }}>Fortæl lidt om jeres hold, og hvad I gerne vil blive bedre til med AI. Så vender jeg tilbage.</p>
-          <div className="mt-12 lg:mt-auto">
+          <div className="mt-12 lg:mt-auto lg:mb-14">
             <ul className="grid gap-3">
               {promises.map((t) => (
                 <li key={t} className="flex items-center gap-3 text-[1rem]" style={{ color: muted }}>
