@@ -33,7 +33,7 @@ export function LaunchBar({ mode }: { mode: SiteMode }) {
     <div role="region" aria-label="Lanceringstilbud" className="relative z-30 text-white" style={{ background: "#0a0a0b" }}>
       <div className="mx-auto flex w-full max-w-[1440px] flex-wrap items-center justify-center gap-x-10 gap-y-2 py-2 pl-4 pr-11 lg:px-12 lg:py-2.5">
         <p className="w-full text-center text-[0.8125rem] lg:w-auto lg:text-[0.9375rem]">
-          De første {privat ? "100 kunder" : "20 virksomheder"} får <span className="text-[0.9375rem] font-bold lg:text-[1.125rem]" style={{ color: "#fb970a" }}>50 % rabat</span> det første år.
+          De første {privat ? "100 kunder" : "20 virksomheder"} får <span className="bg-clip-text text-[0.9375rem] font-bold text-transparent lg:text-[1.125rem]" style={{ backgroundImage: "linear-gradient(90deg, #fb970a, #f8400a)", WebkitBackgroundClip: "text" }}>50 % rabat</span> det første år.
         </p>
         <div className="flex items-center gap-2 lg:contents">
         <div className="flex items-center gap-1 lg:gap-2" aria-label="Tid til lancering">
