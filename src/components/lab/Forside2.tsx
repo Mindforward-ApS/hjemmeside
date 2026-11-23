@@ -589,7 +589,8 @@ function Contact() {
 type Sep = 1 | 2 | 3;
 const tones: Record<Sep, string[]> = {
   // Marco 2026-11-23: the contact section is white now (was dark).
-  1: ["page", "peach", "white", "page", "white", "page", "cream", "warm"],
+  // Marco 2026-11-23: FAQ white so it stands off the cream price section above.
+  1: ["page", "peach", "white", "page", "white", "page", "white", "warm"],
   2: ["white", "peach", "white", "sand", "white", "sand", "white", "dark"],
   3: ["page", "page", "page", "page", "page", "page", "page", "dark"],
 };
