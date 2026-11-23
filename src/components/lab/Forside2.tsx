@@ -430,7 +430,7 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
           <ul className="mt-6 grid gap-4">
             {facts.map((f) => <li key={f.t} className="flex items-center gap-3 text-[1rem]" style={{ color: "#4a4440" }}><Icon name={f.icon} size={18} />{f.t}</li>)}
           </ul>
-          <div className="mt-12">
+          <div className="mt-12 lg:mt-20">
             <p className="text-[1rem]" style={{ color: "#4a4440" }}>Virksomheder, der træner AI med os</p>
             <ul className="mt-4 flex flex-wrap items-center gap-x-10 gap-y-3" style={{ color: "#0f0d0c" }}>
               <li><span role="img" aria-label="SydDesign" className="block h-[1.4rem] w-[7rem] bg-current" style={{ maskImage: "url(/logos/syddesign.svg)", WebkitMaskImage: "url(/logos/syddesign.svg)", maskSize: "contain", WebkitMaskSize: "contain", maskRepeat: "no-repeat", WebkitMaskRepeat: "no-repeat" }} /></li>

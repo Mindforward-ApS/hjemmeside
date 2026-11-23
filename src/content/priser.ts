@@ -6,7 +6,7 @@ const same = ["Alle moduler i niveau 1", "Øvemiljø med opgaver og score", "Kur
 
 export const erhverv: Plan[] = [
   { id: "enkelt", name: "Enkelt bruger", price: "69 kr", unit: "/ bruger/md. ekskl. moms", items: same, support: "Chat-support", cta: "Kom i gang", href: "business" },
-  { id: "ti", name: "10 brugere", price: "55 kr", unit: "/ bruger/md. ekskl. moms", tab: "Rabat fra 10 brugere · telefonsupport", badge: "Spar 20 %", items: same, support: "Telefonsupport", cta: "Kom i gang", href: "business", featured: true },
+  { id: "ti", name: "10 brugere", price: "55 kr", unit: "/ bruger/md. ekskl. moms", tab: "Rabat fra 10 brugere", badge: "Spar 20 %", items: same, support: "Telefonsupport", cta: "Kom i gang", href: "business", featured: true },
   { id: "enterprise", name: "Enterprise", price: "Efter aftale", unit: "", items: same, support: "Telefonsupport", cta: "Tal med os", href: "contact" },
 ];
 
