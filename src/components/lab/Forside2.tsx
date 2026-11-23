@@ -439,9 +439,9 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
           </div>
         </div>
         {plans.map((p) => p.featured ? (
-          <div key={p.id} className="flex flex-col rounded-[22px] p-[3px] lg:self-end" style={{ background: "linear-gradient(180deg, #f8400a 0%, #fb6a0a 45%, #fb970a 100%)" }}>
-            <p className="px-4 pb-2 pt-1.5 text-center text-[0.875rem] font-semibold text-white">{p.tab}</p>
-            <div className="flex-1 rounded-[19px] bg-white">{card(p)}</div>
+          <div key={p.id} className="pris-glow relative flex flex-col rounded-[22px] p-[3px] lg:self-end">
+            <p className="relative mb-[3px] rounded-t-[19px] px-4 pb-1.5 pt-1.5 text-center text-[0.875rem] font-semibold text-white" style={{ background: "linear-gradient(90deg, #f8400a, #fb6a0a)" }}>{p.tab}</p>
+            <div className="relative flex-1 rounded-[19px] bg-white">{card(p)}</div>
           </div>
         ) : (
           <div key={p.id} className="order-last rounded-[20px] border bg-white lg:order-none lg:self-end" style={{ borderColor: "#e3dfdc" }}>{card(p)}</div>

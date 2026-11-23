@@ -612,3 +612,11 @@ body:has([data-preview-nav]) .site-nav:not([data-preview-nav]) { display: none; 
   .hero-pts-col .hero-login { margin-top: 3.2svh; }
 }
 
+
+/* Featured price card (Marco 2026-11-23: "kan vi gøre det levende?"): the frame in the M logo's orange and gold
+   slowly turns around the card, with a soft glow behind it. Still for reduced motion. */
+@property --pris-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.pris-glow { isolation: isolate; background: conic-gradient(from var(--pris-a), #f8400a, #fb970a, #ffc53d, #fb970a, #f8400a, #fb6a0a, #f8400a); animation: pris-spin 6s linear infinite; }
+.pris-glow::before { content: ""; position: absolute; inset: 6px; z-index: -1; border-radius: inherit; background: inherit; filter: blur(22px); opacity: .45; }
+@keyframes pris-spin { to { --pris-a: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .pris-glow { animation: none; } }
