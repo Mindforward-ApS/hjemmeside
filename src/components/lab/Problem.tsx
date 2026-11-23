@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { GrebBtn } from "@/components/ui/GrebBtn";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 import { appLinks } from "@/lib/app";
 
 // Problem section right after the hero (Marco 2026-11-23). Idea from his reference (design/references/
@@ -57,9 +58,12 @@ export function Problem() {
     <section id="problemet" className="relative overflow-x-clip bg-white pb-20 pt-24 sm:pb-24 sm:pt-[7.5rem]">
       <div className="w-full px-5 sm:px-[3.5vw]">
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-[5vw]">
-          <h2 className={`${head} max-w-[790px] !font-semibold text-[clamp(2.25rem,1.4rem+2.6vw,3.5rem)] leading-[1.143] tracking-[-0.045em]`} style={{ color: ink }}>
+          <div>
+          <SectionLabel>Problemet</SectionLabel>
+          <h2 className={`${head} mt-4 max-w-[790px] !font-semibold text-[clamp(2.25rem,1.4rem+2.6vw,3.5rem)] leading-[1.143] tracking-[-0.045em]`} style={{ color: ink }}>
             Jeres folk bruger allerede AI. Ingen har lært dem det.
           </h2>
+          </div>
           <p className="max-w-[480px] text-[1.0625rem] leading-[1.6] lg:pb-2" style={{ color: muted }}>
             De fleste har lært sig AI selv, i farten. Mindforward giver hele holdet det samme udgangspunkt.
           </p>
