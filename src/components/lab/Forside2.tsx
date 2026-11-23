@@ -67,8 +67,10 @@ function PlatformVideo() {
     <div className="absolute inset-0 bg-[#ece4df]">
       <video ref={v} src="/video/produkt-video.mp4" poster="/video/produkt-video-poster.jpg" controls={playing} playsInline preload="metadata" onEnded={() => setPlaying(false)} className="h-full w-full object-cover" aria-label="Produktvideo: sådan virker Mindforward" />
       {!playing && (
-        <button type="button" onClick={play} aria-label="Afspil produktvideoen, 50 sekunder" className="nf-focus group absolute inset-0 grid place-items-center bg-[#201613]/10">
-          <span className="grid size-[4.5rem] place-items-center rounded-full bg-white shadow-[0_10px_30px_-8px_rgba(32,22,19,0.45)] transition-transform duration-300 group-hover:scale-110" style={{ color: c.coral }}>
+        // Start image (Marco 2026-11-23): "Sådan kommer du i gang med Mindforward" over a dark veil, with the play button.
+        <button type="button" onClick={play} aria-label="Afspil videoen: Sådan kommer du i gang med Mindforward, 50 sekunder" className="nf-focus group absolute inset-0 flex flex-col items-center justify-center gap-5 px-6 text-center backdrop-blur-[6px]" style={{ background: "linear-gradient(180deg, rgba(20,13,11,0.62), rgba(20,13,11,0.78))" }}>
+          <span className="max-w-[18ch] text-[clamp(1.5rem,1rem+1.6vw,2.5rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-white">Sådan kommer du i gang med Mindforward</span>
+          <span className="grid size-[4.5rem] place-items-center rounded-full bg-white shadow-[0_10px_30px_-8px_rgba(32,22,19,0.45)] transition-transform duration-300 group-hover:scale-110" style={{ color: "#f8400a" }}>
             <svg width="22" height="24" viewBox="0 0 22 24" aria-hidden className="translate-x-[2px]"><path d="M2 2.2v19.6c0 1 1.1 1.6 2 1.1l16.3-9.8c.8-.5.8-1.7 0-2.2L4 1.1C3.1.6 2 1.2 2 2.2z" fill="currentColor" /></svg>
           </span>
         </button>
