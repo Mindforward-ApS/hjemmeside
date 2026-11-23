@@ -2,9 +2,9 @@ import Image from "next/image";
 import { GrebBtn } from "@/components/ui/GrebBtn";
 import { appLinks } from "@/lib/app";
 
-// Problem section right after the hero (Marco 2026-11-23). Layout copied closely from his chosen reference
-// (design/references/problem-ref-compare.png): full-height hairline guides, a heading row, then two columns
-// (self-taught AI vs. Mindforward) with a big figure each and a list, and a closing line with one button.
+// Problem section right after the hero (Marco 2026-11-23). Idea from his reference (design/references/
+// problem-ref-compare.png): self-taught AI vs. Mindforward side by side, a big figure and a list each, a closing line
+// with one button. Built as cards like the rest of the page (Marco: "kort og ikke bento grid").
 // Our colours: coral minus marks on the problem side, orange checks on our side.
 // Source for "1 ud af 10": CBS, March 2026 (via DR), only 1 in 10 employees have had formal AI training.
 const ink = "#201613";
@@ -53,59 +53,56 @@ function Mark() {
 }
 
 export function Problem() {
-  // The vertical guides run the full height; every row is separated by a hairline across them.
-  const cell = "px-6 sm:px-8";
   return (
-    <section id="problemet" className="relative overflow-x-clip bg-white">
-      <div className="mx-auto w-full max-w-[1200px] border-x" style={{ borderColor: line }}>
-        <div className={`${cell} pb-12 pt-20 sm:pt-28`}>
-          <h2 className={`${head} !font-semibold text-[clamp(2rem,1.4rem+2vw,2.75rem)] leading-[1.15] tracking-[-0.035em]`} style={{ color: ink }}>
+    <section id="problemet" className="relative overflow-x-clip bg-white pb-20 pt-24 sm:pb-24 sm:pt-[7.5rem]">
+      <div className="w-full px-5 sm:px-[3.5vw]">
+        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-[5vw]">
+          <h2 className={`${head} max-w-[790px] !font-semibold text-[clamp(2.25rem,1.4rem+2.6vw,3.5rem)] leading-[1.143] tracking-[-0.045em]`} style={{ color: ink }}>
             Jeres folk bruger allerede AI. Ingen har lært dem det.
           </h2>
-          <p className="mt-3 max-w-[640px] text-[1.0625rem] leading-[1.6]" style={{ color: muted }}>
+          <p className="max-w-[480px] text-[1.0625rem] leading-[1.6] lg:pb-2" style={{ color: muted }}>
             De fleste har lært sig AI selv, i farten. Mindforward giver hele holdet det samme udgangspunkt.
           </p>
         </div>
 
-        <div className="grid border-t md:grid-cols-2" style={{ borderColor: line }}>
-          {/* Problem side */}
-          <div className="flex flex-col md:border-r" style={{ borderColor: line }}>
-            <div className={`${cell} flex items-center gap-3 border-b py-6`} style={{ borderColor: line }}>
+        {/* Marco 2026-11-23: the tools-vs-Mindforward idea as two cards, like the rest of the page. The Mindforward card
+            uses the featured price card's frame (pris-glow: the logo gradient with a strip on top). */}
+        <div className="mt-[60px] grid gap-4 md:grid-cols-2 md:items-end xl:gap-[1.74vw]">
+          <div className="flex flex-col rounded-[22px] p-6 sm:p-8" style={{ background: "#f5f2ef" }}>
+            <div className="flex items-center gap-3">
               <span className="flex -space-x-2">
                 {["chatgpt", "copilot", "claude"].map((t) => (
-                  <span key={t} className="grid size-9 place-items-center rounded-[10px] bg-white ring-2 ring-white" style={{ boxShadow: `0 0 0 1px ${line}` }}>
+                  <span key={t} className="grid size-9 place-items-center rounded-[10px] bg-white ring-2 ring-[#f5f2ef]">
                     <Image src={`/logos/${t}.png`} alt="" width={22} height={22} className="size-[22px] object-contain" />
                   </span>
                 ))}
               </span>
               <p className={`${head} text-[1.25rem]`} style={{ color: ink }}>Selvlært, i farten</p>
             </div>
-            <div className={`${cell} border-b py-8`} style={{ borderColor: line }}>
-              <p className={`${head} !font-semibold text-[clamp(2.75rem,2rem+2vw,3.25rem)] leading-none tracking-[-0.04em] tabular-nums`} style={{ color: ink }}>1 ud af 10</p>
-              <p className="mt-3 text-[1rem]" style={{ color: muted }}>har fået formel AI-træning på jobbet <span className="text-[0.8125rem] opacity-70">(CBS, 2026)</span></p>
-            </div>
-            <ul className={`${cell} space-y-3.5 py-8`}>
+            <p className={`${head} mt-8 !font-semibold text-[clamp(2.75rem,2rem+2vw,3.25rem)] leading-none tracking-[-0.04em] tabular-nums`} style={{ color: ink }}>1 ud af 10</p>
+            <p className="mt-3 text-[1rem]" style={{ color: muted }}>har fået formel AI-træning på jobbet <span className="text-[0.8125rem] opacity-70">(CBS, 2026)</span></p>
+            <ul className="mt-7 space-y-3.5 border-t pt-7" style={{ borderColor: line }}>
               {uden.map((t) => <li key={t} className="flex gap-3 text-[1rem] leading-6" style={{ color: muted }}><Minus />{t}</li>)}
             </ul>
           </div>
 
-          {/* Our side */}
-          <div className="flex flex-col border-t md:border-t-0" style={{ borderColor: line }}>
-            <div className={`${cell} flex items-center gap-3 border-b py-6`} style={{ borderColor: line }}>
-              <Mark />
-              <p className={`${head} text-[1.25rem]`} style={{ color: ink }}>Med Mindforward</p>
-            </div>
-            <div className={`${cell} border-b py-8`} style={{ borderColor: line }}>
-              <p className={`${head} !font-semibold text-[clamp(2.75rem,2rem+2vw,3.25rem)] leading-none tracking-[-0.04em] tabular-nums`} style={{ color: ink }}>10 min</p>
+          <div className="pris-glow relative flex flex-col rounded-[22px] p-[3px]">
+            <p className="relative px-4 pb-2 pt-1.5 text-center text-[0.875rem] font-semibold text-white [text-shadow:0_1px_2px_rgba(120,20,0,0.45)]">Med Mindforward</p>
+            <div className="relative flex flex-1 flex-col rounded-[19px] bg-white p-6 sm:p-8">
+              <div className="flex items-center gap-3">
+                <Mark />
+                <p className={`${head} text-[1.25rem]`} style={{ color: ink }}>Hele holdet, samme udgangspunkt</p>
+              </div>
+              <p className={`${head} mt-8 !font-semibold text-[clamp(2.75rem,2rem+2vw,3.25rem)] leading-none tracking-[-0.04em] tabular-nums`} style={{ color: ink }}>10 min</p>
               <p className="mt-3 text-[1rem]" style={{ color: muted }}>om dagen, på dansk, for hele holdet</p>
+              <ul className="mt-7 space-y-3.5 border-t pt-7" style={{ borderColor: line }}>
+                {med.map((t) => <li key={t} className="flex gap-3 text-[1rem] leading-6" style={{ color: ink }}><Tick />{t}</li>)}
+              </ul>
             </div>
-            <ul className={`${cell} space-y-3.5 py-8`}>
-              {med.map((t) => <li key={t} className="flex gap-3 text-[1rem] leading-6" style={{ color: ink }}><Tick />{t}</li>)}
-            </ul>
           </div>
         </div>
 
-        <div className={`${cell} flex flex-col items-center gap-5 border-t py-12 text-center`} style={{ borderColor: line }}>
+        <div className="mt-12 flex flex-col items-center gap-5 text-center">
           <p className={`${head} text-[1.375rem]`} style={{ color: ink }}>Giv hele holdet det samme udgangspunkt.</p>
           <GrebBtn href={appLinks.startBusiness}>Tilmeld jer</GrebBtn>
         </div>
