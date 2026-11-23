@@ -22,16 +22,17 @@ export function KontaktSide({ heading: H = "h1", id }: { heading?: "h1" | "h2"; 
         <div className="flex min-w-0 flex-col">
           <H className="font-semibold leading-[1.05] tracking-[-0.03em] text-[clamp(2.25rem,1.6rem+1.8vw,3rem)]" style={{ color: ink }}>Kom i kontakt</H>
           <p className="mt-4 max-w-[26rem] text-[1rem] leading-6" style={{ color: muted }}>Fortæl lidt om jeres hold, og hvad I gerne vil blive bedre til med AI. Så vender jeg tilbage.</p>
-          <div className="mt-12 lg:mt-auto lg:mb-14">
-            <ul className="grid gap-3">
+          {/* Marco 2026-11-23: the promises sit right under the intro; Marco's card stays at the bottom. */}
+          <ul className="mt-8 grid gap-3">
               {promises.map((t) => (
                 <li key={t} className="flex items-center gap-3 text-[1rem]" style={{ color: muted }}>
                   <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden className="shrink-0" style={{ color: "#f8400a" }}><path d="m3 8.5 3.2 3L13 4.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   {t}
                 </li>
               ))}
-            </ul>
-            <div className="mt-7 flex items-center gap-4">
+          </ul>
+          <div className="mt-10 lg:mt-auto lg:mb-14">
+            <div className="flex items-center gap-4">
               <Image src="/img/marco-2.jpg" alt="" width={52} height={52} className="size-[52px] rounded-full object-cover" />
               <div>
                 <p className="text-[1.0625rem] font-medium" style={{ color: ink }}>Marco Nielsen</p>
