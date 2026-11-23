@@ -359,22 +359,11 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa 
       {!miwa && <><div aria-hidden data-hero-bg className="pointer-events-none absolute inset-0 overflow-hidden lg:bottom-auto lg:aspect-[2752/1536] lg:[mask-image:linear-gradient(180deg,black_72%,transparent)]">
         {navSwitch && <Image src="/img/hero-erhverv-2.jpg" alt="" fill priority sizes="100vw" className={`scale-[1.03] object-cover object-[70%_40%] transition-opacity duration-700 lg:object-[50%_40%] ${privat ? "opacity-0" : "opacity-100"}`} />}
         <Image src="/img/hero-hjem.jpg" alt="" fill priority={!navSwitch} sizes="100vw" className={`scale-[1.03] object-cover object-[72%_40%] transition-opacity duration-700 lg:object-[50%_40%] ${navSwitch && !privat ? "opacity-0" : "opacity-100"}`} />
-        {/* Marco 2026-11-07: the blur fades out towards the people (sharp) and is strongest behind the headline and text.
-            Phones keep a light even blur, because the text sits on top of the people there. */}
-        <div className="absolute inset-0 backdrop-blur-[3px] lg:hidden" />
-        {/* Progressive blur (Marco: "mere gradvist, ikke bare cut"): stacked layers, each a bit stronger and ending a bit
-            further left, so the blur builds up smoothly instead of switching on at one line. */}
-        {/* Marco: the blur must never touch the people, so every layer is fully clear by 50 % of the width (the team
-            starts at ~54 %, the woman at ~65 %). */}
-        {([[4, 56, 70], [10, 50, 64], [20, 44, 58], [36, 38, 52]] as const).map(([px, solid, clear]) => (
-          // Marco 2026-11-23: the blur now builds up from the RIGHT, behind the testimonial videos; the left side is sharp.
-          <div key={px} className="absolute inset-0 hidden lg:block" style={{ backdropFilter: `blur(${px}px)`, WebkitBackdropFilter: `blur(${px}px)`, maskImage: `linear-gradient(270deg, black 0%, black ${solid}%, transparent ${clear}%)`, WebkitMaskImage: `linear-gradient(270deg, black 0%, black ${solid}%, transparent ${clear}%)` }} />
-        ))}
+        {/* Marco 2026-11-23: one even, heavy blur over the whole photo, so it is barely visible. */}
+        <div className="absolute inset-0" style={{ backdropFilter: "blur(28px)", WebkitBackdropFilter: "blur(28px)" }} />
       </div>
-      {/* Phones: dark on the left as before. Desktop (Marco 2026-11-23): light, unblurred left side; the right side behind the
-          videos is darker and blurred. */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 lg:hidden" style={{ background: "linear-gradient(90deg, rgba(14,10,9,0.86) 0%, rgba(14,10,9,0.7) 38%, rgba(14,10,9,0.35) 70%, rgba(14,10,9,0.25) 100%), linear-gradient(180deg, rgba(14,10,9,0.5) 0%, transparent 25%, transparent 65%, rgba(14,10,9,0.8) 100%)" }} />
-      <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block" style={{ background: "linear-gradient(90deg, rgba(14,10,9,0.3) 0%, rgba(14,10,9,0.28) 40%, rgba(14,10,9,0.82) 54%, rgba(14,10,9,0.9) 100%), linear-gradient(180deg, rgba(14,10,9,0.45) 0%, transparent 22%, transparent 65%, rgba(14,10,9,0.8) 100%)" }} /></>}
+      {/* Marco 2026-11-23: the same dark veil everywhere in the hero, phones and desktop alike. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "rgba(14,10,9,0.72)" }} /></>}
       {/* Marco 2026-11-20: Miwa's autumn landscape behind the live hero; dark veil on the left keeps the white text readable. */}
       {/* Marco 2026-11-21: in the choreography preview she sits at the computer in the warm room (baked into the image). */}
       {(miwa === "live" || miwa === "forloeb") && (
