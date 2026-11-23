@@ -59,6 +59,9 @@ export async function contactAction(_: FormState, data: FormData): Promise<FormS
   const url = process.env.DATABASE_URL;
   if (!url) return { ok: false, message: "Beskeden kunne ikke sendes lige nu. Skriv til kontakt@mindforward.dk.", values };
   const m = parsed.data;
+  // Contact page (Marco 2026-11-23): the ticked "Hvad kan vi hjælpe med?" topics go in front of the message.
+  const topics = data.getAll("topics").map(String).filter(Boolean).slice(0, 10);
+  if (topics.length) m.message = `Emner: ${topics.join(", ")}\n\n${m.message}`.slice(0, 4200);
   try {
     const sql = neon(url);
     await sql`insert into contact_messages (name, email, company, phone, team_size, message)
