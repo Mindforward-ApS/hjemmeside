@@ -481,7 +481,7 @@ export function Faq() {
           <SectionLabel>FAQ</SectionLabel>
           <h2 className={`${head} mt-[22px] text-[clamp(2.5rem,1.6rem+2.4vw,3.25rem)] font-medium leading-[1.08] tracking-[-0.02em]`} style={{ color: c.ink }}>Spørgsmål, vi ofte får</h2>
           <div className="mt-10 flex flex-1 flex-col items-start rounded-[24px] px-8 py-9" style={{ background: "#fbf8f3", boxShadow: faqCard }}>
-            <span className="grid size-[108px] place-items-center rounded-full" style={{ background: c.coralSoft, boxShadow: "0 12px 30px -8px rgba(31,22,17,0.35)" }}><Image src="/icon.svg" alt="" width={52} height={52} unoptimized /></span>
+            <span className="block size-[108px] overflow-hidden rounded-full" style={{ boxShadow: "0 12px 30px -8px rgba(31,22,17,0.35)" }}><Image src="/img/marco-2.jpg" alt="Marco Nielsen" width={108} height={108} className="size-full object-cover" /></span>
             <h3 className={`${head} mt-9 text-[clamp(1.75rem,1.2rem+1.2vw,2.125rem)] font-normal leading-tight tracking-[-0.01em]`} style={{ color: c.ink }}>Hellere skrive direkte?</h3>
             <p className="mb-10 mt-5 text-[1.25rem] leading-[35px]" style={{ color: "rgba(31,22,17,0.64)" }}>Lad os tale om jeres hold.</p>
             <a href="mailto:kontakt@mindforward.dk" className="nf-focus mt-auto block self-stretch rounded-[14px] border px-[30px] py-3.5 text-center text-[1.1875rem] font-medium transition-colors hover:bg-[rgba(28,28,30,0.05)]" style={{ borderColor: "rgba(31,22,17,0.16)", color: "#1c1c1e" }}>kontakt@mindforward.dk</a>
