@@ -20,7 +20,7 @@ export function KontaktSide({ heading: H = "h1", id }: { heading?: "h1" | "h2"; 
   const err = (n: "name" | "email" | "message") => e[n] && <p id={`k-${n}-err`} className="mt-1.5 text-[0.8125rem]" style={{ color: "#b8452c" }}>{e[n]}</p>;
   return (
     <section id={id} className="py-[100px]" style={{ backgroundColor: "#fbf1e8", backgroundImage: "radial-gradient(55% 65% at 88% 18%, rgba(251,151,10,0.22), transparent 70%), radial-gradient(45% 55% at 8% 92%, rgba(248,64,10,0.12), transparent 70%)" }}>
-      <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-12 px-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] lg:gap-x-20 lg:px-[3.5vw]">
+      <div className="grid w-full grid-cols-1 gap-12 px-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] lg:gap-x-20 sm:px-[3.5vw]">
         <div className="flex min-w-0 flex-col">
           <H className="font-semibold leading-[1.05] tracking-[-0.03em] text-[clamp(2.25rem,1.6rem+1.8vw,3rem)]" style={{ color: ink }}>Lad os tage en snak</H>
           <p className="mt-4 max-w-[26rem] text-[1rem] leading-6" style={{ color: muted }}>Fortæl lidt om jeres hold, og hvad I gerne vil blive bedre til med AI. Så vender jeg tilbage.</p>

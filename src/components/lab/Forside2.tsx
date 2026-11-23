@@ -413,7 +413,7 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
   };
   return (
     <section id="priser" className="py-[100px]">
-      <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-12 px-5 lg:grid-cols-[minmax(0,1fr)_repeat(3,minmax(0,292px))] lg:gap-x-5 lg:px-[3.5vw]">
+      <div className="grid w-full grid-cols-1 gap-12 px-5 sm:px-[3.5vw] lg:grid-cols-[minmax(0,1fr)_repeat(3,minmax(0,292px))] lg:gap-x-5">
         <div className="flex min-w-0 flex-col lg:pr-6">
           <span className="self-start rounded-full border px-3 py-1 text-[0.875rem]" style={{ borderColor: "#dcd7d3", color: "#0f0d0c" }}>Vores priser</span>
           <h2 className={`${head} mt-4 text-[clamp(2.25rem,1.6rem+1.8vw,3rem)] !font-semibold leading-[1.05] tracking-[-0.03em]`} style={{ color: "#0f0d0c" }}>Enkle priser, ingen binding</h2>
@@ -476,7 +476,7 @@ const faqCard = "0 1px 0 rgba(31,22,17,0.04), 0 24px 48px -28px rgba(31,22,17,0.
 export function Faq() {
   return (
     <section id="faq" className="relative isolate overflow-hidden pb-24 pt-20" style={{ background: "#f6f1ea" }}>
-      <div className="mx-auto grid w-full max-w-[1216px] gap-12 px-5 lg:grid-cols-[36%_1fr] lg:gap-[5%] lg:px-0">
+      <div className="grid w-full gap-12 px-5 sm:px-[3.5vw] lg:grid-cols-[36%_1fr] lg:gap-[5%]">
         {/* Marco 2026-11-23: the left column takes its height from the questions (h-0 + min-h-full), so the card's bottom
             always lines up with the last question, open or closed. */}
         <div className="flex flex-col lg:h-0 lg:min-h-full">

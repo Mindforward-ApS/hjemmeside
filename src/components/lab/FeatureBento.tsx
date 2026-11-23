@@ -36,7 +36,7 @@ const card = "flex flex-col rounded-[20px] border bg-white p-6";
 export function FeatureBento() {
   return (
     <section aria-labelledby="features-title" className="py-[100px]" style={{ background: "#ece6de" }}>
-      <div className="mx-auto w-full max-w-[1440px] px-5 lg:px-[3.5vw]">
+      <div className="w-full px-5 sm:px-[3.5vw]">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div className="flex flex-col">
             <SectionLabel>Funktioner</SectionLabel>
