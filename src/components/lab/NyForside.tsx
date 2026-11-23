@@ -12,6 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { GrebBtn } from "@/components/ui/GrebBtn";
 import { HeroStories } from "@/components/lab/HeroStories";
+import { LaunchBar } from "@/components/lab/LaunchBar";
 import "./knapper.css";
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { appLinks } from "@/lib/app";
@@ -385,6 +386,8 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa 
         </div>
       )}
       {miwa === "video" && <HeroMiwaVideoBg />}
+      {/* Marco 2026-11-23: launch announcement above everything in the hero. */}
+      {!miwa && <LaunchBar mode={mode} />}
       {navSwitch && <TopBar mode={mode} setMode={setMode} />}
       {/* Marco 2026-11-07: a very light orange haze spread over the whole blurred area (left), gone before the people. */}
       <div aria-hidden data-glow className="pointer-events-none absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(232,102,74,0.075) 0%, rgba(232,102,74,0.06) 30%, rgba(232,102,74,0.025) 48%, transparent 58%)" }} />
