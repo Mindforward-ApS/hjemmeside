@@ -372,69 +372,77 @@ function Pilot() {
   );
 }
 
-/* 6 · Pris, laid out like a three-plan pricing page (Marco 2026-11-10: "lav den på vores homepage"): centred label
-   and a 72/80 heading; three columns, the middle one dark with a peach tab on top; outer plans as an outlined card with
-   a white price box, a bordered list and an outlined pill button. Plans and prices are the approved ones (academy.ts). */
+/* 6 · Pris: intro and facts on the left, the three plans as white cards on the right (Marco 2026-11-23). Plans and
+   prices are the approved ones (content/priser.ts). */
 const Check = ({ light = false }: { light?: boolean }) => (
   <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden className="shrink-0"><path d="m3 8.5 3.2 3L13 4.5" fill="none" stroke={light ? "#fff" : "#8f8a86"} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
 );
-const Arr = () => <svg width="14" height="14" viewBox="0 0 12 12" aria-hidden><path d="M3 9 9 3M4 3h5v5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 const planHref = { business: appLinks.startBusiness, private: appLinks.buyPrivate(), contact: "/kontakt" } as const;
 
 export function Price({ toggle = false }: { toggle?: boolean } = {}) {
   // Follows the Erhverv / Privat choice in the top bar (Marco 2026-11-11). On /priser, which has no top bar, the
   // section shows its own Erhverv / Privat switch (toggle).
+  // Layout (Marco 2026-11-23): intro column on the left with three facts, the plans as cards on the right; the
+  // featured plan sits in a frame with the M logo's orange gradient and a strip on top.
   const mode = useSiteMode();
-  const plans = mode === "privat" ? privat : erhverv;
+  const privatMode = mode === "privat";
+  const plans = privatMode ? privat : erhverv;
+  const facts = privatMode
+    ? [{ icon: "check" as const, t: "Opsig, når du vil" }, { icon: "user" as const, t: "Halv pris for studerende" }, { icon: "shield" as const, t: "Data i EU" }]
+    : [{ icon: "check" as const, t: "Opsig, når I vil" }, { icon: "user" as const, t: "Fra 1 bruger" }, { icon: "shield" as const, t: "Data i EU med databehandleraftale" }];
+  const grad = "linear-gradient(180deg, #f8400a, #fb970a)";
+  const card = (p: (typeof plans)[number]) => {
+    const items = [...p.items, p.support];
+    const [unitMain, ...unitRest] = p.unit.replace(/^\/\s*/, "").split(" ");
+    return (
+      <div className="flex h-full flex-col rounded-[22px] bg-white">
+        <div className="px-6 pb-6 pt-7">
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-[1.375rem] font-medium tracking-[-0.02em]" style={{ color: c.ink }}>{p.name}</p>
+            {p.badge && <span className="whitespace-nowrap rounded-full px-2.5 py-1 text-[0.8125rem] font-semibold" style={{ background: c.coralSoft, color: c.coralText }}>{p.badge}</span>}
+          </div>
+          <p className="mt-4 flex items-baseline gap-1.5"><span className={`${head} whitespace-nowrap text-[2.75rem] !font-semibold leading-none tracking-[-0.04em]`} style={{ color: c.ink }}>{p.price}</span>{p.unit && <span className="text-[1rem]" style={{ color: "#6b625d" }}>/{unitMain}</span>}</p>
+          <p className="mt-3 text-[0.9375rem]" style={{ color: "#6b625d" }}>{p.unit ? unitRest.join(" ") : "Pris efter antal brugere"}</p>
+        </div>
+        <div className="flex flex-1 flex-col border-t px-6 pb-6 pt-6" style={{ borderColor: "#ece6e1" }}>
+          <p className="text-[0.9375rem]" style={{ color: "#6b625d" }}>{privatMode ? "Det får du" : "Det får I"}</p>
+          <ul className="mt-4 grid gap-3.5">
+            {items.map((x) => <li key={x} className="flex items-start gap-3 text-[0.9375rem] leading-6" style={{ color: c.ink }}><span className="mt-1"><Check /></span>{x}</li>)}
+          </ul>
+          <div className="mt-auto pt-7">
+            <GrebBtn href={planHref[p.href]} className={p.featured ? "greb-btn--full" : "greb-btn--full greb-btn--light"}>{p.cta}</GrebBtn>
+          </div>
+        </div>
+      </div>
+    );
+  };
   return (
-    <section id="priser" className="py-[120px]">
-      <div className={wrap}>
-        {/* Label + heading on the left (Marco 2026-11-10). */}
-        <div>
+    <section id="priser" className="py-[100px]">
+      <div className={`${wrap} grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,2.28fr)] lg:gap-10`}>
+        <div className="lg:pt-10">
           <Label>Pris</Label>
-          <h2 className={`${head} mt-4 max-w-[704px] text-[clamp(2.5rem,1.4rem+3.6vw,4.5rem)] !font-semibold leading-[1.11] tracking-[-0.05em]`} style={{ color: c.ink }}>Enkle priser, ingen binding</h2>
+          <h2 className={`${head} mt-4 max-w-[12ch] text-[clamp(2.25rem,1.6rem+1.8vw,3.25rem)] !font-semibold leading-[1.08] tracking-[-0.045em]`} style={{ color: c.ink }}>Enkle priser, ingen binding</h2>
+          <p className="mt-5 max-w-[24rem] text-[1rem] leading-6" style={{ color: "#6b625d" }}>{privatMode ? "Én fast pris om måneden. Del med en ven, og I betaler mindre hver." : "I betaler pr. bruger pr. måned. Jo flere I er, jo lavere er prisen."}</p>
           {toggle && (
-            <div role="group" aria-label="Vælg priser for" className="mt-8 inline-flex rounded-full bg-white p-1 text-[0.9375rem] font-semibold">
+            <div role="group" aria-label="Vælg priser for" className="mt-6 inline-flex rounded-full bg-white p-1 text-[0.9375rem] font-semibold">
               {([["virksomhed", "Erhverv"], ["privat", "Privat"]] as const).map(([k, l]) => (
                 <button key={k} type="button" aria-pressed={mode === k} onClick={() => setSiteMode(k)} className="nf-focus rounded-full px-5 py-2 transition" style={mode === k ? { background: c.ink, color: "#fff" } : { color: c.ink }}>{l}</button>
               ))}
             </div>
           )}
+          <ul className="mt-7 grid gap-3.5">
+            {facts.map((f) => <li key={f.t} className="flex items-center gap-3 text-[1rem]" style={{ color: "#4a3f3b" }}><Icon name={f.icon} size={18} />{f.t}</li>)}
+          </ul>
         </div>
-        <div className="mt-[60px] grid items-start gap-6 lg:grid-cols-[454fr_425fr_454fr]">
-          {plans.map((p) => {
-            const price = p.price;
-            const unit = p.unit;
-            const items = [...p.items, p.support];
-            if (p.featured) return (
-              <div key={p.id} className="order-first lg:order-none">
-                <div className="rounded-t-[24px] px-4 pb-[47px] pt-4 text-center text-[1rem] font-bold leading-6" style={{ background: "#f6c9b6", color: c.ink }}>{p.tab}</div>
-                <div className="-mt-[31px] rounded-[24px] px-5 pb-6 pt-5" style={{ background: c.dark }}>
-                  <div className="rounded-[12px] p-5">
-                    <p className="text-[0.875rem] font-medium uppercase leading-6 text-white/90">{p.name}</p>
-                    <p className="mt-2.5 flex items-baseline gap-1"><span className={`${head} whitespace-nowrap text-[3rem] !font-semibold leading-[56px] tracking-[-0.04em] text-white`}>{price}</span><span className="text-[0.875rem] text-white/80">{unit}</span></p>
-                  </div>
-                  <ul className="mt-5 grid gap-4 rounded-[12px] border p-5" style={{ borderColor: "#5a4a44" }}>
-                    {items.map((x) => <li key={x} className="flex items-center gap-3 text-[1rem] leading-6 text-white"><Check light />{x}</li>)}
-                  </ul>
-                  <GrebBtn href={planHref[p.href]} onDark className="greb-btn--full mt-8">{p.cta}</GrebBtn>
-                </div>
-              </div>
-            );
-            return (
-              <div key={p.id} className="rounded-[24px] border bg-white p-5" style={{ borderColor: "#e3ddd8" }}>
-                {/* Filled white card with a page-coloured price box, so the plan stands off the section (Marco 2026-11-10). */}
-                <div className="rounded-[12px] p-5" style={{ background: c.page }}>
-                  <p className="text-[0.875rem] font-medium uppercase leading-6" style={{ color: "#6b625d" }}>{p.name}</p>
-                  <p className="mt-2.5 flex items-baseline gap-1"><span className={`${head} whitespace-nowrap text-[3rem] !font-semibold leading-[56px] tracking-[-0.04em]`} style={{ color: c.ink }}>{price}</span><span className="text-[0.875rem]" style={{ color: "#8f8a86" }}>{unit}</span></p>
-                </div>
-                <ul className="mt-5 grid gap-4 rounded-[12px] border p-5" style={{ borderColor: "#e3ddd8" }}>
-                  {items.map((x) => <li key={x} className="flex items-center gap-3 text-[1rem] leading-6" style={{ color: "#6b625d" }}><Check />{x}</li>)}
-                </ul>
-                <GrebBtn href={planHref[p.href]} className="greb-btn--full greb-btn--light mt-10">{p.cta}</GrebBtn>
-              </div>
-            );
-          })}
+        <div className="grid items-center gap-5 md:grid-cols-3">
+          {plans.map((p) => p.featured ? (
+            <div key={p.id} className="order-first flex flex-col rounded-[26px] p-[3px] md:order-none" style={{ background: grad }}>
+              <p className="px-4 pb-2 pt-1.5 text-center text-[0.875rem] font-semibold text-white">{p.tab}</p>
+              <div className="flex-1">{card(p)}</div>
+            </div>
+          ) : (
+            <div key={p.id} className="rounded-[24px] border" style={{ borderColor: "#e3ddd8" }}>{card(p)}</div>
+          ))}
         </div>
       </div>
     </section>
