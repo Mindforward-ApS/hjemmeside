@@ -73,11 +73,11 @@ export function FeatureBento() {
               <div className="mt-auto"><CardButton href="#kurser">Se kurserne</CardButton></div>
             </div>
             <div className="order-first flex flex-1 justify-center lg:order-none">
-              <div className="relative w-[200px] rounded-[38px] p-[7px] shadow-[0_30px_60px_-28px_rgba(31,22,17,0.55)] lg:w-[188px]" style={{ background: "#0f0d0c" }}>
-                <div className="relative overflow-hidden rounded-[31px] bg-white" style={{ aspectRatio: "390 / 844" }}>
+              <div className="relative w-[250px] rounded-[42px] p-[8px] shadow-[0_30px_60px_-28px_rgba(31,22,17,0.55)] lg:w-[236px]" style={{ background: "#0f0d0c" }}>
+                <div className="relative overflow-hidden rounded-[34px] bg-white" style={{ aspectRatio: "390 / 844" }}>
                   <video src="/video/platform-mobil.mp4" poster="/video/platform-mobil-poster.jpg" autoPlay muted loop playsInline aria-label="Platformen på en telefon: oversigt, kurser og kursusbeviser" className="absolute inset-0 h-full w-full object-cover" />
                 </div>
-                <span aria-hidden className="absolute left-1/2 top-[13px] h-[18px] w-[64px] -translate-x-1/2 rounded-full" style={{ background: "#0f0d0c" }} />
+                <span aria-hidden className="absolute left-1/2 top-[15px] h-[20px] w-[72px] -translate-x-1/2 rounded-full" style={{ background: "#0f0d0c" }} />
               </div>
             </div>
           </article>
