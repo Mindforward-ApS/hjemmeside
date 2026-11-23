@@ -613,10 +613,14 @@ body:has([data-preview-nav]) .site-nav:not([data-preview-nav]) { display: none; 
 }
 
 
-/* Featured price card (Marco 2026-11-23: "kan vi gøre det levende?"): the frame in the M logo's orange and gold
-   slowly turns around the card, with a soft glow behind it. Still for reduced motion. */
+/* Featured price card (Marco 2026-11-23: "kan vi gøre det levende?" → "lidt mere tilfældigt"): the frame's orange and
+   gold drift back and forth at an uneven pace instead of turning in a circle, and the glow behind it breathes on its
+   own rhythm, so the two never line up into a visible loop. Still for reduced motion. */
 @property --pris-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-.pris-glow { isolation: isolate; background: conic-gradient(from var(--pris-a), #f8400a, #fb970a, #ffc53d, #fb970a, #f8400a, #fb6a0a, #f8400a); animation: pris-spin 6s linear infinite; }
-.pris-glow::before { content: ""; position: absolute; inset: 6px; z-index: -1; border-radius: inherit; background: inherit; filter: blur(22px); opacity: .45; }
-@keyframes pris-spin { to { --pris-a: 360deg; } }
-@media (prefers-reduced-motion: reduce) { .pris-glow { animation: none; } }
+@property --pris-b { syntax: "<angle>"; inherits: false; initial-value: 90deg; }
+.pris-glow { isolation: isolate; background: conic-gradient(from var(--pris-a), #f8400a, #fb970a, #ffc53d, #fb970a, #f8400a, #fb6a0a, #f8400a); animation: pris-drift 17s ease-in-out infinite; }
+.pris-glow::before { content: ""; position: absolute; inset: 6px; z-index: -1; border-radius: inherit; background: conic-gradient(from var(--pris-b), #f8400a, #ffc53d, #fb970a, #f8400a, #fb970a, #f8400a); filter: blur(24px); opacity: .4; animation: pris-glow-b 11s ease-in-out infinite, pris-breathe 7s ease-in-out infinite; }
+@keyframes pris-drift { 0% { --pris-a: 0deg; } 18% { --pris-a: 95deg; } 31% { --pris-a: 60deg; } 52% { --pris-a: 210deg; } 64% { --pris-a: 170deg; } 83% { --pris-a: 300deg; } 100% { --pris-a: 360deg; } }
+@keyframes pris-glow-b { 0% { --pris-b: 90deg; } 27% { --pris-b: -40deg; } 49% { --pris-b: 30deg; } 76% { --pris-b: -120deg; } 100% { --pris-b: 90deg; } }
+@keyframes pris-breathe { 0%, 100% { opacity: .3; } 23% { opacity: .55; } 41% { opacity: .35; } 68% { opacity: .6; } 84% { opacity: .4; } }
+@media (prefers-reduced-motion: reduce) { .pris-glow, .pris-glow::before { animation: none; } }
