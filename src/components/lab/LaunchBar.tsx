@@ -28,19 +28,19 @@ export function LaunchBar({ mode }: { mode: SiteMode }) {
   const privat = mode === "privat";
   const [d, h, m, s] = now === null ? [null, null, null, null] : parts(LAUNCH - now);
   const close = () => { setClosed(true); try { localStorage.setItem(KEY, "1"); } catch {} };
-  const tiles: [number | null, string][] = [[d, "Dage"], [h, "Timer"], [m, "Min"], [s, "Sek"]];
+  const tiles: [number | null, string][] = [[d, "d"], [h, "t"], [m, "m"], [s, "s"]];
   return (
     <div role="region" aria-label="Lanceringstilbud" className="relative z-30 text-white" style={{ background: "#0a0a0b" }}>
-      <div className="mx-auto flex w-full max-w-[1440px] flex-wrap items-center justify-center gap-x-10 gap-y-2 py-2.5 pl-4 pr-11 lg:px-12 lg:py-3.5">
+      <div className="mx-auto flex w-full max-w-[1440px] flex-wrap items-center justify-center gap-x-10 gap-y-2 py-2 pl-4 pr-11 lg:px-12 lg:py-2.5">
         <p className="w-full text-center text-[0.8125rem] lg:w-auto lg:text-[0.9375rem]">
           De første {privat ? "100 kunder" : "20 virksomheder"} får <span className="text-[0.9375rem] font-bold lg:text-[1.125rem]" style={{ color: "#fb970a" }}>50 % rabat</span> det første år.
         </p>
         <div className="flex items-center gap-2 lg:contents">
         <div className="flex items-center gap-1 lg:gap-2" aria-label="Tid til lancering">
           {tiles.map(([v, l]) => (
-            <div key={l} className="grid w-[40px] place-items-center rounded-[8px] border py-1 lg:w-[58px] lg:rounded-[10px] lg:py-2" style={{ borderColor: "rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.04)" }}>
-              <span className="text-[0.875rem] font-semibold tabular-nums leading-none lg:text-[1.25rem]" suppressHydrationWarning>{v === null ? "--" : String(v).padStart(2, "0")}</span>
-              <span className="mt-0.5 text-[0.625rem] text-white/55 lg:mt-1 lg:text-[0.75rem]">{l}</span>
+            <div key={l} className="flex h-9 w-[46px] items-baseline justify-center gap-0.5 rounded-full border pt-[11px] lg:w-[62px]" style={{ borderColor: "rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.04)" }}>
+              <span className="text-[0.875rem] font-semibold tabular-nums leading-none lg:text-[0.9375rem]" suppressHydrationWarning>{v === null ? "--" : String(v).padStart(2, "0")}</span>
+              <span className="text-[0.6875rem] leading-none text-white/55">{l}</span>
             </div>
           ))}
         </div>
