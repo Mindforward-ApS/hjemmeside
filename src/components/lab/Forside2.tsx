@@ -385,9 +385,13 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
   const mode = useSiteMode();
   const privatMode = mode === "privat";
   const plans = privatMode ? privat : erhverv;
-  const facts = privatMode
-    ? [{ icon: "clock" as const, t: "10 minutter om dagen" }, { icon: "shield" as const, t: "Data i EU" }, { icon: "check" as const, t: "Opsig, når du vil" }]
-    : [{ icon: "clock" as const, t: "10 minutter om dagen" }, { icon: "shield" as const, t: "Data i EU med databehandleraftale" }, { icon: "check" as const, t: "Opsig, når I vil" }];
+  // Marco 2026-11-23: the three facts as in the reference (calendar, shield with check, circular arrow), in Danish.
+  const ico = { width: 18, height: 18, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
+  const facts = [
+    { t: "7 dages gratis prøveperiode", icon: <svg {...ico}><rect x="3.5" y="5" width="17" height="15.5" rx="2.5" /><path d="M8 3v4M16 3v4M3.5 10h17M9 15l2 2 4-4" /></svg> },
+    { t: "Ingen skjulte gebyrer", icon: <svg {...ico}><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.2-7.5 9.5-4.3-1.3-7.5-4.9-7.5-9.5V6L12 3z" /><path d="M9 12l2 2 4-4" /></svg> },
+    { t: privatMode ? "Opsig, når du vil" : "Opsig, når I vil", icon: <svg {...ico}><path d="M20 12a8 8 0 1 1-2.34-5.66" /><path d="M20 4v4.5h-4.5" /></svg> },
+  ];
   const leadline = ownLogos.find((l) => l.name === "Leadline")!;
   const arrow = <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
   const card = (p: (typeof plans)[number]) => {
@@ -428,7 +432,7 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
             </div>
           )}
           <ul className="mt-6 grid gap-4">
-            {facts.map((f) => <li key={f.t} className="flex items-center gap-3 text-[1rem]" style={{ color: "#4a4440" }}><Icon name={f.icon} size={18} />{f.t}</li>)}
+            {facts.map((f) => <li key={f.t} className="flex items-center gap-3 text-[1rem]" style={{ color: "#4a4440" }}><span className="shrink-0" style={{ color: "#4a4440" }}>{f.icon}</span>{f.t}</li>)}
           </ul>
           <div className="mt-12 lg:mt-20">
             <p className="text-[1rem]" style={{ color: "#4a4440" }}>Virksomheder, der træner AI med os</p>
