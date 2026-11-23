@@ -11,6 +11,7 @@ import { APP_URL, appLinks } from "@/lib/app";
 import { contactAction, type FormState } from "@/lib/actions";
 import { Icon } from "@/components/ui/Icon";
 import { DemoLogo, ownLogos } from "@/components/night/DemoLogos";
+import { KontaktSide } from "@/components/forms/KontaktSide";
 import { erhverv, privat } from "@/content/priser";
 import { setSiteMode, useSiteMode } from "@/lib/siteMode";
 import { Udtalelser } from "./Udtalelser";
@@ -587,7 +588,8 @@ function Contact() {
    In white areas the white cards turn page-coloured so they still read as cards. */
 type Sep = 1 | 2 | 3;
 const tones: Record<Sep, string[]> = {
-  1: ["page", "peach", "white", "page", "white", "page", "cream", "dark"],
+  // Marco 2026-11-23: the contact section is white now (was dark).
+  1: ["page", "peach", "white", "page", "white", "page", "cream", "white"],
   2: ["white", "peach", "white", "sand", "white", "sand", "white", "dark"],
   3: ["page", "page", "page", "page", "page", "page", "page", "dark"],
 };
@@ -617,7 +619,7 @@ function Sec({ sep, k, children }: { sep?: Sep; k: number; children: React.React
 }
 
 export function Forside2({ practice, pilot, sep, steps }: { practice?: React.ReactNode; pilot?: React.ReactNode; sep?: Sep; steps?: React.ReactNode } = {}) {
-  const parts = [<Platform key="p" />, steps ?? <FeatureBento key="s" />, <Cases key="c" />, practice ?? <Practice key="o" />, pilot ?? <Pilot key="l" />, <Price key="r" />, <Faq key="f" />, <Contact key="k" />];
+  const parts = [<Platform key="p" />, steps ?? <FeatureBento key="s" />, <Cases key="c" />, practice ?? <Practice key="o" />, pilot ?? <Pilot key="l" />, <Price key="r" />, <Faq key="f" />, <KontaktSide key="k" heading="h2" id="kontakt" />];
   return (
     <div style={{ background: c.page }}>
       {/* In white areas the white cards and buttons switch to the page colour so they still read as cards. */}

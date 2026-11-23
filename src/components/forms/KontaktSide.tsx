@@ -4,23 +4,23 @@ import Image from "next/image";
 import { useActionState } from "react";
 import { contactAction, type FormState } from "@/lib/actions";
 
-// Contact page (Marco 2026-11-23): heading and intro top left, three promises and Marco's card bottom left, the form
+// Contact section on the front page and the /kontakt page (Marco 2026-11-23): heading and intro top left, three promises and Marco's card bottom left, the form
 // in a soft panel on the right with topic checkboxes. Same type scale and container as the price section.
 const ink = "#0f0d0c";
 const muted = "#4a4440";
 const topics = ["AI-kursus til holdet", "Pilotforløb", "Priser og tilbud", "Demo af platformen", "Enterprise-aftale", "Andet"];
 const promises = ["Svar inden for 1 hverdag", "Data i EU med databehandleraftale", "Ingen binding, I kan stoppe, når I vil"];
-const input = "w-full rounded-[10px] border bg-white px-3.5 text-[0.9375rem] outline-none transition placeholder:text-[#6b625d] focus:border-[#f8400a] focus:ring-2 focus:ring-[#f8400a]/20";
+const input = "w-full rounded-[10px] border px-3.5 text-[0.9375rem] outline-none transition placeholder:text-[#6b625d] focus:border-[#f8400a] focus:ring-2 focus:ring-[#f8400a]/20";
 
-export function KontaktSide() {
+export function KontaktSide({ heading: H = "h1", id }: { heading?: "h1" | "h2"; id?: string } = {}) {
   const [state, action, pending] = useActionState<FormState, FormData>(contactAction, { ok: false });
   const e = state.errors ?? {};
   const err = (n: "name" | "email" | "message") => e[n] && <p id={`k-${n}-err`} className="mt-1.5 text-[0.8125rem]" style={{ color: "#b8452c" }}>{e[n]}</p>;
   return (
-    <section className="py-[100px]" style={{ background: "#fff" }}>
+    <section id={id} className="py-[100px]" style={{ background: "#fff" }}>
       <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-12 px-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] lg:gap-x-20 lg:px-[3.5vw]">
         <div className="flex min-w-0 flex-col">
-          <h1 className="font-semibold leading-[1.05] tracking-[-0.03em] text-[clamp(2.25rem,1.6rem+1.8vw,3rem)]" style={{ color: ink }}>Kom i kontakt</h1>
+          <H className="font-semibold leading-[1.05] tracking-[-0.03em] text-[clamp(2.25rem,1.6rem+1.8vw,3rem)]" style={{ color: ink }}>Kom i kontakt</H>
           <p className="mt-4 max-w-[26rem] text-[1rem] leading-6" style={{ color: muted }}>Fortæl lidt om jeres hold, og hvad I gerne vil blive bedre til med AI. Så vender jeg tilbage.</p>
           <div className="mt-12 lg:mt-auto">
             <ul className="grid gap-3">
@@ -49,17 +49,17 @@ export function KontaktSide() {
               <input className="hidden" name="company_website" tabIndex={-1} autoComplete="off" aria-hidden />
               <div>
                 <label htmlFor="k-name" className="sr-only">Navn</label>
-                <input id="k-name" name="name" autoComplete="name" required placeholder="Navn *" defaultValue={state.values?.name} aria-invalid={!!e.name} aria-describedby={e.name ? "k-name-err" : undefined} className={`${input} h-11`} style={{ borderColor: "#e3ddd8", color: ink }} />
+                <input id="k-name" name="name" autoComplete="name" required placeholder="Navn *" defaultValue={state.values?.name} aria-invalid={!!e.name} aria-describedby={e.name ? "k-name-err" : undefined} className={`${input} h-11`} style={{ borderColor: "#e3ddd8", color: ink, background: "#fff" }} />
                 {err("name")}
               </div>
               <div>
                 <label htmlFor="k-email" className="sr-only">Mail</label>
-                <input id="k-email" name="email" type="email" inputMode="email" autoComplete="email" required placeholder="Mail *" defaultValue={state.values?.email} aria-invalid={!!e.email} aria-describedby={e.email ? "k-email-err" : undefined} className={`${input} h-11`} style={{ borderColor: "#e3ddd8", color: ink }} />
+                <input id="k-email" name="email" type="email" inputMode="email" autoComplete="email" required placeholder="Mail *" defaultValue={state.values?.email} aria-invalid={!!e.email} aria-describedby={e.email ? "k-email-err" : undefined} className={`${input} h-11`} style={{ borderColor: "#e3ddd8", color: ink, background: "#fff" }} />
                 {err("email")}
               </div>
               <div>
                 <label htmlFor="k-message" className="sr-only">Fortæl os om jeres hold</label>
-                <textarea id="k-message" name="message" required rows={3} placeholder="Fortæl os lidt om jeres hold" defaultValue={state.values?.message} aria-invalid={!!e.message} aria-describedby={e.message ? "k-message-err" : undefined} className={`${input} resize-y py-3`} style={{ borderColor: "#e3ddd8", color: ink }} />
+                <textarea id="k-message" name="message" required rows={3} placeholder="Fortæl os lidt om jeres hold" defaultValue={state.values?.message} aria-invalid={!!e.message} aria-describedby={e.message ? "k-message-err" : undefined} className={`${input} resize-y py-3`} style={{ borderColor: "#e3ddd8", color: ink, background: "#fff" }} />
                 {err("message")}
               </div>
               <fieldset className="mt-1">
