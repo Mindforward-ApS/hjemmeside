@@ -103,9 +103,6 @@ function Platform() {
           </div>
           <div className="relative order-first xl:order-none">
             <div className="relative xl:absolute xl:inset-x-0 xl:bottom-0 xl:translate-x-6">
-              {/* Hatched shadow (Marco 2026-11-11): a coral square of diagonal stripes behind the top-right corner of the video card, 14 px up and right behind
-                  it; decoration only, hidden on phones. */}
-              <div aria-hidden="true" className="pointer-events-none absolute right-0 top-0 z-0 aspect-square h-[60%] hidden translate-x-[14px] -translate-y-[14px] rounded-[32px] sm:block" style={{ background: "repeating-linear-gradient(45deg, #e8664a 0 12px, transparent 12px 30px)" }} />
               <div className="relative z-10 aspect-video overflow-hidden rounded-[32px]">
                 <PlatformVideo />
               </div>
