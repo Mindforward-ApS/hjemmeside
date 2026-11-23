@@ -10,6 +10,7 @@ import { GrebBtn } from "@/components/ui/GrebBtn";
 import { appLinks } from "@/lib/app";
 import { UiStage } from "@/components/lab/uiMotion";
 import { UiInvite, UiLesson, UiScore, UiTeam } from "@/components/lab/StartCalendly";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const c = { ink: "#201613", cta: "linear-gradient(90deg, #fb970a, #f8400a)" /* M logo gradient, Marco 2026-11-23 */, muted: "#6b625d", coral: "#e8664a", coralText: "#b8452c", page: "#f5f2ef", dark: "#201613", tray: "#fbefe8" };
 const wrap = "w-full px-5 sm:px-[3.5vw]";
@@ -25,11 +26,7 @@ const steps = [
 ];
 
 function Label() {
-  return (
-    <p className="flex items-center gap-2 text-[0.875rem] font-medium leading-6" style={{ color: c.ink }}>
-      <span aria-hidden className="size-[18px] rounded-[6px]" style={{ background: c.coral }} />Sådan kommer I i gang
-    </p>
-  );
+  return <SectionLabel>Sådan kommer I i gang</SectionLabel>;
 }
 function Pill() {
   return (

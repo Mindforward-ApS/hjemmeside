@@ -639,3 +639,6 @@ body:has([data-preview-nav]) .site-nav:not([data-preview-nav]) { display: none; 
 /* Marco 2026-11-23: "den skal bruges alle steder og mener alle steder" – Google Sans Flex (the font in the
    Funktioner cards) on every element, overriding Bebas Neue, Instrument Serif, Inter Tight, Inter and IBM Plex Mono. */
 body, body * { font-family: var(--font-inter), system-ui, sans-serif !important; }
+
+/* Marco 2026-11-23: the price section is the standard for every section heading (size, weight, tracking). */
+main section h2, section[data-std] h2 { font-size: clamp(2.25rem, 1.6rem + 1.8vw, 3rem) !important; font-weight: 600 !important; letter-spacing: -0.03em !important; line-height: 1.05 !important; }

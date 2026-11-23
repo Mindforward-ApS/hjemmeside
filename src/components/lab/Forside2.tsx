@@ -5,6 +5,7 @@
 // square before every label, coral pill buttons with an arrow. Our colours, our copy and our facts only.
 import Image from "next/image";
 import Link from "next/link";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 import { GrebBtn } from "@/components/ui/GrebBtn";
 import { Fragment, useActionState, useEffect, useRef, useState } from "react";
 import { APP_URL, appLinks } from "@/lib/app";
@@ -23,12 +24,7 @@ const head = "font-[family-name:var(--font-geist)] font-medium tracking-[-0.03em
 const h2 = `${head} text-[clamp(2.25rem,1.6rem+2.2vw,3.5rem)] leading-[1.14]`;
 
 function Label({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
-  return (
-    <p className={`flex items-center gap-2 text-[0.875rem] font-medium leading-6 ${light ? "text-white" : ""}`} style={light ? undefined : { color: c.ink }}>
-      <span aria-hidden className="size-[18px] rounded-[6px]" style={{ background: c.coral }} />
-      {children}
-    </p>
-  );
+  return <SectionLabel light={light}>{children}</SectionLabel>;
 }
 
 function Pill({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) {
@@ -89,9 +85,7 @@ function Platform() {
     <section id="kurser" className="relative overflow-x-clip pb-16 pt-24 sm:pt-[7.5rem]">
       <div className={wrap}>
         <div>
-          <p className="flex items-center gap-2 text-[0.875rem] font-medium leading-6" style={{ color: c.ink }}>
-            <span aria-hidden className="size-[18px] rounded-[6px]" style={{ background: c.coral }} />Platformen
-          </p>
+          <SectionLabel>Platformen</SectionLabel>
           <h2 className={`${head} mt-4 max-w-[790px] !font-semibold text-[clamp(2.25rem,1.4rem+2.6vw,3.5rem)] leading-[1.143] tracking-[-0.045em]`} style={{ color: c.ink }}>Korte lektioner, et rigtigt øvemiljø og overblik til lederen</h2>
         </div>
         {/* Marco 2026-11-11: the product video (16:9, with sound) is shown whole; the stats card is only as tall as its content, and on desktop the video is lifted so both end at the same
@@ -485,9 +479,7 @@ export function Faq() {
     <section id="faq" className="relative isolate overflow-hidden pb-24 pt-20" style={{ background: "#f6f1ea" }}>
       <div className="mx-auto grid w-full max-w-[1216px] gap-12 px-5 lg:grid-cols-[36%_1fr] lg:gap-[5%] lg:px-0">
         <div className="flex flex-col">
-          <p className="inline-flex items-center gap-2.5 self-start rounded-full px-3.5 py-[7px] text-[0.75rem] font-semibold uppercase leading-4 tracking-[0.08em]" style={{ background: "#fbf8f3", color: c.ink }}>
-            <span aria-hidden className="size-1.5 rounded-full" style={{ background: c.coral }} />FAQ
-          </p>
+          <SectionLabel>FAQ</SectionLabel>
           <h2 className={`${head} mt-[22px] text-[clamp(2.5rem,1.6rem+2.4vw,3.25rem)] font-medium leading-[1.08] tracking-[-0.02em]`} style={{ color: c.ink }}>Spørgsmål, vi ofte får</h2>
           <div className="mt-10 flex flex-1 flex-col items-start rounded-[24px] px-8 py-9" style={{ background: "#fbf8f3", boxShadow: faqCard }}>
             <span className="grid size-[108px] place-items-center rounded-full" style={{ background: c.coralSoft, boxShadow: "0 12px 30px -8px rgba(31,22,17,0.35)" }}><Image src="/icon.svg" alt="" width={52} height={52} unoptimized /></span>

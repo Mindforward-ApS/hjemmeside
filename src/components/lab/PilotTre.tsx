@@ -7,6 +7,7 @@ import Image from "next/image";
 import { GrebBtn } from "@/components/ui/GrebBtn";
 import { Icon } from "@/components/ui/Icon";
 import { Ph } from "@/components/lab/Forside2";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const c = { ink: "#201613", cta: "linear-gradient(90deg, #fb970a, #f8400a)" /* M logo gradient, Marco 2026-11-23 */, muted: "#6b625d", coral: "#e8664a", page: "#f5f2ef", dark: "#201613" };
 const wrap = "w-full px-5 sm:px-[3.5vw]";
@@ -22,11 +23,7 @@ const points = [
 ];
 
 function Label({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
-  return (
-    <p className={`flex items-center gap-2 text-[0.875rem] font-medium leading-6 ${light ? "text-white" : ""}`} style={light ? undefined : { color: c.ink }}>
-      <span aria-hidden className="size-[18px] rounded-[6px]" style={{ background: c.coral }} />{children}
-    </p>
-  );
+  return <SectionLabel light={light}>{children}</SectionLabel>;
 }
 function Pill({ href, children }: { href: string; children: React.ReactNode }) {
   return (

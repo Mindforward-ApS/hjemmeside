@@ -2,6 +2,7 @@
 // section on the 3770 draft, with Mindforward's own features. Photos of people are initials; the phone is a placeholder.
 import "./feature-bento.css";
 import { appLinks } from "@/lib/app";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const Initials = ({ t, bg }: { t: string; bg: string }) => (
   <span aria-hidden style={{ display: "grid", placeItems: "center", width: "100%", height: "100%", borderRadius: "50%", background: bg, color: "#fff", fontWeight: 600, fontSize: 14 }}>{t}</span>
@@ -13,7 +14,7 @@ export function FeatureBento() {
       <section className="features" aria-labelledby="features-title">
         <div className="features-head">
           <div>
-            <p className="eyebrow">Funktioner</p>
+            <SectionLabel>Funktioner</SectionLabel>
             <h2 id="features-title">Alt, holdet har brug for,<br />ét sted</h2>
           </div>
           <p className="features-sub">Lektioner, øvemiljø, kursusbevis og overblik til lederen arbejder sammen på én platform, så holdet bruger tiden på at lære.</p>
