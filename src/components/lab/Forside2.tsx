@@ -6,7 +6,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { GrebBtn } from "@/components/ui/GrebBtn";
-import { useActionState, useEffect, useRef, useState } from "react";
+import { Fragment, useActionState, useEffect, useRef, useState } from "react";
 import { APP_URL, appLinks } from "@/lib/app";
 import { contactAction, type FormState } from "@/lib/actions";
 import { Icon } from "@/components/ui/Icon";
@@ -419,8 +419,8 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
   };
   return (
     <section id="priser" className="py-[100px]">
-      <div className="mx-auto grid w-full max-w-[1440px] gap-12 px-5 lg:grid-cols-[minmax(0,1fr)_repeat(3,minmax(0,292px))] lg:gap-x-5 lg:px-[3.5vw]">
-        <div className="flex flex-col lg:pr-6">
+      <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-12 px-5 lg:grid-cols-[minmax(0,1fr)_repeat(3,minmax(0,292px))] lg:gap-x-5 lg:px-[3.5vw]">
+        <div className="flex min-w-0 flex-col lg:pr-6">
           <span className="self-start rounded-full border px-3 py-1 text-[0.875rem]" style={{ borderColor: "#dcd7d3", color: "#0f0d0c" }}>Vores priser</span>
           <h2 className={`${head} mt-4 text-[clamp(2.25rem,1.6rem+1.8vw,3rem)] !font-semibold leading-[1.05] tracking-[-0.03em]`} style={{ color: "#0f0d0c" }}>Enkle priser, ingen binding</h2>
           <p className="mt-5 max-w-[24rem] text-[1rem] leading-6" style={{ color: "#4a4440" }}>{privatMode ? "Én fast pris om måneden. Del med en ven, og I betaler mindre hver." : "I betaler pr. bruger pr. måned. Jo flere I er, jo lavere er prisen."}</p>
@@ -436,10 +436,22 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
           </ul>
           <div className="mt-12 lg:mt-20">
             <p className="text-[1rem]" style={{ color: "#4a4440" }}>Virksomheder, der træner AI med os</p>
-            <ul className="mt-4 flex flex-wrap items-center gap-x-10 gap-y-3" style={{ color: "#0f0d0c" }}>
-              <li><span role="img" aria-label="SydDesign" className="block h-[1.4rem] w-[7rem] bg-current" style={{ maskImage: "url(/logos/syddesign.svg)", WebkitMaskImage: "url(/logos/syddesign.svg)", maskSize: "contain", WebkitMaskSize: "contain", maskRepeat: "no-repeat", WebkitMaskRepeat: "no-repeat" }} /></li>
-              <li><DemoLogo logo={leadline} /></li>
-            </ul>
+            {/* Logo marquee (Marco 2026-11-23): runs left, pauses on hover, fades at both edges, still for reduced motion.
+                The set is repeated so one half always fills the strip; the second half is hidden from screen readers. */}
+            <div className="logo-marquee mt-4 overflow-hidden" style={{ maskImage: "linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)", WebkitMaskImage: "linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)" }}>
+              <div className="logo-marquee__track flex w-max items-center" style={{ color: "#0f0d0c" }}>
+                {[0, 1].map((half) => (
+                  <ul key={half} aria-hidden={half === 1 || undefined} className="flex shrink-0 items-center gap-x-10 pr-10">
+                    {[0, 1, 2].map((r) => (
+                      <Fragment key={r}>
+                        <li><span role="img" aria-label={half === 0 && r === 0 ? "SydDesign" : undefined} className="block h-[1.4rem] w-[7rem] bg-current" style={{ maskImage: "url(/logos/syddesign.svg)", WebkitMaskImage: "url(/logos/syddesign.svg)", maskSize: "contain", WebkitMaskSize: "contain", maskRepeat: "no-repeat", WebkitMaskRepeat: "no-repeat" }} /></li>
+                        <li><DemoLogo logo={leadline} /></li>
+                      </Fragment>
+                    ))}
+                  </ul>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
         {plans.map((p) => p.featured ? (

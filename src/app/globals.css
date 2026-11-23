@@ -624,3 +624,9 @@ body:has([data-preview-nav]) .site-nav:not([data-preview-nav]) { display: none; 
 @keyframes pris-glow-b { 0% { --pris-b: 90deg; } 27% { --pris-b: -40deg; } 49% { --pris-b: 30deg; } 76% { --pris-b: -120deg; } 100% { --pris-b: 90deg; } }
 @keyframes pris-breathe { 0%, 100% { opacity: .3; } 23% { opacity: .55; } 41% { opacity: .35; } 68% { opacity: .6; } 84% { opacity: .4; } }
 @media (prefers-reduced-motion: reduce) { .pris-glow, .pris-glow::before { animation: none; } }
+
+/* Logo marquee in the price section (Marco 2026-11-23): one half of the doubled track scrolls past, then it loops. */
+.logo-marquee__track { animation: logo-marquee 22s linear infinite; }
+.logo-marquee:hover .logo-marquee__track { animation-play-state: paused; }
+@keyframes logo-marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .logo-marquee__track { animation: none; } }
