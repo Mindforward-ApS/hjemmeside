@@ -10,6 +10,7 @@ import { useActionState, useEffect, useRef, useState } from "react";
 import { APP_URL, appLinks } from "@/lib/app";
 import { contactAction, type FormState } from "@/lib/actions";
 import { Icon } from "@/components/ui/Icon";
+import { DemoLogo, ownLogos } from "@/components/night/DemoLogos";
 import { erhverv, privat } from "@/content/priser";
 import { setSiteMode, useSiteMode } from "@/lib/siteMode";
 import { Udtalelser } from "./Udtalelser";
@@ -374,76 +375,77 @@ function Pilot() {
 
 /* 6 · Pris: intro and facts on the left, the three plans as white cards on the right (Marco 2026-11-23). Plans and
    prices are the approved ones (content/priser.ts). */
-const Check = ({ light = false }: { light?: boolean }) => (
-  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden className="shrink-0"><path d="m3 8.5 3.2 3L13 4.5" fill="none" stroke={light ? "#fff" : "#8f8a86"} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
-);
 const planHref = { business: appLinks.startBusiness, private: appLinks.buyPrivate(), contact: "/kontakt" } as const;
 
 export function Price({ toggle = false }: { toggle?: boolean } = {}) {
   // Follows the Erhverv / Privat choice in the top bar (Marco 2026-11-11). On /priser, which has no top bar, the
   // section shows its own Erhverv / Privat switch (toggle).
-  // Layout (Marco 2026-11-23): intro column on the left with three facts, the plans as cards on the right; the
-  // featured plan sits in a frame with the M logo's orange gradient and a strip on top.
+  // Layout (Marco 2026-11-23, "præcis på samme måde"): intro column with three facts and customer logos at the bottom,
+  // two plan cards on the right; the featured one sits in a frame with the M logo's gradient and a strip on top.
   const mode = useSiteMode();
   const privatMode = mode === "privat";
-  const plans = privatMode ? privat : erhverv;
+  const plans = (privatMode ? privat : erhverv).slice(0, 2);
   const facts = privatMode
-    ? [{ icon: "check" as const, t: "Opsig, når du vil" }, { icon: "user" as const, t: "Halv pris for studerende" }, { icon: "shield" as const, t: "Data i EU" }]
-    : [{ icon: "check" as const, t: "Opsig, når I vil" }, { icon: "user" as const, t: "Fra 1 bruger" }, { icon: "shield" as const, t: "Data i EU med databehandleraftale" }];
-  const grad = "linear-gradient(180deg, #f8400a, #fb970a)";
+    ? [{ icon: "clock" as const, t: "10 minutter om dagen" }, { icon: "shield" as const, t: "Data i EU" }, { icon: "check" as const, t: "Opsig, når du vil" }]
+    : [{ icon: "clock" as const, t: "10 minutter om dagen" }, { icon: "shield" as const, t: "Data i EU med databehandleraftale" }, { icon: "check" as const, t: "Opsig, når I vil" }];
+  const leadline = ownLogos.find((l) => l.name === "Leadline")!;
+  const arrow = <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
   const card = (p: (typeof plans)[number]) => {
     const items = [...p.items, p.support];
     const [unitMain, ...unitRest] = p.unit.replace(/^\/\s*/, "").split(" ");
     return (
-      <div className="flex h-full flex-col rounded-[22px] bg-white">
-        <div className="px-6 pb-6 pt-7">
+      <div className="flex h-full flex-col">
+        <div className="px-6 pb-7 pt-7">
           <div className="flex items-center justify-between gap-3">
-            <p className="text-[1.375rem] font-medium tracking-[-0.02em]" style={{ color: c.ink }}>{p.name}</p>
-            {p.badge && <span className="whitespace-nowrap rounded-full px-2.5 py-1 text-[0.8125rem] font-semibold" style={{ background: c.coralSoft, color: c.coralText }}>{p.badge}</span>}
+            <p className="text-[1.5rem] font-medium tracking-[-0.02em]" style={{ color: "#0f0d0c" }}>{p.name}</p>
+            {p.badge && <span className="whitespace-nowrap rounded-full px-2.5 py-1 text-[0.875rem] font-semibold" style={{ background: "#ffeadb", color: "#f8400a" }}>{p.badge}</span>}
           </div>
-          <p className="mt-4 flex items-baseline gap-1.5"><span className={`${head} whitespace-nowrap text-[2.75rem] !font-semibold leading-none tracking-[-0.04em]`} style={{ color: c.ink }}>{p.price}</span>{p.unit && <span className="text-[1rem]" style={{ color: "#6b625d" }}>/{unitMain}</span>}</p>
-          <p className="mt-3 text-[0.9375rem]" style={{ color: "#6b625d" }}>{p.unit ? unitRest.join(" ") : "Pris efter antal brugere"}</p>
+          <p className="mt-4 flex items-baseline gap-2"><span className={`${head} whitespace-nowrap text-[3rem] !font-semibold leading-none tracking-[-0.03em]`} style={{ color: "#0f0d0c" }}>{p.price}</span><span className="text-[1.125rem]" style={{ color: "#4a4440" }}>/{unitMain}</span></p>
+          <p className="mt-3 text-[1rem]" style={{ color: "#6b625d" }}>{unitRest.join(" ")}</p>
         </div>
-        <div className="flex flex-1 flex-col border-t px-6 pb-6 pt-6" style={{ borderColor: "#ece6e1" }}>
-          <p className="text-[0.9375rem]" style={{ color: "#6b625d" }}>{privatMode ? "Det får du" : "Det får I"}</p>
-          <ul className="mt-4 grid gap-3.5">
-            {items.map((x) => <li key={x} className="flex items-start gap-3 text-[0.9375rem] leading-6" style={{ color: c.ink }}><span className="mt-1"><Check /></span>{x}</li>)}
+        <div className="flex flex-1 flex-col border-t px-6 pb-8 pt-6" style={{ borderColor: "#e8e4e1" }}>
+          <p className="text-[1rem]" style={{ color: "#4a4440" }}>{privatMode ? "Det får du" : "Det får I"}</p>
+          <ul className="mt-4 grid gap-4">
+            {items.map((x) => <li key={x} className="flex items-center gap-3 text-[1rem] leading-6" style={{ color: "#1a1614" }}><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden className="shrink-0"><path d="m3 8.5 3.2 3L13 4.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>{x}</li>)}
           </ul>
-          <div className="mt-auto pt-7">
-            <GrebBtn href={planHref[p.href]} className={p.featured ? "greb-btn--full" : "greb-btn--full greb-btn--light"}>{p.cta}</GrebBtn>
-          </div>
+          <Link href={planHref[p.href]} className={`nf-focus nf-press mt-auto flex h-12 translate-y-0 items-center justify-center gap-2 rounded-full text-[0.9375rem] font-semibold transition ${p.featured ? "text-white hover:bg-black" : "border hover:bg-[#f7f5f3]"}`} style={p.featured ? { background: "#0f0d0c", marginTop: 32 } : { borderColor: "#dcd7d3", color: "#0f0d0c", marginTop: 32 }}>{p.cta} {arrow}</Link>
         </div>
       </div>
     );
   };
   return (
     <section id="priser" className="py-[100px]">
-      <div className={`${wrap} grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,2.28fr)] lg:gap-10`}>
-        <div className="lg:pt-10">
-          <Label>Pris</Label>
-          <h2 className={`${head} mt-4 max-w-[12ch] text-[clamp(2.25rem,1.6rem+1.8vw,3.25rem)] !font-semibold leading-[1.08] tracking-[-0.045em]`} style={{ color: c.ink }}>Enkle priser, ingen binding</h2>
-          <p className="mt-5 max-w-[24rem] text-[1rem] leading-6" style={{ color: "#6b625d" }}>{privatMode ? "Én fast pris om måneden. Del med en ven, og I betaler mindre hver." : "I betaler pr. bruger pr. måned. Jo flere I er, jo lavere er prisen."}</p>
+      <div className="mx-auto grid w-full max-w-[1152px] gap-12 px-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,340px)_minmax(0,340px)] lg:gap-x-6 lg:px-0">
+        <div className="flex flex-col lg:pr-14">
+          <span className="self-start rounded-full border px-3 py-1 text-[0.875rem]" style={{ borderColor: "#dcd7d3", color: "#0f0d0c" }}>Pris</span>
+          <h2 className={`${head} mt-4 text-[clamp(2.25rem,1.6rem+1.8vw,3rem)] !font-semibold leading-[1.05] tracking-[-0.03em]`} style={{ color: "#0f0d0c" }}>Enkle priser, ingen binding</h2>
+          <p className="mt-5 max-w-[24rem] text-[1rem] leading-6" style={{ color: "#4a4440" }}>{privatMode ? "Én fast pris om måneden. Del med en ven, og I betaler mindre hver." : "I betaler pr. bruger pr. måned. Jo flere I er, jo lavere er prisen."}</p>
           {toggle && (
-            <div role="group" aria-label="Vælg priser for" className="mt-6 inline-flex rounded-full bg-white p-1 text-[0.9375rem] font-semibold">
+            <div role="group" aria-label="Vælg priser for" className="mt-6 inline-flex self-start rounded-full p-1 text-[0.9375rem] font-semibold" style={{ background: "#f5f2ef" }}>
               {([["virksomhed", "Erhverv"], ["privat", "Privat"]] as const).map(([k, l]) => (
                 <button key={k} type="button" aria-pressed={mode === k} onClick={() => setSiteMode(k)} className="nf-focus rounded-full px-5 py-2 transition" style={mode === k ? { background: c.ink, color: "#fff" } : { color: c.ink }}>{l}</button>
               ))}
             </div>
           )}
-          <ul className="mt-7 grid gap-3.5">
-            {facts.map((f) => <li key={f.t} className="flex items-center gap-3 text-[1rem]" style={{ color: "#4a3f3b" }}><Icon name={f.icon} size={18} />{f.t}</li>)}
+          <ul className="mt-6 grid gap-4">
+            {facts.map((f) => <li key={f.t} className="flex items-center gap-3 text-[1rem]" style={{ color: "#4a4440" }}><Icon name={f.icon} size={18} />{f.t}</li>)}
           </ul>
+          <div className="mt-12 lg:mt-auto">
+            <p className="text-[1rem]" style={{ color: "#4a4440" }}>Virksomheder, der træner AI med os</p>
+            <ul className="mt-4 flex flex-wrap items-center gap-x-10 gap-y-3" style={{ color: "#0f0d0c" }}>
+              <li><span role="img" aria-label="SydDesign" className="block h-[1.4rem] w-[7rem] bg-current" style={{ maskImage: "url(/logos/syddesign.svg)", WebkitMaskImage: "url(/logos/syddesign.svg)", maskSize: "contain", WebkitMaskSize: "contain", maskRepeat: "no-repeat", WebkitMaskRepeat: "no-repeat" }} /></li>
+              <li><DemoLogo logo={leadline} /></li>
+            </ul>
+          </div>
         </div>
-        <div className="grid items-center gap-5 md:grid-cols-3">
-          {plans.map((p) => p.featured ? (
-            <div key={p.id} className="order-first flex flex-col rounded-[26px] p-[3px] md:order-none" style={{ background: grad }}>
-              <p className="px-4 pb-2 pt-1.5 text-center text-[0.875rem] font-semibold text-white">{p.tab}</p>
-              <div className="flex-1">{card(p)}</div>
-            </div>
-          ) : (
-            <div key={p.id} className="rounded-[24px] border" style={{ borderColor: "#e3ddd8" }}>{card(p)}</div>
-          ))}
-        </div>
+        {plans.map((p) => p.featured ? (
+          <div key={p.id} className="flex flex-col rounded-[22px] p-[3px] lg:self-end" style={{ background: "linear-gradient(180deg, #f8400a 0%, #fb6a0a 45%, #fb970a 100%)" }}>
+            <p className="px-4 pb-2 pt-1.5 text-center text-[0.875rem] font-semibold text-white">{p.tab}</p>
+            <div className="flex-1 rounded-[19px] bg-white">{card(p)}</div>
+          </div>
+        ) : (
+          <div key={p.id} className="order-last rounded-[20px] border bg-white lg:order-none lg:self-end" style={{ borderColor: "#e3dfdc" }}>{card(p)}</div>
+        ))}
       </div>
     </section>
   );
