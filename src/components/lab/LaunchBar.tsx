@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import type { SiteMode } from "@/lib/siteMode";
 
 // Announcement bar above the header (Marco 2026-11-23, after his Black Friday reference): offer on the left,
-// "Lancering" in the middle, a live countdown to launch (1 January 2027, same moment as the waitlist) and a button.
+// a live countdown to launch (1 January 2027, same moment as the waitlist) and a button.
 // Privat: the first 100 customers get 50 % off the first year. Erhverv: the first 20 companies.
 const LAUNCH = new Date("2027-01-01T09:00:00+01:00").getTime();
 const KEY = "mf-launchbar-closed";
@@ -35,10 +35,6 @@ export function LaunchBar({ mode }: { mode: SiteMode }) {
         <p className="w-full text-center text-[0.8125rem] lg:w-auto lg:text-[0.9375rem]">
           De første {privat ? "100 kunder" : "20 virksomheder"} får <span className="text-[0.9375rem] font-bold lg:text-[1.125rem]" style={{ color: "#fb970a" }}>50 % rabat</span> det første år.
         </p>
-        <div className="hidden text-center leading-none lg:block">
-          <p className="bg-clip-text text-[1.875rem] font-semibold tracking-[-0.02em] text-transparent" style={{ backgroundImage: "linear-gradient(90deg, #ffffff, #8a8580)" }}>Lancering</p>
-          <p className="mt-1.5 text-[0.8125rem] font-medium" style={{ color: "#fb970a" }}>1. januar 2027</p>
-        </div>
         <div className="flex items-center gap-2 lg:contents">
         <div className="flex items-center gap-1 lg:gap-2" aria-label="Tid til lancering">
           {tiles.map(([v, l]) => (
@@ -48,12 +44,12 @@ export function LaunchBar({ mode }: { mode: SiteMode }) {
             </div>
           ))}
         </div>
-        <div className="flex flex-col items-center">
-          <Link href="/venteliste" className="nf-focus inline-flex h-9 items-center gap-1.5 whitespace-nowrap rounded-[10px] px-3 text-[0.8125rem] lg:gap-2 lg:px-4 lg:text-[0.875rem] font-semibold text-white transition hover:brightness-110" style={{ background: "linear-gradient(90deg, #fb970a, #f8400a)" }}>
+        <div className="flex items-center gap-3">
+          <Link href="/venteliste" className="nf-focus inline-flex h-9 items-center gap-1.5 whitespace-nowrap rounded-full px-4 text-[0.8125rem] lg:gap-2 lg:px-5 lg:text-[0.875rem] font-semibold text-white transition hover:brightness-110" style={{ background: "linear-gradient(90deg, #fb970a, #f8400a)" }}>
             Sikr din plads
             <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </Link>
-          <span className="mt-1 hidden text-[0.75rem] text-white/50 lg:block">Kun {privat ? "100" : "20"} pladser</span>
+          <span className="hidden whitespace-nowrap text-[0.8125rem] text-white/55 sm:inline">Kun {privat ? "100" : "20"} pladser</span>
         </div>
         </div>
       </div>
