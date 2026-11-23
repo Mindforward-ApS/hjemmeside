@@ -15,7 +15,7 @@ import { DemoLogo, ownLogos } from "@/components/night/DemoLogos";
 import { KontaktSide } from "@/components/forms/KontaktSide";
 import { erhverv, privat } from "@/content/priser";
 import { setSiteMode, useSiteMode } from "@/lib/siteMode";
-import { Udtalelser } from "./Udtalelser";
+import { Problem } from "./Problem";
 import { FeatureBento } from "./FeatureBento";
 
 const c = { ink: "#201613", cta: "linear-gradient(90deg, #fb970a, #f8400a)" /* M logo gradient, Marco 2026-11-23 */, muted: "#5a4a44", coral: "#e8664a", coralText: "#b8452c", coralSoft: "#fbe1d7", page: "#f5f2ef", dark: "#201613", line: "rgba(32,22,19,0.1)" };
@@ -631,8 +631,8 @@ export function Forside2({ practice, pilot, sep, steps }: { practice?: React.Rea
     <div style={{ background: c.page }}>
       {/* In white areas the white cards and buttons switch to the page colour so they still read as cards. */}
       <style>{`[data-tone="white"] .bg-white { background-color: ${c.page}; } [data-tone="sand"] .bg-white { background-color: #fff; }`}</style>
-      {/* Marco 2026-11-14: the video testimonials come right after the hero. */}
-      <Udtalelser />
+      {/* Marco 2026-11-23: the problem comes right after the hero; the video testimonials row is gone (the videos are in the hero). */}
+      <Problem />
       {parts.map((node, k) => <Sec key={k} sep={sep} k={k}>{node}</Sec>)}
     </div>
   );
