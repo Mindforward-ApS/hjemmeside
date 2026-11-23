@@ -14,7 +14,7 @@ import { setSiteMode, useSiteMode } from "@/lib/siteMode";
 import { Udtalelser } from "./Udtalelser";
 import { FeatureBento } from "./FeatureBento";
 
-const c = { ink: "#201613", muted: "#5a4a44", coral: "#e8664a", coralText: "#b8452c", coralSoft: "#fbe1d7", page: "#f5f2ef", dark: "#201613", line: "rgba(32,22,19,0.1)" };
+const c = { ink: "#201613", cta: "linear-gradient(90deg, #fb970a, #f8400a)" /* M logo gradient, Marco 2026-11-23 */, muted: "#5a4a44", coral: "#e8664a", coralText: "#b8452c", coralSoft: "#fbe1d7", page: "#f5f2ef", dark: "#201613", line: "rgba(32,22,19,0.1)" };
 const wrap = "w-full px-5 sm:px-[3.5vw]";
 const head = "font-[family-name:var(--font-geist)] font-medium tracking-[-0.03em]";
 const h2 = `${head} text-[clamp(2.25rem,1.6rem+2.2vw,3.5rem)] leading-[1.14]`;
@@ -30,7 +30,7 @@ function Label({ children, light = false }: { children: React.ReactNode; light?:
 
 function Pill({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) {
   return (
-    <Link href={href} className={`nf-focus nf-press group inline-flex h-12 items-center gap-2 rounded-full px-6 text-[0.875rem] font-semibold transition-[filter] hover:brightness-105 ${className}`} style={{ background: c.coral, color: c.ink }}>
+    <Link href={href} className={`nf-focus nf-press group inline-flex h-12 items-center gap-2 rounded-full px-6 text-[0.875rem] font-semibold transition-[filter] hover:brightness-105 ${className}`} style={{ background: c.cta, color: c.ink }}>
       {children}
       <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"><path d="M3 9 9 3M4 3h5v5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
     </Link>
@@ -105,7 +105,7 @@ function Platform() {
               </div>
             ))}
             <p className="pt-6 text-[1rem] leading-6" style={{ color: "#6b625d" }}>Lektioner på dansk i ChatGPT, Copilot eller Claude. Hver lektion slutter med en opgave fra jeres egen hverdag, og lederen kan følge holdet.</p>
-            <Link href="/priser" className="nf-focus nf-press group mt-6 inline-flex h-14 items-center gap-2.5 self-start rounded-[52px] px-7 text-[1rem] font-bold tracking-[-0.5px]" style={{ background: c.coral, color: c.ink }}>
+            <Link href="/priser" className="nf-focus nf-press group mt-6 inline-flex h-14 items-center gap-2.5 self-start rounded-[52px] px-7 text-[1rem] font-bold tracking-[-0.5px]" style={{ background: c.cta, color: c.ink }}>
               Se priser
               <svg width="13" height="13" viewBox="0 0 12 12" aria-hidden className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"><path d="M3 9 9 3M4 3h5v5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </Link>
@@ -422,7 +422,7 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
                   <ul className="mt-5 grid gap-4 rounded-[12px] border p-5" style={{ borderColor: "#5a4a44" }}>
                     {items.map((x) => <li key={x} className="flex items-center gap-3 text-[1rem] leading-6 text-white"><Check light />{x}</li>)}
                   </ul>
-                  <Link href={planHref[p.href]} className="nf-focus nf-press mt-8 flex h-[60px] items-center justify-center gap-2 rounded-[52px] text-[1rem] font-bold tracking-[-0.5px] transition-[filter] hover:brightness-105" style={{ background: c.coral, color: c.ink }}>{p.cta} <Arr /></Link>
+                  <Link href={planHref[p.href]} className="nf-focus nf-press mt-8 flex h-[60px] items-center justify-center gap-2 rounded-[52px] text-[1rem] font-bold tracking-[-0.5px] transition-[filter] hover:brightness-105" style={{ background: c.cta, color: c.ink }}>{p.cta} <Arr /></Link>
                 </div>
               </div>
             );
@@ -513,7 +513,7 @@ function Contact() {
             <span className="grid size-24 shrink-0 place-items-center rounded-[14px]" style={{ background: c.coralSoft }}><Image src="/icon.svg" alt="" width={44} height={44} unoptimized /></span>
             <div>
               <p className="text-[1rem] font-semibold leading-snug" style={{ color: c.ink }}>Hellere skrive direkte?</p>
-              <a href="mailto:kontakt@mindforward.dk" className="nf-focus mt-3 inline-flex h-10 items-center gap-2 rounded-full px-4 text-[0.8125rem] font-semibold" style={{ background: c.coral, color: c.ink }}>kontakt@mindforward.dk</a>
+              <a href="mailto:kontakt@mindforward.dk" className="nf-focus mt-3 inline-flex h-10 items-center gap-2 rounded-full px-4 text-[0.8125rem] font-semibold" style={{ background: c.cta, color: c.ink }}>kontakt@mindforward.dk</a>
             </div>
           </div>
         </div>
@@ -546,7 +546,7 @@ function Contact() {
               {state.errors?.message && <span className="text-[0.8125rem]" style={{ color: c.coralText }}>{state.errors.message}</span>}
             </label>
           </div>
-          <button type="submit" disabled={pending} className="nf-focus mt-7 h-14 w-full rounded-full text-[0.9375rem] font-semibold transition-[filter] hover:brightness-105 disabled:opacity-60" style={{ background: c.coral, color: c.ink }}>{pending ? "Sender …" : "Send"}</button>
+          <button type="submit" disabled={pending} className="nf-focus mt-7 h-14 w-full rounded-full text-[0.9375rem] font-semibold transition-[filter] hover:brightness-105 disabled:opacity-60" style={{ background: c.cta, color: c.ink }}>{pending ? "Sender …" : "Send"}</button>
           <p className="mt-4 flex items-center gap-2 text-[0.8125rem]" style={{ color: c.muted }}>
             <Icon name="check" size={14} />{state.ok ? state.message : "Vi bruger kun dine oplysninger til at svare dig."}
           </p>

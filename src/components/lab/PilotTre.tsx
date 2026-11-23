@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
 import { Ph } from "@/components/lab/Forside2";
 
-const c = { ink: "#201613", muted: "#6b625d", coral: "#e8664a", page: "#f5f2ef", dark: "#201613" };
+const c = { ink: "#201613", cta: "linear-gradient(90deg, #fb970a, #f8400a)" /* M logo gradient, Marco 2026-11-23 */, muted: "#6b625d", coral: "#e8664a", page: "#f5f2ef", dark: "#201613" };
 const wrap = "w-full px-5 sm:px-[3.5vw]";
 const head = "font-[family-name:var(--font-geist)] !font-semibold tracking-[-0.045em]";
 const h2 = `${head} text-[clamp(2.25rem,1.4rem+2.6vw,3.5rem)] leading-[1.143]`;
@@ -30,7 +30,7 @@ function Label({ children, light = false }: { children: React.ReactNode; light?:
 }
 function Pill({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <Link href={href} className="nf-focus nf-press group inline-flex h-14 items-center gap-2.5 rounded-[52px] px-7 text-[1rem] font-bold tracking-[-0.5px]" style={{ background: c.coral, color: c.ink }}>
+    <Link href={href} className="nf-focus nf-press group inline-flex h-14 items-center gap-2.5 rounded-[52px] px-7 text-[1rem] font-bold tracking-[-0.5px]" style={{ background: c.cta, color: c.ink }}>
       {children}
       <svg width="13" height="13" viewBox="0 0 12 12" aria-hidden className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"><path d="M3 9 9 3M4 3h5v5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
     </Link>
