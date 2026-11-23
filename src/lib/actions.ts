@@ -93,3 +93,25 @@ function flatten(err: z.ZodError) {
   }
   return out;
 }
+
+// Newsletter band above the footer (Marco 2026-11-23). Stored in the same Neon database as the contact messages,
+// table newsletter_signups (unique email, so signing up twice is harmless).
+export async function newsletterAction(_: FormState, data: FormData): Promise<FormState> {
+  const ok = { ok: true, message: "Tak! Du er skrevet op til nyhedsbrevet." };
+  if (data.get("company_website")) return ok;
+  const values = { email: String(data.get("email") ?? "") };
+  if (await rateLimited("newsletter")) return { ok: false, message: "For mange forsøg. Prøv igen om et minut.", values };
+  const parsed = leadSchema.safeParse({ email: data.get("email") });
+  if (!parsed.success) return { ok: false, errors: flatten(parsed.error), values };
+  const url = process.env.DATABASE_URL;
+  if (!url) return { ok: false, message: "Tilmeldingen virker ikke lige nu. Prøv igen senere.", values };
+  try {
+    const sql = neon(url);
+    await sql`create table if not exists newsletter_signups (id bigserial primary key, email text not null unique, source text not null default 'forside', created_at timestamptz not null default now())`;
+    await sql`insert into newsletter_signups (email, source) values (${parsed.data.email.toLowerCase()}, 'footer') on conflict (email) do nothing`;
+  } catch (err) {
+    console.error("newsletter_signups insert failed", err);
+    return { ok: false, message: "Tilmeldingen virker ikke lige nu. Prøv igen senere.", values };
+  }
+  return ok;
+}

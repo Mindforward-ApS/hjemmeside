@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { site } from "@/content/site";
 import { MindforwardLogo } from "@/components/ui/MindforwardLogo";
+import { NewsletterBand } from "@/components/layout/NewsletterBand";
 
 // Site-wide footer (Marco 2026-10-22: E1, without the giant wordmark). It is brown like the hero's stage, so it continues
 // the home page's StageCta without a seam. Company details are on every page (§8, §12.7).
 export function SiteFooter() {
   const c = site.company;
   return (
+    <>
+    <NewsletterBand />
     <footer className="text-white" style={{ background: "linear-gradient(180deg, #201613 0%, #1a0f0c 100%)" }}>
       <div className="px-6 pb-10 md:px-[3.5vw]">
         <div className="border-t border-white/10 pt-14">
@@ -41,5 +44,6 @@ export function SiteFooter() {
         </div>
       </div>
     </footer>
+    </>
   );
 }
