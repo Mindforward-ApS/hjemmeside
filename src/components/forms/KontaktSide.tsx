@@ -11,6 +11,7 @@ const ink = "#0f0d0c";
 const muted = "#4a4440";
 const topics = ["AI-kursus til holdet", "Pilotforløb", "Priser og tilbud", "Demo af platformen", "Enterprise-aftale", "Andet"];
 const promises = ["Svar inden for 1 hverdag", "Data i EU med databehandleraftale", "Ingen binding, I kan stoppe, når I vil"];
+// The section has a warm background with soft glows in the M logo's colours (Marco 2026-11-23, not plain white).
 const input = "w-full rounded-[10px] border px-3.5 text-[0.9375rem] outline-none transition placeholder:text-[#6b625d] focus:border-[#f8400a] focus:ring-2 focus:ring-[#f8400a]/20";
 
 export function KontaktSide({ heading: H = "h1", id }: { heading?: "h1" | "h2"; id?: string } = {}) {
@@ -18,7 +19,7 @@ export function KontaktSide({ heading: H = "h1", id }: { heading?: "h1" | "h2"; 
   const e = state.errors ?? {};
   const err = (n: "name" | "email" | "message") => e[n] && <p id={`k-${n}-err`} className="mt-1.5 text-[0.8125rem]" style={{ color: "#b8452c" }}>{e[n]}</p>;
   return (
-    <section id={id} className="py-[100px]" style={{ background: "#fff" }}>
+    <section id={id} className="py-[100px]" style={{ backgroundColor: "#fbf1e8", backgroundImage: "radial-gradient(55% 65% at 88% 18%, rgba(251,151,10,0.22), transparent 70%), radial-gradient(45% 55% at 8% 92%, rgba(248,64,10,0.12), transparent 70%)" }}>
       <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-12 px-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] lg:gap-x-20 lg:px-[3.5vw]">
         <div className="flex min-w-0 flex-col">
           <H className="font-semibold leading-[1.05] tracking-[-0.03em] text-[clamp(2.25rem,1.6rem+1.8vw,3rem)]" style={{ color: ink }}>Lad os tage en snak</H>
@@ -33,7 +34,7 @@ export function KontaktSide({ heading: H = "h1", id }: { heading?: "h1" | "h2"; 
               ))}
           </ul>
           {/* Marco 2026-11-23 ("mere indbydende"): a bigger photo and a short greeting, so it feels like writing to a person. */}
-          <figure className="mt-10 max-w-[28rem] rounded-[18px] border p-6 lg:mt-auto lg:mb-6" style={{ borderColor: "#ece6e1", background: "#fbf9f7" }}>
+          <figure className="mt-10 max-w-[28rem] rounded-[18px] border p-6 lg:mt-auto lg:mb-6" style={{ borderColor: "rgba(31,22,17,0.06)", background: "#fff", boxShadow: "0 18px 40px -28px rgba(31,22,17,0.35)" }}>
             <blockquote className="text-[1.125rem] leading-[1.5]" style={{ color: ink }}>“Jeg læser selv alle beskeder og svarer inden for en hverdag. Skriv bare løs, også hvis I kun er nysgerrige.”</blockquote>
             <figcaption className="mt-5 flex items-center gap-4">
               <Image src="/img/marco-2.jpg" alt="Marco Nielsen" width={72} height={72} className="size-[72px] rounded-full object-cover" />
@@ -48,7 +49,7 @@ export function KontaktSide({ heading: H = "h1", id }: { heading?: "h1" | "h2"; 
         <div className="relative min-w-0">
         {/* Soft orange glow behind the form, in the M logo's colours (same family as the featured price card). */}
         <div aria-hidden className="kontakt-glow pointer-events-none absolute -inset-3 -z-0 rounded-[28px]" />
-        <div className="relative rounded-[16px] p-6 sm:p-7" style={{ background: "#f5f2ef" }}>
+        <div className="relative rounded-[16px] p-6 sm:p-7" style={{ background: "#fff", boxShadow: "0 1px 0 rgba(31,22,17,0.04), 0 24px 48px -28px rgba(31,22,17,0.35)" }}>
           {state.ok ? (
             <p role="status" className="flex min-h-[320px] items-center justify-center text-center text-[1.125rem] font-medium" style={{ color: ink }}>{state.message}</p>
           ) : (
@@ -56,17 +57,17 @@ export function KontaktSide({ heading: H = "h1", id }: { heading?: "h1" | "h2"; 
               <input className="hidden" name="company_website" tabIndex={-1} autoComplete="off" aria-hidden />
               <div>
                 <label htmlFor="k-name" className="sr-only">Navn</label>
-                <input id="k-name" name="name" autoComplete="name" required placeholder="Navn *" defaultValue={state.values?.name} aria-invalid={!!e.name} aria-describedby={e.name ? "k-name-err" : undefined} className={`${input} h-11`} style={{ borderColor: "#e3ddd8", color: ink, background: "#fff" }} />
+                <input id="k-name" name="name" autoComplete="name" required placeholder="Navn *" defaultValue={state.values?.name} aria-invalid={!!e.name} aria-describedby={e.name ? "k-name-err" : undefined} className={`${input} h-11`} style={{ borderColor: "#e3ddd8", color: ink, background: "#fbf9f7" }} />
                 {err("name")}
               </div>
               <div>
                 <label htmlFor="k-email" className="sr-only">Mail</label>
-                <input id="k-email" name="email" type="email" inputMode="email" autoComplete="email" required placeholder="Mail *" defaultValue={state.values?.email} aria-invalid={!!e.email} aria-describedby={e.email ? "k-email-err" : undefined} className={`${input} h-11`} style={{ borderColor: "#e3ddd8", color: ink, background: "#fff" }} />
+                <input id="k-email" name="email" type="email" inputMode="email" autoComplete="email" required placeholder="Mail *" defaultValue={state.values?.email} aria-invalid={!!e.email} aria-describedby={e.email ? "k-email-err" : undefined} className={`${input} h-11`} style={{ borderColor: "#e3ddd8", color: ink, background: "#fbf9f7" }} />
                 {err("email")}
               </div>
               <div>
                 <label htmlFor="k-message" className="sr-only">Fortæl os om jeres hold</label>
-                <textarea id="k-message" name="message" required rows={3} placeholder="Fortæl os lidt om jeres hold" defaultValue={state.values?.message} aria-invalid={!!e.message} aria-describedby={e.message ? "k-message-err" : undefined} className={`${input} resize-y py-3`} style={{ borderColor: "#e3ddd8", color: ink, background: "#fff" }} />
+                <textarea id="k-message" name="message" required rows={3} placeholder="Fortæl os lidt om jeres hold" defaultValue={state.values?.message} aria-invalid={!!e.message} aria-describedby={e.message ? "k-message-err" : undefined} className={`${input} resize-y py-3`} style={{ borderColor: "#e3ddd8", color: ink, background: "#fbf9f7" }} />
                 {err("message")}
               </div>
               <fieldset className="mt-1">

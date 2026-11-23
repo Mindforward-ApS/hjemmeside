@@ -589,11 +589,11 @@ function Contact() {
 type Sep = 1 | 2 | 3;
 const tones: Record<Sep, string[]> = {
   // Marco 2026-11-23: the contact section is white now (was dark).
-  1: ["page", "peach", "white", "page", "white", "page", "cream", "white"],
+  1: ["page", "peach", "white", "page", "white", "page", "cream", "warm"],
   2: ["white", "peach", "white", "sand", "white", "sand", "white", "dark"],
   3: ["page", "page", "page", "page", "page", "page", "page", "dark"],
 };
-const toneBg: Record<string, string> = { page: c.page, cream: "#f6f1ea", white: "#ffffff", peach: "#f8ddd0", sand: "#ece4dd", dark: c.dark };
+const toneBg: Record<string, string> = { warm: "#fbf1e8", page: c.page, cream: "#f6f1ea", white: "#ffffff", peach: "#f8ddd0", sand: "#ece4dd", dark: c.dark };
 const names = ["Platformen", "Sådan kommer I i gang", "I praksis", "Øvemiljøet", "Pilotforløb", "Pris", "Spørgsmål og svar", "Kontakt"];
 
 function Sec({ sep, k, children }: { sep?: Sep; k: number; children: React.ReactNode }) {
