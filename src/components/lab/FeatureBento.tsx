@@ -1,6 +1,6 @@
 // Funktioner (Marco 2026-11-14, rebuilt 2026-11-23 on the price section's standard): six white cards with a hairline
 // border, left-aligned copy and the price section's buttons; the course certificate is the highlighted card in the
-// M logo's gradient frame. Real Mindforward content: the platform tour video, the approved certificate (V7) and the
+// M logo's gradient frame. Real Mindforward content: the platform recorded on a phone, the approved certificate (V7) and the
 // three tools' own logos. Phones: every card reads picture → title and text → button.
 import Image from "next/image";
 import Link from "next/link";
@@ -64,16 +64,21 @@ export function FeatureBento() {
             <CardButton href="#priser">Se priser</CardButton>
           </article>
 
-          {/* Korte lektioner */}
-          <article className={`${card} gap-6 md:col-span-2 lg:flex-row`} style={{ borderColor: line }}>
-            <div className="flex flex-col lg:w-[44%]">
-              <Copy title="Korte lektioner på dansk">Ti minutter om dagen, i det værktøj, I bruger.</Copy>
+          {/* Platformen på telefonen (Marco 2026-11-23): a real recording of the platform at phone size, in a phone frame */}
+          <article className={`${card} gap-6 md:col-span-2 lg:flex-row lg:items-center`} style={{ borderColor: line }}>
+            <div className="flex flex-col lg:w-[52%] lg:self-stretch">
+              <Copy title="Lær på telefonen">Hele platformen virker på mobilen: lektioner, kurser og dit kursusbevis. Ti minutter i toget er nok.</Copy>
               <p className="mt-5 text-[2.5rem] font-semibold leading-none tracking-[-0.03em] lg:mt-8 lg:text-[3rem]" style={{ color: ink }}>10 min</p>
-              <p className="mt-2 text-[0.9375rem]" style={{ color: muted }}>pr. lektion</p>
+              <p className="mt-2 text-[0.9375rem]" style={{ color: muted }}>pr. lektion, hvor du er</p>
               <div className="mt-auto"><CardButton href="#kurser">Se kurserne</CardButton></div>
             </div>
-            <div className="relative order-first aspect-[16/10] w-full overflow-hidden rounded-[14px] border lg:order-none lg:w-[56%] lg:self-center" style={{ borderColor: line, background: "#f5f2ef" }}>
-              <video src="/video/platform-tur.mp4" poster="/video/platform-tur-poster.jpg" autoPlay muted loop playsInline aria-label="Platformen: oversigt med kurser, øvetid og fremskridt" className="absolute inset-0 h-full w-full object-cover" />
+            <div className="order-first flex flex-1 justify-center lg:order-none">
+              <div className="relative w-[200px] rounded-[38px] p-[7px] shadow-[0_30px_60px_-28px_rgba(31,22,17,0.55)] lg:w-[188px]" style={{ background: "#0f0d0c" }}>
+                <div className="relative overflow-hidden rounded-[31px] bg-white" style={{ aspectRatio: "390 / 844" }}>
+                  <video src="/video/platform-mobil.mp4" poster="/video/platform-mobil-poster.jpg" autoPlay muted loop playsInline aria-label="Platformen på en telefon: oversigt, kurser og kursusbeviser" className="absolute inset-0 h-full w-full object-cover" />
+                </div>
+                <span aria-hidden className="absolute left-1/2 top-[13px] h-[18px] w-[64px] -translate-x-1/2 rounded-full" style={{ background: "#0f0d0c" }} />
+              </div>
             </div>
           </article>
 
