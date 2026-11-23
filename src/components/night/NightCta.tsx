@@ -1,5 +1,6 @@
 import { appLinks } from "@/lib/app";
 import Link from "next/link";
+import { GrebBtn } from "@/components/ui/GrebBtn";
 import { Icon } from "@/components/ui/Icon";
 
 // Closing panel: a coral horizon rising from the bottom edge, centred headline, two actions.
@@ -17,7 +18,7 @@ export function NightCta({ title = "Giv dine kunder svar i dag", sub = "14 dage 
             <h2 className="n-display mx-auto mt-8 max-w-[40rem]" style={{ fontSize: "clamp(2.25rem, 1rem + 3vw, 3.75rem)" }}>{title}</h2>
             <p className="mx-auto mt-5 max-w-[30rem] text-[1.0625rem] text-muted">{sub}</p>
             <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-              <Link href={primary.href} className="n-btn n-btn-primary"><Icon name="arrowRight" size={18} /> {primary.label}</Link>
+              <GrebBtn href={primary.href} onDark>{primary.label}</GrebBtn>
               <Link href={secondary.href} className="n-btn n-btn-dark"><Icon name="clock" size={16} /> {secondary.label}</Link>
             </div>
           </div>

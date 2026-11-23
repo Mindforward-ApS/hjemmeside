@@ -60,3 +60,6 @@
   .greb-btn:hover, .greb-btn:active .greb-btn__circle { transform: none; }
   .greb-btn:hover::before, .greb-btn:hover::after { animation: none; }
 }
+/* Full-width variant (forms, price cards): label left, circle right. */
+.greb-btn.greb-btn--full { display: flex; width: 100%; }
+.greb-btn:disabled { opacity: .6; cursor: progress; }

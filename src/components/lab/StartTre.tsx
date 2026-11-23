@@ -6,7 +6,7 @@
 // A · Tidslinje: numbered dots on one line, a card per step with its product piece.
 // B · Fast venstre: heading and button stay put on the left while four big step cards scroll past on the right.
 // C · Bento: one big first step, the other three around it in a grid, each with its product piece.
-import Link from "next/link";
+import { GrebBtn } from "@/components/ui/GrebBtn";
 import { appLinks } from "@/lib/app";
 import { UiStage } from "@/components/lab/uiMotion";
 import { UiInvite, UiLesson, UiScore, UiTeam } from "@/components/lab/StartCalendly";
@@ -33,10 +33,7 @@ function Label() {
 }
 function Pill() {
   return (
-    <Link href={appLinks.startBusiness} className="nf-focus nf-press group inline-flex h-14 items-center gap-2.5 rounded-[52px] px-7 text-[1rem] font-bold tracking-[-0.5px]" style={{ background: c.cta, color: c.ink }}>
-      Start et kursus
-      <svg width="13" height="13" viewBox="0 0 12 12" aria-hidden className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"><path d="M3 9 9 3M4 3h5v5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-    </Link>
+    <GrebBtn href={appLinks.startBusiness} onDark>Start et kursus</GrebBtn>
   );
 }
 // The product piece on a soft tray; plays its little animation when it scrolls into view.

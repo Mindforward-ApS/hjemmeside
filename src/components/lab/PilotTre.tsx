@@ -4,7 +4,7 @@
 // photos are placeholders. A · Tekst venstre, billede højre. B · Mørkt kort venstre, to billeder højre.
 // C · Centreret overskrift, fire fordele som kort med billede, knap under.
 import Image from "next/image";
-import Link from "next/link";
+import { GrebBtn } from "@/components/ui/GrebBtn";
 import { Icon } from "@/components/ui/Icon";
 import { Ph } from "@/components/lab/Forside2";
 
@@ -30,10 +30,7 @@ function Label({ children, light = false }: { children: React.ReactNode; light?:
 }
 function Pill({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <Link href={href} className="nf-focus nf-press group inline-flex h-14 items-center gap-2.5 rounded-[52px] px-7 text-[1rem] font-bold tracking-[-0.5px]" style={{ background: c.cta, color: c.ink }}>
-      {children}
-      <svg width="13" height="13" viewBox="0 0 12 12" aria-hidden className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"><path d="M3 9 9 3M4 3h5v5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-    </Link>
+    <GrebBtn href={href} onDark>{children}</GrebBtn>
   );
 }
 function MailChip() {

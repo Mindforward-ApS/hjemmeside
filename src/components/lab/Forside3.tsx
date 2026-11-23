@@ -6,6 +6,7 @@
 // photo panels. Same content as the live front page (Forside2); the live page is untouched.
 import Image from "next/image";
 import Link from "next/link";
+import { GrebBtn } from "@/components/ui/GrebBtn";
 import { Fragment, useActionState, useEffect, useRef, useState } from "react";
 import { APP_URL, appLinks } from "@/lib/app";
 import { contactAction, type FormState } from "@/lib/actions";
@@ -30,10 +31,7 @@ function Label({ children, light = false }: { children: React.ReactNode; light?:
 
 function Pill({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) {
   return (
-    <Link href={href} className={`nf-focus nf-press group inline-flex h-12 items-center gap-2 rounded-full px-6 text-[0.875rem] font-semibold transition-[filter] hover:brightness-105 ${className}`} style={{ background: c.cta, color: c.ink }}>
-      {children}
-      <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"><path d="M3 9 9 3M4 3h5v5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-    </Link>
+    <GrebBtn href={href} onDark className={className}>{children}</GrebBtn>
   );
 }
 
@@ -104,10 +102,7 @@ function Platform() {
               </div>
             ))}
             <p className="pt-6 text-[1rem] leading-6" style={{ color: "#6b625d" }}>Lektioner på dansk i ChatGPT, Copilot eller Claude. Hver lektion slutter med en opgave fra jeres egen hverdag, og lederen kan følge holdet.</p>
-            <Link href="/priser" className="nf-focus nf-press group mt-6 inline-flex h-14 items-center gap-2.5 self-start rounded-[52px] px-7 text-[1rem] font-bold tracking-[-0.5px]" style={{ background: c.cta, color: c.ink }}>
-              Se priser
-              <svg width="13" height="13" viewBox="0 0 12 12" aria-hidden className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"><path d="M3 9 9 3M4 3h5v5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-            </Link>
+            <GrebBtn href="/priser" onDark className="mt-6 self-start">Se priser</GrebBtn>
           </div>
           <div className="relative order-first xl:order-none">
             <div className="relative">
@@ -418,7 +413,7 @@ function Price() {
                   <ul className="mt-5 grid gap-4 rounded-[12px] border p-5" style={{ borderColor: "#5a4a44" }}>
                     {items.map((x) => <li key={x} className="flex items-center gap-3 text-[1rem] leading-6 text-white"><Check light />{x}</li>)}
                   </ul>
-                  <Link href={planHref[p.href]} className="nf-focus nf-press mt-8 flex h-[60px] items-center justify-center gap-2 rounded-[52px] text-[1rem] font-bold tracking-[-0.5px] transition-[filter] hover:brightness-105" style={{ background: c.cta, color: c.ink }}>{p.cta} <Arr /></Link>
+                  <GrebBtn href={planHref[p.href]} onDark className="greb-btn--full mt-8">{p.cta}</GrebBtn>
                 </div>
               </div>
             );
@@ -498,7 +493,7 @@ function Contact() {
             <span className="grid size-24 shrink-0 place-items-center rounded-[14px]" style={{ background: c.coralSoft }}><Image src="/icon.svg" alt="" width={44} height={44} unoptimized /></span>
             <div>
               <p className="text-[1rem] font-semibold leading-snug text-white">Hellere skrive direkte?</p>
-              <a href="mailto:kontakt@mindforward.dk" className="nf-focus mt-3 inline-flex h-10 items-center gap-2 rounded-full px-4 text-[0.8125rem] font-semibold" style={{ background: c.cta, color: c.ink }}>kontakt@mindforward.dk</a>
+              <GrebBtn href="mailto:kontakt@mindforward.dk" onDark className="mt-3">kontakt@mindforward.dk</GrebBtn>
             </div>
           </div>
         </div>
@@ -531,7 +526,7 @@ function Contact() {
               {state.errors?.message && <span className="text-[0.8125rem]" style={{ color: c.coralText }}>{state.errors.message}</span>}
             </label>
           </div>
-          <button type="submit" disabled={pending} className="nf-focus mt-7 h-14 w-full rounded-full text-[0.9375rem] font-semibold transition-[filter] hover:brightness-105 disabled:opacity-60" style={{ background: c.cta, color: c.ink }}>{pending ? "Sender …" : "Send"}</button>
+          <GrebBtn disabled={pending} onDark className="greb-btn--full mt-7">{pending ? "Sender …" : "Send"}</GrebBtn>
           <p className="mt-4 flex items-center gap-2 text-[0.8125rem]" style={{ color: c.muted }}>
             <Icon name="check" size={14} />{state.ok ? state.message : "Vi bruger kun dine oplysninger til at svare dig."}
           </p>

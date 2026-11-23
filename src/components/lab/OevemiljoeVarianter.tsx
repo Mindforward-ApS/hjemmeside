@@ -5,7 +5,7 @@
 // A · Billede venstre: dark band, big screenshot box left, label + heading + text + three steps right.
 // B · Tekst venstre, kort højre: light, heading and steps left, a tall card right with screenshot, score and feedback.
 // C · Delt i tre: light, centred heading, then step cards left and right of a big screenshot in the middle.
-import Link from "next/link";
+import { GrebBtn } from "@/components/ui/GrebBtn";
 import { appLinks } from "@/lib/app";
 import { Icon } from "@/components/ui/Icon";
 import { Ph } from "@/components/lab/Forside2";
@@ -32,10 +32,7 @@ function Label({ children, light = false }: { children: React.ReactNode; light?:
 }
 function Pill({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <Link href={href} className="nf-focus nf-press group inline-flex h-14 items-center gap-2.5 rounded-[52px] px-7 text-[1rem] font-bold tracking-[-0.5px]" style={{ background: c.cta, color: c.ink }}>
-      {children}
-      <svg width="13" height="13" viewBox="0 0 12 12" aria-hidden className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"><path d="M3 9 9 3M4 3h5v5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-    </Link>
+    <GrebBtn href={href} onDark>{children}</GrebBtn>
   );
 }
 function Score({ dark = false }: { dark?: boolean }) {

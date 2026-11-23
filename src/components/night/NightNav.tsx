@@ -2,6 +2,7 @@
 
 import { appLinks } from "@/lib/app";
 import Link from "next/link";
+import { GrebBtn } from "@/components/ui/GrebBtn";
 import { useEffect, useState } from "react";
 import { site } from "@/content/site";
 import { Logo } from "@/components/ui/Logo";
@@ -49,7 +50,7 @@ export function NightNav() {
             </li>
           ))}
         </ul>
-        <Link href={appLinks.signup} className="n-btn n-btn-primary mt-8 w-full">Prøv gratis i 14 dage</Link>
+        <GrebBtn href={appLinks.signup} onDark className="greb-btn--full mt-8">Prøv gratis i 14 dage</GrebBtn>
       </div>
     </header>
   );
