@@ -495,7 +495,11 @@ export function Faq() {
             <span className="block size-[84px] shrink-0 overflow-hidden rounded-full" style={{ boxShadow: "0 0 0 1px #0f0d0c, 0 12px 30px -8px rgba(31,22,17,0.35)" }}><Image src="/img/marco-2.jpg" alt="Marco Nielsen" width={96} height={96} className="size-full object-cover" /></span>
             <h3 className={`${head} mt-5 text-[1.75rem] font-normal leading-tight tracking-[-0.01em]`} style={{ color: c.ink }}>Hellere skrive direkte?</h3>
             <p className="mb-5 mt-2 text-[1.125rem] leading-7" style={{ color: "rgba(31,22,17,0.64)" }}>Lad os tale om jeres hold.</p>
-            <a href="mailto:kontakt@mindforward.dk" className="nf-focus mt-auto block self-stretch rounded-[14px] border px-[30px] py-3 text-center text-[1.0625rem] font-medium transition-colors hover:bg-[rgba(28,28,30,0.05)]" style={{ borderColor: "rgba(31,22,17,0.16)", color: "#1c1c1e" }}>kontakt@mindforward.dk</a>
+            {/* Marco 2026-11-23: the site's secondary button (white twin of the orange one), with a mail icon in the circle. */}
+            <a href="mailto:kontakt@mindforward.dk" className="greb-btn greb-btn--light mt-auto">
+              <span>kontakt@mindforward.dk</span>
+              <span className="greb-btn__circle" aria-hidden="true"><Icon name="mail" size={15} /></span>
+            </a>
           </div>
         </div>
         <div data-mind="peek" data-mind-react="think" className="flex flex-col gap-5">
