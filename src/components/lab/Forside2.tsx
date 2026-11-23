@@ -592,7 +592,7 @@ function Contact() {
    2 · Paneler: each section is a rounded panel inset from the window, with a strip of page colour between panels.
    3 · Linjer og numre: one background, a hairline and a numbered heading row ("01 Platformen") opening each section.
    In white areas the white cards turn page-coloured so they still read as cards. */
-type Sep = 1 | 2 | 3 | 4 | 5;
+type Sep = 1 | 2 | 3 | 4 | 5 | 6;
 const tones: Record<Sep, string[]> = {
   // Marco 2026-11-23: the contact section is white now (was dark).
   // Marco 2026-11-23: FAQ white so it stands off the cream price section above.
@@ -602,8 +602,10 @@ const tones: Record<Sep, string[]> = {
   // Marco 2026-11-23 "for mange forskellige farver": 4 = white and sand alternating, 5 = all white (cards turn sand).
   4: ["page", "white", "page", "white", "page", "white", "page", "white"],
   5: ["white", "white", "white", "white", "white", "white", "white", "white"],
+  // Marco 2026-11-23: one surface for the whole page, the hero photo blurred so far it is barely visible.
+  6: ["clear", "clear", "clear", "clear", "clear", "clear", "clear", "clear"],
 };
-const toneBg: Record<string, string> = { warm: "#fbf1e8", page: c.page, cream: "#f6f1ea", white: "#ffffff", peach: "#f8ddd0", sand: "#ece4dd", dark: c.dark };
+const toneBg: Record<string, string> = { clear: "transparent", warm: "#fbf1e8", page: c.page, cream: "#f6f1ea", white: "#ffffff", peach: "#f8ddd0", sand: "#ece4dd", dark: c.dark };
 const names = ["Platformen", "Sådan kommer I i gang", "I praksis", "Øvemiljøet", "Pilotforløb", "Pris", "Spørgsmål og svar", "Kontakt"];
 
 function Sec({ sep, k, children }: { sep?: Sep; k: number; children: React.ReactNode }) {
@@ -631,7 +633,10 @@ function Sec({ sep, k, children }: { sep?: Sep; k: number; children: React.React
 export function Forside2({ practice, pilot, sep, steps }: { practice?: React.ReactNode; pilot?: React.ReactNode; sep?: Sep; steps?: React.ReactNode } = {}) {
   const parts = [<Platform key="p" />, steps ?? <FeatureBento key="s" />, <Cases key="c" />, practice ?? <Practice key="o" />, pilot ?? <Pilot key="l" />, <Price key="r" />, <Faq key="f" />, <KontaktSide key="k" heading="h2" id="kontakt" />];
   return (
-    <div style={{ background: c.page }}>
+    <div className="relative isolate" style={{ background: sep === 6 ? "transparent" : c.page }}>
+      {/* Marco 2026-11-23: the hero photo, blurred and veiled until it is barely visible, sits still behind every section.
+          A fixed layer instead of background-attachment: fixed, which iPhones ignore. */}
+      {sep === 6 && <div aria-hidden className="pointer-events-none fixed inset-0 -z-10" style={{ background: `${c.page} url(/img/side-sloer.jpg) center / cover no-repeat` }} />}
       {/* In white areas the white cards and buttons switch to the page colour so they still read as cards. */}
       <style>{`[data-tone="white"] .bg-white { background-color: ${c.page}; } [data-tone="sand"] .bg-white { background-color: #fff; }`}</style>
       {/* Marco 2026-11-23: the problem comes right after the hero; the video testimonials row is gone (the videos are in the hero). */}

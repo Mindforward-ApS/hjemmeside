@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className={`${bebas.variable} ${geist.variable}`}>
-      <NyForside layout="ny" practice="b" pilot="a" sep={1} />
+      <NyForside layout="ny" practice="b" pilot="a" sep={6} />
     </div>
   );
 }
