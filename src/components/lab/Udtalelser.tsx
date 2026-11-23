@@ -27,7 +27,7 @@ export function Udtalelser() {
         <h2 id="udtalelser-title" className="text-[2.125rem] font-medium leading-[1.08] tracking-[-0.02em] lg:text-[3.25rem]" style={{ color: "#fff" }}>Det siger<br />vores testbrugere</h2>
         <p className="max-w-[460px] text-[1.0625rem] leading-[26px] text-white/65">Vi tester Mindforward med rigtige hold. Her kommer deres egne ord på video.</p>
       </div>
-      <div className="ud-row mt-[72px] overflow-hidden lg:mt-10">
+      <div data-mind="peek" className="ud-row mt-[72px] overflow-hidden lg:mt-10">
         <ul className="ud-track flex w-max gap-[22px] lg:gap-7">
           {[...cards, ...cards].map((n, k) => <Card key={k} name={n} />)}
         </ul>

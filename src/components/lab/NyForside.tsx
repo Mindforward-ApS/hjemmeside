@@ -13,6 +13,7 @@ import Link from "next/link";
 import { GrebBtn } from "@/components/ui/GrebBtn";
 import { HeroStories } from "@/components/lab/HeroStories";
 import { LaunchBar } from "@/components/lab/LaunchBar";
+import { MindDirector } from "@/components/mind/MindDirector";
 import "./knapper.css";
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { appLinks } from "@/lib/app";
@@ -139,7 +140,7 @@ export function Nav({ switcher, cta = "Sign up" }: { switcher?: ReactNode; cta?:
   const siteMode = useSiteMode();
   return (
     <header className={`${wrap} relative z-20 flex h-20 items-center gap-6`}>
-      <Link href="/" aria-label="Mindforward forside"><MindforwardLogo size={30} /></Link>
+      <Link href="/" aria-label="Mindforward forside"><MindforwardLogo size={30} live /></Link>
       <ul className="mx-auto hidden items-center gap-8 text-[0.9375rem] text-white/80 lg:flex">
         {([["Kurser", "#kurser"], ["Sådan virker det", "#saadan"], ["For virksomheder", "#virksomheder"], ["Priser", "#priser"]] as const).map(([l, href]) => (
           <li key={l}><Link href={href} className="nf-focus relative rounded-[4px] transition-colors after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:text-white hover:after:scale-x-100">{l}</Link></li>
@@ -800,6 +801,8 @@ export function NyForside({ miwa, toggle = false, uiMode = "off", hero = "video"
   return (
     <UiMotionProvider mode={uiMode}>
     <div ref={root} data-page className="bg-white">
+      {/* Marco 2026-11-23: MIND, the living logo (only on the new home page). */}
+      {layout === "ny" && !miwa && <MindDirector />}
       <style>{`
         @keyframes nfFloat { 0%,100% { transform: translateY(0) rotate(var(--r,0deg)); } 50% { transform: translateY(-10px) rotate(var(--r,0deg)); } }
         .nf-float { transform: rotate(var(--r,0deg)); animation: nfFloat var(--float-d,5s) ease-in-out var(--delay,0s) infinite; }

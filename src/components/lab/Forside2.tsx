@@ -63,14 +63,23 @@ function PlatformVideo() {
   const v = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
   const play = () => { setPlaying(true); const el = v.current; if (el) { el.currentTime = 0; el.play().catch(() => {}); } };
+  const root = useRef<HTMLDivElement>(null);
+  // MIND presses play (MindDirector): muted + inline so browsers allow it without a tap; paused again when it leaves.
+  useEffect(() => {
+    const r = root.current; if (!r) return;
+    const mindPlay = () => { const el = v.current; if (!el || playing) return; el.muted = true; el.playsInline = true; el.currentTime = 0; el.play().then(() => setPlaying(true)).catch(() => {}); };
+    const mindPause = () => { const el = v.current; if (el && el.muted) { el.pause(); setPlaying(false); } };
+    r.addEventListener("mind:play", mindPlay); r.addEventListener("mind:pause", mindPause);
+    return () => { r.removeEventListener("mind:play", mindPlay); r.removeEventListener("mind:pause", mindPause); };
+  }, [playing]);
   return (
-    <div className="absolute inset-0 bg-[#ece4df]">
+    <div ref={root} data-mind="play" className="absolute inset-0 bg-[#ece4df]">
       <video ref={v} src="/video/produkt-video.mp4" poster="/video/produkt-video-poster.jpg" controls={playing} playsInline preload="metadata" onEnded={() => setPlaying(false)} className="h-full w-full object-cover" aria-label="Produktvideo: sådan virker Mindforward" />
       {!playing && (
         // Start image (Marco 2026-11-23): "Sådan kommer du i gang med Mindforward" over a dark veil, with the play button.
         <button type="button" onClick={play} aria-label="Afspil videoen: Sådan kommer du i gang med Mindforward, 50 sekunder" className="nf-focus group absolute inset-0 flex flex-col items-center justify-center gap-5 px-6 text-center backdrop-blur-[6px]" style={{ background: "linear-gradient(180deg, rgba(20,13,11,0.62), rgba(20,13,11,0.78))" }}>
           <span className="max-w-[18ch] text-[clamp(1.5rem,1rem+1.6vw,2.5rem)] font-semibold leading-[1.1] tracking-[-0.03em] text-white">Sådan kommer du i gang med Mindforward</span>
-          <span className="grid size-[4.5rem] place-items-center rounded-full bg-white shadow-[0_10px_30px_-8px_rgba(32,22,19,0.45)] transition-transform duration-300 group-hover:scale-110" style={{ color: "#f8400a" }}>
+          <span data-mind-button className="grid size-[4.5rem] place-items-center rounded-full bg-white shadow-[0_10px_30px_-8px_rgba(32,22,19,0.45)] transition-transform duration-300 group-hover:scale-110" style={{ color: "#f8400a" }}>
             <svg width="22" height="24" viewBox="0 0 22 24" aria-hidden className="translate-x-[2px]"><path d="M2 2.2v19.6c0 1 1.1 1.6 2 1.1l16.3-9.8c.8-.5.8-1.7 0-2.2L4 1.1C3.1.6 2 1.2 2 2.2z" fill="currentColor" /></svg>
           </span>
         </button>
@@ -264,7 +273,7 @@ function Cases() {
         <div className="mt-12">
           <ul className="flex gap-5 transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] [--cw:86vw] md:[--cw:44vw] lg:[--cw:calc((100vw-7vw-2.5rem)/3)] lg:!transform-none" style={{ transform: `translateX(calc(${-i} * (var(--cw) + 1.25rem)))` }}>
             {cases.map((x) => (
-              <li key={x.tag} className="flex w-[var(--cw)] shrink-0 rounded-[24px] bg-white p-4 sm:p-5">
+              <li key={x.tag} data-mind={x === cases[0] ? "press" : undefined} className="flex w-[var(--cw)] shrink-0 rounded-[24px] bg-white p-4 sm:p-5">
                 <div className="flex w-full flex-col p-3 sm:p-4">
                   <span className="flex items-center gap-2 self-start rounded-[12px] px-4 py-2.5 text-[0.9375rem] font-semibold" style={{ background: c.page, color: c.ink }}><Image src={x.logo} alt="" width={20} height={20} className="size-5 rounded-[5px]" />{x.tag}</span>
                   <h3 className={`${head} mt-6 text-[1.5rem] leading-snug tracking-[-0.015em]`} style={{ color: c.ink }}>{x.t}</h3>
@@ -449,7 +458,7 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
           </div>
         </div>
         {plans.map((p) => p.featured ? (
-          <div key={p.id} className="pris-glow relative flex flex-col rounded-[22px] p-[3px] lg:self-end">
+          <div key={p.id} data-mind="peek" className="pris-glow relative flex flex-col rounded-[22px] p-[3px] lg:self-end">
             <p className="relative px-4 pb-2 pt-1.5 text-center text-[0.875rem] font-semibold text-white [text-shadow:0_1px_2px_rgba(120,20,0,0.45)]">{p.tab}</p>
             <div className="relative flex-1 rounded-[19px] bg-white">{card(p)}</div>
           </div>
@@ -489,7 +498,7 @@ export function Faq() {
             <a href="mailto:kontakt@mindforward.dk" className="nf-focus mt-auto block self-stretch rounded-[14px] border px-[30px] py-3 text-center text-[1.0625rem] font-medium transition-colors hover:bg-[rgba(28,28,30,0.05)]" style={{ borderColor: "rgba(31,22,17,0.16)", color: "#1c1c1e" }}>kontakt@mindforward.dk</a>
           </div>
         </div>
-        <div className="flex flex-col gap-5">
+        <div data-mind="peek" data-mind-react="think" className="flex flex-col gap-5">
           {faq.map((f, k) => (
             <details key={f.q} name="faq" open={k === 0} className="group rounded-[16px]" style={{ background: "#fbf8f3", boxShadow: faqCard }}>
               <summary className="nf-focus flex cursor-pointer list-none items-center justify-between gap-6 px-[22px] py-5 text-[1.25rem] leading-[1.25] sm:px-7 sm:py-[22px] lg:text-[1.5rem] [&::-webkit-details-marker]:hidden" style={{ color: c.ink }}>

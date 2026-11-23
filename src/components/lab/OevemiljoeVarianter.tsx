@@ -89,7 +89,7 @@ export function B() {
           </ul>
         </div>
         <div className="grid gap-6">
-          <div className="overflow-hidden rounded-[32px] p-3" style={{ background: "#ece4df" }}>
+          <div data-mind="peek" className="overflow-hidden rounded-[32px] p-3" style={{ background: "#ece4df" }}>
             {/* The øvemiljø screen (task, the learner's prompt, the AI's answer); the score sits in its own card below. */}
             <OevemiljoeSkaerm n={999} step={1} className="rounded-[20px]" />
           </div>

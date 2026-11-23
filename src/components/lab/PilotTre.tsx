@@ -51,7 +51,7 @@ export function A() {
           <ul className="mt-10 grid gap-5">
             {points.map((p) => <li key={p.t} className="flex items-center gap-3 text-[1.25rem] font-semibold tracking-[-0.3px]" style={{ color: c.ink }}><Icon name={p.icon} size={18} />{p.t}</li>)}
           </ul>
-          <div className="mt-10"><Pill href="/kontakt">Book 15 min</Pill></div>
+          <div className="mt-10"><span data-mind="press" className="inline-block"><Pill href="/kontakt">Book 15 min</Pill></span></div>
         </div>
         <div className="relative overflow-hidden rounded-[32px] lg:order-1">
           <div className="relative aspect-[628/720] w-full"><Image src="/img/unsplash/team.jpg" alt="Et team arbejder sammen ved en laptop" fill sizes="(min-width: 1024px) 44vw, 100vw" className="object-cover" /></div>
