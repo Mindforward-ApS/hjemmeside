@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useActionState } from "react";
 import { contactAction, type FormState } from "@/lib/actions";
+import { GrebBtn } from "@/components/ui/GrebBtn";
 
 // Contact section on the front page and the /kontakt page (Marco 2026-11-23): heading and intro top left, three promises and Marco's card bottom left, the form
 // in a soft panel on the right with topic checkboxes. Same type scale and container as the price section.
@@ -20,7 +21,7 @@ export function KontaktSide({ heading: H = "h1", id }: { heading?: "h1" | "h2"; 
     <section id={id} className="py-[100px]" style={{ background: "#fff" }}>
       <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-12 px-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] lg:gap-x-20 lg:px-[3.5vw]">
         <div className="flex min-w-0 flex-col">
-          <H className="font-semibold leading-[1.05] tracking-[-0.03em] text-[clamp(2.25rem,1.6rem+1.8vw,3rem)]" style={{ color: ink }}>Kom i kontakt</H>
+          <H className="font-semibold leading-[1.05] tracking-[-0.03em] text-[clamp(2.25rem,1.6rem+1.8vw,3rem)]" style={{ color: ink }}>Lad os tage en snak</H>
           <p className="mt-4 max-w-[26rem] text-[1rem] leading-6" style={{ color: muted }}>Fortæl lidt om jeres hold, og hvad I gerne vil blive bedre til med AI. Så vender jeg tilbage.</p>
           {/* Marco 2026-11-23: the promises sit right under the intro; Marco's card stays at the bottom. */}
           <ul className="mt-8 grid gap-3">
@@ -31,18 +32,23 @@ export function KontaktSide({ heading: H = "h1", id }: { heading?: "h1" | "h2"; 
                 </li>
               ))}
           </ul>
-          <div className="mt-10 lg:mt-auto lg:mb-14">
-            <div className="flex items-center gap-4">
-              <Image src="/img/marco-2.jpg" alt="" width={52} height={52} className="size-[52px] rounded-full object-cover" />
+          {/* Marco 2026-11-23 ("mere indbydende"): a bigger photo and a short greeting, so it feels like writing to a person. */}
+          <figure className="mt-10 max-w-[28rem] rounded-[18px] border p-6 lg:mt-auto lg:mb-6" style={{ borderColor: "#ece6e1", background: "#fbf9f7" }}>
+            <blockquote className="text-[1.125rem] leading-[1.5]" style={{ color: ink }}>“Jeg læser selv alle beskeder og svarer inden for en hverdag. Skriv bare løs, også hvis I kun er nysgerrige.”</blockquote>
+            <figcaption className="mt-5 flex items-center gap-4">
+              <Image src="/img/marco-2.jpg" alt="Marco Nielsen" width={72} height={72} className="size-[72px] rounded-full object-cover" />
               <div>
                 <p className="text-[1.0625rem] font-medium" style={{ color: ink }}>Marco Nielsen</p>
                 <p className="text-[0.9375rem]" style={{ color: muted }}>Founder og Succes Manager</p>
               </div>
-            </div>
-          </div>
+            </figcaption>
+          </figure>
         </div>
 
-        <div className="min-w-0 rounded-[16px] p-6 sm:p-7" style={{ background: "#f5f2ef" }}>
+        <div className="relative min-w-0">
+        {/* Soft orange glow behind the form, in the M logo's colours (same family as the featured price card). */}
+        <div aria-hidden className="kontakt-glow pointer-events-none absolute -inset-3 -z-0 rounded-[28px]" />
+        <div className="relative rounded-[16px] p-6 sm:p-7" style={{ background: "#f5f2ef" }}>
           {state.ok ? (
             <p role="status" className="flex min-h-[320px] items-center justify-center text-center text-[1.125rem] font-medium" style={{ color: ink }}>{state.message}</p>
           ) : (
@@ -74,10 +80,12 @@ export function KontaktSide({ heading: H = "h1", id }: { heading?: "h1" | "h2"; 
                   ))}
                 </div>
               </fieldset>
-              <button type="submit" disabled={pending} className="mt-1 h-11 w-full rounded-full text-[0.9375rem] font-semibold text-white transition hover:bg-black disabled:opacity-60" style={{ background: ink }}>{pending ? "Sender …" : "Send besked"}</button>
+              <GrebBtn disabled={pending} className="greb-btn--full mt-1">{pending ? "Sender …" : "Send besked"}</GrebBtn>
+              <p className="text-center text-[0.9375rem]" style={{ color: muted }}>Hellere skrive direkte? <a href="mailto:kontakt@mindforward.dk" className="font-medium underline underline-offset-4" style={{ color: ink }}>kontakt@mindforward.dk</a></p>
               {state.message && !state.ok && <p role="alert" className="text-[0.875rem]" style={{ color: "#b8452c" }}>{state.message}</p>}
             </form>
           )}
+        </div>
         </div>
       </div>
     </section>
