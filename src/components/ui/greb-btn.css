@@ -63,3 +63,5 @@
 /* Full-width variant (forms, price cards): label left, circle right. */
 .greb-btn.greb-btn--full { display: flex; width: 100%; }
 .greb-btn:disabled { opacity: .6; cursor: progress; }
+/* Light twin for secondary choices next to an orange one (price cards): same size and circle, white fill. */
+.greb-btn.greb-btn--light { --fill: linear-gradient(#fff, #fff); --rim: rgba(32,22,19,.28), rgba(32,22,19,.18) 42%, rgba(32,22,19,.14) 82%; color: #201613; box-shadow: 0 1px 1px rgba(0,0,0,.08), 0 3px 6px -2px rgba(0,0,0,.08); }

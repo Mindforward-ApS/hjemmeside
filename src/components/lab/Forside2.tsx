@@ -431,7 +431,7 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
                 <ul className="mt-5 grid gap-4 rounded-[12px] border p-5" style={{ borderColor: "#e3ddd8" }}>
                   {items.map((x) => <li key={x} className="flex items-center gap-3 text-[1rem] leading-6" style={{ color: "#6b625d" }}><Check />{x}</li>)}
                 </ul>
-                <Link href={planHref[p.href]} className="nf-focus nf-press mt-10 flex h-16 items-center justify-center gap-2 rounded-[52px] border text-[1rem] font-bold tracking-[-0.5px] transition-colors hover:bg-[#f5f2ef]" style={{ borderColor: "#8f8a86", color: "#6b625d" }}>{p.cta} <Arr /></Link>
+                <GrebBtn href={planHref[p.href]} className="greb-btn--full greb-btn--light mt-10">{p.cta}</GrebBtn>
               </div>
             );
           })}
