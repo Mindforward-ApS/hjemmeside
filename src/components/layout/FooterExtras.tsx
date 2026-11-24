@@ -6,7 +6,7 @@ const pay = [
   ["Visa", "/pay/visa-c.svg", 46],
   ["Mastercard", "/pay/mastercard-c.svg", 34],
   ["Apple Pay", "/pay/applepay-c.svg", 46],
-  ["Google Pay", "/pay/googlepay-c.svg", 50],
+  ["Google Pay", "/pay/googlepay-w.svg", 50],
 ] as const;
 
 export function PaymentCarousel() {
@@ -18,9 +18,9 @@ export function PaymentCarousel() {
           <ul key={part} aria-hidden className="flex shrink-0 items-center gap-3 pr-3">
             {pay.map(([n, src, w]) => (
               <li key={n} className="grid h-11 w-[92px] place-items-center">
-                {/* No frame, original colours (Marco 2026-11-24). */}
+                {/* No frame, original colours; Apple Pay and the "Pay" in Google Pay in white so they read on brown (Marco 2026-11-24). */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt="" width={w} height={24} className="h-auto max-h-[28px] object-contain" style={{ width: w }} />
+                <img src={src} alt="" width={w} height={24} className="h-auto max-h-[28px] object-contain" style={{ width: w, filter: n === "Apple Pay" ? "brightness(0) invert(1)" : undefined }} />
               </li>
             ))}
           </ul>
