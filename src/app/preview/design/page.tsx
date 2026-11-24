@@ -52,6 +52,12 @@ const css = `
 .dp main :is(.rounded-\\[20px\\], .rounded-\\[24px\\], .rounded-\\[32px\\], .rounded-\\[34px\\]):is(.bg-white, [style*="#fbf8f3"], [style*="#f5f2ef"]):not(button):not(a) {
   box-shadow: 0 0 0 1px rgba(32,22,19,.07), inset 0 1px 0 rgba(255,255,255,.9), 0 1px 2px rgba(32,22,19,.05), 0 8px 16px -8px rgba(32,22,19,.08), 0 24px 40px -24px rgba(32,22,19,.18) !important; border-color: transparent !important; }
 
+/* 4 · Ét ikon-sprog (Marco 2026-11-24): samme stregtykkelse overalt, 18 px i alle lister, ét flueben (orange, 18 px). */
+.dp main svg:not(.greb-btn svg) :is(path, circle, rect, polyline, line)[stroke], .dp main svg[stroke]:not(.greb-btn svg) :is(path, circle, rect, polyline, line) { stroke-width: 1.75 !important; }
+.dp main li > svg:first-child { width: 18px !important; height: 18px !important; flex: none; }
+.dp main :is(#priser, #kontakt) li > svg:first-child { color: #f8580a !important; }
+.dp main ul[data-hero-in] > li > svg:first-child { width: 22px !important; height: 22px !important; } /* hero: større tekst, større ikon */
+
 /* 6 · Detaljer: tal i samme bredde, formularfelter 48 px, samme fokusring overalt. */
 .dp main { font-variant-numeric: tabular-nums; }
 .dp main :is(input:not([type=checkbox]):not([type=radio]), select) { min-height: 48px !important; border-radius: 12px !important; }
