@@ -23,9 +23,9 @@ export function SiteFooter() {
   const socials = ([["Instagram", c.social.instagram, InstagramLogoIcon], ["Facebook", c.social.facebook, FacebookLogoIcon], ["LinkedIn", c.social.linkedin, LinkedinLogoIcon], ["TikTok", c.social.tiktok, TiktokLogoIcon], ["YouTube", c.social.youtube, YoutubeLogoIcon]] as const);
   return (
     <>
-      <NewsletterBand />
       <footer style={{ color: ink, background: "linear-gradient(180deg, #201613 0%, #1a0f0c 100%)" }}>
-        <div className="px-6 pt-[124px] sm:pt-[148px] md:px-[3.5vw]">
+        <NewsletterBand />
+        <div className="px-6 pt-14 md:px-[3.5vw]">
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 pb-14 lg:grid-cols-[1.3fr_repeat(3,1fr)_1.2fr] lg:gap-8">
             <div className="col-span-2 lg:col-span-1">
               <MindforwardLogo size={28} />
