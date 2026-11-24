@@ -664,3 +664,5 @@ html.brun [data-brun] :is([class*="border"], [class*="border-t"]) { border-color
 html.brun [data-brun] .greb-btn:not(.greb-btn--light), html.brun [data-brun] .greb-btn:not(.greb-btn--light) * { color: #fff !important; }
 html.brun [data-brun] :is(.greb-btn--light, .greb-btn--light *) { color: #201613 !important; }
 html.brun [data-brun] span[style*="#ffeadb"] { color: #f8400a !important; }
+html.brun [data-brun] blockquote { border-color: #f8580a !important; }
+html.brun [data-brun] blockquote footer { color: rgba(255,255,255,0.5) !important; }

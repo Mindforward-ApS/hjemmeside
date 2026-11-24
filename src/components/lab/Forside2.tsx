@@ -501,6 +501,11 @@ export function Faq() {
             <span className="block size-[84px] shrink-0 overflow-hidden rounded-full" style={{ boxShadow: "0 0 0 1px #0f0d0c, 0 12px 30px -8px rgba(31,22,17,0.35)" }}><Image src="/img/marco-2.jpg" alt="Marco Nielsen" width={96} height={96} className="size-full object-cover" /></span>
             <h3 className={`${head} mt-5 text-[1.75rem] font-normal leading-tight tracking-[-0.01em]`} style={{ color: c.ink }}>Hellere skrive direkte?</h3>
             <p className="mb-5 mt-2 text-[1.125rem] leading-7" style={{ color: "rgba(31,22,17,0.64)" }}>Lad os tale om jeres hold.</p>
+            {/* Marco 2026-11-24: a short quote in his own words; fills the card and fits the questions next to it. */}
+            <blockquote className="mb-6 mt-2 border-l-2 pl-4 text-[1rem] italic leading-[1.6]" style={{ borderColor: "#f8580a", color: "rgba(31,22,17,0.72)" }}>
+              „Der findes ingen dumme spørgsmål om AI. Dem, der spørger, er dem, der kommer hurtigst i gang.“
+              <footer className="mt-2 text-[0.875rem] not-italic" style={{ color: "rgba(31,22,17,0.5)" }}>Marco Nielsen, stifter</footer>
+            </blockquote>
             {/* Marco 2026-11-23: the site's secondary button (white twin of the orange one), with a mail icon in the circle. */}
             <a href="mailto:kontakt@mindforward.dk" className="greb-btn greb-btn--light mt-auto">
               <span>kontakt@mindforward.dk</span>
