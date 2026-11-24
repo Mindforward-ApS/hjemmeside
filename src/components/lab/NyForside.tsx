@@ -138,6 +138,13 @@ function ToolCycler() {
 export function Nav({ switcher, cta = "Sign up" }: { switcher?: ReactNode; cta?: string } = {}) {
   // "Tilmeld jer" / "Tilmeld dig" open the app's onboarding for companies or private members.
   const siteMode = useSiteMode();
+  const [menu, setMenu] = useState(false);
+  useEffect(() => {
+    if (!menu) return;
+    const esc = (e: KeyboardEvent) => { if (e.key === "Escape") setMenu(false); };
+    addEventListener("keydown", esc);
+    return () => removeEventListener("keydown", esc);
+  }, [menu]);
   return (
     <header className={`${wrap} relative z-20 flex h-20 items-center gap-6`}>
       <Link href="/" aria-label="Mindforward forside"><MindforwardLogo size={30} live /></Link>
@@ -150,8 +157,28 @@ export function Nav({ switcher, cta = "Sign up" }: { switcher?: ReactNode; cta?:
         {/* Marco 2026-11-07: the Erhverv / Privat switch sits between Priser and Log ind (desktop). */}
         {switcher && <div className="hidden xl:block">{switcher}</div>}
         <Link href={appLinks.login} className="nf-focus hidden h-10 items-center rounded-full px-5 font-[family-name:var(--font-grotesk)] text-[13px] font-bold tracking-[-0.015em] text-white antialiased transition-colors hover:bg-white/10 sm:inline-flex">Log ind</Link>
-        <GrebBtn href={siteMode === "privat" ? appLinks.buyPrivate() : appLinks.startBusiness} onDark>{cta}</GrebBtn>
+        {/* Marco 2026-11-24: below desktop the button becomes a menu (three lines) with the links, Log ind and the CTA. */}
+        <span className="hidden lg:inline-flex"><GrebBtn href={siteMode === "privat" ? appLinks.buyPrivate() : appLinks.startBusiness} onDark>{cta}</GrebBtn></span>
+        <button type="button" aria-label={menu ? "Luk menu" : "Åbn menu"} aria-expanded={menu} aria-controls="mobil-menu" onClick={() => setMenu((v) => !v)}
+          className="nf-focus grid size-12 place-items-center rounded-full bg-white/10 text-white ring-1 ring-white/20 transition-colors hover:bg-white/15 lg:hidden">
+          <span aria-hidden className="relative block h-[14px] w-5">
+            <span className={`absolute left-0 h-[2px] w-5 rounded-full bg-current transition-transform duration-300 ${menu ? "top-[6px] rotate-45" : "top-0"}`} />
+            <span className={`absolute left-0 top-[6px] h-[2px] w-5 rounded-full bg-current transition-opacity duration-200 ${menu ? "opacity-0" : ""}`} />
+            <span className={`absolute left-0 h-[2px] w-5 rounded-full bg-current transition-transform duration-300 ${menu ? "top-[6px] -rotate-45" : "top-[12px]"}`} />
+          </span>
+        </button>
       </div>
+      {menu && (
+        <nav id="mobil-menu" aria-label="Menu" className="mobil-menu absolute inset-x-5 top-[76px] z-50 rounded-[22px] bg-[#201613] p-3 shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_24px_48px_-12px_rgba(0,0,0,0.6)] sm:inset-x-[3.5vw] lg:hidden">
+          <ul className="grid">
+            {([["Kurser", "#kurser"], ["Sådan virker det", "#saadan"], ["Priser", "#priser"], ["Blog", "/blog"], ["Log ind", appLinks.login]] as const).map(([l, href]) => (
+              <li key={l}><Link href={href} onClick={() => setMenu(false)} className="nf-focus flex h-12 items-center rounded-[14px] px-4 text-[1.0625rem] font-medium text-white transition-colors hover:bg-white/[0.06]">{l}</Link></li>
+            ))}
+          </ul>
+          <div className="mt-2 border-t border-white/10 p-2 pt-4"><GrebBtn href={siteMode === "privat" ? appLinks.buyPrivate() : appLinks.startBusiness} onDark className="greb-btn--full">{cta}</GrebBtn></div>
+          <style>{`.mobil-menu { animation: mm-in .22s cubic-bezier(.16,1,.3,1); transform-origin: top right; } @keyframes mm-in { from { opacity: 0; transform: translateY(-6px) scale(.98); } } @media (prefers-reduced-motion: reduce) { .mobil-menu { animation: none; } }`}</style>
+        </nav>
+      )}
     </header>
   );
 }
