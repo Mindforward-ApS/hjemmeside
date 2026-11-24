@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { appLinks } from "@/lib/app";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { VaerktoejBeam } from "./VaerktoejBeam";
 
 const ink = "#0f0d0c";
 const muted = "#4a4440";
@@ -141,7 +142,9 @@ export function FeatureBento() {
 
           {/* Øv i jeres værktøj */}
           <article className={card} style={{ borderColor: line }}>
-            <div className="mb-6 flex flex-1 items-center justify-center gap-3">
+            {/* ui-new: our logo on top with beams running to each tool (preview /preview/ui). */}
+            <div className="ui-new mb-6 flex-1 content-center"><VaerktoejBeam /></div>
+            <div className="ui-old mb-6 flex flex-1 items-center justify-center gap-3">
               {[["chatgpt", "ChatGPT"], ["copilot", "Copilot"], ["claude", "Claude"]].map(([f, n]) => (
                 <div key={f} className="flex flex-col items-center gap-2">
                   <span className="grid size-16 place-items-center rounded-full border bg-white" style={{ borderColor: line }}><Image src={`/logos/${f}.png`} alt="" width={34} height={34} /></span>
