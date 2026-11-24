@@ -51,10 +51,10 @@ export function SiteFooter() {
             <div className="col-span-2 lg:col-span-1">
               <h2 className="text-[1.0625rem] font-semibold tracking-[-0.01em]" style={{ color: ink }}>Kontakt os</h2>
               <a href={`tel:${c.phone.replace(/\s/g, "")}`} className="mt-5 flex items-center gap-2.5 text-[0.9375rem] tabular-nums transition-colors hover:text-[#fb970a]" style={{ color: ink }}>
-                <PhoneIcon size={20} weight="bold" aria-hidden style={{ color: "#f8400a" }} />30 12 70 10
+                <PhoneIcon size={20} weight="bold" aria-hidden />30 12 70 10
               </a>
               <a href={`mailto:${c.email}`} className="mt-3.5 flex items-center gap-2.5 text-[0.9375rem] transition-colors hover:text-[#fb970a]" style={{ color: ink }}>
-                <EnvelopeSimpleIcon size={20} weight="bold" aria-hidden style={{ color: "#f8400a" }} />{c.email}
+                <EnvelopeSimpleIcon size={20} weight="bold" aria-hidden />{c.email}
               </a>
               <p className="mt-3 text-[0.875rem]" style={{ color: muted }}>{c.responsePromise}</p>
             </div>
@@ -62,7 +62,7 @@ export function SiteFooter() {
         </div>
         <div className="border-t" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
           <div className="flex flex-col gap-4 px-6 py-7 text-[0.9375rem] md:flex-row md:items-center md:justify-between md:px-[3.5vw]">
-            <p style={{ color: muted }}>© {c.year} {[c.legalName, c.cvr, c.address].filter((v) => !v.startsWith("[")).join(" · ")}. Alle rettigheder forbeholdes.</p>
+            <p style={{ color: muted }}>© {c.year} Mindforward</p>
             <ul className="flex flex-wrap gap-x-7 gap-y-2">
               {legal.map(([label, href]) => <li key={label}><Link href={href} className="transition-colors hover:text-[#fb970a]">{label}</Link></li>)}
             </ul>
