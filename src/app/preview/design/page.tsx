@@ -19,6 +19,17 @@ const css = `
   box-shadow: inset 0 0 0 1px rgba(32,22,19,.12), 0 1px 1px rgba(0,0,0,.06), 0 3px 6px -2px rgba(0,0,0,.08), 0 12px 20px -12px rgba(0,0,0,.16) !important; }
 .dp main :is(${P}, ${S}):active { box-shadow: inset 0 2px 6px rgba(120,20,0,.45) !important; transform: translateY(0) !important; }
 
+/* 1b · Samme form på alle knapper: højde 43, Tilmeld-skriften, pil i mørk cirkel til højre, så bred som teksten. */
+.dp main :is(.nf-press.h-11, .nf-press.h-\\[43px\\]), .dp .nf-focus.h-9 {
+  display: inline-flex !important; width: auto !important; align-self: flex-start !important; justify-content: flex-start !important;
+  gap: 1.18em !important; height: 43px !important; min-height: 0 !important; padding: 5px 5px 5px 22px !important; border-radius: 999px !important;
+  font: 700 13px/1.2 var(--font-grotesk), system-ui, sans-serif !important; letter-spacing: -.015em !important; }
+.dp main .nf-press.h-11 > svg, .dp .nf-focus.h-9 > svg {
+  order: 2; width: 33px !important; height: 33px !important; padding: 10px; box-sizing: border-box; flex: none;
+  border-radius: 50%; background: #1a0e08; color: #fff; transform: rotate(-45deg); }
+.dp main .nf-press.h-\\[43px\\] { flex-direction: row-reverse; }
+.dp main .nf-press.h-\\[43px\\] > span:first-child { width: 33px !important; height: 33px !important; }
+
 /* 2 · Orange kun til handling: ikoncirkler, barer og fremhævede rammer bliver rolige; prisrammen står stille. */
 .dp main span.grid.rounded-full:is(.size-9, .size-10, .size-11)[style*="fb970a"],
 .dp main span.grid.rounded-full:is(.size-9, .size-10, .size-11)[class*="bg-"] { background: transparent !important; box-shadow: inset 0 0 0 1.5px currentColor !important; color: inherit !important; }
