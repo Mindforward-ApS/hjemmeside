@@ -30,6 +30,12 @@ const css = `
 .dp main .nf-press.h-\\[43px\\] { flex-direction: row-reverse; }
 .dp main .nf-press.h-\\[43px\\] > span:first-child { width: 33px !important; height: 33px !important; }
 
+/* 1c · Hvide knapper: kun tekst, ingen cirkel og pil (Marco 2026-11-24). Orange beholder cirklen. */
+.dp :is(.greb-btn--light) .greb-btn__circle,
+.dp main :is(.nf-press.h-11:not(.text-white), .nf-press.h-\\[43px\\]) > :is(svg, span:first-child) { display: none !important; }
+.dp .greb-btn.greb-btn--light,
+.dp main :is(.nf-press.h-11:not(.text-white), .nf-press.h-\\[43px\\]) { padding: 0 24px !important; height: 43px !important; justify-content: center !important; }
+
 /* 2 · Orange kun til handling: ikoncirkler, barer og fremhævede rammer bliver rolige; prisrammen står stille. */
 .dp main span.grid.rounded-full:is(.size-9, .size-10, .size-11)[style*="fb970a"],
 .dp main span.grid.rounded-full:is(.size-9, .size-10, .size-11)[class*="bg-"] { background: transparent !important; box-shadow: inset 0 0 0 1.5px currentColor !important; color: inherit !important; }
