@@ -30,7 +30,7 @@ export function LiveMind({ className = "", size }: { className?: string; size: n
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let avatar: Avatar | null = null, gone = false;
     loadApi().then((M) => {
-      if (gone || !box.current) return;
+      if (gone || !box.current) return; // cleaned up before the script was ready
       avatar = M.create(box.current, { shadow: false, autoplay: true, ring: "#ffffff", gloss: true });
       avatar.loop("idle");
       setLive(true);

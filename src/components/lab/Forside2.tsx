@@ -18,6 +18,7 @@ import { erhverv, privat } from "@/content/priser";
 import { setSiteMode, useSiteMode } from "@/lib/siteMode";
 import { Problem } from "./Problem";
 import { FeatureBento } from "./FeatureBento";
+import { FaqMind } from "@/components/mind/FaqMind";
 
 const c = { ink: "#201613", cta: "linear-gradient(90deg, #fb970a, #f8400a)" /* M logo gradient, Marco 2026-11-23 */, muted: "#5a4a44", coral: "#e8664a", coralText: "#b8452c", coralSoft: "#fbe1d7", page: "#f5f2ef", dark: "#201613", line: "rgba(32,22,19,0.1)" };
 const wrap = "w-full px-5 sm:px-[3.5vw]";
@@ -479,6 +480,7 @@ const faq = [
    right with a plus that turns into a cross; the first one is open. Our heading, questions and contact copy. */
 const faqCard = "0 1px 0 rgba(31,22,17,0.04), 0 24px 48px -28px rgba(31,22,17,0.35)";
 export function Faq() {
+  const faqList = useRef<HTMLDivElement>(null);
   return (
     <section id="faq" className="relative isolate overflow-hidden pb-24 pt-20" style={{ background: "#f6f1ea" }}>
       <div className="grid w-full gap-12 px-5 sm:px-[3.5vw] lg:grid-cols-[36%_1fr] lg:gap-[5%]">
@@ -503,7 +505,9 @@ export function Faq() {
             </a>
           </div>
         </div>
-        <div data-mind="peek" data-mind-react="think" className="flex flex-col gap-5">
+        {/* Marco 2026-11-24: MIND hops from question to question here (FaqMind), so the section's roaming MIND stays away. */}
+        <div ref={faqList} className="relative flex flex-col gap-5">
+          <FaqMind listRef={faqList} />
           {faq.map((f, k) => (
             <details key={f.q} name="faq" open={k === 0} className="group rounded-[16px]" style={{ background: "#fbf8f3", boxShadow: faqCard }}>
               <summary className="nf-focus flex cursor-pointer list-none items-center justify-between gap-6 px-[22px] py-5 text-[1.25rem] leading-[1.25] sm:px-7 sm:py-[22px] lg:text-[1.5rem] [&::-webkit-details-marker]:hidden" style={{ color: c.ink }}>
