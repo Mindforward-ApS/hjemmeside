@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { EnvelopeSimpleIcon } from "@phosphor-icons/react/dist/ssr";
+import { EnvelopeSimpleIcon, FacebookLogoIcon, InstagramLogoIcon, LinkedinLogoIcon, PhoneIcon } from "@phosphor-icons/react/dist/ssr";
 import { site } from "@/content/site";
 import { appLinks } from "@/lib/app";
 import { MindforwardLogo } from "@/components/ui/MindforwardLogo";
@@ -20,6 +20,7 @@ const legal = [["Privatlivspolitik", "/privatliv"], ["Handelsbetingelser", "/vil
 
 export function SiteFooter() {
   const c = site.company;
+  const socials = ([["LinkedIn", c.social.linkedin, LinkedinLogoIcon], ["Facebook", c.social.facebook, FacebookLogoIcon], ["Instagram", c.social.instagram, InstagramLogoIcon]] as const).filter(([, href]) => href);
   return (
     <>
       <NewsletterBand />
@@ -29,6 +30,13 @@ export function SiteFooter() {
             <div className="col-span-2 lg:col-span-1">
               <MindforwardLogo size={28} />
               <p className="mt-5 max-w-[19rem] text-[0.9375rem] leading-relaxed" style={{ color: muted }}>{site.description}</p>
+              {socials.length > 0 && (
+                <ul className="mt-6 flex gap-5">
+                  {socials.map(([label, href, I]) => (
+                    <li key={label}><a href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="transition-colors hover:text-[#fb970a]"><I size={20} weight="bold" aria-hidden /></a></li>
+                  ))}
+                </ul>
+              )}
             </div>
             {cols.map((col) => (
               <div key={col.title}>
@@ -42,7 +50,10 @@ export function SiteFooter() {
             ))}
             <div className="col-span-2 lg:col-span-1">
               <h2 className="text-[1.0625rem] font-semibold tracking-[-0.01em]" style={{ color: ink }}>Kontakt os</h2>
-              <a href={`mailto:${c.email}`} className="mt-5 flex items-center gap-2.5 text-[0.9375rem] transition-colors hover:text-[#fb970a]" style={{ color: ink }}>
+              <a href={`tel:${c.phone.replace(/\s/g, "")}`} className="mt-5 flex items-center gap-2.5 text-[0.9375rem] tabular-nums transition-colors hover:text-[#fb970a]" style={{ color: ink }}>
+                <PhoneIcon size={20} weight="bold" aria-hidden style={{ color: "#f8400a" }} />30 12 70 10
+              </a>
+              <a href={`mailto:${c.email}`} className="mt-3.5 flex items-center gap-2.5 text-[0.9375rem] transition-colors hover:text-[#fb970a]" style={{ color: ink }}>
                 <EnvelopeSimpleIcon size={20} weight="bold" aria-hidden style={{ color: "#f8400a" }} />{c.email}
               </a>
               <p className="mt-3 text-[0.875rem]" style={{ color: muted }}>{c.responsePromise}</p>

@@ -13,9 +13,11 @@ export const site = {
     cvr: "[CVR 00000000]",
     address: "[Gadenavn 1, 8000 Aarhus C]",
     email: "kontakt@mindforward.dk",
-    phone: "[+45 00 00 00 00]",
+    phone: "+45 30 12 70 10",
     responsePromise: "Svar inden for 1 hverdag",
     year: 2026,
+    // Marco 2026-11-24: social profiles in the footer. An icon only shows once its link is filled in.
+    social: { linkedin: "", facebook: "", instagram: "" },
   },
   founder: {
     name: "[Stifterens navn]",
