@@ -424,7 +424,7 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa 
             {!privat && (
               <p className="flex items-center gap-2.5">
                 <Icon name="shield" size={20} className="shrink-0 text-white" />
-                <span className="font-semibold text-white">69 kr. pr. bruger</span>
+                <span className="font-semibold text-white">69 kr. pr. bruger</span>
               </p>
             )}
           </div>
@@ -497,8 +497,8 @@ function Certificate() {
 
 /* ───────────── 6 · Testimonials: a real carousel (the example quotes from the current site) ───────────── */
 const quotes = [
-  { name: "Kontorchef", firm: "logistikvirksomhed, 40 ansatte", photo: "", initials: "KC", quote: "Referaterne tager mig otte minutter nu. Før brugte jeg en halv time efter hvert møde.", before: "30 min", after: "8 min", what: "pr. referat" },
-  { name: "Sælger", firm: "byggemarked", photo: "/img/people/ali-yilmaz.webp", initials: "SA", quote: "Jeg skriver tilbud på halvdelen af tiden, og de lyder stadig som mig.", before: "45 min", after: "20 min", what: "pr. tilbud" },
+  { name: "Kontorchef", firm: "logistikvirksomhed, 40 ansatte", photo: "", initials: "KC", quote: "Referaterne tager mig otte minutter nu. Før brugte jeg en halv time efter hvert møde.", before: "30 min", after: "8 min", what: "pr. referat" },
+  { name: "Sælger", firm: "byggemarked", photo: "/img/people/ali-yilmaz.webp", initials: "SA", quote: "Jeg skriver tilbud på halvdelen af tiden, og de lyder stadig som mig.", before: "45 min", after: "20 min", what: "pr. tilbud" },
   { name: "Ejer", firm: "revisionsfirma, 12 ansatte", photo: "/img/people/peter-skov.webp", initials: "EJ", quote: "Nu ved hele holdet, hvad vi må dele med AI. Det var dét, der holdt os tilbage.", before: "0", after: "12", what: "medarbejdere i gang" },
 ];
 
@@ -517,7 +517,7 @@ function Pilot() {
           <h2 data-split className={`${h2} !text-white`} data-no-split>Bliv en af de første</h2>
           <p data-reveal className="mt-5 max-w-[28rem] text-[1.0625rem] leading-relaxed text-white/70">Vi søger de første danske hold, der vil træne AI med os. Som pilotkunde får I:</p>
           <div data-reveal className="mt-8 hidden flex-wrap items-center gap-x-6 gap-y-3 lg:flex">
-            <Link href="/kontakt" className="nf-focus nf-press group inline-flex h-12 items-center gap-2 rounded-full px-7 text-[0.9375rem] font-semibold transition-[filter] hover:brightness-110" style={{ background: c.coral, color: c.ink }}>Book 15 min <Icon name="arrowRight" size={16} className="transition-transform duration-300 group-hover:translate-x-1" /></Link>
+            <Link href="/kontakt" className="nf-focus nf-press group inline-flex h-12 items-center gap-2 rounded-full px-7 text-[0.9375rem] font-semibold transition-[filter] hover:brightness-110" style={{ background: c.coral, color: c.ink }}>Book 15 min <Icon name="arrowRight" size={16} className="transition-transform duration-300 group-hover:translate-x-1" /></Link>
             <Link href={appLinks.startBusiness} className="text-[0.9375rem] font-medium text-white/80 underline decoration-white/30 underline-offset-4 hover:text-white hover:decoration-white">Eller start et kursus</Link>
           </div>
         </div>
@@ -533,7 +533,7 @@ function Pilot() {
           ))}
         </ul>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3 lg:hidden">
-          <Link href="/kontakt" className="nf-focus nf-press group inline-flex h-12 items-center gap-2 rounded-full px-7 text-[0.9375rem] font-semibold" style={{ background: c.coral, color: c.ink }}>Book 15 min <Icon name="arrowRight" size={16} /></Link>
+          <Link href="/kontakt" className="nf-focus nf-press group inline-flex h-12 items-center gap-2 rounded-full px-7 text-[0.9375rem] font-semibold" style={{ background: c.coral, color: c.ink }}>Book 15 min <Icon name="arrowRight" size={16} /></Link>
           <Link href={appLinks.startBusiness} className="text-[0.9375rem] font-medium text-white/80 underline decoration-white/30 underline-offset-4">Eller start et kursus</Link>
         </div>
       </div>
@@ -566,7 +566,7 @@ export function TestimonialSaved() {
                 <span className="font-semibold" style={{ color: c.peach }}>{q.after}</span> {q.what}
               </p>
             </div>
-            <p key={`q${i}`} className="nf-fade max-w-[34rem] text-[clamp(1.375rem,1rem+1.2vw,1.875rem)] font-medium leading-snug tracking-[-0.01em] text-white">“{q.quote}”</p>
+            <p key={`q${i}`} className="nf-fade max-w-[34rem] text-[clamp(1.375rem,1rem+1.2vw,1.875rem)] font-medium leading-snug tracking-[-0.01em] text-white">„{q.quote}“</p>
             <div className="flex items-end justify-between gap-4">
               <div><p className="font-semibold text-white">{q.name}</p><p className="text-[0.875rem] text-white/60">{q.firm}</p></div>
               <p className="flex gap-1" style={{ color: c.peach }} aria-label="5 ud af 5">{[0, 1, 2, 3, 4].map((k) => <svg key={k} width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 21l1.6-7L2 9.2l7.1-.6z" /></svg>)}</p>
@@ -587,8 +587,8 @@ export function TestimonialSaved() {
 function Stats() {
   // Marco 2026-11-04: the numbers section becomes the price section (CRO: the leader looks for the price before buying).
   const facts = [
-    { n: "10 min", d: "pr. lektion, så det passer ind i en travl dag" },
-    { n: "1–2 timer", d: "for et helt kursus, fordelt på korte lektioner" },
+    { n: "10 min", d: "pr. lektion, så det passer ind i en travl dag" },
+    { n: "1–2 timer", d: "for et helt kursus, fordelt på korte lektioner" },
     { n: "Data i EU", d: "Hostet i EU, data i Frankfurt" },
   ];
   const incl = ["ChatGPT, Copilot og Claude, side om side", "Teamoverblik og rapport til lederen", "Kursusbevis med navn og unikt ID", "Databehandleraftale"];
@@ -616,7 +616,7 @@ function Stats() {
             <span className="text-[0.9375rem] text-white/60">pr. bruger om måneden</span>
           </p>
           <p className="relative mt-4 flex flex-wrap gap-2">
-            {["Fra 5 brugere", "Ingen binding"].map((x) => <span key={x} className="rounded-full bg-white/10 px-3 py-1 text-[0.8125rem] font-medium text-white/85 ring-1 ring-white/10">{x}</span>)}
+            {["Fra 5 brugere", "Ingen binding"].map((x) => <span key={x} className="rounded-full bg-white/10 px-3 py-1 text-[0.8125rem] font-medium text-white/85 ring-1 ring-white/10">{x}</span>)}
           </p>
           <ul className="relative mt-8 grid gap-3.5 border-t border-white/10 pt-8">
             {incl.map((x) => (
@@ -627,7 +627,7 @@ function Stats() {
           </ul>
           <div className="relative mt-9 grid gap-3">
             <Link href={appLinks.startBusiness} className="nf-focus nf-press group inline-flex h-12 items-center justify-center gap-2 rounded-full text-[0.9375rem] font-semibold transition-[filter] hover:brightness-110" style={{ background: c.coral, color: c.ink }}>Start et kursus <Icon name="arrowRight" size={16} className="transition-transform duration-300 group-hover:translate-x-1" /></Link>
-            <Link href="/kontakt" className="nf-focus inline-flex h-12 items-center justify-center rounded-full text-[0.9375rem] font-medium text-white/85 ring-1 ring-white/20 transition-colors hover:bg-white/5">Book 15 min</Link>
+            <Link href="/kontakt" className="nf-focus inline-flex h-12 items-center justify-center rounded-full text-[0.9375rem] font-medium text-white/85 ring-1 ring-white/20 transition-colors hover:bg-white/5">Book 15 min</Link>
           </div>
         </div>
       </div>
@@ -650,9 +650,9 @@ function Phone({ className = "", children, style }: { className?: string; childr
 /* Marco 2026-11-04: objections answered before the last CTA. Every answer is a fact already on the page. */
 const faq = [
   { q: "Er vores data sikre?", a: "Platformen er hostet i EU med data i Frankfurt, og I får en databehandleraftale med fra start." },
-  { q: "Hvor lang tid tager det?", a: "En lektion tager cirka 10 minutter. Et helt kursus tager 1–2 timer, fordelt på korte lektioner." },
+  { q: "Hvor lang tid tager det?", a: "En lektion tager cirka 10 minutter. Et helt kursus tager 1–2 timer, fordelt på korte lektioner." },
   { q: "Kan vi stoppe igen?", a: "Ja. Der er ingen binding, og I betaler pr. bruger pr. måned." },
-  { q: "Hvor mange skal være med?", a: "Fra 5 brugere. Prisen er 69 kr. pr. bruger om måneden." },
+  { q: "Hvor mange skal være med?", a: "Fra 5 brugere. Prisen er 69 kr. pr. bruger om måneden." },
   { q: "Hvilke AI-værktøjer lærer vi?", a: "ChatGPT, Copilot og Claude, side om side, så holdet lærer det værktøj, I bruger." },
   { q: "Får medarbejderne et bevis?", a: "Ja. Alle får et kursusbevis med navn, score og et unikt ID, som kan tjekkes via QR-koden." },
 ];
@@ -701,7 +701,7 @@ function CtaBand() {
             <p className="mt-4 max-w-[26rem] text-[1rem] leading-relaxed" style={{ color: "#4a3a34" }}>Start i dag, eller tag 15 minutter med os først.</p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link href={appLinks.startBusiness} className="nf-focus nf-press group inline-flex h-12 items-center gap-2 rounded-full px-6 text-[0.9375rem] font-medium text-white transition-transform" style={{ background: c.dark }}>Start et kursus <Icon name="arrowRight" size={16} className="transition-transform duration-300 group-hover:translate-x-1" /></Link>
-              <Link href="/kontakt" className="nf-focus nf-press inline-flex h-12 items-center gap-2 rounded-full border px-6 text-[0.9375rem] font-medium transition-colors hover:bg-white/40" style={{ borderColor: c.dark, color: c.ink }}>Book 15 min</Link>
+              <Link href="/kontakt" className="nf-focus nf-press inline-flex h-12 items-center gap-2 rounded-full border px-6 text-[0.9375rem] font-medium transition-colors hover:bg-white/40" style={{ borderColor: c.dark, color: c.ink }}>Book 15 min</Link>
             </div>
           </div>
         </div>

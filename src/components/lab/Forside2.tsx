@@ -176,7 +176,7 @@ function StepLearn() {
       </div>
       <p className={`${head} mt-4 text-[1.0625rem] leading-6 !font-semibold`} style={{ color: c.ink }}>Skriv beskeder, der giver brugbare svar</p>
       <div className="mt-4 h-1.5 overflow-hidden rounded-full" style={{ background: c.page }}><div className="h-full w-[62%] rounded-full" style={{ background: c.coral }} /></div>
-      <div className="mt-2 flex justify-between"><span className={mini} style={{ color: c.muted }}>6 af 10 min</span><span className={mini} style={{ color: c.muted }}>Dansk</span></div>
+      <div className="mt-2 flex justify-between"><span className={mini} style={{ color: c.muted }}>6 af 10 min</span><span className={mini} style={{ color: c.muted }}>Dansk</span></div>
       <div className="mt-auto flex items-center justify-between rounded-[10px] px-3 py-2.5" style={{ background: c.page }}>
         <span className={`${mini} font-medium`} style={{ color: c.ink }}>Fortsæt lektionen</span>
         <span className="grid size-6 place-items-center rounded-full" style={{ background: c.coral }}><svg width="8" height="9" viewBox="0 0 22 24" aria-hidden><path d="M2 2.2v19.6c0 1 1.1 1.6 2 1.1l16.3-9.8c.8-.5.8-1.7 0-2.2L4 1.1C3.1.6 2 1.2 2 2.2z" fill="#fff" /></svg></span>
@@ -283,7 +283,8 @@ function Cases() {
               <li key={x.tag} data-mind={x === cases[0] ? "press" : undefined} className="flex w-[var(--cw)] shrink-0 rounded-[24px] bg-white p-4 sm:p-5">
                 <div className="flex w-full flex-col p-3 sm:p-4">
                   <span className="flex items-center gap-2 self-start rounded-[12px] px-4 py-2.5 text-[0.9375rem] font-semibold" style={{ background: c.page, color: c.ink }}><Image src={x.logo} alt="" width={20} height={20} className="size-5 rounded-[5px]" />{x.tag}</span>
-                  <h3 className={`${head} mt-6 text-[1.5rem] leading-snug tracking-[-0.015em]`} style={{ color: c.ink }}>{x.t}</h3>
+                  {/* Marco 2026-11-24: room for two lines in every card, so the text below starts at the same height. */}
+                  <h3 className={`${head} mt-6 min-h-[2lh] text-balance text-[1.5rem] leading-snug tracking-[-0.015em]`} style={{ color: c.ink }}>{x.t}</h3>
                   <p className="mt-3 text-[0.9375rem] leading-relaxed" style={{ color: c.muted }}>{x.d}</p>
                   <div className="mt-auto grid grid-cols-2 gap-6 pt-8">
                     {x.s.map(([a, b], k) => (
@@ -376,7 +377,7 @@ function Pilot() {
               <li key={p.t} className="flex items-center gap-3 text-[1.25rem] font-semibold tracking-[-0.3px]" style={{ color: c.ink }}><Icon name={p.icon} size={18} />{p.t}</li>
             ))}
           </ul>
-          <Pill href="/kontakt" className="mt-10">Book 15 min</Pill>
+          <Pill href="/kontakt" className="mt-10">Book 15 min</Pill>
         </div>
       </div>
     </section>
@@ -445,22 +446,11 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
           </ul>
           <div className="mt-12 lg:mt-20">
             <p className="text-[1rem]" style={{ color: "#4a4440" }}>Virksomheder, der træner AI med os</p>
-            {/* Logo marquee (Marco 2026-11-23): runs left, pauses on hover, fades at both edges, still for reduced motion.
-                The set is repeated so one half always fills the strip; the second half is hidden from screen readers. */}
-            <div className="logo-marquee mt-4 overflow-hidden" style={{ maskImage: "linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)", WebkitMaskImage: "linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)" }}>
-              <div className="logo-marquee__track flex w-max items-center" style={{ color: "#0f0d0c" }}>
-                {[0, 1].map((half) => (
-                  <ul key={half} aria-hidden={half === 1 || undefined} className="flex shrink-0 items-center gap-x-10 pr-10">
-                    {[0, 1, 2].map((r) => (
-                      <Fragment key={r}>
-                        <li><span role="img" aria-label={half === 0 && r === 0 ? "SydDesign" : undefined} className="block h-[1.4rem] w-[7rem] bg-current" style={{ maskImage: "url(/logos/syddesign.svg)", WebkitMaskImage: "url(/logos/syddesign.svg)", maskSize: "contain", WebkitMaskSize: "contain", maskRepeat: "no-repeat", WebkitMaskRepeat: "no-repeat" }} /></li>
-                        <li><DemoLogo logo={leadline} /></li>
-                      </Fragment>
-                    ))}
-                  </ul>
-                ))}
-              </div>
-            </div>
+            {/* Marco 2026-11-24: a still row with each customer once, until there are enough logos for a marquee. */}
+            <ul className="mt-4 flex items-center gap-x-10" style={{ color: "#0f0d0c" }}>
+              <li><span role="img" aria-label="SydDesign" className="block h-[1.4rem] w-[7rem] bg-current" style={{ maskImage: "url(/logos/syddesign.svg)", WebkitMaskImage: "url(/logos/syddesign.svg)", maskSize: "contain", WebkitMaskSize: "contain", maskRepeat: "no-repeat", WebkitMaskRepeat: "no-repeat" }} /></li>
+              <li><DemoLogo logo={leadline} /></li>
+            </ul>
           </div>
         </div>
         {plans.map((p) => p.featured ? (
@@ -479,9 +469,9 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
 /* 7 · FAQ: heading left, white rounded questions right. */
 const faq = [
   { q: "Er vores data sikre?", a: "Platformen er hostet i EU med data i Frankfurt, og I får en databehandleraftale med fra start." },
-  { q: "Hvor lang tid tager det?", a: "En lektion tager cirka 10 minutter. Et helt kursus tager 1–2 timer, fordelt på korte lektioner." },
+  { q: "Hvor lang tid tager det?", a: "En lektion tager cirka 10 minutter. Et helt kursus tager 1–2 timer, fordelt på korte lektioner." },
   { q: "Kan vi stoppe igen?", a: "Ja. Der er ingen binding, og I betaler pr. bruger pr. måned." },
-  { q: "Hvor mange skal være med?", a: "Fra 1 bruger. Erhverv koster 69 kr. pr. bruger om måneden og 55 kr. fra 10 brugere. Privat koster 69 kr. om måneden." },
+  { q: "Hvor mange skal være med?", a: "Fra 1 bruger. Erhverv koster 69 kr. pr. bruger om måneden og 55 kr. fra 10 brugere. Privat koster 69 kr. om måneden." },
   { q: "Hvilke AI-værktøjer lærer vi?", a: "ChatGPT, Copilot og Claude, side om side, så holdet lærer det værktøj, I bruger." },
   { q: "Får medarbejderne et bevis?", a: "Ja. Alle får et kursusbevis med navn, score og et unikt ID, som kan tjekkes via QR-koden." },
 ];

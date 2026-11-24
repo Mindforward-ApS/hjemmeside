@@ -74,7 +74,7 @@ export function FeatureBento() {
           <article className={`${card} gap-6 md:col-span-2 lg:flex-row lg:items-center`} style={{ borderColor: line }}>
             <div className="flex flex-col lg:w-[52%] lg:self-stretch">
               <Copy title="Lær på telefonen">Hele platformen virker på mobilen: lektioner, kurser og dit kursusbevis. Ti minutter i toget er nok.</Copy>
-              <p className="mt-5 text-[2.5rem] font-semibold leading-none tracking-[-0.03em] lg:mt-8 lg:text-[3rem]" style={{ color: ink }}>10 min</p>
+              <p className="mt-5 text-[2.5rem] font-semibold leading-none tracking-[-0.03em] lg:mt-8 lg:text-[3rem]" style={{ color: ink }}>10 min</p>
               <p className="mt-2 text-[0.9375rem]" style={{ color: muted }}>pr. lektion, hvor du er</p>
               <div className="mt-auto"><CardButton href="#kurser">Se kurserne</CardButton></div>
             </div>

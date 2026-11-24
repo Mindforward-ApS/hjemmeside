@@ -10,25 +10,18 @@ import type { SiteMode } from "@/lib/siteMode";
 const LAUNCH = new Date("2027-01-01T09:00:00+01:00").getTime();
 const KEY = "mf-launchbar-closed";
 
-function parts(ms: number) {
-  const s = Math.max(0, Math.floor(ms / 1000));
-  return [Math.floor(s / 86400), Math.floor((s % 86400) / 3600), Math.floor((s % 3600) / 60), s % 60];
-}
-
 export function LaunchBar({ mode }: { mode: SiteMode }) {
   const [now, setNow] = useState<number | null>(null);
   const [closed, setClosed] = useState(false);
   useEffect(() => {
+    // Reading localStorage and the clock must happen after hydration.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     try { if (localStorage.getItem(KEY) === "1") setClosed(true); } catch {}
     setNow(Date.now());
-    const t = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(t);
   }, []);
   if (closed || (now !== null && now >= LAUNCH)) return null;
   const privat = mode === "privat";
-  const [d, h, m, s] = now === null ? [null, null, null, null] : parts(LAUNCH - now);
   const close = () => { setClosed(true); try { localStorage.setItem(KEY, "1"); } catch {} };
-  const tiles: [number | null, string][] = [[d, "d"], [h, "t"], [m, "m"], [s, "s"]];
   return (
     <div role="region" aria-label="Lanceringstilbud" className="relative z-30 text-white" style={{ background: "#0a0a0b" }}>
       <div className="mx-auto flex w-full max-w-[1440px] flex-wrap items-center justify-center gap-x-10 gap-y-2 py-2 pl-4 pr-11 lg:px-12 lg:py-2.5">
@@ -36,14 +29,7 @@ export function LaunchBar({ mode }: { mode: SiteMode }) {
           De første {privat ? "100 kunder" : "20 virksomheder"} får <span className="bg-clip-text text-[0.9375rem] font-bold text-transparent lg:text-[1.125rem]" style={{ backgroundImage: "linear-gradient(90deg, #fb970a, #f8400a)", WebkitBackgroundClip: "text" }}>50 % rabat</span> det første år.
         </p>
         <div className="flex items-center gap-2 lg:contents">
-        <div className="flex items-center gap-1 lg:gap-2" aria-label="Tid til lancering">
-          {tiles.map(([v, l]) => (
-            <div key={l} className="flex h-9 w-[46px] items-baseline justify-center gap-0.5 rounded-full border pt-[11px] lg:w-[62px]" style={{ borderColor: "rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.04)" }}>
-              <span className="text-[0.875rem] font-semibold tabular-nums leading-none lg:text-[0.9375rem]" suppressHydrationWarning>{v === null ? "--" : String(v).padStart(2, "0")}</span>
-              <span className="text-[0.6875rem] leading-none text-white/55">{l}</span>
-            </div>
-          ))}
-        </div>
+        {/* Marco 2026-11-24: no ticking countdown (reads as a sales trick to B2B buyers); the offer stays. */}
         <div className="flex items-center gap-3">
           <Link href="/venteliste" className="nf-focus inline-flex h-9 items-center gap-1.5 whitespace-nowrap rounded-full px-4 text-[0.8125rem] lg:gap-2 lg:px-5 lg:text-[0.875rem] font-semibold text-white transition hover:brightness-110" style={{ background: "linear-gradient(90deg, #fb970a, #f8400a)" }}>
             Sikr din plads

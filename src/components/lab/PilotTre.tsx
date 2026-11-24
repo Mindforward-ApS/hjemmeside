@@ -56,7 +56,7 @@ export function A() {
           <ul className="mt-10 grid gap-5">
             {points.map((p) => <li key={p.t} className="flex items-center gap-3 text-[1.25rem] font-semibold tracking-[-0.3px] text-white"><Icon name={p.icon} size={18} />{p.t}</li>)}
           </ul>
-          <div className="mt-10"><span data-mind="press" className="inline-block"><Pill href="/kontakt">Book 15 min</Pill></span></div>
+          <div className="mt-10"><span data-mind="press" className="inline-block"><Pill href="/kontakt">Book 15 min</Pill></span></div>
         </div>
         <div className="relative overflow-hidden rounded-[32px] lg:order-1">
           <div className="relative aspect-[628/720] w-full"><Image src="/img/unsplash/team.jpg" alt="Et team arbejder sammen ved en laptop" fill sizes="(min-width: 1024px) 44vw, 100vw" className="object-cover" /></div>
@@ -84,7 +84,7 @@ export function B() {
               </li>
             ))}
           </ul>
-          <div className="mt-auto pt-10"><Pill href="/kontakt">Book 15 min</Pill></div>
+          <div className="mt-auto pt-10"><Pill href="/kontakt">Book 15 min</Pill></div>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-[1.4fr_1fr]">
           <Ph label="Billede: et team ved en skærm" size="1400 × 900 px" className="min-h-[16rem] rounded-[32px]" />
@@ -123,7 +123,7 @@ export function C() {
           ))}
         </ul>
         <div className="mt-12 flex flex-wrap items-center justify-center gap-5">
-          <Pill href="/kontakt">Book 15 min</Pill>
+          <Pill href="/kontakt">Book 15 min</Pill>
           <a href="mailto:kontakt@mindforward.dk" className="nf-focus text-[1rem] font-semibold underline underline-offset-4" style={{ color: c.ink }}>Eller skriv til kontakt@mindforward.dk</a>
         </div>
       </div>

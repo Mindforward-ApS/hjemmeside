@@ -79,11 +79,15 @@ export function B() {
           <Label light>Øvemiljøet</Label>
           <h2 className={`${h2} mt-4 max-w-[12ch] text-white`}>{HEAD}</h2>
           <p className="mt-6 max-w-[28rem] text-[1rem] leading-6 text-white/70">{PARA}</p>
-          <ul className="mt-auto grid gap-3 pt-12">
+          {/* Marco 2026-11-24: the steps follow the text and fill the card, instead of leaving a hole in the middle. */}
+          <ul className="mt-10 grid flex-1 content-end gap-3">
             {steps.map((s) => (
-              <li key={s.n} className="flex items-center gap-4 rounded-[16px] bg-white/[0.06] p-4">
+              <li key={s.n} className="flex items-start gap-4 rounded-[16px] bg-white/[0.06] p-5">
                 <span className="grid size-10 shrink-0 place-items-center rounded-full" style={{ background: c.cta, color: "#fff" }}><Icon name={s.icon} size={16} /></span>
-                <span className="text-[1rem] font-semibold text-white">{s.t}</span>
+                <span>
+                  <span className="block text-[1rem] font-semibold text-white">{s.t}</span>
+                  <span className="mt-1 block text-[0.9375rem] leading-6 text-white/60">{s.d}</span>
+                </span>
               </li>
             ))}
           </ul>

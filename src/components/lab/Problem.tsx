@@ -89,7 +89,7 @@ export function Problem() {
                 <Mark />
                 <p className={`${head} text-[1.25rem]`} style={{ color: ink }}>Hele holdet, samme udgangspunkt</p>
               </div>
-              <p className={`${head} mt-8 !font-semibold text-[clamp(2.75rem,2rem+2vw,3.25rem)] leading-none tracking-[-0.04em] tabular-nums`} style={{ color: ink }}>10 min</p>
+              <p className={`${head} mt-8 !font-semibold text-[clamp(2.75rem,2rem+2vw,3.25rem)] leading-none tracking-[-0.04em] tabular-nums`} style={{ color: ink }}>10 min</p>
               <p className="mt-3 text-[1rem]" style={{ color: muted }}>om dagen, på dansk, for hele holdet</p>
               <ul className="mt-7 space-y-3.5 border-t pt-7" style={{ borderColor: line }}>
                 {med.map((t) => <li key={t} className="flex gap-3 text-[1rem] leading-6" style={{ color: ink }}><Tick />{t}</li>)}
