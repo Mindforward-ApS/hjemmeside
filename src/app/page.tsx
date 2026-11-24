@@ -19,10 +19,11 @@ export const metadata: Metadata = {
 
 // Marco 2026-11-20: the full website is the home page again instead of the waitlist (which lives at /venteliste).
 // Hero unchanged, everything below in the new structure, Øvemiljø B, Pilot A (picture left), section separation 1.
+// Marco 2026-11-21: Miwa stands in the hero as a real-time 3D figure (components/lab/Miwa3D).
 export default function Home() {
   return (
     <div className={`${bebas.variable} ${geist.variable}`}>
-      <NyForside layout="ny" practice="b" pilot="a" sep={1} />
+      <NyForside layout="ny" practice="b" pilot="a" sep={1} miwa="3d" />
     </div>
   );
 }
