@@ -1,49 +1,63 @@
 import Link from "next/link";
+import { EnvelopeSimpleIcon } from "@phosphor-icons/react/dist/ssr";
 import { site } from "@/content/site";
+import { appLinks } from "@/lib/app";
 import { MindforwardLogo } from "@/components/ui/MindforwardLogo";
 import { NewsletterBand } from "@/components/layout/NewsletterBand";
 
-// Site-wide footer (Marco 2026-10-22: E1, without the giant wordmark). It is brown like the hero's stage, so it continues
-// the home page's StageCta without a seam. Company details are on every page (§8, §12.7).
+// Site-wide footer (Marco 2026-11-24, from his reference): light footer with logo and short text on the left, three
+// link columns and a contact column, then a hairline and a bottom row with © left and the legal links right.
+// No social icons or phone number until real ones exist. Top padding leaves room for the newsletter band on top.
+// Marco 2026-11-24: brown like before, white text.
+const ink = "#ffffff";
+const muted = "rgba(255,255,255,0.6)";
+const cols = [
+  { title: "Kurser", links: [["ChatGPT", "/#kurser"], ["Copilot", "/#kurser"], ["Claude", "/#kurser"], ["Alle kurser", "/#kurser"]] },
+  { title: "Mindforward", links: [["Sådan virker det", "/#saadan"], ["Priser", "/#priser"], ["For virksomheder", "/priser#priser"], ["Kontakt", "/#kontakt"]] },
+  { title: "Hjælp", links: [["Spørgsmål og svar", "/#faq"], ["Log ind", appLinks.login], ["Opret konto", appLinks.startBusiness]] },
+] as const;
+const legal = [["Privatlivspolitik", "/privatliv"], ["Handelsbetingelser", "/vilkaar"], ["Cookies", "/cookies"]] as const;
+
 export function SiteFooter() {
   const c = site.company;
   return (
     <>
-    <NewsletterBand />
-    <footer className="text-white" style={{ background: "linear-gradient(180deg, #201613 0%, #1a0f0c 100%)" }}>
-      <div className="px-6 pb-10 pt-[60px] sm:pt-[84px] md:px-[3.5vw]">
-        <div className="pt-14">
-          <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
-            <div>
-              <MindforwardLogo size={30} />
-              <p className="mt-4 max-w-[20rem] text-[0.9375rem] text-white/55">{site.description}</p>
-              <p className="mt-5 text-[0.9375rem]">
-                <a href={`mailto:${c.email}`} className="text-white hover:underline">{c.email}</a>
-                <span className="text-white/45"> · {c.responsePromise}</span>
-              </p>
+      <NewsletterBand />
+      <footer style={{ color: ink, background: "linear-gradient(180deg, #201613 0%, #1a0f0c 100%)" }}>
+        <div className="px-6 pt-[124px] sm:pt-[148px] md:px-[3.5vw]">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 pb-14 lg:grid-cols-[1.3fr_repeat(3,1fr)_1.2fr] lg:gap-8">
+            <div className="col-span-2 lg:col-span-1">
+              <MindforwardLogo size={28} />
+              <p className="mt-5 max-w-[19rem] text-[0.9375rem] leading-relaxed" style={{ color: muted }}>{site.description}</p>
             </div>
-            <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-              {site.footer.map((col) => (
-                <div key={col.title}>
-                  <h2 className="text-[0.75rem] font-medium uppercase tracking-[0.12em] text-white/45">{col.title}</h2>
-                  <ul className="mt-4 grid gap-1">
-                    {col.links.map((l) => (
-                      <li key={l.href + l.label}>
-                        <Link href={l.href} className="inline-flex min-h-11 items-center text-[0.9375rem] text-white/75 transition-colors hover:text-white">{l.label}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+            {cols.map((col) => (
+              <div key={col.title}>
+                <h2 className="text-[1.0625rem] font-semibold tracking-[-0.01em]" style={{ color: ink }}>{col.title}</h2>
+                <ul className="mt-5 grid gap-3.5">
+                  {col.links.map(([label, href]) => (
+                    <li key={label}><Link href={href} className="text-[0.9375rem] transition-colors hover:text-[#fb970a]" style={{ color: ink }}>{label}</Link></li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+            <div className="col-span-2 lg:col-span-1">
+              <h2 className="text-[1.0625rem] font-semibold tracking-[-0.01em]" style={{ color: ink }}>Kontakt os</h2>
+              <a href={`mailto:${c.email}`} className="mt-5 flex items-center gap-2.5 text-[0.9375rem] transition-colors hover:text-[#fb970a]" style={{ color: ink }}>
+                <EnvelopeSimpleIcon size={20} weight="bold" aria-hidden style={{ color: "#f8400a" }} />{c.email}
+              </a>
+              <p className="mt-3 text-[0.875rem]" style={{ color: muted }}>{c.responsePromise}</p>
             </div>
-          </div>
-          <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-[0.8125rem] text-white/45 md:flex-row md:items-center md:justify-between">
-            <p>© {c.year} {[c.legalName, c.cvr, c.address].filter((v) => !v.startsWith("[")).join(" · ")}</p>
-            <p>Hostet i EU · Data i Frankfurt</p>
           </div>
         </div>
-      </div>
-    </footer>
+        <div className="border-t" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+          <div className="flex flex-col gap-4 px-6 py-7 text-[0.9375rem] md:flex-row md:items-center md:justify-between md:px-[3.5vw]">
+            <p style={{ color: muted }}>© {c.year} {[c.legalName, c.cvr, c.address].filter((v) => !v.startsWith("[")).join(" · ")}. Alle rettigheder forbeholdes.</p>
+            <ul className="flex flex-wrap gap-x-7 gap-y-2">
+              {legal.map(([label, href]) => <li key={label}><Link href={href} className="transition-colors hover:text-[#fb970a]">{label}</Link></li>)}
+            </ul>
+          </div>
+        </div>
+      </footer>
     </>
   );
 }
