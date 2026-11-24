@@ -666,3 +666,21 @@ html.brun [data-brun] :is(.greb-btn--light, .greb-btn--light *) { color: #201613
 html.brun [data-brun] span[style*="#ffeadb"] { color: #f8400a !important; }
 html.brun [data-brun] blockquote { border-color: #f8580a !important; }
 html.brun [data-brun] blockquote footer { color: rgba(255,255,255,0.5) !important; }
+
+/* Rytme-preview (Marco 2026-11-24): light sections alternate only white and warm off-white, no peach or glows; brown
+   sections stay as chapters; every light section gets the same air. Only when <html> has .rytme. */
+html.rytme { --lys-a: #ffffff; --lys-b: #f8f5f1; }
+html.rytme .sep-inner:has(> #problemet),
+html.rytme .sep-inner:has(> [data-sek="kurser"]),
+html.rytme .sep-inner:has(> #priser) { background: var(--lys-a) !important; }
+html.rytme .sep-inner:has(> section[aria-labelledby="features-title"]),
+html.rytme .sep-inner:has(> #saadan),
+html.rytme .sep-inner:has(> #faq) { background: var(--lys-b) !important; }
+html.rytme .sep-inner:has(> #kontakt), html.rytme .sep-inner > #kontakt { background: var(--lys-a) !important; background-image: none !important; }
+html.rytme #kontakt .kontakt-glow { display: none !important; }
+html.rytme .sep-inner > :is(#problemet, [data-sek="kurser"], section[aria-labelledby="features-title"], #saadan, #priser, #faq) { padding-top: 120px !important; padding-bottom: 120px !important; }
+html.rytme .sep-inner > #kontakt { padding-top: 120px !important; }
+@media (max-width: 767px) {
+  html.rytme .sep-inner > :is(#problemet, [data-sek="kurser"], section[aria-labelledby="features-title"], #saadan, #priser, #faq) { padding-top: 80px !important; padding-bottom: 80px !important; }
+  html.rytme .sep-inner > #kontakt { padding-top: 80px !important; }
+}

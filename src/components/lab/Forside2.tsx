@@ -268,7 +268,7 @@ function Cases() {
   const go = (d: number) => setI((x) => Math.min(cases.length - 1, Math.max(0, x + d)));
   // Marco 2026-11-10: no photos below the hero.
   return (
-    <section className="overflow-hidden py-20 sm:py-28">
+    <section data-sek="kurser" className="overflow-hidden py-20 sm:py-28">
       <div className={wrap}>
         <div className="flex items-end justify-between gap-6">
           <div>

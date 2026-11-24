@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 export function Skift() {
   const [on, setOn] = useState(true);
   const [brun, setBrun] = useState(true);
+  const [rytme, setRytme] = useState(true);
+  useEffect(() => { document.documentElement.classList.toggle("rytme", rytme); }, [rytme]);
   useEffect(() => { document.documentElement.classList.toggle("brun", brun); }, [brun]);
   useEffect(() => { document.documentElement.classList.add("dp"); }, []);
   useEffect(() => { document.documentElement.classList.toggle("ui-real", on); }, [on]);
@@ -16,6 +18,7 @@ export function Skift() {
       ))}
       <span className="mx-1 h-5 w-px bg-white/20" />
       <button type="button" onClick={() => setBrun(!brun)} className={`rounded-full px-4 py-2 transition-colors ${brun ? "bg-[#f8580a] text-white" : "text-white/70 hover:text-white"}`}>Brune kort {brun ? "til" : "fra"}</button>
+      <button type="button" onClick={() => setRytme(!rytme)} className={`rounded-full px-4 py-2 transition-colors ${rytme ? "bg-[#f8580a] text-white" : "text-white/70 hover:text-white"}`}>Ny rytme {rytme ? "til" : "fra"}</button>
     </div>
   );
 }
