@@ -466,7 +466,7 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
         {plans.map((p) => p.featured ? (
           <div key={p.id} data-mind="peek" className="pris-glow relative flex flex-col rounded-[22px] p-[3px] lg:self-end">
             <p className="relative px-4 pb-2 pt-1.5 text-center text-[0.875rem] font-semibold text-white [text-shadow:0_1px_2px_rgba(120,20,0,0.45)]">{p.tab}</p>
-            <div className="relative flex-1 rounded-[19px] bg-white">{card(p)}</div>
+            <div data-brun className="relative flex-1 rounded-[19px] bg-white">{card(p)}</div>
           </div>
         ) : (
           <div key={p.id} className="order-last rounded-[20px] border bg-white lg:order-none lg:self-end" style={{ borderColor: "#e3dfdc" }}>{card(p)}</div>
@@ -497,7 +497,7 @@ export function Faq() {
         <div className="flex flex-col lg:h-0 lg:min-h-full">
           <SectionLabel>FAQ</SectionLabel>
           <h2 className={`${head} mt-[22px] text-[clamp(2.5rem,1.6rem+2.4vw,3.25rem)] font-medium leading-[1.08] tracking-[-0.02em]`} style={{ color: c.ink }}>Spørgsmål, vi ofte får</h2>
-          <div className="mt-8 flex flex-1 flex-col items-start rounded-[24px] px-8 py-7" style={{ background: "#fbf8f3", boxShadow: faqCard }}>
+          <div data-brun className="mt-8 flex flex-1 flex-col items-start rounded-[24px] px-8 py-7" style={{ background: "#fbf8f3", boxShadow: faqCard }}>
             <span className="block size-[84px] shrink-0 overflow-hidden rounded-full" style={{ boxShadow: "0 0 0 1px #0f0d0c, 0 12px 30px -8px rgba(31,22,17,0.35)" }}><Image src="/img/marco-2.jpg" alt="Marco Nielsen" width={96} height={96} className="size-full object-cover" /></span>
             <h3 className={`${head} mt-5 text-[1.75rem] font-normal leading-tight tracking-[-0.01em]`} style={{ color: c.ink }}>Hellere skrive direkte?</h3>
             <p className="mb-5 mt-2 text-[1.125rem] leading-7" style={{ color: "rgba(31,22,17,0.64)" }}>Lad os tale om jeres hold.</p>

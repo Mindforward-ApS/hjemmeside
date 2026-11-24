@@ -109,7 +109,7 @@ export function FeatureBento() {
           {/* Kursusbevis: the highlighted card, framed like the featured price */}
           <article className="pris-glow relative flex flex-col rounded-[22px] p-[3px] md:col-span-2">
             <p className="relative px-4 pb-2 pt-1.5 text-center text-[0.875rem] font-semibold text-white [text-shadow:0_1px_2px_rgba(120,20,0,0.45)]">Med i alle pakker</p>
-            <div className="relative flex flex-1 flex-col gap-6 rounded-[19px] bg-white p-6 lg:flex-row">
+            <div data-brun className="relative flex flex-1 flex-col gap-6 rounded-[19px] bg-white p-6 lg:flex-row">
               <div className="flex flex-col lg:w-[40%]">
                 <Copy title="Kursusbevis">Alle får et bevis med navn, score og et unikt ID, der kan tjekkes via QR-koden.</Copy>
                 <div className="mt-auto"><CardButton href="#priser" dark>Se priser</CardButton></div>

@@ -84,7 +84,7 @@ export function Problem() {
 
           <div className="pris-glow relative flex flex-col rounded-[22px] p-[3px]">
             <p className="relative px-4 pb-2 pt-1.5 text-center text-[0.875rem] font-semibold text-white [text-shadow:0_1px_2px_rgba(120,20,0,0.45)]">Med Mindforward</p>
-            <div className="relative flex flex-1 flex-col rounded-[19px] bg-white p-6 sm:p-8">
+            <div data-brun className="relative flex flex-1 flex-col rounded-[19px] bg-white p-6 sm:p-8">
               <div className="flex items-center gap-3">
                 <Mark />
                 <p className={`${head} text-[1.25rem]`} style={{ color: ink }}>Hele holdet, samme udgangspunkt</p>

@@ -653,3 +653,14 @@ html.ui-real [data-mind="play"] > button {
   justify-content: flex-start !important; align-items: flex-end !important; flex-direction: row !important; gap: 14px !important; padding: 28px !important; text-align: left !important; }
 html.ui-real [data-mind="play"] > button > span:first-child { order: 2; font-size: 0.9375rem !important; line-height: 1.2 !important; max-width: none !important; align-self: flex-end; margin-bottom: 10px; padding: 10px 16px; border-radius: 999px; background: rgba(20,13,11,.82); letter-spacing: -0.01em !important; }
 html.ui-real [data-mind="play"] > button > [data-mind-button] { width: 3.25rem !important; height: 3.25rem !important; }
+
+/* Brune kort (preview /preview/ui, Marco 2026-11-24): one brown "this is us" card per light section, only when <html>
+   has .brun. Same brown and white text as the hero. Remove the class to go straight back. */
+html.brun [data-brun] { background: linear-gradient(180deg, #2a1d18 0%, #201613 100%) !important; border-color: transparent !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 1px 2px rgba(0,0,0,0.2), 0 24px 44px -24px rgba(32,22,19,0.6) !important; }
+html.brun [data-brun] :is(p, span, li, dd, dt, small, blockquote, figcaption, div) { color: rgba(255,255,255,0.72) !important; }
+html.brun [data-brun] :is(h2, h3, h4, b, strong, blockquote, [class*="text-[2"], [class*="text-[3"], [class*="text-[1.25rem]"], [class*="text-[1.75rem]"], [class*="font-semibold"]) { color: #fff !important; }
+html.brun [data-brun] :is([class*="border"], [class*="border-t"]) { border-color: rgba(255,255,255,0.12) !important; }
+html.brun [data-brun] .greb-btn:not(.greb-btn--light), html.brun [data-brun] .greb-btn:not(.greb-btn--light) * { color: #fff !important; }
+html.brun [data-brun] :is(.greb-btn--light, .greb-btn--light *) { color: #201613 !important; }
+html.brun [data-brun] span[style*="#ffeadb"] { color: #f8400a !important; }

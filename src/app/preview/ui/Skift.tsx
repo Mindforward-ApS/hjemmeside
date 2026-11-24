@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 // Før/Efter for "rigtig UI": toggles .ui-real on <html>; the design pass (.dp) stays on underneath.
 export function Skift() {
   const [on, setOn] = useState(true);
+  const [brun, setBrun] = useState(true);
+  useEffect(() => { document.documentElement.classList.toggle("brun", brun); }, [brun]);
   useEffect(() => { document.documentElement.classList.add("dp"); }, []);
   useEffect(() => { document.documentElement.classList.toggle("ui-real", on); }, [on]);
   return (
@@ -12,6 +14,8 @@ export function Skift() {
       {[["Før", false], ["Efter", true]].map(([l, v]) => (
         <button key={String(l)} type="button" onClick={() => setOn(v as boolean)} className={`rounded-full px-5 py-2 transition-colors ${on === v ? "bg-white text-[#201613]" : "text-white/70 hover:text-white"}`}>{l as string}</button>
       ))}
+      <span className="mx-1 h-5 w-px bg-white/20" />
+      <button type="button" onClick={() => setBrun(!brun)} className={`rounded-full px-4 py-2 transition-colors ${brun ? "bg-[#f8580a] text-white" : "text-white/70 hover:text-white"}`}>Brune kort {brun ? "til" : "fra"}</button>
     </div>
   );
 }
