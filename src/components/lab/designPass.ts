@@ -41,6 +41,10 @@ export const designCss = `
 /* 3 · Kort med dybde: én radius-skala (24 ude, 16 inde), 1 px kant, lag-skygge og en lys linje i toppen. */
 .dp main :is(.rounded-\\[20px\\], .rounded-\\[22px\\], .rounded-\\[24px\\], .rounded-\\[32px\\], .rounded-\\[34px\\]):not(.pris-glow):not(button):not(a) { border-radius: 24px !important; }
 .dp main :is(.rounded-\\[16px\\], .rounded-\\[18px\\], .rounded-\\[19px\\]) { border-radius: 16px !important; }
+/* Orange running frame (Marco 2026-11-24): concentric corners, inner radius = outer − stroke, and a 4 px stroke, so
+   the line keeps the same thickness all the way round, also in the corners. */
+.dp main .pris-glow { border-radius: 24px !important; padding: 4px !important; }
+.dp main .pris-glow > div { border-radius: 20px !important; }
 .dp main :is(.rounded-\\[20px\\], .rounded-\\[24px\\], .rounded-\\[32px\\], .rounded-\\[34px\\]):is(.bg-white, [style*="#fbf8f3"], [style*="#f5f2ef"]):not(button):not(a) {
   box-shadow: 0 0 0 1px rgba(32,22,19,.07), inset 0 1px 0 rgba(255,255,255,.9), 0 1px 2px rgba(32,22,19,.05), 0 8px 16px -8px rgba(32,22,19,.08), 0 24px 40px -24px rgba(32,22,19,.18) !important; border-color: transparent !important; }
 
