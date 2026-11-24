@@ -1,7 +1,8 @@
 import Image from "next/image";
 
 // "Øv i jeres værktøj" (Marco 2026-11-24): Mindforward's logo in a circle on top, the three tools in circles below, and
-// an animated beam running from our logo down to each tool in that tool's colour. Pure SVG + CSS, no JS.
+// an animated beam running from our logo down to each tool in that tool's colour. All three fire at the same time
+// (Marco 2026-11-24: "som om Miwa skyder strålerne ned"). Pure SVG + CSS, no JS.
 const line = "rgba(32,22,19,0.1)";
 const tools = [
   { f: "chatgpt", n: "ChatGPT", c1: "#10a37f", c2: "#7fe0c2", x: 40 },
@@ -24,10 +25,10 @@ export function VaerktoejBeam() {
             </linearGradient>
           ))}
         </defs>
-        {tools.map((t, k) => (
+        {tools.map((t) => (
           <g key={t.f}>
             <path d={path(t.x)} stroke={line} strokeWidth="2" />
-            <path d={path(t.x)} stroke={t.c1} strokeWidth="3" strokeLinecap="round" pathLength={100} className="vb-beam" style={{ animationDelay: `${k * 0.45}s`, filter: `drop-shadow(0 0 3px ${t.c1})` }} />
+            <path d={path(t.x)} stroke={t.c1} strokeWidth="3" strokeLinecap="round" pathLength={100} className="vb-beam" style={{ filter: `drop-shadow(0 0 3px ${t.c1})` }} />
           </g>
         ))}
       </svg>
@@ -43,8 +44,9 @@ export function VaerktoejBeam() {
         </span>
       ))}
       <style>{`
-        .vb-beam { stroke-dasharray: 22 78; stroke-dashoffset: 100; animation: vb-run 2.4s cubic-bezier(.45,0,.25,1) infinite; }
-        @keyframes vb-run { to { stroke-dashoffset: 0; } }
+        /* All three fire at once from the logo, like MIND shooting them down; then a short pause before the next shot. */
+        .vb-beam { stroke-dasharray: 26 200; stroke-dashoffset: 26; animation: vb-shoot 2.2s cubic-bezier(.55,0,.35,1) infinite; }
+        @keyframes vb-shoot { 0% { stroke-dashoffset: 26; } 55% { stroke-dashoffset: -100; } 100% { stroke-dashoffset: -100; } }
         @media (prefers-reduced-motion: reduce) { .vb-beam { animation: none; stroke-dasharray: none; } }
       `}</style>
     </div>
