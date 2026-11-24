@@ -18,9 +18,9 @@ export function PaymentCarousel() {
           <ul key={part} aria-hidden className="flex shrink-0 items-center gap-3 pr-3">
             {pay.map(([n, src, w]) => (
               <li key={n} className="grid h-11 w-[92px] place-items-center">
-                {/* No frame (Marco 2026-11-24). On the brown footer the dark logos are drawn white; Mastercard keeps its colours. */}
+                {/* No frame, original colours (Marco 2026-11-24). */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt="" width={w} height={24} className="h-auto max-h-[28px] object-contain" style={{ width: w, filter: n === "Mastercard" ? undefined : "brightness(0) invert(1)", opacity: 0.9 }} />
+                <img src={src} alt="" width={w} height={24} className="h-auto max-h-[28px] object-contain" style={{ width: w }} />
               </li>
             ))}
           </ul>
