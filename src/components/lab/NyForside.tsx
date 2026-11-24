@@ -384,7 +384,8 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa 
       {/* Marco 2026-11-08: "Tilmeld jer" for Erhverv, "Tilmeld dig" for Privat (nav and hero). */}
       <Nav cta={privat ? "Tilmeld dig" : "Tilmeld jer"} />
       <div className={`${wrap} @container relative grid flex-1 gap-12 pb-14 pt-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-[6vw] lg:content-center lg:items-center lg:py-[0.5svh]`}>
-        <div>
+        {/* Marco 2026-11-24: the text block sits a little higher, centred on the video card (not card + avatars). */}
+        <div className="lg:-translate-y-[48px]">
           {/* Marco 2026-11-02: always exactly these three lines, at the same size relative to the cards on every screen.
               The size follows the content width (cqi), so the composition from his 14.23 screenshot holds everywhere. */}
           {toggle && <ModeSwitch mode={mode} setMode={setMode} />}
