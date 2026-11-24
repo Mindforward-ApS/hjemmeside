@@ -42,14 +42,19 @@ function MailChip() {
 /* A · Billede venstre, tekst højre (Marco 2026-11-10: "A men omvendt") */
 export function A() {
   return (
-    <section id="virksomheder" className="py-[120px]">
+    <section id="virksomheder" className="relative isolate overflow-hidden py-[120px]">
+      {/* Marco 2026-11-24: the same background as the hero (office photo, heavy blur, brown veil); text in white. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <Image src="/img/hero-erhverv-2.jpg" alt="" fill sizes="100vw" className="scale-[1.1] object-cover object-[50%_40%] blur-[40px]" />
+        <div className="absolute inset-0" style={{ background: "rgba(32,22,19,0.92)" }} />
+      </div>
       <div className={`${wrap} grid items-center gap-12 lg:grid-cols-[628fr_752fr] lg:gap-0`}>
         <div className="lg:order-2 lg:pl-[8.5vw]">
-          <Label>Pilotforløb</Label>
-          <h2 className={`${h2} mt-4 max-w-[13ch]`} style={{ color: c.ink }}>{HEAD}</h2>
-          <p className="mt-8 max-w-[30rem] text-[1rem] leading-6" style={{ color: c.muted }}>{PARA}</p>
+          <Label light>Pilotforløb</Label>
+          <h2 className={`${h2} mt-4 max-w-[13ch]`} style={{ color: "#fff" }}>{HEAD}</h2>
+          <p className="mt-8 max-w-[30rem] text-[1rem] leading-6 text-white/70">{PARA}</p>
           <ul className="mt-10 grid gap-5">
-            {points.map((p) => <li key={p.t} className="flex items-center gap-3 text-[1.25rem] font-semibold tracking-[-0.3px]" style={{ color: c.ink }}><Icon name={p.icon} size={18} />{p.t}</li>)}
+            {points.map((p) => <li key={p.t} className="flex items-center gap-3 text-[1.25rem] font-semibold tracking-[-0.3px] text-white"><Icon name={p.icon} size={18} />{p.t}</li>)}
           </ul>
           <div className="mt-10"><span data-mind="press" className="inline-block"><Pill href="/kontakt">Book 15 min</Pill></span></div>
         </div>
