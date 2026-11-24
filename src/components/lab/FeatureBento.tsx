@@ -48,7 +48,11 @@ export function FeatureBento() {
         <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
           {/* Teamoverblik */}
           <article className={card} style={{ borderColor: line }}>
-            <div className="mb-6 grid flex-1 content-center gap-3">
+            {/* ui-new (preview /preview/ui, Marco 2026-11-24): a real crop of the leader's team view instead of the drawn list. */}
+            <div className="ui-new mb-6 flex-1 overflow-hidden rounded-[14px] border" style={{ borderColor: line }}>
+              <Image src="/img/ui/hold.webp" alt="Mit hold i Mindforward: 159 medarbejdere øver, med fremskridt pr. person" width={1520} height={1120} sizes="(min-width: 1024px) 25vw, 90vw" className="h-full w-full object-cover object-left-top" />
+            </div>
+            <div className="ui-old mb-6 grid flex-1 content-center gap-3">
               {[["AH", "Anna H.", "Modul 1 i ChatGPT", 100], ["MJ", "Mads J.", "Lektion 3 i Copilot", 45], ["SK", "Sara K.", "Lektion 1 i Claude", 15]].map(([i, n, t, p]) => (
                 <div key={i as string} className="flex items-center gap-3 rounded-[14px] border p-3" style={{ borderColor: line }}>
                   <span className="grid size-9 shrink-0 place-items-center rounded-full text-[0.75rem] font-semibold text-white" style={{ background: grad }}>{i}</span>
@@ -84,7 +88,15 @@ export function FeatureBento() {
 
           {/* Data i EU */}
           <article className={card} style={{ borderColor: line }}>
-            <div className="mb-6 grid flex-1 place-items-center">
+            {/* ui-new: where the data actually lives, as a small spec sheet. */}
+            <dl className="ui-new mb-6 flex-1 divide-y self-stretch rounded-[14px] border text-[0.875rem]" style={{ borderColor: line }}>
+              {[["Platform", "Vercel · Frankfurt"], ["Database", "Neon · Frankfurt"], ["Region", "EU (eu-central-1)"], ["Aftale", "Databehandleraftale"]].map(([k, v]) => (
+                <div key={k} className="flex items-center justify-between gap-3 px-4 py-3" style={{ borderColor: line }}>
+                  <dt style={{ color: muted }}>{k}</dt><dd className="font-medium" style={{ color: ink }}>{v}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="ui-old mb-6 grid flex-1 place-items-center">
               <div className="scale-90 rounded-[22px] p-[3px] lg:scale-100" style={{ background: grad }}>
                 <div className="grid size-[150px] place-items-center rounded-[19px] text-center" style={{ background: "#201613" }}>
                   <div>

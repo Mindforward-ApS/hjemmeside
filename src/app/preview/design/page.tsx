@@ -11,7 +11,7 @@ const geist = Google_Sans_Flex({ subsets: ["latin", "latin-ext"], variable: "--f
 const P = ".greb-btn:not(.greb-btn--light), .nf-press.h-11.text-white";
 const S = ".greb-btn.greb-btn--light, .nf-press.h-11:not(.text-white), .nf-press.h-\\[43px\\]";
 
-const css = `
+export const designCss = `
 /* 1 · Ét knapsystem: alle primære orange, alle sekundære hvide, samme pille og samme løft. */
 .dp main :is(${P}) { background: linear-gradient(90deg, #fb970a, #f8400a) !important; color: #fff !important; border-color: transparent !important;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.3), inset 0 -2px 5px rgba(120,20,0,.35), 0 1px 1px rgba(0,0,0,.3), 0 3px 6px -2px rgba(0,0,0,.26), 0 14px 24px -12px rgba(0,0,0,.38) !important; }
@@ -68,7 +68,7 @@ const css = `
 export default function Page() {
   return (
     <div className={`${bebas.variable} ${geist.variable}`}>
-      <style>{css}</style>
+      <style>{designCss}</style>
       <NyForside layout="ny" practice="b" pilot="a" sep={1} />
       <Skift />
     </div>

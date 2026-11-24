@@ -642,3 +642,14 @@ body, body * { font-family: var(--font-inter), system-ui, sans-serif !important;
 
 /* Marco 2026-11-23: the price section is the standard for every section heading (size, weight, tracking). */
 main section h2, section[data-std] h2 { font-size: clamp(2.25rem, 1.6rem + 1.8vw, 3rem) !important; font-weight: 600 !important; letter-spacing: -0.03em !important; line-height: 1.05 !important; }
+
+/* Rigtig UI-preview (Marco 2026-11-24): .ui-new shows only when <html> has .ui-real (set on /preview/ui). */
+.ui-new { display: none !important; }
+html.ui-real .ui-new { display: revert !important; }
+html.ui-real .ui-old { display: none !important; }
+html.ui-real [data-mind="play"] > button {
+  backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+  background: linear-gradient(180deg, transparent 50%, rgba(20,13,11,.78)), url(/img/ui/oversigt.webp) center top / cover !important;
+  justify-content: flex-start !important; align-items: flex-end !important; flex-direction: row !important; gap: 14px !important; padding: 28px !important; text-align: left !important; }
+html.ui-real [data-mind="play"] > button > span:first-child { order: 2; font-size: 0.9375rem !important; line-height: 1.2 !important; max-width: none !important; align-self: flex-end; margin-bottom: 10px; padding: 10px 16px; border-radius: 999px; background: rgba(20,13,11,.82); letter-spacing: -0.01em !important; }
+html.ui-real [data-mind="play"] > button > [data-mind-button] { width: 3.25rem !important; height: 3.25rem !important; }
