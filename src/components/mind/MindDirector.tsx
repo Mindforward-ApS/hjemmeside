@@ -193,7 +193,8 @@ function run(M: MindAvatarApi): () => void {
     const fromLeft = leftRoom > rightRoom;
     if (side && Math.max(leftRoom, rightRoom) < S * 0.55) side = false;
     if (!side) {
-      const x = Math.min(vw - S, Math.max(0, left + r.width * 0.78 - S / 2));
+      const fx = parseFloat(t.dataset.mindX || "0.78"); // data-mind-x: where along the top edge (0–1)
+      const x = Math.min(vw - S, Math.max(0, left + r.width * fx - S / 2));
       const line = top, yEnd = line - S * 0.52, yStart = line + 2;
       const clip = (y: number) => `inset(-40% -40% ${Math.max(0, S - (line - y))}px -40%)`;
       if (reduced) { show(x, yEnd); actorEl.style.clipPath = clip(yEnd); actor.expression("neutral"); return; }

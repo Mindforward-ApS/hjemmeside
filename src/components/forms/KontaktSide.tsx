@@ -50,7 +50,8 @@ export function KontaktSide({ heading: H = "h1", id }: { heading?: "h1" | "h2"; 
         <div className="relative min-w-0">
         {/* Soft orange glow behind the form, in the M logo's colours (same family as the featured price card). */}
         <div aria-hidden className="kontakt-glow pointer-events-none absolute -inset-3 -z-0 rounded-[28px]" />
-        <div data-mind="peek-side" data-mind-react="hello" className="relative rounded-[16px] p-6 sm:p-7" style={{ background: "#fff", boxShadow: "0 1px 0 rgba(31,22,17,0.04), 0 24px 48px -28px rgba(31,22,17,0.35)" }}>
+        {/* Marco 2026-11-24: MIND peeks up over the form's top-right corner. */}
+        <div data-mind="peek" data-mind-x="0.9" data-mind-react="hello" className="relative rounded-[16px] p-6 sm:p-7" style={{ background: "#fff", boxShadow: "0 1px 0 rgba(31,22,17,0.04), 0 24px 48px -28px rgba(31,22,17,0.35)" }}>
           {state.ok ? (
             <p role="status" className="flex min-h-[320px] items-center justify-center text-center text-[1.125rem] font-medium" style={{ color: ink }}>{state.message}</p>
           ) : (
