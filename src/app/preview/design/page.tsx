@@ -38,13 +38,13 @@ const css = `
 
 /* 2 · Orange er beholdt overalt (Marco 2026-11-24): rammer, ikoncirkler, barer og glød som på den live side. */
 
-/* 2b · Ikoncirkler i Øvemiljøet og "Skriv til os" (Marco 2026-11-24): den orange cirkel bliver, med en lille sort cirkel
-   og hvidt ikon indeni, og samme 3D som knapperne (lys kant foroven, skygge indad forneden, skygge under). */
-.dp main span.grid.rounded-full:is(.size-10, .size-11) {
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 -2px 5px rgba(120,20,0,.35), 0 1px 1px rgba(0,0,0,.25), 0 4px 8px -3px rgba(120,20,0,.35) !important; }
-.dp main span.grid.rounded-full:is(.size-10, .size-11) > svg {
-  width: 66% !important; height: 66% !important; padding: 15%; box-sizing: border-box; border-radius: 50%;
-  background: #1a0e08; color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 1px 2px rgba(120,20,0,.45); }
+/* 2b · "Skriv til os" i pilotforløbet bliver en hvid knap som de andre: kun mailadressen, ingen cirkel (Marco 2026-11-24). */
+.dp main a.nf-focus.rounded-full.bg-white[href^="mailto:"] {
+  height: 43px !important; padding: 0 24px !important; gap: 0 !important; justify-content: center !important;
+  box-shadow: inset 0 0 0 1px rgba(32,22,19,.12), 0 1px 1px rgba(0,0,0,.06), 0 3px 6px -2px rgba(0,0,0,.08), 0 12px 20px -12px rgba(0,0,0,.16) !important; }
+.dp main a.nf-focus.rounded-full.bg-white[href^="mailto:"] > span:first-child { display: none !important; }
+.dp main a.nf-focus.rounded-full.bg-white[href^="mailto:"] span.leading-tight > span.block { display: none !important; }
+.dp main a.nf-focus.rounded-full.bg-white[href^="mailto:"] :is(small, span, p) { font: 700 13px/1.2 var(--font-grotesk), system-ui, sans-serif !important; letter-spacing: -.015em !important; color: #201613 !important; text-transform: none !important; }
 
 /* 3 · Kort med dybde: én radius-skala (24 ude, 16 inde), 1 px kant, lag-skygge og en lys linje i toppen. */
 .dp main :is(.rounded-\\[20px\\], .rounded-\\[22px\\], .rounded-\\[24px\\], .rounded-\\[32px\\], .rounded-\\[34px\\]):not(.pris-glow):not(button):not(a) { border-radius: 24px !important; }
