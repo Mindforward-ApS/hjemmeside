@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { LiveMind } from "@/components/mind/LiveMind";
 import { ArrowUpIcon, ArrowsOutSimpleIcon, ArrowsInSimpleIcon, ChatCircleDotsIcon, PhoneIcon, XIcon } from "@phosphor-icons/react";
 
 // Open Mon–Fri 9–16 Copenhagen time: green dot. Outside those hours: red.
@@ -86,7 +87,7 @@ export function ChatBubble() {
           {/* MIND peeks over the top edge, like the robot in the reference. */}
           {/* Marco 2026-11-24: MIND sits a little lower, standing on the card's top edge with a soft contact shadow under it. */}
           <span aria-hidden className="absolute top-[40px] left-1/2 h-[14px] w-[96px] -translate-x-1/2 rounded-[50%] blur-[5px]" style={{ background: "radial-gradient(closest-side, rgba(32,22,19,0.6), rgba(32,22,19,0.15) 70%, transparent)" }} />
-          <Image src="/img/miwa-chat.png" alt="" width={256} height={213} className="absolute -top-[26px] left-1/2 h-auto w-[84px] -translate-x-1/2 drop-shadow-[0_3px_4px_rgba(120,30,0,0.35)]" />
+          <LiveMind size={84} className="absolute -top-[26px] left-1/2 -translate-x-1/2 drop-shadow-[0_3px_4px_rgba(120,30,0,0.35)]" />
           <div className="flex items-center justify-between px-4 pt-4">
             <button type="button" onClick={() => setBig((b) => !b)} aria-label={big ? "Gør mindre" : "Gør større"} className="grid size-9 place-items-center rounded-full ring-1 ring-[rgba(32,22,19,0.14)] transition-colors hover:bg-[#f5f2ef]">
               {big ? <ArrowsInSimpleIcon size={16} weight="bold" /> : <ArrowsOutSimpleIcon size={16} weight="bold" />}
@@ -130,7 +131,7 @@ export function ChatBubble() {
         onClick={() => setView((v) => (v === "closed" ? "card" : "closed"))}
         className={`relative grid size-16 place-items-center rounded-full transition-[transform,background-color] duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#201613] ${open ? "bg-[#0a0a0b] shadow-[0_2px_4px_rgba(0,0,0,.2),0_12px_28px_-8px_rgba(0,0,0,.45)]" : "rounded-br-[6px] bg-white shadow-[0_0_0_1px_rgba(32,22,19,.08),0_2px_4px_rgba(0,0,0,.12),0_12px_28px_-8px_rgba(0,0,0,.35)]"}`}
       >
-        {open ? <XIcon size={24} weight="bold" className="text-white" aria-hidden /> : <Image src="/img/miwa-chat.png" alt="" width={256} height={213} className="h-auto w-[46px] drop-shadow-[0_2px_3px_rgba(120,30,0,0.35)]" />}
+        {open ? <XIcon size={24} weight="bold" className="text-white" aria-hidden /> : <LiveMind size={46} className="drop-shadow-[0_2px_3px_rgba(120,30,0,0.35)]" />}
         {!open && online !== null && <span aria-hidden className={`absolute right-0.5 top-0.5 size-3.5 rounded-full ring-2 ring-white ${online ? "bg-[#22c55e]" : "bg-[#ef4444]"}`} />}
       </button>
       <style>{`
