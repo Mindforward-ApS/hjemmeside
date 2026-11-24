@@ -1,6 +1,5 @@
 // "Data i EU" badge (Marco 2026-11-24: keep the old badge, just nicer). The dark tile in the logo-gradient frame, now
 // with faint white dots over the whole tile, "Frankfurt" as the big word, a top gloss and the buttons' depth.
-const grad = "linear-gradient(135deg, #ffc53d, #fb970a 35%, #f8400a)";
 
 // A 10 px grid; the radius grows from 0.5 in the middle to 2.1 at the corners (halftone towards the edge).
 const dots = Array.from({ length: 16 * 16 }, (_, k) => {
@@ -11,8 +10,10 @@ const dots = Array.from({ length: 16 * 16 }, (_, k) => {
 
 export function EuBadge() {
   return (
-    <div className="rounded-[26px] p-[3px] shadow-[0_1px_1px_rgba(0,0,0,0.2),0_10px_20px_-8px_rgba(248,64,10,0.45),0_28px_40px_-20px_rgba(32,22,19,0.5)]" style={{ background: grad }}>
-      <div className="relative grid size-[160px] place-items-center overflow-hidden rounded-[23px]" style={{ background: "radial-gradient(120% 90% at 50% 0%, #3a2822 0%, #201613 55%, #160f0d 100%)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.14), inset 0 -10px 20px rgba(0,0,0,0.35)" }}>
+    // Marco 2026-11-24: more 3D (raised tile: light top rim, inner shade at the bottom, layered drop shadow) and the
+    // orange frame runs round (a conic gradient whose angle turns, like the price card and the buttons' hover glow).
+    <div className="eu-frame relative rounded-[26px] p-[3px] shadow-[0_1px_1px_rgba(0,0,0,0.25),0_4px_8px_-2px_rgba(32,22,19,0.3),0_14px_24px_-10px_rgba(248,64,10,0.5),0_34px_50px_-24px_rgba(32,22,19,0.6)]">
+      <div className="relative grid size-[160px] place-items-center overflow-hidden rounded-[23px]" style={{ background: "radial-gradient(120% 90% at 50% 0%, #3d2a23 0%, #201613 55%, #140d0b 100%)", boxShadow: "inset 0 1.5px 0 rgba(255,255,255,0.22), inset 0 0 0 1px rgba(255,255,255,0.05), inset 0 -14px 24px rgba(0,0,0,0.5), inset 0 8px 16px -8px rgba(255,255,255,0.06)" }}>
         {/* gloss */}
         <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-1/2" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.08), transparent)" }} />
         {/* Marco 2026-11-24: faint white dots over the whole brown tile, standing still, growing towards the edges. */}
@@ -25,6 +26,12 @@ export function EuBadge() {
           <p className="mt-1.5 text-[0.6875rem] tabular-nums text-white/45">eu-central-1</p>
         </div>
       </div>
+      <style>{`
+        @property --eu-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+        .eu-frame { background: conic-gradient(from var(--eu-a), #f8400a, #fb970a 25%, #ffd86b 38%, #fb970a 50%, #f8400a 75%, #f8400a); animation: eu-run 6s linear infinite; }
+        @keyframes eu-run { to { --eu-a: 360deg; } }
+        @media (prefers-reduced-motion: reduce) { .eu-frame { animation: none; } }
+      `}</style>
     </div>
   );
 }
