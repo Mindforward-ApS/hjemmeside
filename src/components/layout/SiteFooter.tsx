@@ -11,8 +11,8 @@ export function SiteFooter() {
     <>
     <NewsletterBand />
     <footer className="text-white" style={{ background: "linear-gradient(180deg, #201613 0%, #1a0f0c 100%)" }}>
-      <div className="px-6 pb-10 md:px-[3.5vw]">
-        <div className="border-t border-white/10 pt-14">
+      <div className="px-6 pb-10 pt-[60px] sm:pt-[84px] md:px-[3.5vw]">
+        <div className="pt-14">
           <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
             <div>
               <MindforwardLogo size={30} />

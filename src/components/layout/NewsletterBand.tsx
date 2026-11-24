@@ -4,12 +4,14 @@ import { useActionState } from "react";
 import { newsletterAction, type FormState } from "@/lib/actions";
 import { GrebBtn } from "@/components/ui/GrebBtn";
 
-// Black newsletter band between the last section and the footer (Marco 2026-11-23).
+// Newsletter card between the last section and the footer (Marco 2026-11-23, floating since 2026-11-24).
 export function NewsletterBand() {
   const [state, action, pending] = useActionState<FormState, FormData>(newsletterAction, { ok: false });
   return (
-    <section aria-labelledby="nyhedsbrev-titel" className="text-white" style={{ background: "#0a0a0b" }}>
-      <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-6 px-6 py-10 md:px-[3.5vw] lg:flex-row lg:items-center lg:justify-between">
+    // Marco 2026-11-24: a floating card that lies over both the contact section above and the footer below
+    // (negative margins on both sides; the footer gets matching top padding).
+    <section aria-labelledby="nyhedsbrev-titel" className="relative z-10 -mb-[84px] -mt-[84px] max-sm:-mb-[60px] max-sm:-mt-[60px] text-white">
+      <div className="flex w-full flex-col gap-6 rounded-[28px] px-6 py-9 sm:px-[3.5vw] lg:flex-row lg:items-center lg:justify-between" style={{ background: "radial-gradient(120% 140% at 0% 0%, #2a1c17 0%, #0f0a09 60%)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.12), 0 0 0 1px rgba(255,255,255,0.04), 0 2px 4px rgba(0,0,0,0.25), 0 24px 48px -16px rgba(20,13,11,0.55), 0 48px 80px -40px rgba(20,13,11,0.6)" }}>
         <div>
           <h2 id="nyhedsbrev-titel" className="text-[1.5rem] font-semibold tracking-[-0.02em]" style={{ color: "#fff" }}>Tilmeld dig vores nyhedsbrev</h2>
           <p className="mt-1.5 text-[0.9375rem] text-white/60">Nyt om AI på arbejdet, nye kurser og gode tips. Afmeld når som helst.</p>
