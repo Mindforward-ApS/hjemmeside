@@ -690,3 +690,8 @@ html.rytme .sep-inner > #kontakt { padding-top: 120px !important; }
 @media (min-width: 1700px) {
   .sm\:px-\[3\.5vw\], .md\:px-\[3\.5vw\] { padding-inline: max(3.5vw, calc((100vw - 1600px) / 2)) !important; }
 }
+
+/* Fit to screen (Marco 2026-11-24, FitSections.tsx): on desktop the air around each section follows the screen height. */
+@media (min-width: 1024px) {
+  html.fit :is(.sep-inner > section, section#problemet) { padding-top: clamp(48px, 7vh, 120px) !important; padding-bottom: clamp(48px, 7vh, 120px) !important; }
+}

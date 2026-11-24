@@ -9,6 +9,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { FooterGate } from "@/components/layout/FooterGate";
 import { ChatBubble } from "@/components/layout/ChatBubble";
 import { CookieBanner } from "@/components/layout/CookieBanner";
+import { FitSections } from "@/components/layout/FitSections";
 import { designCss } from "@/components/lab/designPass";
 import { RevealObserver } from "@/components/motion/RevealObserver";
 import { SplitHeadings } from "@/components/motion/SplitHeadings";
@@ -71,6 +72,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SpotlightTracker />
         <ChatBubble />
         <CookieBanner />
+        <FitSections />
       </body>
     </html>
   );
