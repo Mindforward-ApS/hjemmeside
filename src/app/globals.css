@@ -684,3 +684,9 @@ html.rytme .sep-inner > #kontakt { padding-top: 120px !important; }
   html.rytme .sep-inner > :is(#problemet, [data-sek="kurser"], section[aria-labelledby="features-title"], #saadan, #priser, #faq) { padding-top: 80px !important; padding-bottom: 80px !important; }
   html.rytme .sep-inner > #kontakt { padding-top: 80px !important; }
 }
+
+/* Alle skærme (Marco 2026-11-24): on screens wider than a 16" MacBook the content stops growing at 1600 px and sits
+   centred, while section backgrounds still run edge to edge. Below that nothing changes. */
+@media (min-width: 1700px) {
+  .sm\:px-\[3\.5vw\], .md\:px-\[3\.5vw\] { padding-inline: max(3.5vw, calc((100vw - 1600px) / 2)) !important; }
+}

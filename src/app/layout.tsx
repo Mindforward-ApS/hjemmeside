@@ -9,6 +9,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { FooterGate } from "@/components/layout/FooterGate";
 import { ChatBubble } from "@/components/layout/ChatBubble";
 import { CookieBanner } from "@/components/layout/CookieBanner";
+import { designCss } from "@/components/lab/designPass";
 import { RevealObserver } from "@/components/motion/RevealObserver";
 import { SplitHeadings } from "@/components/motion/SplitHeadings";
 import { SpotlightTracker } from "@/components/motion/SpotlightTracker";
@@ -49,10 +50,12 @@ const orgJsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="da" data-pal="sort-koral" suppressHydrationWarning className={`${inter.variable} ${serif.variable} ${grotesk.variable}${VIS_PLADSHOLDERE ? "" : " skjul-ph"}`}>
+    <html lang="da" data-pal="sort-koral" suppressHydrationWarning className={`dp ui-real brun rytme ${inter.variable} ${serif.variable} ${grotesk.variable}${VIS_PLADSHOLDERE ? "" : " skjul-ph"}`}>
       <head>
         {/* Enables reveal styles only when JS runs, so content is never hidden without JS (§10.7). */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        {/* Marco 2026-11-24: the approved design pass is live on every page. */}
+        <style dangerouslySetInnerHTML={{ __html: designCss }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </head>
       <body>
