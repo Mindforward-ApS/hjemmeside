@@ -695,3 +695,14 @@ html.rytme .sep-inner > #kontakt { padding-top: 120px !important; }
 @media (min-width: 1024px) {
   html.fit :is(.sep-inner > section, section#problemet) { padding-top: clamp(48px, 7vh, 120px) !important; padding-bottom: clamp(48px, 7vh, 120px) !important; }
 }
+
+/* 3D on the brown cards in the orange frame (Marco 2026-11-24, like the Data i EU badge): light from the top, a bright
+   top rim, darker towards the bottom, an inner shade at the edges, and a layered shadow under the frame. */
+html.brun .pris-glow > [data-brun] {
+  background: radial-gradient(120% 70% at 50% -10%, #4a332a 0%, #2a1c17 45%, #1a110e 80%, #120b09 100%) !important;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.22), inset 0 0 0 1px rgba(255,255,255,0.05), inset 3px 0 8px -4px rgba(255,255,255,0.07),
+    inset -3px 0 8px -4px rgba(0,0,0,0.5), inset 0 -22px 34px -10px rgba(0,0,0,0.55), inset 0 16px 26px -14px rgba(255,255,255,0.09) !important;
+}
+html.brun .pris-glow:has(> [data-brun]) {
+  box-shadow: 0 1px 1px rgba(0,0,0,0.25), 0 6px 12px -4px rgba(32,22,19,0.3), 0 18px 32px -12px rgba(248,64,10,0.45), 0 40px 60px -28px rgba(32,22,19,0.55) !important;
+}
