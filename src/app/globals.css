@@ -714,3 +714,19 @@ html.fit.rytme .sep-inner > section[aria-labelledby="features-title"] { padding-
 html.fit.rytme .sep-inner > section[data-fit-join] { padding-top: 0 !important; }
 /* Full width + fit (Marco 2026-11-24): the pilot photo is a touch less tall on desktop, so the section fits small laptops. */
 @media (min-width: 1024px) { html.fit #virksomheder .aspect-\[628\/720\] { aspect-ratio: 628 / 600 !important; } }
+
+/* One section = one screen (Marco 2026-11-24): on desktop every section is exactly the height of the window, with its
+   content centred, so standing in a section you see only that section. The page settles on a section when you stop
+   scrolling (proximity, so it never fights the scroll). */
+@media (min-width: 1024px) {
+  html.fit { scroll-snap-type: y proximity; }
+  html.fit .sep-inner > section, html.fit section#problemet {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center; scroll-snap-align: start;
+  }
+}
+/* Funktioner (6 cards) cannot fit one laptop screen at a readable size, so it is two screens, one row each, both
+   exactly one window high (Marco 2026-11-24: "kun den sektion"). */
+@media (min-width: 1024px) {
+  html.fit.rytme .sep-inner > section[aria-labelledby="features-title"],
+  html.fit.rytme .sep-inner > section[data-fit-join] { padding-top: clamp(48px, 7vh, 120px) !important; padding-bottom: clamp(48px, 7vh, 120px) !important; }
+}
