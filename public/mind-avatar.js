@@ -100,17 +100,26 @@
       `<defs><linearGradient id="${id}g" gradientUnits="userSpaceOnUse" x1="118" y1="0" x2="905" y2="0">` +
       `<stop offset="0" stop-color="${opts.start}"/><stop offset="1" stop-color="${opts.end}"/></linearGradient>` +
       `<radialGradient id="${id}s"><stop offset="0" stop-color="#000" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>` +
-      // Glossy finish (Marco 2026-11-24): soft light from the top left, a darker bottom, and sharp specular highlights.
+      // Glossy finish (Marco 2026-11-24, tuned to miwa-3d-front.png): an inflated body (light top-left, darker rim), a
+      // raised white ring and face with a soft bevel shadow, and sharp specular highlights on the lobes.
       (opts.gloss ? `<clipPath id="${id}c"><path d="${SIL}"/></clipPath>` +
-        `<radialGradient id="${id}h" cx="0.32" cy="0.22" r="0.62"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".45" stop-color="#fff" stop-opacity=".12"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>` +
-        `<linearGradient id="${id}d" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#7a1e00" stop-opacity="0"/><stop offset="1" stop-color="#7a1e00" stop-opacity=".32"/></linearGradient>` : '') +
+        `<radialGradient id="${id}h" cx="0.34" cy="0.26" r="0.7"><stop offset="0" stop-color="#fff" stop-opacity=".42"/><stop offset=".38" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>` +
+        `<radialGradient id="${id}v" cx="0.5" cy="0.45" r="0.62"><stop offset=".62" stop-color="#6a1600" stop-opacity="0"/><stop offset="1" stop-color="#6a1600" stop-opacity=".45"/></radialGradient>` +
+        `<linearGradient id="${id}d" x1="0" y1="0" x2="0" y2="1"><stop offset=".5" stop-color="#7a1e00" stop-opacity="0"/><stop offset="1" stop-color="#7a1e00" stop-opacity=".35"/></linearGradient>` +
+        `<linearGradient id="${id}r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#ead8cf"/></linearGradient>` +
+        `<filter id="${id}b" x="-10%" y="-10%" width="120%" height="125%"><feDropShadow dx="0" dy="10" stdDeviation="7" flood-color="#5a1500" flood-opacity=".45"/></filter>` +
+        `<filter id="${id}f" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="9" stdDeviation="5" flood-color="#000" flood-opacity=".35"/></filter>` : '') +
       `</defs>` +
       (opts.shadow ? `<ellipse data-p="shadow" cx="512" cy="838" rx="270" ry="34" fill="url(#${id}s)"/>` : '') +
       `<g data-p="body"><path d="${SIL}" fill="url(#${id}g)"/>` +
-      (opts.gloss ? `<g clip-path="url(#${id}c)"><rect x="0" y="0" width="1024" height="1024" fill="url(#${id}d)"/><rect x="0" y="0" width="1024" height="1024" fill="url(#${id}h)"/>` +
-        `<ellipse cx="300" cy="300" rx="70" ry="34" transform="rotate(-28 300 300)" fill="#fff" fill-opacity=".75"/><ellipse cx="640" cy="270" rx="46" ry="20" transform="rotate(-12 640 270)" fill="#fff" fill-opacity=".55"/><ellipse cx="770" cy="640" rx="38" ry="80" transform="rotate(18 770 640)" fill="#fff" fill-opacity=".2"/></g>` : '') +
-      `<path d="${RING}" fill="${opts.ring}" fill-rule="evenodd"/>` +
-      `<g data-p="face" fill="none" stroke-linecap="round" stroke-linejoin="round">` +
+      (opts.gloss ? `<g clip-path="url(#${id}c)"><rect x="0" y="0" width="1024" height="1024" fill="url(#${id}v)"/><rect x="0" y="0" width="1024" height="1024" fill="url(#${id}d)"/><rect x="0" y="0" width="1024" height="1024" fill="url(#${id}h)"/>` +
+        `<path d="M232 318c18-62 74-104 132-96 18 3 14 22-4 24-48 6-86 38-100 84-6 20-34 12-28-12z" fill="#fff" fill-opacity=".85"/>` +
+        `<ellipse cx="402" cy="252" rx="26" ry="14" transform="rotate(-20 402 252)" fill="#fff" fill-opacity=".8"/>` +
+        `<path d="M600 236c40-22 96-22 132 6 14 11 2 28-14 20-34-16-74-16-104-2-18 8-30-14-14-24z" fill="#fff" fill-opacity=".7"/>` +
+        `<path d="M806 560c26 40 30 92 6 132-8 14-26 6-20-10 16-36 14-78-4-110-8-14 8-26 18-12z" fill="#fff" fill-opacity=".35"/>` +
+        `<path d="M300 700c30 30 70 44 110 42 16-1 18 20 2 22-48 6-96-12-128-48-10-12 6-26 16-16z" fill="#fff" fill-opacity=".22"/></g>` : '') +
+      (opts.gloss ? `<path d="${RING}" fill="url(#${id}r)" fill-rule="evenodd" filter="url(#${id}b)"/>` : `<path d="${RING}" fill="${opts.ring}" fill-rule="evenodd"/>`) +
+      `<g data-p="face" fill="none" stroke-linecap="round" stroke-linejoin="round"${opts.gloss ? ` filter="url(#${id}f)"` : ''}>` +
       (opts.faceOutline > 0 ? `<g stroke="${opts.outline}"><path data-p="eyeL0"/><path data-p="eyeR0"/><path data-p="mouth0"/></g>` : '') +
       `<g stroke="#fff"><path data-p="eyeL" stroke-width="53"/><path data-p="eyeR" stroke-width="53"/><path data-p="mouth" stroke-width="44"/></g></g></g>`;
     const q = n => svg.querySelector(`[data-p="${n}"]`);
