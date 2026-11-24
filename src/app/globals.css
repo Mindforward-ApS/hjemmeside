@@ -701,3 +701,5 @@ html.brun .pris-glow:has(> [data-brun]) {
 
 
 
+/* Price: the brown card itself is as wide as the white cards; the orange frame sits outside it (Marco 2026-11-24). */
+@media (min-width: 1024px) { html.dp #priser .pris-glow { margin-inline: -4px; } }
