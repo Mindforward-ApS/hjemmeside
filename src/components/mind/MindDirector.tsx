@@ -195,7 +195,8 @@ function run(M: MindAvatarApi): () => void {
     if (!side) {
       const fx = parseFloat(t.dataset.mindX || "0.78"); // data-mind-x: where along the top edge (0–1)
       const x = Math.min(vw - S, Math.max(0, left + r.width * fx - S / 2));
-      const line = top, yEnd = line - S * 0.52, yStart = line + 2;
+      const riseBy = parseFloat(t.dataset.mindRise || "0.52"); // data-mind-rise: how much of MIND shows over the edge
+      const line = top, yEnd = line - S * riseBy, yStart = line + 2;
       const clip = (y: number) => `inset(-40% -40% ${Math.max(0, S - (line - y))}px -40%)`;
       if (reduced) { show(x, yEnd); actorEl.style.clipPath = clip(yEnd); actor.expression("neutral"); return; }
       show(x, yStart); actorEl.style.clipPath = clip(yStart); actor.start(); actor.loop("idle");
