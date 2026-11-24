@@ -14,7 +14,7 @@ const ink = "#ffffff";
 const muted = "rgba(255,255,255,0.6)";
 const cols = [
   { title: "Kurser", links: [["ChatGPT", "/#kurser"], ["Copilot", "/#kurser"], ["Claude", "/#kurser"], ["Alle kurser", "/#kurser"]] },
-  { title: "Mindforward", links: [["Sådan virker det", "/#saadan"], ["Priser", "/#priser"], ["For virksomheder", "/priser#priser"], ["Kontakt", "/#kontakt"]] },
+  { title: "Mindforward", links: [["Sådan virker det", "/#saadan"], ["Priser", "/#priser"], ["Blog", "/blog"], ["Kontakt", "/#kontakt"]] },
   { title: "Hjælp", links: [["Spørgsmål og svar", "/#faq"], ["Log ind", appLinks.login], ["Opret konto", appLinks.startBusiness]] },
 ] as const;
 const legal = [["Privatlivspolitik", "/privatliv"], ["Handelsbetingelser", "/vilkaar"], ["Cookies", "/cookies"]] as const;
