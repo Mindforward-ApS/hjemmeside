@@ -712,3 +712,5 @@ html.brun .pris-glow:has(> [data-brun]) {
 /* The two Funktioner rows as one section (wins over the rytme padding). */
 html.fit.rytme .sep-inner > section[aria-labelledby="features-title"] { padding-bottom: 20px !important; }
 html.fit.rytme .sep-inner > section[data-fit-join] { padding-top: 0 !important; }
+/* Full width + fit (Marco 2026-11-24): the pilot photo is a touch less tall on desktop, so the section fits small laptops. */
+@media (min-width: 1024px) { html.fit #virksomheder .aspect-\[628\/720\] { aspect-ratio: 628 / 600 !important; } }

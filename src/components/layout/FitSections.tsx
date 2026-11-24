@@ -20,9 +20,6 @@ function fit() {
   });
   for (const { box } of targets) { box.style.zoom = ""; box.style.width = ""; box.style.marginInline = ""; }
   if (!desktop) return;
-  // Lock each box to its natural width before scaling, so pictures and videos that follow the width shrink too
-  // (otherwise a zoomed box gets a wider virtual width and its 16:9 video grows taller again).
-  const widths = targets.map(({ box }) => box.getBoundingClientRect().width);
   // Marco 2026-11-24: one zoom for the whole page (the one the tallest section needs), so every section and card keeps the
   // same width and size. Measured per section, applied to all; a few passes settle the last pixels.
   let zoom = 1;
@@ -32,12 +29,13 @@ function fit() {
       const over = frame.getBoundingClientRect().height - innerHeight;
       if (over <= 0) continue;
       const h = box.getBoundingClientRect().height;
-      need = Math.min(need, zoom * (h - over - 2) / h);
+      need = Math.min(need, zoom * (h - over - 4) / h);
     }
     need = Math.max(0.7, Math.floor(need * 1000) / 1000);
     if (need >= zoom) break;
     zoom = need;
-    targets.forEach(({ box }, i) => { box.style.zoom = String(zoom); box.style.width = `${widths[i]}px`; box.style.marginInline = "auto"; });
+    // Full width always (Marco 2026-11-24): no width lock, so cards keep filling the page edge to edge.
+    targets.forEach(({ box }) => { box.style.zoom = String(zoom); });
   }
 }
 
