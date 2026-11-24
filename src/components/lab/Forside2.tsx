@@ -103,7 +103,7 @@ function Platform() {
         {/* Marco 2026-11-11: the product video (16:9, with sound) is shown whole; the stats card is only as tall as its content, and on desktop the video is lifted so both end at the same
             height at the bottom (the video hangs from the bottom of the row; the row is as tall as the card). */}
         <div className="mt-[60px] grid gap-4 xl:grid-cols-[400fr_1000fr] xl:gap-[1.74vw]">
-          <div className="flex flex-col self-start rounded-[32px] bg-white p-6 2xl:p-8">
+          <div className="flex flex-col self-start rounded-[32px] bg-white p-6 xl:self-end 2xl:p-8">
             {[["10", "min", "Så lang tid tager en lektion"], ["69", "kr.", "Pris pr. bruger pr. måned"]].map(([n, u, l]) => (
               <div key={n} className="grid grid-cols-2 items-start border-b pb-7 pt-0 [&:nth-child(2)]:pt-6" style={{ borderColor: "rgba(32,22,19,0.08)" }}>
                 <p className={`${head} flex items-start text-[56px] leading-[60px] tracking-[-2px]`} style={{ color: c.ink }}>{n}<span className="ml-1.5 mt-0 text-[22px] font-bold leading-6 tracking-normal">{u}</span></p>
@@ -113,8 +113,9 @@ function Platform() {
             <p className="pt-6 text-[1rem] leading-6" style={{ color: "#6b625d" }}>Lektioner på dansk i ChatGPT, Copilot eller Claude. Hver lektion slutter med en opgave fra jeres egen hverdag, og lederen kan følge holdet.</p>
             <GrebBtn href="/priser" onDark className="mt-6 self-start">Se priser</GrebBtn>
           </div>
-          <div className="relative order-first xl:order-none">
-            <div className="relative xl:absolute xl:inset-x-0 xl:bottom-0 xl:translate-x-6">
+          {/* Marco 2026-11-24: the video no longer hangs up over the heading; video and card share the bottom line. */}
+          <div className="relative order-first xl:order-none xl:self-end">
+            <div className="relative">
               <div className="relative z-10 aspect-video overflow-hidden rounded-[32px]">
                 <PlatformVideo />
               </div>
