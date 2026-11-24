@@ -7,6 +7,7 @@ import Link from "next/link";
 import { appLinks } from "@/lib/app";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { VaerktoejBeam } from "./VaerktoejBeam";
+import { EuBadge } from "./EuBadge";
 
 const ink = "#0f0d0c";
 const muted = "#4a4440";
@@ -89,14 +90,8 @@ export function FeatureBento() {
 
           {/* Data i EU */}
           <article className={card} style={{ borderColor: line }}>
-            {/* ui-new: where the data actually lives, as a small spec sheet. */}
-            <dl className="ui-new mb-6 flex-1 divide-y self-stretch rounded-[14px] border text-[0.875rem]" style={{ borderColor: line }}>
-              {[["Platform", "Vercel · Frankfurt"], ["Database", "Neon · Frankfurt"], ["Region", "EU (eu-central-1)"], ["Aftale", "Databehandleraftale"]].map(([k, v]) => (
-                <div key={k} className="flex items-center justify-between gap-3 px-4 py-3" style={{ borderColor: line }}>
-                  <dt style={{ color: muted }}>{k}</dt><dd className="font-medium" style={{ color: ink }}>{v}</dd>
-                </div>
-              ))}
-            </dl>
+            {/* ui-new: the badge, made nicer (EuBadge). */}
+            <div className="ui-new mb-6 flex-1 content-center justify-items-center" style={{ display: "grid" }}><div className="grid flex-1 place-items-center"><EuBadge /></div></div>
             <div className="ui-old mb-6 grid flex-1 place-items-center">
               <div className="scale-90 rounded-[22px] p-[3px] lg:scale-100" style={{ background: grad }}>
                 <div className="grid size-[150px] place-items-center rounded-[19px] text-center" style={{ background: "#201613" }}>
