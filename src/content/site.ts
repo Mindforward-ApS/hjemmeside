@@ -17,7 +17,7 @@ export const site = {
     responsePromise: "Svar inden for 1 hverdag",
     year: 2026,
     // Marco 2026-11-24: social profiles in the footer. An icon only shows once its link is filled in.
-    social: { linkedin: "", facebook: "", instagram: "" },
+    social: { instagram: "", facebook: "", linkedin: "", tiktok: "", youtube: "" },
   },
   founder: {
     name: "[Stifterens navn]",

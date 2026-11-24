@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { EnvelopeSimpleIcon, FacebookLogoIcon, InstagramLogoIcon, LinkedinLogoIcon, PhoneIcon } from "@phosphor-icons/react/dist/ssr";
+import { EnvelopeSimpleIcon, FacebookLogoIcon, InstagramLogoIcon, LinkedinLogoIcon, PhoneIcon, TiktokLogoIcon, YoutubeLogoIcon } from "@phosphor-icons/react/dist/ssr";
 import { site } from "@/content/site";
 import { appLinks } from "@/lib/app";
 import { MindforwardLogo } from "@/components/ui/MindforwardLogo";
@@ -20,7 +20,7 @@ const legal = [["Privatlivspolitik", "/privatliv"], ["Handelsbetingelser", "/vil
 
 export function SiteFooter() {
   const c = site.company;
-  const socials = ([["LinkedIn", c.social.linkedin, LinkedinLogoIcon], ["Facebook", c.social.facebook, FacebookLogoIcon], ["Instagram", c.social.instagram, InstagramLogoIcon]] as const);
+  const socials = ([["Instagram", c.social.instagram, InstagramLogoIcon], ["Facebook", c.social.facebook, FacebookLogoIcon], ["LinkedIn", c.social.linkedin, LinkedinLogoIcon], ["TikTok", c.social.tiktok, TiktokLogoIcon], ["YouTube", c.social.youtube, YoutubeLogoIcon]] as const);
   return (
     <>
       <NewsletterBand />
@@ -31,12 +31,12 @@ export function SiteFooter() {
               <MindforwardLogo size={28} />
               <p className="mt-5 max-w-[19rem] text-[0.9375rem] leading-relaxed" style={{ color: muted }}>{site.description}</p>
               {socials.length > 0 && (
-                <ul className="mt-6 flex gap-5">
+                <ul className="mt-6 flex gap-4">
                   {socials.map(([label, href, I]) => (
                     <li key={label}>{href
-                      ? <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="transition-colors hover:text-[#fb970a]"><I size={20} weight="bold" aria-hidden /></a>
+                      ? <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="transition-colors hover:text-[#fb970a]"><I size={24} weight="fill" aria-hidden /></a>
                       // Shown now (Marco 2026-11-24); becomes a link as soon as the profile URL is set in site.ts.
-                      : <span title={label}><I size={20} weight="bold" aria-hidden /></span>}</li>
+                      : <span title={label}><I size={24} weight="fill" aria-hidden /></span>}</li>
                   ))}
                 </ul>
               )}
