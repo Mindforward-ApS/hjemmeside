@@ -61,7 +61,8 @@ function run(M: MindAvatarApi): () => void {
   const word = document.querySelector<HTMLElement>("[data-mind-word]");
   let heroState: "logo" | "leaving" | "gone" | "returning" = "logo";
   let hero: Avatar | null = null, heroBox: HTMLElement | null = null, heroCancel: (() => void) | null = null;
-  if (spot) {
+  // Marco 2026-11-24: on phones the header keeps the real glossy picture (breathing via CSS); the drawn MIND is desktop only.
+  if (spot && innerWidth >= 1024) {
     const img = spot.querySelector("img");
     const w = spot.offsetWidth, h = spot.offsetHeight;
     const side = w / (BODY.r - BODY.l);

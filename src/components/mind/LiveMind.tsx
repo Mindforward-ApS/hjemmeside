@@ -27,7 +27,8 @@ export function LiveMind({ className = "", size }: { className?: string; size: n
   const box = useRef<HTMLSpanElement>(null);
   const [live, setLive] = useState(false);
   useEffect(() => {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Phones show the real glossy picture (it breathes via CSS); the drawn, blinking MIND runs on desktop.
+    if (innerWidth < 1024 || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let avatar: Avatar | null = null, gone = false;
     loadApi().then((M) => {
       if (gone || !box.current) return; // cleaned up before the script was ready
@@ -40,7 +41,7 @@ export function LiveMind({ className = "", size }: { className?: string; size: n
   // The avatar's body fills ~78 % of its square box, so the box is a little larger than the still picture.
   return (
     <span aria-hidden className={`relative inline-block shrink-0 ${className}`} style={{ width: size, height: size * 0.83 }}>
-      {!live && <Image src="/img/miwa-chat.png" alt="" width={256} height={213} className="absolute inset-0 h-full w-full object-contain" />}
+      {!live && <Image src="/img/miwa-chat.png" alt="" width={256} height={213} className="mind-breathe absolute inset-0 h-full w-full object-contain" />}
       <span ref={box} className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[52%]" style={{ width: size * 1.28, height: size * 1.28 }} />
     </span>
   );

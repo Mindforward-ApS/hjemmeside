@@ -703,3 +703,10 @@ html.brun .pris-glow:has(> [data-brun]) {
 
 /* Price: the brown card itself is as wide as the white cards; the orange frame sits outside it (Marco 2026-11-24). */
 @media (min-width: 1024px) { html.dp #priser .pris-glow { margin-inline: -4px; } }
+
+/* Glossy MIND on phones (Marco 2026-11-24): the real picture, breathing gently. */
+@keyframes mind-breathe { 0%, 100% { transform: translateY(0) scale(1, 1); } 50% { transform: translateY(-1.5px) scale(1.015, 0.985); } }
+@media (max-width: 1023px) {
+  .mind-breathe, [data-mind-spot] > img { animation: mind-breathe 3.2s ease-in-out infinite; transform-origin: 50% 90%; }
+}
+@media (prefers-reduced-motion: reduce) { .mind-breathe, [data-mind-spot] > img { animation: none; } }
