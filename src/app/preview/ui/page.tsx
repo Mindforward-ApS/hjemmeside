@@ -1,6 +1,6 @@
 import { Bebas_Neue, Google_Sans_Flex } from "next/font/google";
 import { NyForside } from "@/components/lab/NyForside";
-import { designCss } from "../design/page";
+import { designCss } from "@/components/lab/designPass";
 import { Skift } from "./Skift";
 
 // Punkt 5 · Rigtig UI (Marco 2026-11-24): the design-pass preview plus real platform UI in three places
