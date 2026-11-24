@@ -85,8 +85,8 @@ export function ChatBubble() {
         <div role="dialog" aria-label="Chat med Mindforward" className={`chat-in relative mt-14 flex flex-col overflow-visible rounded-[28px] bg-white shadow-[0_0_0_1px_rgba(32,22,19,.08),0_2px_4px_rgba(0,0,0,.08),0_24px_56px_-12px_rgba(32,22,19,.4)] ${big ? "h-[min(720px,calc(100vh-140px))] w-[min(520px,calc(100vw-40px))]" : "h-[min(560px,calc(100vh-140px))] w-[min(360px,calc(100vw-40px))]"}`} style={{ color: ink }}>
           {/* MIND peeks over the top edge, like the robot in the reference. */}
           {/* Marco 2026-11-24: MIND sits a little lower, standing on the card's top edge with a soft contact shadow under it. */}
-          <span aria-hidden className="absolute top-[14px] left-1/2 h-[14px] w-[96px] -translate-x-1/2 rounded-[50%] blur-[5px]" style={{ background: "radial-gradient(closest-side, rgba(32,22,19,0.6), rgba(32,22,19,0.15) 70%, transparent)" }} />
-          <Image src="/img/miwa-chat.png" alt="" width={256} height={213} className="absolute -top-[52px] left-1/2 h-auto w-[84px] -translate-x-1/2 drop-shadow-[0_3px_4px_rgba(120,30,0,0.35)]" />
+          <span aria-hidden className="absolute top-[40px] left-1/2 h-[14px] w-[96px] -translate-x-1/2 rounded-[50%] blur-[5px]" style={{ background: "radial-gradient(closest-side, rgba(32,22,19,0.6), rgba(32,22,19,0.15) 70%, transparent)" }} />
+          <Image src="/img/miwa-chat.png" alt="" width={256} height={213} className="absolute -top-[26px] left-1/2 h-auto w-[84px] -translate-x-1/2 drop-shadow-[0_3px_4px_rgba(120,30,0,0.35)]" />
           <div className="flex items-center justify-between px-4 pt-4">
             <button type="button" onClick={() => setBig((b) => !b)} aria-label={big ? "Gør mindre" : "Gør større"} className="grid size-9 place-items-center rounded-full ring-1 ring-[rgba(32,22,19,0.14)] transition-colors hover:bg-[#f5f2ef]">
               {big ? <ArrowsInSimpleIcon size={16} weight="bold" /> : <ArrowsOutSimpleIcon size={16} weight="bold" />}
@@ -95,7 +95,7 @@ export function ChatBubble() {
               <XIcon size={16} weight="bold" />
             </button>
           </div>
-          <div className="px-6 pt-2 text-center">
+          <div className="px-6 pt-4 text-center">
             <p className="text-[1.375rem] font-semibold tracking-[-0.02em]">Hej! 👋</p>
             <p className="mt-1 text-[0.875rem] leading-5 text-[#6b625d]">Chat med MIND. Hvad kan vi hjælpe med?</p>
           </div>
