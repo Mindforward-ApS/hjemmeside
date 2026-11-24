@@ -91,7 +91,7 @@
   };
 
   function create(container, opts) {
-    opts = Object.assign({ shadow: true, autoplay: true, start: '#FB970A', end: '#F8400A', ring: '#ffffff', outline: '#000000', faceOutline: 12 }, opts);
+    opts = Object.assign({ shadow: true, autoplay: true, start: '#FB970A', end: '#F8400A', ring: '#ffffff', outline: '#000000', faceOutline: 12, gloss: false }, opts);
     const id = 'mind' + (uid++);
     const svg = document.createElementNS(NS, 'svg');
     svg.setAttribute('viewBox', '0 0 1024 1024'); svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', 'MIND');
@@ -99,9 +99,17 @@
     svg.innerHTML =
       `<defs><linearGradient id="${id}g" gradientUnits="userSpaceOnUse" x1="118" y1="0" x2="905" y2="0">` +
       `<stop offset="0" stop-color="${opts.start}"/><stop offset="1" stop-color="${opts.end}"/></linearGradient>` +
-      `<radialGradient id="${id}s"><stop offset="0" stop-color="#000" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs>` +
+      `<radialGradient id="${id}s"><stop offset="0" stop-color="#000" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>` +
+      // Glossy finish (Marco 2026-11-24): soft light from the top left, a darker bottom, and sharp specular highlights.
+      (opts.gloss ? `<clipPath id="${id}c"><path d="${SIL}"/></clipPath>` +
+        `<radialGradient id="${id}h" cx="0.32" cy="0.22" r="0.62"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".45" stop-color="#fff" stop-opacity=".12"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>` +
+        `<linearGradient id="${id}d" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#7a1e00" stop-opacity="0"/><stop offset="1" stop-color="#7a1e00" stop-opacity=".32"/></linearGradient>` : '') +
+      `</defs>` +
       (opts.shadow ? `<ellipse data-p="shadow" cx="512" cy="838" rx="270" ry="34" fill="url(#${id}s)"/>` : '') +
-      `<g data-p="body"><path d="${SIL}" fill="url(#${id}g)"/><path d="${RING}" fill="${opts.ring}" fill-rule="evenodd"/>` +
+      `<g data-p="body"><path d="${SIL}" fill="url(#${id}g)"/>` +
+      (opts.gloss ? `<g clip-path="url(#${id}c)"><rect x="0" y="0" width="1024" height="1024" fill="url(#${id}d)"/><rect x="0" y="0" width="1024" height="1024" fill="url(#${id}h)"/>` +
+        `<ellipse cx="300" cy="300" rx="70" ry="34" transform="rotate(-28 300 300)" fill="#fff" fill-opacity=".75"/><ellipse cx="640" cy="270" rx="46" ry="20" transform="rotate(-12 640 270)" fill="#fff" fill-opacity=".55"/><ellipse cx="770" cy="640" rx="38" ry="80" transform="rotate(18 770 640)" fill="#fff" fill-opacity=".2"/></g>` : '') +
+      `<path d="${RING}" fill="${opts.ring}" fill-rule="evenodd"/>` +
       `<g data-p="face" fill="none" stroke-linecap="round" stroke-linejoin="round">` +
       (opts.faceOutline > 0 ? `<g stroke="${opts.outline}"><path data-p="eyeL0"/><path data-p="eyeR0"/><path data-p="mouth0"/></g>` : '') +
       `<g stroke="#fff"><path data-p="eyeL" stroke-width="53"/><path data-p="eyeR" stroke-width="53"/><path data-p="mouth" stroke-width="44"/></g></g></g>`;

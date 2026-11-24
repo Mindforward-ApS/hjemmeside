@@ -18,7 +18,8 @@ type Avatar = { el: SVGSVGElement; set: (p: Pose) => void; play: (n: string, cb?
 type MindAvatarApi = { create: (el: HTMLElement, o?: Record<string, unknown>) => Avatar; hopPose: (phase: number, lean: number) => Pose };
 declare global { interface Window { MindAvatar?: MindAvatarApi } }
 
-const OPTS = { shadow: false, autoplay: false, ring: "#000000" };
+// Marco 2026-11-24: the glossy look of the logo (white ring, gloss), so the living MIND matches it.
+const OPTS = { shadow: false, autoplay: false, ring: "#ffffff", gloss: true };
 const BODY = { l: 0.13, r: 0.91, t: 0.2, b: 0.83 }; // the character's body inside its square box (feet at ~0.8)
 const FEET = 0.8;
 
@@ -107,7 +108,6 @@ function run(M: MindAvatarApi): () => void {
     heroCancel = travel(heroBox, hero, [offRight(), 0], [0, 0], 4, () => { setWord(true); hero!.start(); hero!.loop("hide"); heroState = "logo"; checkHero(); });
   }
   function checkHero() {
-    // Without a live header logo (Marco 2026-11-24: the glossy logo stays still) the sections still get MIND after 60 px.
     if (reduced || !hero) { heroState = scrollY > 60 ? "gone" : "logo"; if (heroState === "gone") sections.refresh(); else sections.dismiss(); return; }
     if (scrollY > 60) heroLeave(); else if (scrollY < 12) heroReturn();
   }
