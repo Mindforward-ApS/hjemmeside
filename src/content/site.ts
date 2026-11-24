@@ -18,6 +18,8 @@ export const site = {
     year: 2026,
     // Marco 2026-11-24: social profiles in the footer. An icon only shows once its link is filled in.
     social: { instagram: "", facebook: "", linkedin: "", tiktok: "", youtube: "" },
+    // App store links; the badges become clickable once these are set.
+    apps: { ios: "", android: "" },
   },
   founder: {
     name: "[Stifterens navn]",

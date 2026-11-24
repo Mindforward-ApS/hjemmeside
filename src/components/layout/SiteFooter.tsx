@@ -4,6 +4,7 @@ import { site } from "@/content/site";
 import { appLinks } from "@/lib/app";
 import { MindforwardLogo } from "@/components/ui/MindforwardLogo";
 import { NewsletterBand } from "@/components/layout/NewsletterBand";
+import { AppBadges, PaymentCarousel } from "@/components/layout/FooterExtras";
 
 // Site-wide footer (Marco 2026-11-24, from his reference): light footer with logo and short text on the left, three
 // link columns and a contact column, then a hairline and a bottom row with © left and the legal links right.
@@ -40,6 +41,7 @@ export function SiteFooter() {
                   ))}
                 </ul>
               )}
+              <AppBadges ios={c.apps.ios} android={c.apps.android} />
             </div>
             {cols.map((col) => (
               <div key={col.title}>
@@ -65,8 +67,9 @@ export function SiteFooter() {
         </div>
         <div className="border-t" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
           <div className="flex flex-col gap-4 px-6 py-7 text-[0.9375rem] md:flex-row md:items-center md:justify-between md:px-[3.5vw]">
-            <p style={{ color: muted }}>© {c.year} Mindforward</p>
-            <ul className="flex flex-wrap gap-x-7 gap-y-2">
+            <p className="md:flex-1" style={{ color: muted }}>© {c.year} Mindforward</p>
+            <PaymentCarousel />
+            <ul className="flex flex-wrap gap-x-7 gap-y-2 md:flex-1 md:justify-end">
               {legal.map(([label, href]) => <li key={label}><Link href={href} className="transition-colors hover:text-[#fb970a]">{label}</Link></li>)}
             </ul>
           </div>
