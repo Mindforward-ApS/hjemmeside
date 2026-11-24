@@ -58,6 +58,23 @@ export const designCss = `
 .dp main :is(#priser, #kontakt) li > svg:first-child { color: #f8580a !important; }
 .dp main ul[data-hero-in] > li > svg:first-child { width: 22px !important; height: 22px !important; } /* hero: større tekst, større ikon */
 
+/* 3b · Ét kortudtryk (Marco 2026-11-24): kun to kortfarver, hvid og brun. Alle lyse kort får Funktioner-kortets udtryk:
+   hvid, 24 px hjørner, 1 px kant, samme lag-skygge. Brune kort ([data-brun], øvemiljø-kortet) beholder deres farve. */
+.dp main :is(
+  #problemet .flex.flex-col.rounded-\\[22px\\]:not(.pris-glow),
+  #kurser .self-start.rounded-\\[32px\\],
+  [class*="w-\\[var(--cw)\\]"].rounded-\\[24px\\],
+  #saadan .grid.content-start.rounded-\\[16px\\],
+  #saadan .rounded-\\[16px\\].bg-white,
+  #saadan .overflow-hidden.rounded-\\[32px\\].p-3,
+  #faq details,
+  #kontakt figure,
+  #kontakt .relative.rounded-\\[16px\\]
+):not([data-brun]) {
+  background: #fff !important; border: 1px solid rgba(32,22,19,0.08) !important; border-radius: 24px !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 1px 2px rgba(32,22,19,.05), 0 8px 16px -8px rgba(32,22,19,.08), 0 24px 40px -24px rgba(32,22,19,.18) !important; }
+.dp main #faq details { border-radius: 20px !important; }
+
 /* 6 · Detaljer: tal i samme bredde, formularfelter 48 px, samme fokusring overalt. */
 .dp main { font-variant-numeric: tabular-nums; }
 .dp main :is(input:not([type=checkbox]):not([type=radio]), select) { min-height: 48px !important; border-radius: 12px !important; }
