@@ -11,6 +11,7 @@ import { Fragment, useActionState, useEffect, useRef, useState } from "react";
 import { APP_URL, appLinks } from "@/lib/app";
 import { contactAction, type FormState } from "@/lib/actions";
 import { Icon } from "@/components/ui/Icon";
+import { ArrowClockwiseIcon, CalendarCheckIcon, CheckIcon, ShieldCheckIcon } from "@phosphor-icons/react/dist/ssr";
 import { DemoLogo, ownLogos } from "@/components/night/DemoLogos";
 import { KontaktSide } from "@/components/forms/KontaktSide";
 import { erhverv, privat } from "@/content/priser";
@@ -389,11 +390,10 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
   const privatMode = mode === "privat";
   const plans = privatMode ? privat : erhverv;
   // Marco 2026-11-23: the three facts as in the reference (calendar, shield with check, circular arrow), in Danish.
-  const ico = { width: 18, height: 18, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
   const facts = [
-    { t: "7 dages gratis prøveperiode", icon: <svg {...ico}><rect x="3.5" y="5" width="17" height="15.5" rx="2.5" /><path d="M8 3v4M16 3v4M3.5 10h17M9 15l2 2 4-4" /></svg> },
-    { t: "Ingen skjulte gebyrer", icon: <svg {...ico}><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.2-7.5 9.5-4.3-1.3-7.5-4.9-7.5-9.5V6L12 3z" /><path d="M9 12l2 2 4-4" /></svg> },
-    { t: privatMode ? "Opsig, når du vil" : "Opsig, når I vil", icon: <svg {...ico}><path d="M20 12a8 8 0 1 1-2.34-5.66" /><path d="M20 4v4.5h-4.5" /></svg> },
+    { t: "7 dages gratis prøveperiode", icon: <CalendarCheckIcon size={20} weight="bold" aria-hidden /> },
+    { t: "Ingen skjulte gebyrer", icon: <ShieldCheckIcon size={20} weight="bold" aria-hidden /> },
+    { t: privatMode ? "Opsig, når du vil" : "Opsig, når I vil", icon: <ArrowClockwiseIcon size={20} weight="bold" aria-hidden /> },
   ];
   const leadline = ownLogos.find((l) => l.name === "Leadline")!;
   const arrow = <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
@@ -413,7 +413,7 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
         <div className="flex flex-1 flex-col border-t px-5 pb-5 pt-4" style={{ borderColor: "#e8e4e1" }}>
           <p className="text-[0.9375rem]" style={{ color: "#4a4440" }}>{privatMode ? "Det får du" : "Det får I"}</p>
           <ul className="mt-3 grid gap-2.5">
-            {items.map((x) => <li key={x} className="flex items-center gap-2.5 text-[0.9375rem] leading-[1.35]" style={{ color: "#1a1614" }}><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden className="shrink-0"><path d="m3 8.5 3.2 3L13 4.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>{x}</li>)}
+            {items.map((x) => <li key={x} className="flex items-center gap-2.5 text-[0.9375rem] leading-[1.35]" style={{ color: "#1a1614" }}><CheckIcon size={16} weight="bold" aria-hidden className="shrink-0" style={{ color: "#f8400a" }} />{x}</li>)}
           </ul>
           <Link href={planHref[p.href]} className={`nf-focus nf-press mt-auto flex h-11 translate-y-0 items-center justify-center gap-2 rounded-full text-[0.9375rem] font-semibold transition ${p.featured ? "text-white hover:bg-black" : "border hover:bg-[#f7f5f3]"}`} style={p.featured ? { background: "#0f0d0c", marginTop: 22 } : { borderColor: "#dcd7d3", color: "#0f0d0c", marginTop: 22 }}>{p.cta} {arrow}</Link>
         </div>

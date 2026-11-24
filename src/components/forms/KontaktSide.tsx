@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { CheckIcon } from "@phosphor-icons/react/dist/ssr";
 import { useActionState } from "react";
 import { contactAction, type FormState } from "@/lib/actions";
 import { GrebBtn } from "@/components/ui/GrebBtn";
@@ -28,7 +29,7 @@ export function KontaktSide({ heading: H = "h1", id }: { heading?: "h1" | "h2"; 
           <ul className="mt-8 grid gap-3">
               {promises.map((t) => (
                 <li key={t} className="flex items-center gap-3 text-[1rem]" style={{ color: muted }}>
-                  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden className="shrink-0" style={{ color: "#f8400a" }}><path d="m3 8.5 3.2 3L13 4.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                  <CheckIcon size={16} weight="bold" aria-hidden className="shrink-0" style={{ color: "#f8400a" }} />
                   {t}
                 </li>
               ))}

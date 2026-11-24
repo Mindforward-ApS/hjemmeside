@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { GrebBtn } from "@/components/ui/GrebBtn";
+import { CheckIcon, MinusCircleIcon } from "@phosphor-icons/react/dist/ssr";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { appLinks } from "@/lib/app";
 
@@ -31,20 +32,11 @@ const med = [
 ];
 
 function Minus() {
-  return (
-    <svg viewBox="0 0 20 20" aria-hidden className="mt-[3px] size-[18px] shrink-0" fill="none">
-      <circle cx="10" cy="10" r="8" stroke="#e8664a" strokeWidth="1.6" />
-      <path d="M6.5 10h7" stroke="#e8664a" strokeWidth="1.6" strokeLinecap="round" />
-    </svg>
-  );
+  return <MinusCircleIcon size={18} weight="bold" aria-hidden className="mt-[3px] shrink-0" style={{ color: "#e8664a" }} />;
 }
 
 function Tick() {
-  return (
-    <svg viewBox="0 0 20 20" aria-hidden className="mt-[3px] size-[18px] shrink-0" fill="none">
-      <path d="M4.5 10.5 8.5 14.5 15.5 6" stroke="#f8580a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
+  return <CheckIcon size={18} weight="bold" aria-hidden className="mt-[3px] shrink-0" style={{ color: "#f8580a" }} />;
 }
 
 function Mark() {

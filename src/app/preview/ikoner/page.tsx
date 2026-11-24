@@ -1,7 +1,8 @@
 import {
   ArrowClockwiseIcon, CalendarCheckIcon, ChartLineUpIcon, CheckIcon, ClockIcon, EnvelopeIcon, FileTextIcon, LockSimpleIcon,
-  MinusCircleIcon, NotePencilIcon, PlayIcon, PlusIcon, ShieldCheckIcon, SparkleIcon, UserIcon, type Icon as PIcon,
+  MinusCircleIcon, NotePencilIcon, PlayIcon, PlusIcon, ShieldCheckIcon, SparkleIcon, UserIcon,
 } from "@phosphor-icons/react/dist/ssr";
+import type { Icon as PIcon } from "@phosphor-icons/react";
 import { Icon, type IconName } from "@/components/ui/Icon";
 
 // Icon comparison (Marco 2026-11-24): today's hand-drawn icons vs Phosphor Regular and Bold, all dark ink at 22 px,
