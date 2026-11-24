@@ -596,14 +596,15 @@ type Sep = 1 | 2 | 3 | 4 | 5;
 const tones: Record<Sep, string[]> = {
   // Marco 2026-11-23: the contact section is white now (was dark).
   // Marco 2026-11-23: FAQ white so it stands off the cream price section above.
-  1: ["page", "peach", "white", "page", "white", "page", "white", "warm"],
+  // Marco 2026-11-24: Funktioner gets the same background as "Lad os tage en snak".
+  1: ["page", "kontakt", "white", "page", "white", "page", "white", "warm"],
   2: ["white", "peach", "white", "sand", "white", "sand", "white", "dark"],
   3: ["page", "page", "page", "page", "page", "page", "page", "dark"],
   // Marco 2026-11-23 "for mange forskellige farver": 4 = white and sand alternating, 5 = all white (cards turn sand).
   4: ["page", "white", "page", "white", "page", "white", "page", "white"],
   5: ["white", "white", "white", "white", "white", "white", "white", "white"],
 };
-const toneBg: Record<string, string> = { warm: "#fbf1e8", page: c.page, cream: "#f6f1ea", white: "#ffffff", peach: "#f8ddd0", sand: "#ece4dd", dark: c.dark };
+const toneBg: Record<string, string> = { kontakt: "radial-gradient(55% 65% at 88% 18%, rgba(251,151,10,0.22), transparent 70%), radial-gradient(45% 55% at 8% 92%, rgba(248,64,10,0.12), transparent 70%), #fbf1e8", warm: "#fbf1e8", page: c.page, cream: "#f6f1ea", white: "#ffffff", peach: "#f8ddd0", sand: "#ece4dd", dark: c.dark };
 const names = ["Platformen", "Sådan kommer I i gang", "I praksis", "Øvemiljøet", "Pilotforløb", "Pris", "Spørgsmål og svar", "Kontakt"];
 
 function Sec({ sep, k, children }: { sep?: Sep; k: number; children: React.ReactNode }) {
