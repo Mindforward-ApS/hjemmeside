@@ -17,9 +17,10 @@ export function PaymentCarousel() {
         {[0, 1, 2].map((part) => (
           <ul key={part} aria-hidden className="flex shrink-0 items-center gap-3 pr-3">
             {pay.map(([n, src, w]) => (
-              <li key={n} className="grid h-11 w-[92px] place-items-center rounded-[10px] bg-white shadow-[inset_0_-1px_0_rgba(32,22,19,0.08),0_1px_2px_rgba(0,0,0,0.25)]">
+              <li key={n} className="grid h-11 w-[92px] place-items-center">
+                {/* No frame (Marco 2026-11-24). On the brown footer the dark logos are drawn white; Mastercard keeps its colours. */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt="" width={w} height={24} className="h-auto max-h-[28px] object-contain" style={{ width: w }} />
+                <img src={src} alt="" width={w} height={24} className="h-auto max-h-[28px] object-contain" style={{ width: w, filter: n === "Mastercard" ? undefined : "brightness(0) invert(1)", opacity: 0.9 }} />
               </li>
             ))}
           </ul>
@@ -39,12 +40,12 @@ export function PaymentCarousel() {
 export function AppBadges({ ios, android }: { ios?: string; android?: string }) {
   const img = (src: string, alt: string) => (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={src} alt={alt} width={135} height={40} className="h-10 w-auto" />
+    <img src={src} alt={alt} width={135} height={40} className="h-9 w-auto" />
   );
   const wrap = (href: string | undefined, child: React.ReactNode, k: string) =>
     href ? <a key={k} href={href} target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-85">{child}</a> : <span key={k}>{child}</span>;
   return (
-    <div className="mt-6 flex flex-wrap gap-3">
+    <div className="mt-6 flex gap-2.5">
       {wrap(ios, img("/pay/appstore-badge.svg", "Hent i App Store"), "ios")}
       {wrap(android, img("/pay/googleplay-badge.svg", "Nu på Google Play"), "android")}
     </div>
