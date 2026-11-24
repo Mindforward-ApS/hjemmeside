@@ -278,9 +278,9 @@ function Cases() {
           <div className="hidden gap-3 sm:flex lg:hidden"><Arrow dir="left" onClick={() => go(-1)} /><Arrow dir="right" onClick={() => go(1)} /></div>
         </div>
         <div className="mt-12">
-          <ul className="flex gap-5 transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] [--cw:86vw] md:[--cw:44vw] lg:[--cw:calc((100vw-7vw-2.5rem)/3)] lg:!transform-none" style={{ transform: `translateX(calc(${-i} * (var(--cw) + 1.25rem)))` }}>
+          <ul className="flex gap-5 lg:w-full transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] [--cw:86vw] md:[--cw:44vw] lg:[--cw:calc((100vw-7vw-2.5rem)/3)] lg:!transform-none" style={{ transform: `translateX(calc(${-i} * (var(--cw) + 1.25rem)))` }}>
             {cases.map((x) => (
-              <li key={x.tag} data-mind={x === cases[0] ? "press" : undefined} className="flex w-[var(--cw)] shrink-0 rounded-[24px] bg-white p-4 sm:p-5">
+              <li key={x.tag} data-mind={x === cases[0] ? "press" : undefined} className="flex w-[var(--cw)] shrink-0 rounded-[24px] bg-white p-4 sm:p-5 lg:w-auto lg:min-w-0 lg:flex-1">
                 <div className="flex w-full flex-col p-3 sm:p-4">
                   <span className="flex items-center gap-2 self-start rounded-[12px] px-4 py-2.5 text-[0.9375rem] font-semibold" style={{ background: c.page, color: c.ink }}><Image src={x.logo} alt="" width={20} height={20} className="size-5 rounded-[5px]" />{x.tag}</span>
                   {/* Marco 2026-11-24: room for two lines in every card, so the text below starts at the same height. */}
@@ -429,7 +429,7 @@ export function Price({ toggle = false }: { toggle?: boolean } = {}) {
   };
   return (
     <section id="priser" className="py-[100px]">
-      <div className="grid w-full grid-cols-1 gap-12 px-5 sm:px-[3.5vw] lg:grid-cols-[minmax(0,1fr)_repeat(3,minmax(0,292px))] lg:gap-x-5">
+      <div className="grid w-full grid-cols-1 gap-12 px-5 sm:px-[3.5vw] lg:grid-cols-[minmax(250px,1fr)_repeat(3,minmax(0,320px))] lg:gap-x-5">
         <div className="flex min-w-0 flex-col lg:pr-6">
           <span className="self-start rounded-full border px-3 py-1 text-[0.875rem]" style={{ borderColor: "#dcd7d3", color: "#0f0d0c" }}>Vores priser</span>
           <h2 className={`${head} mt-4 text-[clamp(2.25rem,1.6rem+1.8vw,3rem)] !font-semibold leading-[1.05] tracking-[-0.03em]`} style={{ color: "#0f0d0c" }}>Enkle priser, ingen binding</h2>
