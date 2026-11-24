@@ -14,8 +14,8 @@ export const designCss = `
 /* 1b · Samme form på alle knapper: højde 43, Tilmeld-skriften, pil i mørk cirkel til højre, så bred som teksten. */
 .dp main :is(.nf-press.h-11, .nf-press.h-\\[43px\\]), .dp .nf-focus.h-9 {
   display: inline-flex !important; width: auto !important; align-self: flex-start !important; justify-content: flex-start !important;
-  gap: 1.18em !important; height: 43px !important; min-height: 0 !important; padding: 5px 5px 5px 22px !important; border-radius: 999px !important;
-  font: 700 13px/1.2 var(--font-grotesk), system-ui, sans-serif !important; letter-spacing: -.015em !important; }
+  gap: 1.18em !important; height: 50px !important; min-height: 0 !important; padding: 5px 5px 5px 24px !important; border-radius: 999px !important;
+  font: 700 15px/1.2 var(--font-grotesk), system-ui, sans-serif !important; letter-spacing: -.015em !important; }
 .dp main .nf-press.h-11 > svg, .dp .nf-focus.h-9 > svg {
   order: 2; width: 33px !important; height: 33px !important; padding: 10px; box-sizing: border-box; flex: none;
   border-radius: 50%; background: #1a0e08; color: #fff; transform: rotate(-45deg); }
@@ -26,17 +26,17 @@ export const designCss = `
 .dp :is(.greb-btn--light) .greb-btn__circle,
 .dp main :is(.nf-press.h-11:not(.text-white), .nf-press.h-\\[43px\\]) > :is(svg, span:first-child) { display: none !important; }
 .dp .greb-btn.greb-btn--light,
-.dp main :is(.nf-press.h-11:not(.text-white), .nf-press.h-\\[43px\\]) { padding: 0 24px !important; height: 43px !important; justify-content: center !important; }
+.dp main :is(.nf-press.h-11:not(.text-white), .nf-press.h-\\[43px\\]) { padding: 0 26px !important; height: 50px !important; justify-content: center !important; }
 
 /* 2 · Orange er beholdt overalt (Marco 2026-11-24): rammer, ikoncirkler, barer og glød som på den live side. */
 
 /* 2b · "Skriv til os" i pilotforløbet bliver en hvid knap som de andre: kun mailadressen, ingen cirkel (Marco 2026-11-24). */
 .dp main a.nf-focus.rounded-full.bg-white[href^="mailto:"] {
-  height: 43px !important; padding: 0 24px !important; gap: 0 !important; justify-content: center !important;
+  height: 50px !important; padding: 0 26px !important; gap: 0 !important; justify-content: center !important;
   box-shadow: inset 0 0 0 1px rgba(32,22,19,.12), 0 1px 1px rgba(0,0,0,.06), 0 3px 6px -2px rgba(0,0,0,.08), 0 12px 20px -12px rgba(0,0,0,.16) !important; }
 .dp main a.nf-focus.rounded-full.bg-white[href^="mailto:"] > span:first-child { display: none !important; }
 .dp main a.nf-focus.rounded-full.bg-white[href^="mailto:"] span.leading-tight > span.block { display: none !important; }
-.dp main a.nf-focus.rounded-full.bg-white[href^="mailto:"] :is(small, span, p) { font: 700 13px/1.2 var(--font-grotesk), system-ui, sans-serif !important; letter-spacing: -.015em !important; color: #201613 !important; text-transform: none !important; }
+.dp main a.nf-focus.rounded-full.bg-white[href^="mailto:"] :is(small, span, p) { font: 700 15px/1.2 var(--font-grotesk), system-ui, sans-serif !important; letter-spacing: -.015em !important; color: #201613 !important; text-transform: none !important; }
 
 /* 3 · Kort med dybde: én radius-skala (24 ude, 16 inde), 1 px kant, lag-skygge og en lys linje i toppen. */
 .dp main :is(.rounded-\\[20px\\], .rounded-\\[22px\\], .rounded-\\[24px\\], .rounded-\\[32px\\], .rounded-\\[34px\\]):not(.pris-glow):not(button):not(a) { border-radius: 24px !important; }

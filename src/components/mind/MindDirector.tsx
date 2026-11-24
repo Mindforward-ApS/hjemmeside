@@ -241,5 +241,5 @@ function run(M: MindAvatarApi): () => void {
   on(window, "resize", () => { if (active) slipAway(); sections.refresh(); }, { passive: true });
 
   checkHero();
-  return () => { stopAll(); heroCancel?.(); hero?.stop(); offs.forEach((f) => f()); if (word) word.removeAttribute("style"); };
+  return () => { stopAll(); heroCancel?.(); hero?.stop(); offs.forEach((f) => f()); if (word) for (const k of ["display", "max-width", "overflow", "opacity", "margin-left", "transition"]) word.style.removeProperty(k); }; // only what MIND set; keeps the logo's font size
 }
