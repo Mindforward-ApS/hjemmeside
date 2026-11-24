@@ -360,10 +360,10 @@ export function Hero({ toggle = false, media = "cards", navSwitch = false, miwa 
         {navSwitch && <Image src="/img/hero-erhverv-2.jpg" alt="" fill priority sizes="100vw" className={`scale-[1.03] object-cover object-[70%_40%] transition-opacity duration-700 lg:object-[50%_40%] ${privat ? "opacity-0" : "opacity-100"}`} />}
         <Image src="/img/hero-hjem.jpg" alt="" fill priority={!navSwitch} sizes="100vw" className={`scale-[1.03] object-cover object-[72%_40%] transition-opacity duration-700 lg:object-[50%_40%] ${navSwitch && !privat ? "opacity-0" : "opacity-100"}`} />
         {/* Marco 2026-11-23: one even, heavy blur over the whole photo, so it is barely visible. */}
-        <div className="absolute inset-0" style={{ backdropFilter: "blur(28px)", WebkitBackdropFilter: "blur(28px)" }} />
+        <div className="absolute inset-0" style={{ backdropFilter: "blur(40px)", WebkitBackdropFilter: "blur(40px)" }} />
       </div>
-      {/* Marco 2026-11-23: the same dark veil everywhere in the hero, phones and desktop alike. */}
-      <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "rgba(14,10,9,0.72)" }} /></>}
+      {/* Marco 2026-11-23: the same brown veil everywhere in the hero, phones and desktop alike (brown and stronger, Marco 2026-11-24). */}
+      <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "rgba(32,22,19,0.92)" }} /></>}
       {/* Marco 2026-11-20: Miwa's autumn landscape behind the live hero; dark veil on the left keeps the white text readable. */}
       {/* Marco 2026-11-21: in the choreography preview she sits at the computer in the warm room (baked into the image). */}
       {(miwa === "live" || miwa === "forloeb") && (
