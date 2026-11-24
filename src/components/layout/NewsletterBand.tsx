@@ -11,7 +11,7 @@ export function NewsletterBand() {
     // Marco 2026-11-24: a floating card that lies over both the contact section above and the footer below
     // (negative margins on both sides; the footer gets matching top padding).
     <section aria-labelledby="nyhedsbrev-titel" className="relative z-10 -mb-[84px] -mt-[84px] max-sm:-mb-[60px] max-sm:-mt-[60px] text-white">
-      <div className="flex w-full flex-col gap-6 px-6 py-9 sm:px-[3.5vw] lg:flex-row lg:items-center lg:justify-between" style={{ background: "radial-gradient(120% 140% at 0% 0%, #2a1c17 0%, #0f0a09 60%)", boxShadow: "inset 0 1.5px 0 rgba(255,255,255,0.18), inset 0 14px 24px -14px rgba(255,255,255,0.07), 0 -2px 4px rgba(20,13,11,0.12), 0 -14px 28px -10px rgba(20,13,11,0.28), 0 -36px 60px -30px rgba(20,13,11,0.25), 0 24px 48px -16px rgba(20,13,11,0.55)" }}>
+      <div className="flex w-full flex-col gap-6 px-6 py-9 sm:px-[3.5vw] lg:flex-row lg:items-center lg:justify-between" style={{ background: "#0a0a0b", boxShadow: "inset 0 1.5px 0 rgba(255,255,255,0.18), inset 0 14px 24px -14px rgba(255,255,255,0.07), 0 -2px 4px rgba(20,13,11,0.12), 0 -14px 28px -10px rgba(20,13,11,0.28), 0 -36px 60px -30px rgba(20,13,11,0.25), 0 24px 48px -16px rgba(20,13,11,0.55)" }}>
         <div>
           <h2 id="nyhedsbrev-titel" className="text-[1.5rem] font-semibold tracking-[-0.02em]" style={{ color: "#fff" }}>Tilmeld dig vores nyhedsbrev</h2>
           <p className="mt-1.5 text-[0.9375rem] text-white/60">Nyt om AI på arbejdet, nye kurser og gode tips. Afmeld når som helst.</p>
