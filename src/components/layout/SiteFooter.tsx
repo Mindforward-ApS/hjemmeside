@@ -41,7 +41,6 @@ export function SiteFooter() {
                   ))}
                 </ul>
               )}
-              <AppBadges ios={c.apps.ios} android={c.apps.android} />
             </div>
             {cols.map((col) => (
               <div key={col.title}>
@@ -62,14 +61,15 @@ export function SiteFooter() {
                 <EnvelopeSimpleIcon size={20} weight="bold" aria-hidden />{c.email}
               </a>
               <p className="mt-3 text-[0.875rem]" style={{ color: muted }}>{c.responsePromise}</p>
+              <AppBadges ios={c.apps.ios} android={c.apps.android} />
             </div>
           </div>
         </div>
         <div className="border-t" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
-          <div className="flex flex-col gap-4 px-6 py-7 text-[0.9375rem] md:flex-row md:items-center md:justify-between md:px-[3.5vw]">
-            <p className="md:flex-1" style={{ color: muted }}>© {c.year} Mindforward</p>
+          <div className="flex flex-col gap-4 px-6 py-7 text-[0.9375rem] md:flex-row md:items-center md:justify-between md:gap-10 md:px-[3.5vw]">
+            <p className="shrink-0" style={{ color: muted }}>© {c.year} Mindforward</p>
             <PaymentCarousel />
-            <ul className="flex flex-wrap gap-x-7 gap-y-2 md:flex-1 md:justify-end">
+            <ul className="flex shrink-0 flex-wrap gap-x-7 gap-y-2">
               {legal.map(([label, href]) => <li key={label}><Link href={href} className="transition-colors hover:text-[#fb970a]">{label}</Link></li>)}
             </ul>
           </div>
