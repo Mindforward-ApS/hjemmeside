@@ -23,23 +23,21 @@ function fit() {
   // Lock each box to its natural width before scaling, so pictures and videos that follow the width shrink too
   // (otherwise a zoomed box gets a wider virtual width and its 16:9 video grows taller again).
   const widths = targets.map(({ box }) => box.getBoundingClientRect().width);
-  // Iterate: zoom changes line breaks and image sizes a little, so a few passes settle the last pixels.
+  // Marco 2026-11-24: one zoom for the whole page (the one the tallest section needs), so every section and card keeps the
+  // same width and size. Measured per section, applied to all; a few passes settle the last pixels.
+  let zoom = 1;
   for (let pass = 0; pass < 5; pass++) {
-    let changed = false;
+    let need = zoom;
     for (const { box, frame } of targets) {
       const over = frame.getBoundingClientRect().height - innerHeight;
       if (over <= 0) continue;
-      const z = parseFloat(box.style.zoom || "1");
       const h = box.getBoundingClientRect().height;
-      const next = Math.max(0.7, z * (h - over - 2) / h);
-      if (next < z) {
-        box.style.zoom = String(Math.floor(next * 1000) / 1000);
-        box.style.width = `${widths[targets.findIndex((t) => t.box === box)]}px`;
-        box.style.marginInline = "auto";
-        changed = true;
-      }
+      need = Math.min(need, zoom * (h - over - 2) / h);
     }
-    if (!changed) break;
+    need = Math.max(0.7, Math.floor(need * 1000) / 1000);
+    if (need >= zoom) break;
+    zoom = need;
+    targets.forEach(({ box }, i) => { box.style.zoom = String(zoom); box.style.width = `${widths[i]}px`; box.style.marginInline = "auto"; });
   }
 }
 

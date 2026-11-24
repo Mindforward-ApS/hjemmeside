@@ -110,7 +110,7 @@ export function FeatureBento() {
       </div>
     </section>
     {/* Marco 2026-11-24: the six cards as two screens of three, so each row fits on one screen at a readable size. */}
-    <section aria-label="Flere funktioner" className="pb-[100px]">
+    <section aria-label="Flere funktioner" data-fit-join className="pb-[100px]">
       <div className="w-full px-5 sm:px-[3.5vw]">
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
 

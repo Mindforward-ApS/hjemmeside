@@ -678,10 +678,10 @@ html.rytme .sep-inner:has(> #saadan),
 html.rytme .sep-inner:has(> #faq) { background: var(--lys-b) !important; }
 html.rytme .sep-inner:has(> #kontakt), html.rytme .sep-inner > #kontakt { background: var(--lys-a) !important; background-image: none !important; }
 html.rytme #kontakt .kontakt-glow { display: none !important; }
-html.rytme .sep-inner > :is(#problemet, [data-sek="kurser"], section[aria-labelledby="features-title"], #saadan, #priser, #faq) { padding-top: 120px !important; padding-bottom: 120px !important; }
+html.rytme .sep-inner > :where(#problemet, [data-sek="kurser"], section[aria-labelledby="features-title"], #saadan, #priser, #faq) { padding-top: 120px !important; padding-bottom: 120px !important; }
 html.rytme .sep-inner > #kontakt { padding-top: 120px !important; }
 @media (max-width: 767px) {
-  html.rytme .sep-inner > :is(#problemet, [data-sek="kurser"], section[aria-labelledby="features-title"], #saadan, #priser, #faq) { padding-top: 80px !important; padding-bottom: 80px !important; }
+  html.rytme .sep-inner > :where(#problemet, [data-sek="kurser"], section[aria-labelledby="features-title"], #saadan, #priser, #faq) { padding-top: 80px !important; padding-bottom: 80px !important; }
   html.rytme .sep-inner > #kontakt { padding-top: 80px !important; }
 }
 
@@ -693,7 +693,10 @@ html.rytme .sep-inner > #kontakt { padding-top: 120px !important; }
 
 /* Fit to screen (Marco 2026-11-24, FitSections.tsx): on desktop the air around each section follows the screen height. */
 @media (min-width: 1024px) {
-  html.fit :is(.sep-inner > section, section#problemet) { padding-top: clamp(48px, 7vh, 120px) !important; padding-bottom: clamp(48px, 7vh, 120px) !important; }
+  html.fit .sep-inner > section, html.fit section#problemet { padding-top: clamp(48px, 7vh, 120px) !important; padding-bottom: clamp(48px, 7vh, 120px) !important; }
+  /* The two Funktioner rows sit close together, as one section. */
+  html.fit .sep-inner > section:has(+ section[data-fit-join]) { padding-bottom: 20px !important; }
+  html.fit .sep-inner > section[data-fit-join] { padding-top: 0 !important; }
 }
 
 /* 3D on the brown cards in the orange frame (Marco 2026-11-24, like the Data i EU badge): light from the top, a bright
@@ -706,3 +709,6 @@ html.brun .pris-glow > [data-brun] {
 html.brun .pris-glow:has(> [data-brun]) {
   box-shadow: 0 1px 1px rgba(0,0,0,0.25), 0 6px 12px -4px rgba(32,22,19,0.3), 0 18px 32px -12px rgba(248,64,10,0.45), 0 40px 60px -28px rgba(32,22,19,0.55) !important;
 }
+/* The two Funktioner rows as one section (wins over the rytme padding). */
+html.fit.rytme .sep-inner > section[aria-labelledby="features-title"] { padding-bottom: 20px !important; }
+html.fit.rytme .sep-inner > section[data-fit-join] { padding-top: 0 !important; }
