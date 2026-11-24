@@ -42,7 +42,7 @@ function Tick() {
 function Mark() {
   // Mindforward's smiling brain, same file as the header logo.
   // eslint-disable-next-line @next/next/no-img-element
-  return <img src="/img/mindforward-logo-3.png" alt="" aria-hidden width={43} height={36} className="block h-9 w-auto shrink-0" />;
+  return <img src="/img/miwa-chat.png" alt="" aria-hidden width={43} height={36} className="block h-9 w-auto shrink-0" />;
 }
 
 export function Problem() {

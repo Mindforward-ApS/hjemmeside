@@ -140,7 +140,7 @@ export function Nav({ switcher, cta = "Sign up" }: { switcher?: ReactNode; cta?:
   const siteMode = useSiteMode();
   return (
     <header className={`${wrap} relative z-20 flex h-20 items-center gap-6`}>
-      <Link href="/" aria-label="Mindforward forside"><MindforwardLogo size={30} live /></Link>
+      <Link href="/" aria-label="Mindforward forside"><MindforwardLogo size={30} /></Link>
       <ul className="mx-auto hidden items-center gap-8 text-[0.9375rem] text-white/80 lg:flex">
         {([["Kurser", "#kurser"], ["Sådan virker det", "#saadan"], ["Priser", "#priser"], ["Blog", "/blog"]] as const).map(([l, href]) => (
           <li key={l}><Link href={href} className="nf-focus relative rounded-[4px] transition-colors after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:text-white hover:after:scale-x-100">{l}</Link></li>

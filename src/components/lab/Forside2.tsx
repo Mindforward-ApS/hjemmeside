@@ -539,7 +539,7 @@ function Contact() {
           <h2 className={`${h2} !font-semibold tracking-[-0.045em] mt-4 max-w-[14ch] text-white`}>Lad os tale om jeres hold</h2>
           <p className="mt-4 max-w-[24rem] text-[1rem] leading-relaxed text-white/70">Udfyld formularen, så vender vi tilbage inden for 1 hverdag.</p>
           <div className="mt-8 flex max-w-[28rem] items-center gap-4 rounded-[20px] bg-white p-2.5 lg:mt-auto">
-            <span className="grid size-16 shrink-0 place-items-center rounded-[14px]" style={{ background: c.coralSoft }}><Image src="/img/mindforward-logo-2.png" alt="" width={48} height={40} /></span>
+            <span className="grid size-16 shrink-0 place-items-center rounded-[14px]" style={{ background: c.coralSoft }}><Image src="/img/miwa-chat.png" alt="" width={48} height={40} /></span>
             <div>
               <p className="text-[1rem] font-semibold leading-snug" style={{ color: c.ink }}>Hellere skrive direkte?</p>
               <GrebBtn href="mailto:kontakt@mindforward.dk" onDark className="mt-3">kontakt@mindforward.dk</GrebBtn>

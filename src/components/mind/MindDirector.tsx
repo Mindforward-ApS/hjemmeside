@@ -107,7 +107,8 @@ function run(M: MindAvatarApi): () => void {
     heroCancel = travel(heroBox, hero, [offRight(), 0], [0, 0], 4, () => { setWord(true); hero!.start(); hero!.loop("hide"); heroState = "logo"; checkHero(); });
   }
   function checkHero() {
-    if (reduced) { heroState = scrollY > 60 ? "gone" : "logo"; if (heroState === "gone") sections.refresh(); else sections.dismiss(); return; }
+    // Without a live header logo (Marco 2026-11-24: the glossy logo stays still) the sections still get MIND after 60 px.
+    if (reduced || !hero) { heroState = scrollY > 60 ? "gone" : "logo"; if (heroState === "gone") sections.refresh(); else sections.dismiss(); return; }
     if (scrollY > 60) heroLeave(); else if (scrollY < 12) heroReturn();
   }
   on(window, "scroll", () => checkHero(), { passive: true });

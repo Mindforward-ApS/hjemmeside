@@ -33,7 +33,7 @@ export function VaerktoejBeam() {
         ))}
       </svg>
       <span className="absolute left-1/2 top-0 grid size-[46px] -translate-x-1/2 place-items-center rounded-full border bg-white" style={{ borderColor: line, boxShadow: "0 6px 16px -8px rgba(32,22,19,0.35)" }}>
-        <Image src="/img/mindforward-logo-3.png" alt="Mindforward" width={30} height={25} className="h-[25px] w-auto" />
+        <Image src="/img/miwa-chat.png" alt="Mindforward" width={256} height={213} className="h-[25px] w-auto" />
       </span>
       {tools.map((t) => (
         <span key={t.f} className="absolute flex -translate-x-1/2 flex-col items-center gap-1.5" style={{ left: `${(t.x / 240) * 100}%`, top: `${(118 / 180) * 100}%` }}>
