@@ -94,11 +94,16 @@ function PlatformVideo() {
    floating card 380 wide, 32 in from the picture's bottom-right corner. */
 function Platform() {
   return (
-    <section id="kurser" className="relative overflow-x-clip pb-16 pt-24 sm:pt-[7.5rem]">
+    <section id="kurser" className="relative isolate overflow-hidden pb-24 pt-24 sm:pt-[7.5rem]">
+      {/* Marco 2026-11-24: the same background as the hero (office photo, heavy blur, brown veil); text in white. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <Image src="/img/hero-erhverv-2.jpg" alt="" fill sizes="100vw" className="scale-[1.1] object-cover object-[50%_40%] blur-[40px]" />
+        <div className="absolute inset-0" style={{ background: "rgba(32,22,19,0.92)" }} />
+      </div>
       <div className={wrap}>
         <div>
-          <SectionLabel>Løsningen</SectionLabel>
-          <h2 className={`${head} mt-4 max-w-[790px] !font-semibold text-[clamp(2.25rem,1.4rem+2.6vw,3.5rem)] leading-[1.143] tracking-[-0.045em]`} style={{ color: c.ink }}>Korte lektioner, et rigtigt øvemiljø og overblik til lederen</h2>
+          <SectionLabel light>Løsningen</SectionLabel>
+          <h2 className={`${head} mt-4 max-w-[790px] !font-semibold text-[clamp(2.25rem,1.4rem+2.6vw,3.5rem)] leading-[1.143] tracking-[-0.045em]`} style={{ color: "#fff" }}>Korte lektioner, et rigtigt øvemiljø og overblik til lederen</h2>
         </div>
         {/* Marco 2026-11-11: the product video (16:9, with sound) is shown whole; the stats card is only as tall as its content, and on desktop the video is lifted so both end at the same
             height at the bottom (the video hangs from the bottom of the row; the row is as tall as the card). */}
