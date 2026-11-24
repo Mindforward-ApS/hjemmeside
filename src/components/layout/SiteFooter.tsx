@@ -20,7 +20,7 @@ const legal = [["Privatlivspolitik", "/privatliv"], ["Handelsbetingelser", "/vil
 
 export function SiteFooter() {
   const c = site.company;
-  const socials = ([["LinkedIn", c.social.linkedin, LinkedinLogoIcon], ["Facebook", c.social.facebook, FacebookLogoIcon], ["Instagram", c.social.instagram, InstagramLogoIcon]] as const).filter(([, href]) => href);
+  const socials = ([["LinkedIn", c.social.linkedin, LinkedinLogoIcon], ["Facebook", c.social.facebook, FacebookLogoIcon], ["Instagram", c.social.instagram, InstagramLogoIcon]] as const);
   return (
     <>
       <NewsletterBand />
@@ -33,7 +33,10 @@ export function SiteFooter() {
               {socials.length > 0 && (
                 <ul className="mt-6 flex gap-5">
                   {socials.map(([label, href, I]) => (
-                    <li key={label}><a href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="transition-colors hover:text-[#fb970a]"><I size={20} weight="bold" aria-hidden /></a></li>
+                    <li key={label}>{href
+                      ? <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="transition-colors hover:text-[#fb970a]"><I size={20} weight="bold" aria-hidden /></a>
+                      // Shown now (Marco 2026-11-24); becomes a link as soon as the profile URL is set in site.ts.
+                      : <span title={label}><I size={20} weight="bold" aria-hidden /></span>}</li>
                   ))}
                 </ul>
               )}
