@@ -37,7 +37,6 @@ const card = "flex flex-col rounded-[20px] border bg-white p-6";
 
 export function FeatureBento() {
   return (
-    <>
     <section aria-labelledby="features-title" className="py-[100px]">
       <div className="w-full px-5 sm:px-[3.5vw]">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
@@ -106,13 +105,7 @@ export function FeatureBento() {
             <Copy title="Data i EU">Hostet i Frankfurt, og I får en databehandleraftale med fra start.</Copy>
             <CardButton href="#faq">FAQ</CardButton>
           </article>
-        </div>
-      </div>
-    </section>
-    {/* Marco 2026-11-24: the six cards as two screens of three, so each row fits on one screen at a readable size. */}
-    <section aria-label="Flere funktioner" data-fit-join className="pb-[100px]">
-      <div className="w-full px-5 sm:px-[3.5vw]">
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+
 
           {/* Kursusbevis: the highlighted card, framed like the featured price */}
           <article className="pris-glow relative flex flex-col rounded-[22px] p-[3px] md:col-span-2">
@@ -161,6 +154,5 @@ export function FeatureBento() {
         </div>
       </div>
     </section>
-    </>
   );
 }
