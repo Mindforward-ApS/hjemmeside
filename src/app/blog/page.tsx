@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { appLinks } from "@/lib/app";
 import { posts, type BlogPost } from "@/lib/blog";
-import { NightCta } from "@/components/night/NightCta";
 import { Icon } from "@/components/ui/Icon";
 import { categoryLabel, formatDate } from "./shared";
 
@@ -43,8 +41,6 @@ export default function BlogPage() {
           )}
         </div>
       </section>
-
-      <NightCta title="Lær det ved at gøre det" sub="Korte lektioner på dansk, opgaver i øvemiljøet og et kursusbevis til sidst." primary={{ label: "Kom i gang", href: appLinks.signup }} secondary={{ label: "Se priser", href: "/priser" }} />
     </div>
   );
 }
