@@ -137,7 +137,8 @@ function ToolCycler() {
 }
 
 /* ───────────── Nav ───────────── */
-export function Nav({ switcher, cta = "Sign up" }: { switcher?: ReactNode; cta?: string } = {}) {
+export function Nav({ switcher, cta = "Sign up", base = "" }: { switcher?: ReactNode; cta?: string; base?: string } = {}) {
+  // base: "/" on other pages (the blog), so the section links lead back to the front page.
   // "Tilmeld jer" / "Tilmeld dig" open the app's onboarding for companies or private members.
   const siteMode = useSiteMode();
   const [menu, setMenu] = useState(false);
@@ -151,7 +152,7 @@ export function Nav({ switcher, cta = "Sign up" }: { switcher?: ReactNode; cta?:
     <header className={`${wrap} relative z-20 flex h-20 items-center gap-6`}>
       <Link href="/" aria-label="Mindforward forside"><MindforwardLogo size={30} live /></Link>
       <ul className="mx-auto hidden items-center gap-8 text-[0.9375rem] text-white/80 lg:flex">
-        {([["Kurser", "#kurser"], ["Sådan virker det", "#saadan"], ["Priser", "#priser"], ["Blog", "/blog"]] as const).map(([l, href]) => (
+        {([["Kurser", `${base}#kurser`], ["Sådan virker det", `${base}#saadan`], ["Priser", `${base}#priser`], ["Blog", "/blog"]] as const).map(([l, href]) => (
           <li key={l}><Link href={href} className="nf-focus relative rounded-[4px] transition-colors after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:text-white hover:after:scale-x-100">{l}</Link></li>
         ))}
       </ul>
@@ -173,7 +174,7 @@ export function Nav({ switcher, cta = "Sign up" }: { switcher?: ReactNode; cta?:
       {menu && (
         <nav id="mobil-menu" aria-label="Menu" className="mobil-menu absolute inset-x-5 top-[76px] z-50 rounded-[22px] bg-[#201613] p-3 shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_24px_48px_-12px_rgba(0,0,0,0.6)] sm:inset-x-[3.5vw] lg:hidden">
           <ul className="grid">
-            {([["Kurser", "#kurser"], ["Sådan virker det", "#saadan"], ["Priser", "#priser"], ["Blog", "/blog"], ["Log ind", appLinks.login]] as const).map(([l, href]) => (
+            {([["Kurser", `${base}#kurser`], ["Sådan virker det", `${base}#saadan`], ["Priser", `${base}#priser`], ["Blog", "/blog"], ["Log ind", appLinks.login]] as const).map(([l, href]) => (
               <li key={l}><Link href={href} onClick={() => setMenu(false)} className="nf-focus flex h-12 items-center rounded-[14px] px-4 text-[1.0625rem] font-medium text-white transition-colors hover:bg-white/[0.06]">{l}</Link></li>
             ))}
           </ul>

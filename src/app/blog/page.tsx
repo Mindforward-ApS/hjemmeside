@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   const [first, ...rest] = posts;
   return (
-    <div className="theme-night -mt-[5.5rem] pt-[5.5rem]">
+    <div className="theme-night">
       <section className="relative overflow-hidden">
         <div aria-hidden className="n-glow right-[5%] top-[-10%] h-[30rem] w-[34rem]" />
         <div className="container-wide relative pb-12 pt-16 md:pb-16 md:pt-24">

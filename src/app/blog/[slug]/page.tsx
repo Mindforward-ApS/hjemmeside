@@ -81,7 +81,7 @@ export default async function PostPage({ params }: PageProps<"/blog/[slug]">) {
   };
 
   return (
-    <div className="theme-night -mt-[5.5rem] pt-[5.5rem]">
+    <div className="theme-night">
       <article className="pb-16 pt-14 md:pb-24 md:pt-20">
         <div className="mx-auto w-full max-w-[46rem] px-[var(--gutter)]">
           <Link href="/blog" className="inline-flex min-h-11 items-center gap-2 text-[0.9375rem] text-muted hover:text-heading"><Icon name="arrowLeft" size={16} /> Blog</Link>
