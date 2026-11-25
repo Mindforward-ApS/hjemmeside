@@ -61,7 +61,7 @@ export function Ph({ label, size, className = "", round = false }: { label?: str
 
 
 // The real 26 s screen recording of the platform, a still with a round play button; one click plays it in place.
-function PlatformVideo() {
+export function PlatformVideo() {
   const v = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
   const play = () => { setPlaying(true); const el = v.current; if (el) { el.currentTime = 0; el.play().catch(() => {}); } };
@@ -634,8 +634,8 @@ function Sec({ sep, k, children }: { sep?: Sep; k: number; children: React.React
   return inner;
 }
 
-export function Forside2({ practice, pilot, sep, steps }: { practice?: React.ReactNode; pilot?: React.ReactNode; sep?: Sep; steps?: React.ReactNode } = {}) {
-  const parts = [<Platform key="p" />, steps ?? <FeatureBento key="s" />, <Cases key="c" />, practice ?? <Practice key="o" />, pilot ?? <Pilot key="l" />, <Price key="r" />, <Faq key="f" />, <KontaktSide key="k" heading="h2" id="kontakt" />];
+export function Forside2({ practice, pilot, sep, steps, platform }: { practice?: React.ReactNode; pilot?: React.ReactNode; sep?: Sep; steps?: React.ReactNode; platform?: React.ReactNode } = {}) {
+  const parts = [platform ?? <Platform key="p" />, steps ?? <FeatureBento key="s" />, <Cases key="c" />, practice ?? <Practice key="o" />, pilot ?? <Pilot key="l" />, <Price key="r" />, <Faq key="f" />, <KontaktSide key="k" heading="h2" id="kontakt" />];
   return (
     <div style={{ background: c.page }}>
       {/* In white areas the white cards and buttons switch to the page colour so they still read as cards. */}

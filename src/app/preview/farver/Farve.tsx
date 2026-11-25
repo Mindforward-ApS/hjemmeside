@@ -44,10 +44,38 @@ function css(p: P) {
   `;
 }
 
-export function Farve({ v }: { v: "a" | "b" | "c" }) {
+// Button test in Espresso (Marco 2026-11-24): three primary-button looks. The design pass sets the buttons with
+// ".dp main :is(…)", so these rules start with "html.dp body" to win. White secondary buttons stay as they are.
+const PB = ".greb-btn:not(.greb-btn--light), .nf-press.h-11.text-white";
+const CIRCLE = ".greb-btn:not(.greb-btn--light) .greb-btn__circle, .nf-press.h-11.text-white > svg";
+const ON_DARK = ":is([data-hero], [data-brun], #virksomheder)"; // the dark backgrounds: hero + nav, brown cards, pilot
+type Knap = { bg: string; color: string; shadow: string; press: string; circle: string; arrow: string; dark?: { bg: string; color: string; shadow: string; circle: string; arrow: string } };
+const knapper: Record<1 | 2 | 3, Knap> = {
+  // 1 · Terracotta, flad: one solid colour, a small press, no gradient, no glow.
+  1: { bg: "#c4572f", color: "#fff", shadow: "inset 0 1px 0 rgba(255,255,255,.16), 0 1px 2px rgba(0,0,0,.22), 0 8px 16px -10px rgba(0,0,0,.4)", press: "inset 0 2px 4px rgba(0,0,0,.25)", circle: "#1b1715", arrow: "#fff" },
+  // 2 · Terracotta med blød 3D: light top edge, darker bottom, like a physical key.
+  2: { bg: "linear-gradient(180deg, #d06a40 0%, #c4572f 55%, #ad4823 100%)", color: "#fff", shadow: "inset 0 1px 0 rgba(255,255,255,.38), inset 0 -3px 0 rgba(80,25,8,.32), 0 1px 1px rgba(0,0,0,.3), 0 4px 8px -2px rgba(0,0,0,.22), 0 14px 24px -12px rgba(0,0,0,.42)", press: "inset 0 2px 5px rgba(80,25,8,.5)", circle: "#1b1715", arrow: "#fff" },
+  // 3 · Espresso-mørk: dark brown button, light circle; cream on dark backgrounds. Orange is left to Miwa.
+  3: { bg: "linear-gradient(180deg, #332b27 0%, #1b1715 100%)", color: "#fff", shadow: "inset 0 1px 0 rgba(255,255,255,.14), 0 1px 2px rgba(0,0,0,.3), 0 10px 20px -10px rgba(0,0,0,.45)", press: "inset 0 2px 5px rgba(0,0,0,.45)", circle: "#f3eee7", arrow: "#1b1715",
+    dark: { bg: "linear-gradient(180deg, #fbf8f3 0%, #ece5db 100%)", color: "#1b1715", shadow: "inset 0 1px 0 #fff, 0 1px 2px rgba(0,0,0,.3), 0 10px 20px -10px rgba(0,0,0,.5)", circle: "#1b1715", arrow: "#fff" } },
+};
+function knapCss(k: Knap) {
+  const d = k.dark;
+  return `
+  html.dp body :is(${PB}) { background: ${k.bg} !important; color: ${k.color} !important; box-shadow: ${k.shadow} !important; filter: none !important; }
+  html.dp body :is(${PB}):active { box-shadow: ${k.press} !important; }
+  html.dp body :is(${CIRCLE}) { background: ${k.circle} !important; color: ${k.arrow} !important; box-shadow: none !important; }
+  ${d ? `
+  html.dp body ${ON_DARK} :is(${PB}) { background: ${d.bg} !important; color: ${d.color} !important; box-shadow: ${d.shadow} !important; }
+  html.dp body ${ON_DARK} :is(${PB}) > :not(.greb-btn__circle):not(svg) { color: ${d.color} !important; }
+  html.dp body ${ON_DARK} :is(${CIRCLE}) { background: ${d.circle} !important; color: ${d.arrow} !important; }` : ""}
+  `;
+}
+
+export function Farve({ v, k }: { v: "a" | "b" | "c"; k?: 1 | 2 | 3 }) {
   return (
     <div className={`${bebas.variable} ${geist.variable}`}>
-      <style>{css(palettes[v])}</style>
+      <style>{css(palettes[v]) + (k ? knapCss(knapper[k]) : "")}</style>
       <NyForside layout="ny" practice="b" pilot="a" sep={1} />
     </div>
   );

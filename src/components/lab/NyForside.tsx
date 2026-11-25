@@ -32,6 +32,8 @@ import { StartKort } from "@/components/lab/StartKort";
 import { UseCases } from "@/components/lab/UseCases";
 import { OevKort } from "@/components/lab/OevKort";
 import { Forside2 } from "@/components/lab/Forside2";
+import { LoesningVideo } from "@/components/lab/LoesningVideo";
+import { OevDemo } from "@/components/lab/OevDemo";
 import { Forside3 } from "@/components/lab/Forside3";
 import * as Oev3 from "@/components/lab/OevemiljoeVarianter";
 import * as Pilot3 from "@/components/lab/PilotTre";
@@ -739,7 +741,7 @@ function CtaBand() {
 }
 
 /* ───────────── Page + motion layer ───────────── */
-export function NyForside({ miwa, toggle = false, uiMode = "off", hero = "video", video, start, skills, oev, cert = true, layout, practice, pilot, sep, start3, system }: { miwa?: "velkommen" | "glad" | "live" | "forloeb" | "video"; toggle?: boolean; uiMode?: UiMode; hero?: "video" | "lunar" | "pleo"; video?: VideoVersion; start?: "kort"; skills?: "cases"; oev?: "kort"; cert?: boolean; layout?: "ny"; practice?: "a" | "b" | "c"; pilot?: "a" | "b" | "c"; sep?: 1 | 2 | 3 | 4 | 5; start3?: "a" | "b" | "c"; system?: boolean } = {}) {
+export function NyForside({ miwa, toggle = false, uiMode = "off", hero = "video", video, start, skills, oev, cert = true, layout, practice, pilot, sep, start3, system, aaben }: { miwa?: "velkommen" | "glad" | "live" | "forloeb" | "video"; toggle?: boolean; uiMode?: UiMode; hero?: "video" | "lunar" | "pleo"; video?: VideoVersion; start?: "kort"; skills?: "cases"; oev?: "kort"; cert?: boolean; layout?: "ny"; practice?: "a" | "b" | "c"; pilot?: "a" | "b" | "c"; sep?: 1 | 2 | 3 | 4 | 5; start3?: "a" | "b" | "c"; system?: boolean; aaben?: boolean } = {}) {
   const VideoSek = video ? videoVersions[video] : null;
   const root = useRef<HTMLDivElement>(null);
 
@@ -842,7 +844,7 @@ export function NyForside({ miwa, toggle = false, uiMode = "off", hero = "video"
       {/* Marco 2026-11-07: "gå med den vi selv har og bare fjern den store produkt video for nu" (Lunar copy too recognisable). */}
       {hero === "lunar" ? <HeroLunar /> : hero === "pleo" ? <HeroPleo /> : <Hero toggle={toggle} media={miwa ? "none" : "stories"} navSwitch={!toggle} miwa={miwa} />}
       {miwa === "forloeb" && <MiwaForloeb />}
-      {layout === "ny" && system ? <Forside3 practice={practice === "b" ? <Oev3.B /> : undefined} pilot={pilot === "a" ? <Pilot3.A /> : undefined} /> : layout === "ny" ? <Forside2 practice={practice === "a" ? <Oev3.A /> : practice === "b" ? <Oev3.B /> : practice === "c" ? <Oev3.C /> : undefined} pilot={pilot === "a" ? <Pilot3.A /> : pilot === "b" ? <Pilot3.B /> : pilot === "c" ? <Pilot3.C /> : undefined} sep={sep} steps={start3 === "a" ? <Start3.A /> : start3 === "b" ? <Start3.B /> : start3 === "c" ? <Start3.C /> : undefined} /> : (<>
+      {layout === "ny" && system ? <Forside3 practice={practice === "b" ? <Oev3.B /> : undefined} pilot={pilot === "a" ? <Pilot3.A /> : undefined} /> : layout === "ny" ? <Forside2 platform={aaben ? <LoesningVideo key="p" /> : undefined} practice={aaben ? <OevDemo /> : practice === "a" ? <Oev3.A /> : practice === "b" ? <Oev3.B /> : practice === "c" ? <Oev3.C /> : undefined} pilot={pilot === "a" ? <Pilot3.A /> : pilot === "b" ? <Pilot3.B /> : pilot === "c" ? <Pilot3.C /> : undefined} sep={sep} steps={start3 === "a" ? <Start3.A /> : start3 === "b" ? <Start3.B /> : start3 === "c" ? <Start3.C /> : undefined} /> : (<>
       {/* Product video right after the hero (Marco 2026-11-10); versions on /preview/sektion-video, "/" unchanged. */}
       {VideoSek && <VideoSek />}
       {/* Feature strip = version F, tall photo cards (Marco 2026-11-03). */}
