@@ -15,9 +15,11 @@ const nextConfig: NextConfig = {
       { source: "/privatliv", destination: `${APP_URL}/privatliv`, permanent: false },
       { source: "/vilkaar", destination: `${APP_URL}/handelsbetingelser`, permanent: false },
       { source: "/cookies", destination: `${APP_URL}/cookies`, permanent: false },
-      ...["/sikkerhed", "/platform", "/kunder", "/kunder/:path*", "/om-os", "/blog", "/blog/:path*", "/kurser/:path*", "/loesninger/:path*"].map((source) => ({ source, destination: "/", permanent: false })),
+      ...["/sikkerhed", "/platform", "/kunder", "/kunder/:path*", "/om-os", "/kurser/:path*", "/loesninger/:path*"].map((source) => ({ source, destination: "/", permanent: false })),
     ];
   },
+  // Blog posts are markdown files read from disk (src/lib/blog.ts); keep them next to the server code.
+  outputFileTracingIncludes: { "/blog/*": ["./content/blog/*.md"], "/sitemap.xml": ["./content/blog/*.md"] },
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {
